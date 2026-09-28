@@ -6,10 +6,7 @@
 
     <title>VELORA</title>
 
-    <meta name="description" content="VELORA - Zarif ve şık takılar">
-
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -68,7 +65,6 @@
             align-items: center;
             text-align: center;
             padding: 30px;
-            position: relative;
 
             background-image:
                 linear-gradient(
@@ -83,14 +79,11 @@
         }
 
         .hero-content {
-            position: relative;
-            z-index: 2;
             color: white;
         }
 
         .hero h1 {
             font-size: 70px;
-            color: white;
             letter-spacing: 7px;
             margin-bottom: 15px;
             text-shadow: 0 3px 15px rgba(0,0,0,0.5);
@@ -99,7 +92,6 @@
         .hero p {
             font-size: 21px;
             margin-bottom: 28px;
-            color: white;
             text-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
 
@@ -268,7 +260,6 @@
         .order-section {
             display: none;
             padding: 70px 7%;
-            background: #faf7f5;
         }
 
         .order-section.active {
@@ -290,7 +281,7 @@
             margin-bottom: 10px;
         }
 
-        .order-box p {
+        .order-box > p {
             text-align: center;
             margin-bottom: 30px;
             color: #666;
@@ -355,6 +346,91 @@
             cursor: pointer;
         }
 
+        .payment-section {
+            display: none;
+            padding: 70px 7%;
+        }
+
+        .payment-section.active {
+            display: block;
+        }
+
+        .payment-box {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .payment-box h2 {
+            text-align: center;
+            color: #9b6b52;
+            margin-bottom: 10px;
+        }
+
+        .test-badge {
+            text-align: center;
+            background: #fff3cd;
+            color: #856404;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .payment-total {
+            text-align: center;
+            font-size: 28px;
+            color: #9b6b52;
+            font-weight: bold;
+            margin: 25px 0;
+        }
+
+        .fake-card {
+            background: #f5ebe4;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .fake-card label {
+            display: block;
+            margin: 12px 0 6px;
+            font-weight: bold;
+        }
+
+        .fake-card input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .pay-button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            background: #9b6b52;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .back-button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #9b6b52;
+            border-radius: 25px;
+            background: white;
+            color: #9b6b52;
+            cursor: pointer;
+        }
+
         @media (max-width: 800px) {
 
             .product-grid {
@@ -381,11 +457,11 @@
                 width: 100%;
             }
 
-            .order-box {
+            .order-box,
+            .payment-box {
                 padding: 25px 20px;
             }
         }
-
     </style>
 </head>
 
@@ -576,7 +652,7 @@
             Teslimat bilgilerinizi girin.
         </p>
 
-        <form onsubmit="submitOrder(event)">
+        <form onsubmit="continueToPayment(event)">
 
             <div class="form-group">
 
@@ -616,7 +692,7 @@
 
                 <textarea
                     id="address"
-                    placeholder="Mahalle, sokak, bina no, daire no, ilçe ve şehir"
+                    placeholder="Teslimat adresiniz"
                     required
                 ></textarea>
 
@@ -630,7 +706,7 @@
 
                 <textarea
                     id="note"
-                    placeholder="Varsa siparişinizle ilgili bir not yazabilirsiniz."
+                    placeholder="Varsa sipariş notunuz"
                 ></textarea>
 
             </div>
@@ -661,7 +737,7 @@
                 type="submit"
                 class="order-submit"
             >
-                Siparişi Oluştur
+                Ödemeye Geç
             </button>
 
             <button
@@ -673,6 +749,93 @@
             </button>
 
         </form>
+
+    </div>
+
+</section>
+
+
+<section
+    class="payment-section"
+    id="odeme"
+>
+
+    <div class="payment-box">
+
+        <h2>
+            Ödeme
+        </h2>
+
+        <div class="test-badge">
+            🧪 TEST ÖDEME — GERÇEK PARA ÇEKİLMEZ
+        </div>
+
+        <div class="payment-total">
+
+            <span id="paymentTotal">
+                0
+            </span>
+            TL
+
+        </div>
+
+        <div class="fake-card">
+
+            <label>
+                Kart Üzerindeki İsim
+            </label>
+
+            <input
+                type="text"
+                id="cardName"
+                placeholder="TEST KULLANICI"
+            >
+
+            <label>
+                Kart Numarası
+            </label>
+
+            <input
+                type="text"
+                id="cardNumber"
+                placeholder="TEST CARD"
+            >
+
+            <label>
+                Son Kullanma
+            </label>
+
+            <input
+                type="text"
+                id="cardExpiry"
+                placeholder="12/30"
+            >
+
+            <label>
+                CVV
+            </label>
+
+            <input
+                type="text"
+                id="cardCvv"
+                placeholder="123"
+            >
+
+        </div>
+
+        <button
+            class="pay-button"
+            onclick="makeTestPayment()"
+        >
+            Test Ödemesini Yap
+        </button>
+
+        <button
+            class="back-button"
+            onclick="backToOrder()"
+        >
+            Sipariş Bilgilerine Dön
+        </button>
 
     </div>
 
@@ -744,10 +907,12 @@
 
 let cart = [];
 
+let currentOrder = null;
+
 
 function addToCart(name, price) {
 
-    let existing =
+    const existing =
         cart.find(
             item => item.name === name
         );
@@ -776,8 +941,10 @@ function addToCart(name, price) {
 
 function updateCart() {
 
-    let items =
-        document.getElementById("cartItems");
+    const items =
+        document.getElementById(
+            "cartItems"
+        );
 
     items.innerHTML = "";
 
@@ -809,7 +976,7 @@ function updateCart() {
                     <div class="quantity">
 
                         <button
-                            onclick="changeQuantity(${index},-1)"
+                            onclick="changeQuantity(${index}, -1)"
                         >
                             −
                         </button>
@@ -817,7 +984,7 @@ function updateCart() {
                         ${item.quantity}
 
                         <button
-                            onclick="changeQuantity(${index},1)"
+                            onclick="changeQuantity(${index}, 1)"
                         >
                             +
                         </button>
@@ -897,29 +1064,34 @@ function openOrder() {
         .classList
         .remove("active");
 
-    let orderSection =
-        document.getElementById("siparis");
+    document
+        .getElementById("odeme")
+        .classList
+        .remove("active");
 
-    orderSection.classList.add(
-        "active"
-    );
+    document
+        .getElementById("siparis")
+        .classList
+        .add("active");
 
     updateOrderSummary();
 
-    orderSection.scrollIntoView({
-        behavior: "smooth"
-    });
+    document
+        .getElementById("siparis")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 }
 
 
 function updateOrderSummary() {
 
-    let orderItems =
+    const orderItems =
         document.getElementById(
             "orderItems"
         );
 
-    let orderTotal =
+    const orderTotal =
         document.getElementById(
             "orderTotal"
         );
@@ -930,7 +1102,7 @@ function updateOrderSummary() {
 
     cart.forEach(item => {
 
-        let itemTotal =
+        const itemTotal =
             item.price *
             item.quantity;
 
@@ -941,9 +1113,7 @@ function updateOrderSummary() {
             <div style="margin-bottom:8px;">
 
                 ${item.name}
-
                 × ${item.quantity}
-
                 — ${itemTotal} TL
 
             </div>
@@ -965,7 +1135,7 @@ function closeOrder() {
 }
 
 
-async function submitOrder(event) {
+function continueToPayment(event) {
 
     event.preventDefault();
 
@@ -976,7 +1146,7 @@ async function submitOrder(event) {
         return;
     }
 
-    const order = {
+    currentOrder = {
 
         name:
             document.getElementById(
@@ -998,7 +1168,7 @@ async function submitOrder(event) {
                 "note"
             ).value,
 
-        products: cart,
+        products: [...cart],
 
         total: cart.reduce(
             (sum, item) =>
@@ -1007,14 +1177,68 @@ async function submitOrder(event) {
                 item.quantity,
             0
         )
+
     };
 
+    document
+        .getElementById("siparis")
+        .classList
+        .remove("active");
+
+    document
+        .getElementById("odeme")
+        .classList
+        .add("active");
+
+    document.getElementById(
+        "paymentTotal"
+    ).textContent =
+        currentOrder.total;
+
+    document
+        .getElementById("odeme")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+function backToOrder() {
+
+    document
+        .getElementById("odeme")
+        .classList
+        .remove("active");
+
+    document
+        .getElementById("siparis")
+        .classList
+        .add("active");
+
+    document
+        .getElementById("siparis")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+async function makeTestPayment() {
+
+    if (!currentOrder) {
+
+        alert(
+            "Önce sipariş bilgilerini girin."
+        );
+
+        return;
+    }
 
     try {
 
         const response =
             await fetch(
-                "http://localhost:3000/api/order",
+                "http://localhost:3000/api/test-payment",
                 {
                     method: "POST",
 
@@ -1024,7 +1248,9 @@ async function submitOrder(event) {
                     },
 
                     body:
-                        JSON.stringify(order)
+                        JSON.stringify(
+                            currentOrder
+                        )
                 }
             );
 
@@ -1036,19 +1262,31 @@ async function submitOrder(event) {
         if (result.success) {
 
             alert(
-                "Sipariş backend'e başarıyla gönderildi! 🎉"
+                "🎉 TEST ÖDEMESİ BAŞARILI!\n\n" +
+                "Gerçek para çekilmedi.\n" +
+                "VELORA ödeme sistemi test edildi."
             );
 
             cart = [];
 
+            currentOrder = null;
+
             updateCart();
 
-            closeOrder();
+            document
+                .getElementById("odeme")
+                .classList
+                .remove("active");
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
 
         } else {
 
             alert(
-                "Sipariş gönderilemedi."
+                "Test ödeme başarısız."
             );
 
         }
@@ -1058,11 +1296,14 @@ async function submitOrder(event) {
         console.error(error);
 
         alert(
-            "Backend'e bağlanılamadı. " +
-            "Bilgisayarındaki backend'in çalıştığından emin ol."
+            "Backend'e bağlanılamadı.\n\n" +
+            "CMD ekranında node server.js çalışıyor mu kontrol et."
         );
     }
 }
+
+
+updateCart();
 
 </script>
 
