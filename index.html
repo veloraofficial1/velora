@@ -60,7 +60,7 @@
             cursor: pointer;
         }
 
-        /* KAPAK FOTOĞRAFI */
+        /* KAPAK */
         .hero {
             min-height: 600px;
             display: flex;
@@ -72,16 +72,16 @@
 
             background-image:
                 linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-                url("Tasarımcı%20(2).png");
+                url("kapak.png");
 
             background-size: cover;
             background-position: center;
         }
 
         .hero-content {
+            color: white;
             position: relative;
             z-index: 2;
-            color: white;
         }
 
         .hero h1 {
@@ -284,7 +284,6 @@
 <body>
 
 <header>
-
     <div class="logo">VELORA</div>
 
     <nav>
@@ -296,7 +295,6 @@
             🛒 Sepet (<span id="cartCount">0</span>)
         </button>
     </nav>
-
 </header>
 
 
@@ -400,9 +398,7 @@
 
 
 <footer>
-
     © 2026 VELORA
-
 </footer>
 
 
@@ -429,23 +425,18 @@
 
 let cart = [];
 
-
 function addToCart(name, price) {
 
     let existing = cart.find(item => item.name === name);
 
     if (existing) {
-
         existing.quantity++;
-
     } else {
-
         cart.push({
             name: name,
             price: price,
             quantity: 1
         });
-
     }
 
     updateCart();
@@ -494,7 +485,6 @@ function updateCart() {
 
             </div>
         `;
-
     });
 
     document.getElementById("cartTotal").textContent = total;
@@ -508,9 +498,7 @@ function changeQuantity(index, amount) {
     cart[index].quantity += amount;
 
     if (cart[index].quantity <= 0) {
-
         cart.splice(index,1);
-
     }
 
     updateCart();
