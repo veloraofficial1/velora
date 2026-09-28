@@ -61,19 +61,13 @@
             cursor: pointer;
         }
 
-        /* ANA KAPAK */
-
         .hero {
             min-height: 650px;
-
             display: flex;
             justify-content: center;
             align-items: center;
-
             text-align: center;
-
             padding: 30px;
-
             position: relative;
 
             background-image:
@@ -118,8 +112,6 @@
             cursor: pointer;
             font-size: 16px;
         }
-
-        /* ÜRÜNLER */
 
         .products {
             padding: 70px 7%;
@@ -186,8 +178,6 @@
             cursor: pointer;
         }
 
-        /* İLETİŞİM */
-
         .contact {
             padding: 60px 20px;
             text-align: center;
@@ -199,16 +189,12 @@
             margin-bottom: 15px;
         }
 
-        /* FOOTER */
-
         footer {
             background: #333;
             color: white;
             text-align: center;
             padding: 25px;
         }
-
-        /* SEPET */
 
         .cart-panel {
             position: fixed;
@@ -278,8 +264,6 @@
             color: white;
             cursor: pointer;
         }
-
-        /* SİPARİŞ FORMU */
 
         .order-section {
             display: none;
@@ -371,8 +355,6 @@
             cursor: pointer;
         }
 
-        /* TELEFON */
-
         @media (max-width: 800px) {
 
             .product-grid {
@@ -409,9 +391,6 @@
 
 <body>
 
-
-<!-- MENÜ -->
-
 <header>
 
     <div class="logo">
@@ -445,8 +424,6 @@
 </header>
 
 
-<!-- ANA KAPAK -->
-
 <section
     class="hero"
     id="anasayfa"
@@ -473,8 +450,6 @@
 </section>
 
 
-<!-- KOLEKSİYON -->
-
 <section
     class="products"
     id="koleksiyon"
@@ -485,9 +460,6 @@
     </h2>
 
     <div class="product-grid">
-
-
-        <!-- YÜZÜK -->
 
         <div class="product">
 
@@ -521,8 +493,6 @@
         </div>
 
 
-        <!-- KOLYE -->
-
         <div class="product">
 
             <div class="product-image">
@@ -554,8 +524,6 @@
 
         </div>
 
-
-        <!-- BİLEKLİK -->
 
         <div class="product">
 
@@ -593,8 +561,6 @@
 </section>
 
 
-<!-- SİPARİŞ FORMU -->
-
 <section
     class="order-section"
     id="siparis"
@@ -610,9 +576,7 @@
             Teslimat bilgilerinizi girin.
         </p>
 
-
         <form onsubmit="submitOrder(event)">
-
 
             <div class="form-group">
 
@@ -629,7 +593,6 @@
 
             </div>
 
-
             <div class="form-group">
 
                 <label for="phone">
@@ -645,7 +608,6 @@
 
             </div>
 
-
             <div class="form-group">
 
                 <label for="address">
@@ -660,7 +622,6 @@
 
             </div>
 
-
             <div class="form-group">
 
                 <label for="note">
@@ -673,7 +634,6 @@
                 ></textarea>
 
             </div>
-
 
             <div class="order-summary">
 
@@ -697,14 +657,12 @@
 
             </div>
 
-
             <button
                 type="submit"
                 class="order-submit"
             >
                 Siparişi Oluştur
             </button>
-
 
             <button
                 type="button"
@@ -714,15 +672,12 @@
                 Geri Dön
             </button>
 
-
         </form>
 
     </div>
 
 </section>
 
-
-<!-- İLETİŞİM -->
 
 <section
     class="contact"
@@ -740,16 +695,12 @@
 </section>
 
 
-<!-- FOOTER -->
-
 <footer>
 
     © 2026 VELORA
 
 </footer>
 
-
-<!-- SEPET PANELİ -->
 
 <div
     class="cart-panel"
@@ -801,7 +752,6 @@ function addToCart(name, price) {
             item => item.name === name
         );
 
-
     if (existing) {
 
         existing.quantity++;
@@ -820,27 +770,19 @@ function addToCart(name, price) {
 
     }
 
-
     updateCart();
-
 }
 
 
 function updateCart() {
 
     let items =
-        document.getElementById(
-            "cartItems"
-        );
-
+        document.getElementById("cartItems");
 
     items.innerHTML = "";
 
-
     let total = 0;
-
     let count = 0;
-
 
     cart.forEach(
         (item, index) => {
@@ -851,7 +793,6 @@ function updateCart() {
 
             count +=
                 item.quantity;
-
 
             items.innerHTML += `
 
@@ -897,23 +838,19 @@ function updateCart() {
         }
     );
 
-
     document.getElementById(
         "cartTotal"
     ).textContent = total;
 
-
     document.getElementById(
         "cartCount"
     ).textContent = count;
-
 }
 
 
 function changeQuantity(index, amount) {
 
     cart[index].quantity += amount;
-
 
     if (
         cart[index].quantity <= 0
@@ -923,9 +860,7 @@ function changeQuantity(index, amount) {
 
     }
 
-
     updateCart();
-
 }
 
 
@@ -934,7 +869,6 @@ function removeItem(index) {
     cart.splice(index, 1);
 
     updateCart();
-
 }
 
 
@@ -944,7 +878,6 @@ function toggleCart() {
         .getElementById("cartPanel")
         .classList
         .toggle("active");
-
 }
 
 
@@ -957,34 +890,25 @@ function openOrder() {
         );
 
         return;
-
     }
-
 
     document
         .getElementById("cartPanel")
         .classList
         .remove("active");
 
-
     let orderSection =
-        document.getElementById(
-            "siparis"
-        );
-
+        document.getElementById("siparis");
 
     orderSection.classList.add(
         "active"
     );
 
-
     updateOrderSummary();
-
 
     orderSection.scrollIntoView({
         behavior: "smooth"
     });
-
 }
 
 
@@ -995,18 +919,14 @@ function updateOrderSummary() {
             "orderItems"
         );
 
-
     let orderTotal =
         document.getElementById(
             "orderTotal"
         );
 
-
     orderItems.innerHTML = "";
 
-
     let total = 0;
-
 
     cart.forEach(item => {
 
@@ -1014,9 +934,7 @@ function updateOrderSummary() {
             item.price *
             item.quantity;
 
-
         total += itemTotal;
-
 
         orderItems.innerHTML += `
 
@@ -1034,9 +952,7 @@ function updateOrderSummary() {
 
     });
 
-
     orderTotal.textContent = total;
-
 }
 
 
@@ -1046,82 +962,109 @@ function closeOrder() {
         .getElementById("siparis")
         .classList
         .remove("active");
-
 }
 
 
-function submitOrder(event) {
+async function submitOrder(event) {
 
     event.preventDefault();
 
-
     if (cart.length === 0) {
 
-        alert(
-            "Sepetiniz boş."
-        );
+        alert("Sepetiniz boş.");
 
         return;
-
     }
 
+    const order = {
 
-    let name =
-        document.getElementById(
-            "name"
-        ).value;
+        name:
+            document.getElementById(
+                "name"
+            ).value,
+
+        phone:
+            document.getElementById(
+                "phone"
+            ).value,
+
+        address:
+            document.getElementById(
+                "address"
+            ).value,
+
+        note:
+            document.getElementById(
+                "note"
+            ).value,
+
+        products: cart,
+
+        total: cart.reduce(
+            (sum, item) =>
+                sum +
+                item.price *
+                item.quantity,
+            0
+        )
+    };
 
 
-    alert(
-        "Teşekkürler " +
-        name +
-        "! Sipariş bilgileriniz alındı. Ödeme sistemi bir sonraki aşamada bağlanacak."
-    );
+    try {
 
-}
+        const response =
+            await fetch(
+                "http://localhost:3000/api/order",
+                {
+                    method: "POST",
 
-</script>
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-<script>
-const orderForm = document.querySelector(".order-form");
+                    body:
+                        JSON.stringify(order)
+                }
+            );
 
-if (orderForm) {
-    orderForm.addEventListener("submit", async function (event) {
-        event.preventDefault();
 
-        const formData = new FormData(orderForm);
+        const result =
+            await response.json();
 
-        const order = {
-            name: formData.get("name"),
-            phone: formData.get("phone"),
-            address: formData.get("address"),
-            note: formData.get("note")
-        };
 
-        try {
-            const response = await fetch("http://localhost:3000/api/order", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(order)
-            });
+        if (result.success) {
 
-            const result = await response.json();
+            alert(
+                "Sipariş backend'e başarıyla gönderildi! 🎉"
+            );
 
-            if (result.success) {
-                alert("Sipariş backend'e başarıyla gönderildi! 🎉");
-            } else {
-                alert("Sipariş gönderilemedi.");
-            }
+            cart = [];
 
-        } catch (error) {
-            console.error(error);
-            alert("Backend'e bağlanılamadı.");
+            updateCart();
+
+            closeOrder();
+
+        } else {
+
+            alert(
+                "Sipariş gönderilemedi."
+            );
+
         }
-    });
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Backend'e bağlanılamadı. " +
+            "Bilgisayarındaki backend'in çalıştığından emin ol."
+        );
+    }
 }
+
 </script>
-    
+
 </body>
 </html>
