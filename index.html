@@ -60,26 +60,43 @@
             cursor: pointer;
         }
 
+        /* KAPAK FOTOĞRAFI */
         .hero {
-            min-height: 500px;
+            min-height: 600px;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, #f5e6dd, #fff);
             padding: 30px;
+            position: relative;
+
+            background-image:
+                linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+                url("Tasarımcı%20(2).png");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
         }
 
         .hero h1 {
             font-size: 65px;
-            color: #9b6b52;
+            color: white;
             letter-spacing: 5px;
             margin-bottom: 15px;
+            text-shadow: 0 3px 15px rgba(0,0,0,0.4);
         }
 
         .hero p {
             font-size: 20px;
             margin-bottom: 25px;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
 
         .hero button {
@@ -285,7 +302,7 @@
 
 <section class="hero" id="anasayfa">
 
-    <div>
+    <div class="hero-content">
 
         <h1>VELORA</h1>
 
