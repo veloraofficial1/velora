@@ -72,7 +72,7 @@
 
             background-image:
                 linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-                url("kapak.png");
+                url("Tasar%C4%B1mc%C4%B1%20(2).png");
 
             background-size: cover;
             background-position: center;
@@ -334,10 +334,7 @@
 
             <div class="product-image">
 
-                <img
-                    src="resimler/yuzuk.jpg"
-                    alt="VELORA Zarif Yüzük"
-                >
+                <img src="resimler/yuzuk.jpg" alt="VELORA Zarif Yüzük">
 
             </div>
 
@@ -345,9 +342,7 @@
 
                 <h3>Zarif Yüzük</h3>
 
-                <div class="price">
-                    499 TL
-                </div>
+                <div class="price">499 TL</div>
 
                 <button onclick="addToCart('Zarif Yüzük',499)">
                     Sepete Ekle
@@ -362,10 +357,7 @@
 
             <div class="product-image">
 
-                <img
-                    src="resimler/kolye.jpg"
-                    alt="VELORA İnci Kolye"
-                >
+                <img src="resimler/kolye.jpg" alt="VELORA İnci Kolye">
 
             </div>
 
@@ -373,9 +365,7 @@
 
                 <h3>İnci Kolye</h3>
 
-                <div class="price">
-                    699 TL
-                </div>
+                <div class="price">699 TL</div>
 
                 <button onclick="addToCart('İnci Kolye',699)">
                     Sepete Ekle
@@ -390,10 +380,7 @@
 
             <div class="product-image">
 
-                <img
-                    src="resimler/bileklik.jpg"
-                    alt="VELORA Minimal Bileklik"
-                >
+                <img src="resimler/bileklik.jpg" alt="VELORA Minimal Bileklik">
 
             </div>
 
@@ -401,9 +388,7 @@
 
                 <h3>Minimal Bileklik</h3>
 
-                <div class="price">
-                    399 TL
-                </div>
+                <div class="price">399 TL</div>
 
                 <button onclick="addToCart('Minimal Bileklik',399)">
                     Sepete Ekle
@@ -437,29 +422,17 @@
 
 <div class="cart-panel" id="cartPanel">
 
-    <button
-        class="close-cart"
-        onclick="toggleCart()"
-    >
-        ×
-    </button>
+    <button class="close-cart" onclick="toggleCart()">×</button>
 
     <h2>Sepetim</h2>
 
     <div id="cartItems"></div>
 
     <div class="cart-total">
-
-        Toplam:
-        <span id="cartTotal">0</span>
-        TL
-
+        Toplam: <span id="cartTotal">0</span> TL
     </div>
 
-    <button
-        class="order-button"
-        onclick="order()"
-    >
+    <button class="order-button" onclick="order()">
         Siparişe Geç
     </button>
 
@@ -473,9 +446,7 @@ let cart = [];
 
 function addToCart(name, price) {
 
-    let existing = cart.find(
-        item => item.name === name
-    );
+    let existing = cart.find(item => item.name === name);
 
     if (existing) {
 
@@ -484,13 +455,9 @@ function addToCart(name, price) {
     } else {
 
         cart.push({
-
             name: name,
-
             price: price,
-
             quantity: 1
-
         });
 
     }
@@ -502,49 +469,38 @@ function addToCart(name, price) {
 
 function updateCart() {
 
-    let items =
-        document.getElementById("cartItems");
+    let items = document.getElementById("cartItems");
 
     items.innerHTML = "";
 
     let total = 0;
-
     let count = 0;
 
 
     cart.forEach((item, index) => {
 
-        total +=
-            item.price *
-            item.quantity;
+        total += item.price * item.quantity;
 
-        count +=
-            item.quantity;
+        count += item.quantity;
 
 
         items.innerHTML += `
 
             <div class="cart-item">
 
-                <strong>
-                    ${item.name}
-                </strong>
+                <strong>${item.name}</strong>
 
                 ${item.price} TL
 
                 <div class="quantity">
 
-                    <button
-                        onclick="changeQuantity(${index},-1)"
-                    >
+                    <button onclick="changeQuantity(${index},-1)">
                         −
                     </button>
 
                     ${item.quantity}
 
-                    <button
-                        onclick="changeQuantity(${index},1)"
-                    >
+                    <button onclick="changeQuantity(${index},1)">
                         +
                     </button>
 
@@ -564,14 +520,9 @@ function updateCart() {
     });
 
 
-    document.getElementById(
-        "cartTotal"
-    ).textContent = total;
+    document.getElementById("cartTotal").textContent = total;
 
-
-    document.getElementById(
-        "cartCount"
-    ).textContent = count;
+    document.getElementById("cartCount").textContent = count;
 
 }
 
@@ -580,13 +531,11 @@ function changeQuantity(index, amount) {
 
     cart[index].quantity += amount;
 
-
     if (cart[index].quantity <= 0) {
 
         cart.splice(index, 1);
 
     }
-
 
     updateCart();
 
