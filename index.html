@@ -60,7 +60,7 @@
             cursor: pointer;
         }
 
-        /* KAPAK */
+        /* KAPAK FOTOĞRAFI */
         .hero {
             min-height: 600px;
             display: flex;
@@ -76,12 +76,13 @@
 
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
         }
 
         .hero-content {
-            color: white;
             position: relative;
             z-index: 2;
+            color: white;
         }
 
         .hero h1 {
@@ -89,14 +90,14 @@
             color: white;
             letter-spacing: 5px;
             margin-bottom: 15px;
-            text-shadow: 0 3px 15px rgba(0,0,0,0.4);
+            text-shadow: 0 3px 15px rgba(0,0,0,0.5);
         }
 
         .hero p {
             font-size: 20px;
             margin-bottom: 25px;
             color: white;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
 
         .hero button {
@@ -262,6 +263,7 @@
         }
 
         @media (max-width: 800px) {
+
             .product-grid {
                 grid-template-columns: 1fr;
             }
@@ -284,17 +286,23 @@
 <body>
 
 <header>
+
     <div class="logo">VELORA</div>
 
     <nav>
+
         <a href="#anasayfa">Ana Sayfa</a>
+
         <a href="#koleksiyon">Koleksiyon</a>
+
         <a href="#iletisim">İletişim</a>
 
         <button class="cart-button" onclick="toggleCart()">
             🛒 Sepet (<span id="cartCount">0</span>)
         </button>
+
     </nav>
+
 </header>
 
 
@@ -321,17 +329,25 @@
 
     <div class="product-grid">
 
+
         <div class="product">
 
             <div class="product-image">
-                <img src="resimler/yuzuk.jpg" alt="VELORA Zarif Yüzük">
+
+                <img
+                    src="resimler/yuzuk.jpg"
+                    alt="VELORA Zarif Yüzük"
+                >
+
             </div>
 
             <div class="product-info">
 
                 <h3>Zarif Yüzük</h3>
 
-                <div class="price">499 TL</div>
+                <div class="price">
+                    499 TL
+                </div>
 
                 <button onclick="addToCart('Zarif Yüzük',499)">
                     Sepete Ekle
@@ -345,14 +361,21 @@
         <div class="product">
 
             <div class="product-image">
-                <img src="resimler/kolye.jpg" alt="VELORA İnci Kolye">
+
+                <img
+                    src="resimler/kolye.jpg"
+                    alt="VELORA İnci Kolye"
+                >
+
             </div>
 
             <div class="product-info">
 
                 <h3>İnci Kolye</h3>
 
-                <div class="price">699 TL</div>
+                <div class="price">
+                    699 TL
+                </div>
 
                 <button onclick="addToCart('İnci Kolye',699)">
                     Sepete Ekle
@@ -366,14 +389,21 @@
         <div class="product">
 
             <div class="product-image">
-                <img src="resimler/bileklik.jpg" alt="VELORA Minimal Bileklik">
+
+                <img
+                    src="resimler/bileklik.jpg"
+                    alt="VELORA Minimal Bileklik"
+                >
+
             </div>
 
             <div class="product-info">
 
                 <h3>Minimal Bileklik</h3>
 
-                <div class="price">399 TL</div>
+                <div class="price">
+                    399 TL
+                </div>
 
                 <button onclick="addToCart('Minimal Bileklik',399)">
                     Sepete Ekle
@@ -382,6 +412,7 @@
             </div>
 
         </div>
+
 
     </div>
 
@@ -398,23 +429,37 @@
 
 
 <footer>
+
     © 2026 VELORA
+
 </footer>
 
 
 <div class="cart-panel" id="cartPanel">
 
-    <button class="close-cart" onclick="toggleCart()">×</button>
+    <button
+        class="close-cart"
+        onclick="toggleCart()"
+    >
+        ×
+    </button>
 
     <h2>Sepetim</h2>
 
     <div id="cartItems"></div>
 
     <div class="cart-total">
-        Toplam: <span id="cartTotal">0</span> TL
+
+        Toplam:
+        <span id="cartTotal">0</span>
+        TL
+
     </div>
 
-    <button class="order-button" onclick="order()">
+    <button
+        class="order-button"
+        onclick="order()"
+    >
         Siparişe Geç
     </button>
 
@@ -425,71 +470,109 @@
 
 let cart = [];
 
+
 function addToCart(name, price) {
 
-    let existing = cart.find(item => item.name === name);
+    let existing = cart.find(
+        item => item.name === name
+    );
 
     if (existing) {
+
         existing.quantity++;
+
     } else {
+
         cart.push({
+
             name: name,
+
             price: price,
+
             quantity: 1
+
         });
+
     }
 
     updateCart();
+
 }
 
 
 function updateCart() {
 
-    let items = document.getElementById("cartItems");
+    let items =
+        document.getElementById("cartItems");
 
     items.innerHTML = "";
 
     let total = 0;
+
     let count = 0;
+
 
     cart.forEach((item, index) => {
 
-        total += item.price * item.quantity;
+        total +=
+            item.price *
+            item.quantity;
 
-        count += item.quantity;
+        count +=
+            item.quantity;
+
 
         items.innerHTML += `
+
             <div class="cart-item">
 
-                <strong>${item.name}</strong>
+                <strong>
+                    ${item.name}
+                </strong>
 
                 ${item.price} TL
 
                 <div class="quantity">
 
-                    <button onclick="changeQuantity(${index},-1)">
+                    <button
+                        onclick="changeQuantity(${index},-1)"
+                    >
                         −
                     </button>
 
                     ${item.quantity}
 
-                    <button onclick="changeQuantity(${index},1)">
+                    <button
+                        onclick="changeQuantity(${index},1)"
+                    >
                         +
                     </button>
 
                 </div>
 
-                <button class="remove" onclick="removeItem(${index})">
+                <button
+                    class="remove"
+                    onclick="removeItem(${index})"
+                >
                     Ürünü Sil
                 </button>
 
             </div>
+
         `;
+
     });
 
-    document.getElementById("cartTotal").textContent = total;
 
-    document.getElementById("cartCount").textContent = count;
+    document.getElementById(
+        "cartTotal"
+    ).textContent = total;
+
+
+    document.getElementById(
+        "cartCount"
+    ).textContent = count;
+
 }
 
 
@@ -497,25 +580,34 @@ function changeQuantity(index, amount) {
 
     cart[index].quantity += amount;
 
+
     if (cart[index].quantity <= 0) {
-        cart.splice(index,1);
+
+        cart.splice(index, 1);
+
     }
 
+
     updateCart();
+
 }
 
 
 function removeItem(index) {
 
-    cart.splice(index,1);
+    cart.splice(index, 1);
 
     updateCart();
+
 }
 
 
 function toggleCart() {
 
-    document.getElementById("cartPanel").classList.toggle("active");
+    document
+        .getElementById("cartPanel")
+        .classList
+        .toggle("active");
 
 }
 
@@ -528,7 +620,9 @@ function order() {
 
     } else {
 
-        alert("Sipariş ekranını bir sonraki aşamada ekleyeceğiz.");
+        alert(
+            "Sipariş ekranını bir sonraki aşamada ekleyeceğiz."
+        );
 
     }
 
