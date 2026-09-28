@@ -22,8 +22,6 @@
             color: #333;
         }
 
-        /* ÜST MENÜ */
-
         header {
             background: white;
             padding: 20px 7%;
@@ -67,15 +65,11 @@
 
         .hero {
             min-height: 650px;
-
             display: flex;
             justify-content: center;
             align-items: center;
-
             text-align: center;
-
             padding: 30px;
-
             position: relative;
 
             background-image:
@@ -101,31 +95,23 @@
             color: white;
             letter-spacing: 7px;
             margin-bottom: 15px;
-
-            text-shadow:
-                0 3px 15px rgba(0,0,0,0.5);
+            text-shadow: 0 3px 15px rgba(0,0,0,0.5);
         }
 
         .hero p {
             font-size: 21px;
             margin-bottom: 28px;
             color: white;
-
-            text-shadow:
-                0 2px 8px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
 
         .hero button {
             border: none;
             background: #9b6b52;
             color: white;
-
             padding: 15px 28px;
-
             border-radius: 25px;
-
             cursor: pointer;
-
             font-size: 16px;
         }
 
@@ -137,33 +123,22 @@
 
         .products h2 {
             text-align: center;
-
             color: #9b6b52;
-
             font-size: 35px;
-
             margin-bottom: 40px;
         }
 
         .product-grid {
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
         }
 
         .product {
             background: white;
-
             border-radius: 15px;
-
             overflow: hidden;
-
-            box-shadow:
-                0 5px 20px rgba(0,0,0,0.08);
-
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             transition: 0.3s;
         }
 
@@ -173,14 +148,12 @@
 
         .product-image {
             height: 280px;
-
             background: #f5ebe4;
         }
 
         .product-image img {
             width: 100%;
             height: 100%;
-
             object-fit: cover;
         }
 
@@ -194,27 +167,18 @@
 
         .price {
             color: #9b6b52;
-
             font-size: 20px;
-
             font-weight: bold;
-
             margin-bottom: 15px;
         }
 
         .product-info button {
             width: 100%;
-
             padding: 12px;
-
             border: none;
-
             border-radius: 20px;
-
             background: #9b6b52;
-
             color: white;
-
             cursor: pointer;
         }
 
@@ -222,15 +186,12 @@
 
         .contact {
             padding: 60px 20px;
-
             text-align: center;
-
             background: #f5ebe4;
         }
 
         .contact h2 {
             color: #9b6b52;
-
             margin-bottom: 15px;
         }
 
@@ -238,11 +199,8 @@
 
         footer {
             background: #333;
-
             color: white;
-
             text-align: center;
-
             padding: 25px;
         }
 
@@ -250,26 +208,15 @@
 
         .cart-panel {
             position: fixed;
-
             top: 0;
-
             right: -400px;
-
             width: 360px;
-
             height: 100%;
-
             background: white;
-
             z-index: 100;
-
             padding: 25px;
-
-            box-shadow:
-                -5px 0 20px rgba(0,0,0,0.2);
-
+            box-shadow: -5px 0 20px rgba(0,0,0,0.2);
             transition: 0.3s;
-
             overflow-y: auto;
         }
 
@@ -279,79 +226,54 @@
 
         .close-cart {
             float: right;
-
             border: none;
-
             background: none;
-
             font-size: 28px;
-
             cursor: pointer;
         }
 
         .cart-panel h2 {
             color: #9b6b52;
-
             margin-bottom: 20px;
         }
 
         .cart-item {
             border-bottom: 1px solid #ddd;
-
             padding: 15px 0;
         }
 
         .quantity button {
             padding: 5px 10px;
-
             border: none;
-
             background: #eee;
-
             margin: 5px;
-
             cursor: pointer;
         }
 
         .remove {
             border: none;
-
             background: none;
-
             color: #b33;
-
             cursor: pointer;
         }
 
         .cart-total {
             margin-top: 20px;
-
             font-size: 22px;
-
             font-weight: bold;
-
             color: #9b6b52;
         }
 
         .order-button {
             width: 100%;
-
             margin-top: 15px;
-
             padding: 13px;
-
             border: none;
-
             border-radius: 20px;
-
             background: #9b6b52;
-
             color: white;
-
             cursor: pointer;
         }
-
-        /* TELEFON */
 
         @media (max-width: 800px) {
 
@@ -383,11 +305,7 @@
     </style>
 </head>
 
-
 <body>
-
-
-<!-- MENÜ -->
 
 <header>
 
@@ -397,26 +315,18 @@
 
     <nav>
 
-        <a href="#anasayfa">
-            Ana Sayfa
-        </a>
+        <a href="#anasayfa">Ana Sayfa</a>
 
-        <a href="#koleksiyon">
-            Koleksiyon
-        </a>
+        <a href="#koleksiyon">Koleksiyon</a>
 
-        <a href="#iletisim">
-            İletişim
-        </a>
+        <a href="#iletisim">İletişim</a>
 
         <button
             class="cart-button"
             onclick="toggleCart()"
         >
-
             🛒 Sepet
             (<span id="cartCount">0</span>)
-
         </button>
 
     </nav>
@@ -424,18 +334,13 @@
 </header>
 
 
-<!-- ANA SAYFA / KAPAK -->
+<!-- ANA KAPAK -->
 
-<section
-    class="hero"
-    id="anasayfa"
->
+<section class="hero" id="anasayfa">
 
     <div class="hero-content">
 
-        <h1>
-            VELORA
-        </h1>
+        <h1>VELORA</h1>
 
         <p>
             Zarafetin ve şıklığın yeni adresi.
@@ -444,9 +349,7 @@
         <button
             onclick="document.getElementById('koleksiyon').scrollIntoView()"
         >
-
             Koleksiyonu Keşfet
-
         </button>
 
     </div>
@@ -456,15 +359,9 @@
 
 <!-- KOLEKSİYON -->
 
-<section
-    class="products"
-    id="koleksiyon"
->
+<section class="products" id="koleksiyon">
 
-    <h2>
-        VELORA Koleksiyonu
-    </h2>
-
+    <h2>VELORA Koleksiyonu</h2>
 
     <div class="product-grid">
 
@@ -484,9 +381,7 @@
 
             <div class="product-info">
 
-                <h3>
-                    Zarif Yüzük
-                </h3>
+                <h3>Zarif Yüzük</h3>
 
                 <div class="price">
                     499 TL
@@ -495,9 +390,7 @@
                 <button
                     onclick="addToCart('Zarif Yüzük',499)"
                 >
-
                     Sepete Ekle
-
                 </button>
 
             </div>
@@ -520,9 +413,7 @@
 
             <div class="product-info">
 
-                <h3>
-                    İnci Kolye
-                </h3>
+                <h3>İnci Kolye</h3>
 
                 <div class="price">
                     699 TL
@@ -531,9 +422,7 @@
                 <button
                     onclick="addToCart('İnci Kolye',699)"
                 >
-
                     Sepete Ekle
-
                 </button>
 
             </div>
@@ -556,9 +445,7 @@
 
             <div class="product-info">
 
-                <h3>
-                    Minimal Bileklik
-                </h3>
+                <h3>Minimal Bileklik</h3>
 
                 <div class="price">
                     399 TL
@@ -567,15 +454,12 @@
                 <button
                     onclick="addToCart('Minimal Bileklik',399)"
                 >
-
                     Sepete Ekle
-
                 </button>
 
             </div>
 
         </div>
-
 
     </div>
 
@@ -584,14 +468,9 @@
 
 <!-- İLETİŞİM -->
 
-<section
-    class="contact"
-    id="iletisim"
->
+<section class="contact" id="iletisim">
 
-    <h2>
-        VELORA
-    </h2>
+    <h2>VELORA</h2>
 
     <p>
         Zarif detaylar, güçlü stil.
@@ -600,16 +479,12 @@
 </section>
 
 
-<!-- FOOTER -->
-
 <footer>
-
     © 2026 VELORA
-
 </footer>
 
 
-<!-- SEPET PANELİ -->
+<!-- SEPET -->
 
 <div
     class="cart-panel"
@@ -623,9 +498,7 @@
         ×
     </button>
 
-    <h2>
-        Sepetim
-    </h2>
+    <h2>Sepetim</h2>
 
     <div id="cartItems"></div>
 
@@ -641,9 +514,7 @@
         class="order-button"
         onclick="order()"
     >
-
         Siparişe Geç
-
     </button>
 
 </div>
@@ -661,7 +532,6 @@ function addToCart(name, price) {
             item => item.name === name
         );
 
-
     if (existing) {
 
         existing.quantity++;
@@ -669,17 +539,12 @@ function addToCart(name, price) {
     } else {
 
         cart.push({
-
             name: name,
-
             price: price,
-
             quantity: 1
-
         });
 
     }
-
 
     updateCart();
 
@@ -689,13 +554,9 @@ function addToCart(name, price) {
 function updateCart() {
 
     let items =
-        document.getElementById(
-            "cartItems"
-        );
-
+        document.getElementById("cartItems");
 
     items.innerHTML = "";
-
 
     let total = 0;
 
@@ -708,7 +569,6 @@ function updateCart() {
             total +=
                 item.price *
                 item.quantity;
-
 
             count +=
                 item.quantity;
@@ -748,9 +608,7 @@ function updateCart() {
                         class="remove"
                         onclick="removeItem(${index})"
                     >
-
                         Ürünü Sil
-
                     </button>
 
                 </div>
@@ -773,22 +631,15 @@ function updateCart() {
 }
 
 
-function changeQuantity(
-    index,
-    amount
-) {
+function changeQuantity(index, amount) {
 
     cart[index].quantity += amount;
 
-
-    if (
-        cart[index].quantity <= 0
-    ) {
+    if (cart[index].quantity <= 0) {
 
         cart.splice(index, 1);
 
     }
-
 
     updateCart();
 
@@ -818,9 +669,7 @@ function order() {
 
     if (cart.length === 0) {
 
-        alert(
-            "Sepetiniz boş."
-        );
+        alert("Sepetiniz boş.");
 
     } else {
 
@@ -833,7 +682,6 @@ function order() {
 }
 
 </script>
-
 
 </body>
 </html>
