@@ -1082,6 +1082,46 @@ function submitOrder(event) {
 
 </script>
 
+<script>
+const orderForm = document.querySelector(".order-form");
 
+if (orderForm) {
+    orderForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(orderForm);
+
+        const order = {
+            name: formData.get("name"),
+            phone: formData.get("phone"),
+            address: formData.get("address"),
+            note: formData.get("note")
+        };
+
+        try {
+            const response = await fetch("http://localhost:3000/api/order", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(order)
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert("Sipariş backend'e başarıyla gönderildi! 🎉");
+            } else {
+                alert("Sipariş gönderilemedi.");
+            }
+
+        } catch (error) {
+            console.error(error);
+            alert("Backend'e bağlanılamadı.");
+        }
+    });
+}
+</script>
+    
 </body>
 </html>
