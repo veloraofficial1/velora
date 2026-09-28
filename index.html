@@ -65,11 +65,15 @@
 
         .hero {
             min-height: 650px;
+
             display: flex;
             justify-content: center;
             align-items: center;
+
             text-align: center;
+
             padding: 30px;
+
             position: relative;
 
             background-image:
@@ -275,6 +279,100 @@
             cursor: pointer;
         }
 
+        /* SİPARİŞ FORMU */
+
+        .order-section {
+            display: none;
+            padding: 70px 7%;
+            background: #faf7f5;
+        }
+
+        .order-section.active {
+            display: block;
+        }
+
+        .order-box {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .order-box h2 {
+            text-align: center;
+            color: #9b6b52;
+            margin-bottom: 10px;
+        }
+
+        .order-box p {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .order-summary {
+            background: #f5ebe4;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+
+        .order-summary h3 {
+            color: #9b6b52;
+            margin-bottom: 10px;
+        }
+
+        .order-submit {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            background: #9b6b52;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .cancel-order {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #9b6b52;
+            border-radius: 25px;
+            background: white;
+            color: #9b6b52;
+            cursor: pointer;
+        }
+
+        /* TELEFON */
+
         @media (max-width: 800px) {
 
             .product-grid {
@@ -300,12 +398,19 @@
             .cart-panel {
                 width: 100%;
             }
+
+            .order-box {
+                padding: 25px 20px;
+            }
         }
 
     </style>
 </head>
 
 <body>
+
+
+<!-- MENÜ -->
 
 <header>
 
@@ -315,11 +420,17 @@
 
     <nav>
 
-        <a href="#anasayfa">Ana Sayfa</a>
+        <a href="#anasayfa">
+            Ana Sayfa
+        </a>
 
-        <a href="#koleksiyon">Koleksiyon</a>
+        <a href="#koleksiyon">
+            Koleksiyon
+        </a>
 
-        <a href="#iletisim">İletişim</a>
+        <a href="#iletisim">
+            İletişim
+        </a>
 
         <button
             class="cart-button"
@@ -336,11 +447,16 @@
 
 <!-- ANA KAPAK -->
 
-<section class="hero" id="anasayfa">
+<section
+    class="hero"
+    id="anasayfa"
+>
 
     <div class="hero-content">
 
-        <h1>VELORA</h1>
+        <h1>
+            VELORA
+        </h1>
 
         <p>
             Zarafetin ve şıklığın yeni adresi.
@@ -359,9 +475,14 @@
 
 <!-- KOLEKSİYON -->
 
-<section class="products" id="koleksiyon">
+<section
+    class="products"
+    id="koleksiyon"
+>
 
-    <h2>VELORA Koleksiyonu</h2>
+    <h2>
+        VELORA Koleksiyonu
+    </h2>
 
     <div class="product-grid">
 
@@ -381,7 +502,9 @@
 
             <div class="product-info">
 
-                <h3>Zarif Yüzük</h3>
+                <h3>
+                    Zarif Yüzük
+                </h3>
 
                 <div class="price">
                     499 TL
@@ -413,7 +536,9 @@
 
             <div class="product-info">
 
-                <h3>İnci Kolye</h3>
+                <h3>
+                    İnci Kolye
+                </h3>
 
                 <div class="price">
                     699 TL
@@ -445,7 +570,9 @@
 
             <div class="product-info">
 
-                <h3>Minimal Bileklik</h3>
+                <h3>
+                    Minimal Bileklik
+                </h3>
 
                 <div class="price">
                     399 TL
@@ -466,11 +593,145 @@
 </section>
 
 
+<!-- SİPARİŞ FORMU -->
+
+<section
+    class="order-section"
+    id="siparis"
+>
+
+    <div class="order-box">
+
+        <h2>
+            Sipariş Bilgileri
+        </h2>
+
+        <p>
+            Teslimat bilgilerinizi girin.
+        </p>
+
+
+        <form onsubmit="submitOrder(event)">
+
+
+            <div class="form-group">
+
+                <label for="name">
+                    Ad Soyad
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Adınız ve soyadınız"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="phone">
+                    Telefon
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="05XX XXX XX XX"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="address">
+                    Teslimat Adresi
+                </label>
+
+                <textarea
+                    id="address"
+                    placeholder="Mahalle, sokak, bina no, daire no, ilçe ve şehir"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="note">
+                    Sipariş Notu
+                </label>
+
+                <textarea
+                    id="note"
+                    placeholder="Varsa siparişinizle ilgili bir not yazabilirsiniz."
+                ></textarea>
+
+            </div>
+
+
+            <div class="order-summary">
+
+                <h3>
+                    Sipariş Özeti
+                </h3>
+
+                <div id="orderItems">
+                    Sepetiniz boş.
+                </div>
+
+                <br>
+
+                <strong>
+                    Toplam:
+                    <span id="orderTotal">
+                        0
+                    </span>
+                    TL
+                </strong>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="order-submit"
+            >
+                Siparişi Oluştur
+            </button>
+
+
+            <button
+                type="button"
+                class="cancel-order"
+                onclick="closeOrder()"
+            >
+                Geri Dön
+            </button>
+
+
+        </form>
+
+    </div>
+
+</section>
+
+
 <!-- İLETİŞİM -->
 
-<section class="contact" id="iletisim">
+<section
+    class="contact"
+    id="iletisim"
+>
 
-    <h2>VELORA</h2>
+    <h2>
+        VELORA
+    </h2>
 
     <p>
         Zarif detaylar, güçlü stil.
@@ -479,12 +740,16 @@
 </section>
 
 
+<!-- FOOTER -->
+
 <footer>
+
     © 2026 VELORA
+
 </footer>
 
 
-<!-- SEPET -->
+<!-- SEPET PANELİ -->
 
 <div
     class="cart-panel"
@@ -498,21 +763,25 @@
         ×
     </button>
 
-    <h2>Sepetim</h2>
+    <h2>
+        Sepetim
+    </h2>
 
     <div id="cartItems"></div>
 
     <div class="cart-total">
 
         Toplam:
-        <span id="cartTotal">0</span>
+        <span id="cartTotal">
+            0
+        </span>
         TL
 
     </div>
 
     <button
         class="order-button"
-        onclick="order()"
+        onclick="openOrder()"
     >
         Siparişe Geç
     </button>
@@ -532,6 +801,7 @@ function addToCart(name, price) {
             item => item.name === name
         );
 
+
     if (existing) {
 
         existing.quantity++;
@@ -539,12 +809,17 @@ function addToCart(name, price) {
     } else {
 
         cart.push({
+
             name: name,
+
             price: price,
+
             quantity: 1
+
         });
 
     }
+
 
     updateCart();
 
@@ -554,9 +829,13 @@ function addToCart(name, price) {
 function updateCart() {
 
     let items =
-        document.getElementById("cartItems");
+        document.getElementById(
+            "cartItems"
+        );
+
 
     items.innerHTML = "";
+
 
     let total = 0;
 
@@ -635,11 +914,15 @@ function changeQuantity(index, amount) {
 
     cart[index].quantity += amount;
 
-    if (cart[index].quantity <= 0) {
+
+    if (
+        cart[index].quantity <= 0
+    ) {
 
         cart.splice(index, 1);
 
     }
+
 
     updateCart();
 
@@ -665,23 +948,140 @@ function toggleCart() {
 }
 
 
-function order() {
+function openOrder() {
 
     if (cart.length === 0) {
 
-        alert("Sepetiniz boş.");
-
-    } else {
-
         alert(
-            "Sipariş ekranını bir sonraki aşamada ekleyeceğiz."
+            "Önce sepetinize ürün ekleyin."
         );
 
+        return;
+
     }
+
+
+    document
+        .getElementById("cartPanel")
+        .classList
+        .remove("active");
+
+
+    let orderSection =
+        document.getElementById(
+            "siparis"
+        );
+
+
+    orderSection.classList.add(
+        "active"
+    );
+
+
+    updateOrderSummary();
+
+
+    orderSection.scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+function updateOrderSummary() {
+
+    let orderItems =
+        document.getElementById(
+            "orderItems"
+        );
+
+
+    let orderTotal =
+        document.getElementById(
+            "orderTotal"
+        );
+
+
+    orderItems.innerHTML = "";
+
+
+    let total = 0;
+
+
+    cart.forEach(item => {
+
+        let itemTotal =
+            item.price *
+            item.quantity;
+
+
+        total += itemTotal;
+
+
+        orderItems.innerHTML += `
+
+            <div style="margin-bottom:8px;">
+
+                ${item.name}
+
+                × ${item.quantity}
+
+                — ${itemTotal} TL
+
+            </div>
+
+        `;
+
+    });
+
+
+    orderTotal.textContent = total;
+
+}
+
+
+function closeOrder() {
+
+    document
+        .getElementById("siparis")
+        .classList
+        .remove("active");
+
+}
+
+
+function submitOrder(event) {
+
+    event.preventDefault();
+
+
+    if (cart.length === 0) {
+
+        alert(
+            "Sepetiniz boş."
+        );
+
+        return;
+
+    }
+
+
+    let name =
+        document.getElementById(
+            "name"
+        ).value;
+
+
+    alert(
+        "Teşekkürler " +
+        name +
+        "! Sipariş bilgileriniz alındı. Ödeme sistemi bir sonraki aşamada bağlanacak."
+    );
 
 }
 
 </script>
+
 
 </body>
 </html>
