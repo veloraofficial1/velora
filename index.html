@@ -1,1397 +1,776 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>VELORA | Zarafetin Modern Hali</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-
-<style>
-
-/* =========================
-   GENEL
-========================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: "Montserrat", sans-serif;
-    background: #faf8f4;
-    color: #3e3934;
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-
-    background: rgba(250,248,244,0.97);
-
-    border-bottom: 1px solid #e8e0d5;
-
-    padding: 18px 5%;
-}
-
-.header-inner {
-    max-width: 1250px;
-    margin: auto;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-
-/* LOGO */
-
-.logo {
-    font-family: "Cormorant Garamond", serif;
-
-    font-size: 38px;
-
-    letter-spacing: 6px;
-
-    color: #9b7743;
-
-    font-weight: 600;
-
-    text-decoration: none;
-
-    white-space: nowrap;
-}
-
-
-/* =========================
-   NAVIGATION
-========================= */
-
-nav {
-    display: flex;
-    align-items: center;
-
-    gap: 28px;
-}
-
-.nav-item {
-    position: relative;
-}
-
-.nav-link {
-    border: none;
-
-    background: none;
-
-    color: #403a34;
-
-    font-family: "Cormorant Garamond", serif;
-
-    font-size: 20px;
-
-    letter-spacing: 1px;
-
-    cursor: pointer;
-
-    padding: 10px 2px;
-}
-
-.nav-link:hover {
-    color: #a27d46;
-}
-
-
-/* =========================
-   DROPDOWN
-========================= */
-
-.dropdown {
-
-    position: absolute;
-
-    top: 100%;
-    left: 50%;
-
-    transform:
-        translateX(-50%)
-        translateY(10px);
-
-    width: 215px;
-
-    background: #fffdf9;
-
-    border: 1px solid #e9e0d4;
-
-    box-shadow:
-        0 15px 35px
-        rgba(60,45,30,0.10);
-
-    padding: 12px 0;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transition: 0.25s ease;
-}
-
-.nav-item:hover .dropdown {
-
-    opacity: 1;
-
-    visibility: visible;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
-}
-
-.dropdown button {
-
-    width: 100%;
-
-    padding: 11px 18px;
-
-    border: none;
-
-    background: transparent;
-
-    text-align: left;
-
-    font-family: "Montserrat", sans-serif;
-
-    font-size: 13px;
-
-    font-weight: 400;
-
-    color: #554d45;
-
-    cursor: pointer;
-}
-
-.dropdown button:hover {
-
-    background: #f5efe7;
-
-    color: #9b7743;
-}
-
-
-/* NAV LINK */
-
-.nav-extra {
-
-    font-family: "Cormorant Garamond", serif;
-
-    font-size: 20px;
-
-    color: #403a34;
-
-    text-decoration: none;
-
-    padding: 10px 2px;
-
-    white-space: nowrap;
-}
-
-.nav-extra:hover {
-    color: #a27d46;
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-
-    min-height: 550px;
-
-    background:
-        linear-gradient(
-            rgba(50,40,30,0.22),
-            rgba(50,40,30,0.22)
-        ),
-        url("resimler/urun1.jpg")
-        center/cover;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    padding: 50px 20px;
-}
-
-.hero-content {
-    color: white;
-}
-
-.hero h1 {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(50px, 8vw, 90px);
-
-    font-weight: 500;
-
-    letter-spacing: 10px;
-
-    margin-bottom: 10px;
-}
-
-.hero p {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 28px;
-
-    letter-spacing: 2px;
-}
-
-
-/* =========================
-   SECTION TITLE
-========================= */
-
-.section-title {
-
-    text-align: center;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 46px;
-
-    font-weight: 500;
-
-    color: #8e6c3f;
-
-    margin-bottom: 45px;
-}
-
-
-/* =========================
-   CATEGORY SECTION
-========================= */
-
-.categories {
-
-    padding:
-        80px 5% 40px;
-
-    max-width: 1300px;
-
-    margin: auto;
-}
-
-.category-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 20px;
-}
-
-.category-card {
-
-    height: 300px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    cursor: pointer;
-
-    background: #eee7de;
-}
-
-.category-card img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    transition:
-        transform 0.6s ease;
-}
-
-.category-card:hover img {
-
-    transform:
-        scale(1.06);
-}
-
-.category-overlay {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            to top,
-            rgba(30,22,15,0.65),
-            rgba(30,22,15,0.05)
-        );
-
-    display: flex;
-
-    align-items: flex-end;
-
-    justify-content: center;
-
-    padding-bottom: 25px;
-}
-
-.category-overlay h3 {
-
-    color: white;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 34px;
-
-    font-weight: 500;
-
-    letter-spacing: 2px;
-}
-
-
-/* =========================
-   ÖNE ÇIKANLAR
-========================= */
-
-.featured-section {
-
-    max-width: 1300px;
-
-    margin: auto;
-
-    padding:
-        70px 5% 50px;
-}
-
-.featured-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 22px;
-}
-
-.featured-card {
-
-    background: #fffdf9;
-
-    border: 1px solid #e9e0d5;
-
-    overflow: hidden;
-
-    transition:
-        0.3s ease;
-}
-
-.featured-card:hover {
-
-    transform:
-        translateY(-5px);
-
-    box-shadow:
-        0 15px 30px
-        rgba(70,50,30,0.08);
-}
-
-.featured-card img {
-
-    width: 100%;
-
-    height: 280px;
-
-    object-fit: cover;
-
-    display: block;
-}
-
-.featured-info {
-
-    text-align: center;
-
-    padding: 18px;
-}
-
-.featured-info h3 {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 26px;
-
-    font-weight: 500;
-}
-
-.featured-info p {
-
-    margin-top: 7px;
-
-    font-size: 11px;
-
-    color: #9b7743;
-
-    letter-spacing: 1px;
-}
-
-
-/* =========================
-   PRODUCTS
-========================= */
-
-.products-section {
-
-    max-width: 1300px;
-
-    margin: auto;
-
-    padding:
-        60px 5% 100px;
-}
-
-.category-heading {
-
-    text-align: center;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 40px;
-
-    color: #8e6c3f;
-
-    margin:
-        60px 0 30px;
-}
-
-.subcategory-heading {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 30px;
-
-    font-weight: 500;
-
-    color: #9b7743;
-
-    margin:
-        35px 0 20px;
-}
-
-
-/* PRODUCT GRID */
-
-.product-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 30px;
-}
-
-.product-card {
-
-    background: #fffdf9;
-
-    border:
-        1px solid #e9e0d5;
-
-    overflow: hidden;
-
-    transition:
-        0.3s ease;
-}
-
-.product-card:hover {
-
-    transform:
-        translateY(-5px);
-
-    box-shadow:
-        0 15px 30px
-        rgba(70,50,30,0.08);
-}
-
-.product-image {
-
-    width: 100%;
-
-    height: 330px;
-
-    object-fit: cover;
-
-    display: block;
-}
-
-.product-info {
-
-    padding: 22px;
-
-    text-align: center;
-}
-
-.product-name {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 28px;
-
-    font-weight: 500;
-
-    color: #4c433b;
-}
-
-.product-category {
-
-    margin-top: 5px;
-
-    font-size: 11px;
-
-    letter-spacing: 1px;
-
-    color: #a78c69;
-
-    text-transform: uppercase;
-}
-
-
-/* STOCK */
-
-.stock-status {
-
-    margin:
-        15px 0;
-
-    font-size: 13px;
-
-    letter-spacing: 1px;
-
-    color: #9b7743;
-
-    font-weight: 500;
-}
-
-.stock-button {
-
-    width: 100%;
-
-    border:
-        1px solid #d9cbb9;
-
-    background: #f2ede6;
-
-    color: #9c8b76;
-
-    padding: 12px;
-
-    font-family:
-        "Montserrat",
-        sans-serif;
-
-    font-size: 12px;
-
-    cursor: not-allowed;
-}
-
-
-/* =========================
-   REVIEWS
-========================= */
-
-.review-box {
-
-    margin-top: 20px;
-
-    padding-top: 18px;
-
-    border-top:
-        1px solid #eee5da;
-}
-
-.stars {
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 5px;
-
-    margin-bottom: 12px;
-}
-
-.star {
-
-    font-size: 21px;
-
-    color: #d7c7af;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.star.active {
-
-    color: #b28b54;
-}
-
-.review-input {
-
-    width: 100%;
-
-    border:
-        1px solid #ddd3c6;
-
-    padding: 10px;
-
-    resize: vertical;
-
-    min-height: 70px;
-
-    font-family:
-        "Montserrat",
-        sans-serif;
-
-    font-size: 12px;
-
-    background: #fff;
-
-    outline: none;
-}
-
-.review-input:focus {
-
-    border-color:
-        #b89a70;
-}
-
-.review-button {
-
-    margin-top: 8px;
-
-    border:
-        1px solid #b89a70;
-
-    background: transparent;
-
-    color: #8e6c3f;
-
-    padding:
-        9px 18px;
-
-    cursor: pointer;
-
-    font-family:
-        "Montserrat",
-        sans-serif;
-
-    font-size: 12px;
-}
-
-.review-button:hover {
-
-    background: #b89a70;
-
-    color: white;
-}
-
-.reviews {
-
-    margin-top: 15px;
-
-    text-align: left;
-}
-
-.review {
-
-    background: #f8f4ee;
-
-    padding: 10px;
-
-    margin-top: 7px;
-
-    font-size: 12px;
-}
-
-.review-stars {
-
-    color: #b28b54;
-
-    margin-bottom: 4px;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-
-    background: #302a25;
-
-    color: #e9dfd2;
-
-    text-align: center;
-
-    padding: 45px 20px;
-}
-
-.footer-logo {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 35px;
-
-    letter-spacing: 5px;
-
-    color: #c8a875;
-
-    margin-bottom: 10px;
-}
-
-footer p {
-
-    font-size: 12px;
-
-    letter-spacing: 1px;
-}
-
-
-/* =========================
-   TABLET
-========================= */
-
-@media (max-width: 1000px) {
-
-    .header-inner {
-
-        flex-direction: column;
-
-        gap: 15px;
-    }
-
-    nav {
-
-        gap: 15px;
-
-        flex-wrap: wrap;
-
-        justify-content: center;
-    }
-
-    .category-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .featured-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .product-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-    .logo {
-
-        font-size: 32px;
-    }
-
-    nav {
-
-        gap: 5px;
-    }
-
-    .nav-link,
-    .nav-extra {
-
-        font-size: 17px;
-    }
-
-    .category-grid,
-    .featured-grid,
-    .product-grid {
-
-        grid-template-columns: 1fr;
-    }
-
-    .category-card {
-
-        height: 280px;
-    }
-
-    .hero {
-
-        min-height: 450px;
-    }
-
-    .hero h1 {
-
-        font-size: 55px;
-
-        letter-spacing: 6px;
-    }
-
-    .hero p {
-
-        font-size: 22px;
-    }
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELORA | Zarif Takılar</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background: #f7f1e7;
+            color: #4c3b2b;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(247, 241, 231, 0.97);
+            border-bottom: 1px solid #d6c2a5;
+            padding: 18px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 6px;
+            color: #9b7445;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        nav a,
+        .dropbtn {
+            text-decoration: none;
+            color: #5a4632;
+            font-size: 16px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+        }
+
+        nav a:hover,
+        .dropbtn:hover {
+            color: #a67c48;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 30px;
+            left: 0;
+            min-width: 180px;
+            background: #fffaf3;
+            border: 1px solid #dbc8ad;
+            box-shadow: 0 10px 25px rgba(70, 50, 30, 0.12);
+            padding: 8px 0;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px 16px;
+            font-size: 14px;
+            color: #5a4632;
+        }
+
+        .dropdown-content a:hover {
+            background: #f1e5d3;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 580px;
+            background:
+                linear-gradient(
+                    rgba(65, 48, 32, 0.32),
+                    rgba(65, 48, 32, 0.32)
+                ),
+                url("resimler/urun1.jpg") center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            color: white;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 62px;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 23px;
+            letter-spacing: 2px;
+        }
+
+        .hero-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 13px 30px;
+            background: #f8eee0;
+            color: #705333;
+            text-decoration: none;
+            border: 1px solid #c7aa82;
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+            background: #d9bd94;
+            color: white;
+        }
+
+        /* SECTION */
+        section {
+            padding: 80px 6%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 38px;
+            color: #85633d;
+            margin-bottom: 45px;
+            letter-spacing: 3px;
+        }
+
+        /* CATEGORY CARDS */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .category-card {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid #d8c2a4;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .category-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(55, 40, 25, 0.28);
+            color: white;
+            font-size: 27px;
+            letter-spacing: 3px;
+        }
+
+        /* PRODUCTS */
+        #urunler {
+            background: #fbf7f0;
+        }
+
+        .category-heading {
+            text-align: center;
+            font-size: 34px;
+            color: #8b6943;
+            margin: 65px 0 30px;
+            letter-spacing: 3px;
+        }
+
+        .category-heading:first-child {
+            margin-top: 0;
+        }
+
+        .product-grid {
+            max-width: 1250px;
+            margin: 0 auto 50px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .product-card {
+            background: #fffdf9;
+            border: 1px solid #dfccb2;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(90, 65, 40, 0.12);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-name {
+            font-size: 21px;
+            color: #5d4631;
+            margin-bottom: 8px;
+        }
+
+        .product-category {
+            color: #a18058;
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .stock-status {
+            color: #a67c48;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .stock-button {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #cdb18c;
+            background: #eee4d6;
+            color: #8b7357;
+            font-family: inherit;
+            cursor: not-allowed;
+        }
+
+        /* REVIEWS */
+        .review-box {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eadbc8;
+        }
+
+        .stars {
+            margin-bottom: 10px;
+        }
+
+        .star {
+            font-size: 22px;
+            color: #c9b39a;
+            cursor: pointer;
+            margin: 0 2px;
+        }
+
+        .star.active {
+            color: #b3864e;
+        }
+
+        .review-input {
+            width: 100%;
+            min-height: 70px;
+            resize: vertical;
+            padding: 10px;
+            border: 1px solid #d9c5a9;
+            background: #fffaf4;
+            color: #4c3b2b;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .review-input:focus {
+            border-color: #b58c5b;
+        }
+
+        .review-button {
+            width: 100%;
+            margin-top: 8px;
+            padding: 9px;
+            border: 1px solid #b99669;
+            background: #b99669;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .review-button:hover {
+            background: #9f7749;
+        }
+
+        .reviews {
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .review-item {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #f7efe3;
+            border-left: 3px solid #b99669;
+            font-size: 14px;
+        }
+
+        .review-stars {
+            color: #b3864e;
+            margin-bottom: 5px;
+        }
+
+        /* FEATURED */
+        #one-cikanlar {
+            background: #efe3d2;
+        }
+
+        .featured-grid {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .featured-card {
+            background: #fffaf3;
+            border: 1px solid #d9c3a5;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .featured-card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        .featured-info {
+            padding: 18px;
+            text-align: center;
+        }
+
+        .featured-info h3 {
+            color: #664d35;
+            margin-bottom: 7px;
+        }
+
+        .featured-info p {
+            color: #a17b50;
+            font-size: 14px;
+        }
+
+        /* CONTACT */
+        #iletisim {
+            text-align: center;
+            background: #f7f1e7;
+        }
+
+        .contact-text {
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.8;
+            color: #6b5640;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #4d3b2a;
+            color: #f5e9d8;
+            text-align: center;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 1000px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .featured-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            nav {
+                gap: 14px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                min-height: 470px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+                letter-spacing: 5px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .category-grid,
+            .product-grid,
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dropdown-content {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
-
 <header>
-
-<div class="header-inner">
-
-    <!-- LOGO -->
-    <a href="#" class="logo">
-        VELORA
-    </a>
-
+    <a href="#" class="logo">VELORA</a>
 
     <nav>
 
-
         <!-- YÜZÜK -->
+        <div class="dropdown">
+            <button class="dropbtn">Yüzük ▾</button>
 
-        <div class="nav-item">
+            <div class="dropdown-content">
+                <a href="#urunler" onclick="filterCategory('Yüzük','Günlük')">
+                    Günlük
+                </a>
 
-            <button class="nav-link">
-                Yüzük
-            </button>
+                <a href="#urunler" onclick="filterCategory('Yüzük','Taşlı')">
+                    Taşlı
+                </a>
 
-            <div class="dropdown">
+                <a href="#urunler" onclick="filterCategory('Yüzük','Kalpli')">
+                    Kalpli
+                </a>
 
-                <button onclick="filterCategory('Yüzük','Günlük')">
-                    Günlük Yüzükler
-                </button>
-
-                <button onclick="filterCategory('Yüzük','Taşlı')">
-                    Taşlı Yüzükler
-                </button>
-
-                <button onclick="filterCategory('Yüzük','Kalpli')">
-                    Kalpli Yüzükler
-                </button>
-
-                <button onclick="filterCategory('Yüzük','Minimal')">
-                    Minimal Yüzükler
-                </button>
-
+                <a href="#urunler" onclick="filterCategory('Yüzük','Minimal')">
+                    Minimal
+                </a>
             </div>
-
         </div>
-
 
         <!-- BİLEKLİK -->
+        <div class="dropdown">
+            <button class="dropbtn">Bileklik ▾</button>
 
-        <div class="nav-item">
+            <div class="dropdown-content">
+                <a href="#urunler" onclick="filterCategory('Bileklik','Minimal')">
+                    Minimal
+                </a>
 
-            <button class="nav-link">
-                Bileklik
-            </button>
+                <a href="#urunler" onclick="filterCategory('Bileklik','Taşlı')">
+                    Taşlı
+                </a>
 
-            <div class="dropdown">
+                <a href="#urunler" onclick="filterCategory('Bileklik','Su Yolu')">
+                    Su Yolu
+                </a>
 
-                <button onclick="filterCategory('Bileklik','Minimal')">
-                    Minimal Bileklikler
-                </button>
-
-                <button onclick="filterCategory('Bileklik','Taşlı')">
-                    Taşlı Bileklikler
-                </button>
-
-                <button onclick="filterCategory('Bileklik','Su Yolu')">
-                    Su Yolu Bileklikler
-                </button>
-
-                <button onclick="filterCategory('Bileklik','Zincir')">
-                    Zincir Bileklikler
-                </button>
-
+                <a href="#urunler" onclick="filterCategory('Bileklik','Zincir')">
+                    Zincir
+                </a>
             </div>
-
         </div>
-
 
         <!-- KÜPE -->
+        <div class="dropdown">
+            <button class="dropbtn">Küpe ▾</button>
 
-        <div class="nav-item">
+            <div class="dropdown-content">
+                <a href="#urunler" onclick="filterCategory('Küpe','İnci')">
+                    İnci
+                </a>
 
-            <button class="nav-link">
-                Küpe
-            </button>
+                <a href="#urunler" onclick="filterCategory('Küpe','Halka')">
+                    Halka
+                </a>
 
-            <div class="dropdown">
+                <a href="#urunler" onclick="filterCategory('Küpe','Taşlı')">
+                    Taşlı
+                </a>
 
-                <button onclick="filterCategory('Küpe','İnci')">
-                    İnci Küpeler
-                </button>
-
-                <button onclick="filterCategory('Küpe','Halka')">
-                    Halka Küpeler
-                </button>
-
-                <button onclick="filterCategory('Küpe','Taşlı')">
-                    Taşlı Küpeler
-                </button>
-
-                <button onclick="filterCategory('Küpe','Minimal')">
-                    Minimal Küpeler
-                </button>
-
+                <a href="#urunler" onclick="filterCategory('Küpe','Minimal')">
+                    Minimal
+                </a>
             </div>
-
         </div>
-
 
         <!-- KOLYE -->
+        <div class="dropdown">
+            <button class="dropbtn">Kolye ▾</button>
 
-        <div class="nav-item">
+            <div class="dropdown-content">
+                <a href="#urunler" onclick="filterCategory('Kolye','İnci')">
+                    İnci
+                </a>
 
-            <button class="nav-link">
-                Kolye
-            </button>
+                <a href="#urunler" onclick="filterCategory('Kolye','Zincir')">
+                    Zincir
+                </a>
 
-            <div class="dropdown">
+                <a href="#urunler" onclick="filterCategory('Kolye','Minimal')">
+                    Minimal
+                </a>
 
-                <button onclick="filterCategory('Kolye','İnci')">
-                    İnci Kolyeler
-                </button>
-
-                <button onclick="filterCategory('Kolye','Zincir')">
-                    Zincir Kolyeler
-                </button>
-
-                <button onclick="filterCategory('Kolye','Minimal')">
-                    Minimal Kolyeler
-                </button>
-
-                <button onclick="filterCategory('Kolye','Taşlı')">
-                    Taşlı Kolyeler
-                </button>
-
+                <a href="#urunler" onclick="filterCategory('Kolye','Taşlı')">
+                    Taşlı
+                </a>
             </div>
-
         </div>
 
-
-        <!-- ÖNE ÇIKANLAR -->
-
-        <a
-            href="#one-cikanlar"
-            class="nav-extra"
-        >
-            Öne Çıkanlar
-        </a>
-
-
-        <!-- İLETİŞİM -->
-
-        <a
-            href="#iletisim"
-            class="nav-extra"
-        >
-            İletişim
-        </a>
+        <a href="#one-cikanlar">Öne Çıkanlar</a>
+        <a href="#iletisim">İletişim</a>
 
     </nav>
-
-</div>
-
 </header>
 
 
-
-<!-- =========================
-     HERO
-========================= -->
-
+<!-- HERO -->
 <section class="hero">
 
     <div class="hero-content">
 
-        <h1>
-            VELORA
-        </h1>
+        <h1>VELORA</h1>
 
-        <p>
-            Zarafetin modern hali.
-        </p>
+        <p>Zarafetin modern hali.</p>
+
+        <a href="#urunler" class="hero-button">
+            Koleksiyonu Keşfet
+        </a>
 
     </div>
 
 </section>
 
 
-
-<!-- =========================
-     KATEGORİLER
-========================= -->
-
-<section class="categories">
+<!-- KATEGORİLER -->
+<section>
 
     <h2 class="section-title">
         Kategoriler
     </h2>
 
-
     <div class="category-grid">
 
+        <div class="category-card"
+             onclick="filterCategory('Yüzük')">
 
-        <!-- YÜZÜK -->
-
-        <div
-            class="category-card"
-            onclick="filterCategory('Yüzük')"
-        >
-
-            <img
-                src="resimler/yuzuk.jpg"
-                alt="Yüzük"
-                onerror="this.src='resimler/urun1.jpg'"
-            >
+            <img src="resimler/yuzuk.jpg"
+                 alt="Yüzük">
 
             <div class="category-overlay">
-
-                <h3>
-                    Yüzük
-                </h3>
-
+                Yüzük
             </div>
 
         </div>
 
 
-        <!-- BİLEKLİK -->
+        <div class="category-card"
+             onclick="filterCategory('Bileklik')">
 
-        <div
-            class="category-card"
-            onclick="filterCategory('Bileklik')"
-        >
-
-            <img
-                src="resimler/bileklik.jpg"
-                alt="Bileklik"
-                onerror="this.src='resimler/urun1.jpg'"
-            >
+            <img src="resimler/bileklik.jpg"
+                 alt="Bileklik">
 
             <div class="category-overlay">
-
-                <h3>
-                    Bileklik
-                </h3>
-
+                Bileklik
             </div>
 
         </div>
 
 
-        <!-- KÜPE -->
+        <div class="category-card"
+             onclick="filterCategory('Küpe')">
 
-        <div
-            class="category-card"
-            onclick="filterCategory('Küpe')"
-        >
-
-            <img
-                src="resimler/incikupe.jpg"
-                alt="Küpe"
-                onerror="this.src='resimler/urun1.jpg'"
-            >
+            <img src="resimler/incikupe.jpg"
+                 alt="Küpe">
 
             <div class="category-overlay">
-
-                <h3>
-                    Küpe
-                </h3>
-
+                Küpe
             </div>
 
         </div>
 
 
-        <!-- KOLYE -->
+        <div class="category-card"
+             onclick="filterCategory('Kolye')">
 
-        <div
-            class="category-card"
-            onclick="filterCategory('Kolye')"
-        >
-
-            <img
-                src="resimler/kolye.jpg"
-                alt="Kolye"
-                onerror="this.src='resimler/urun1.jpg'"
-            >
+            <img src="resimler/kolye.jpg"
+                 alt="Kolye">
 
             <div class="category-overlay">
-
-                <h3>
-                    Kolye
-                </h3>
-
+                Kolye
             </div>
 
         </div>
-
 
     </div>
 
 </section>
 
 
-
-<!-- =========================
-     ÖNE ÇIKANLAR
-========================= -->
-
-<section
-    class="featured-section"
-    id="one-cikanlar"
->
+<!-- ÜRÜNLER -->
+<section id="urunler">
 
     <h2 class="section-title">
-        Öne Çıkanlar
+        Koleksiyon
     </h2>
-
-
-    <div class="featured-grid">
-
-
-        <!-- SU YOLU -->
-
-        <div class="featured-card">
-
-            <img
-                src="resimler/su-yolu-bileklik.jpg"
-                alt="Su Yolu Bileklik"
-                onerror="this.src='resimler/urun1.jpg'"
-            >
-
-            <div class="featured-info">
-
-                <h3>
-                    Su Yolu Bileklik
-                </h3>
-
-                <p>
-                    Çok Yakında Stoklarda
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- YÜZÜK -->
-
-        <div class="featured-card">
-
-            <img
-                src="resimler/yuzuk.jpg"
-                alt="Zarif Yüzük"
-                onerror="this.src='resimler/urun1.jpg'"
-            >
-
-            <div class="featured-info">
-
-                <h3>
-                    Zarif Yüzük
-                </h3>
-
-                <p>
-                    Çok Yakında Stoklarda
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- KOLYE -->
-
-        <div class="featured-card">
-
-            <img
-                src="resimler/kolye.jpg"
-                alt="İnci Kolye"
-                onerror="this.src='resimler/urun1.jpg'"
-            >
-
-            <div class="featured-info">
-
-                <h3>
-                    İnci Kolye
-                </h3>
-
-                <p>
-                    Çok Yakında Stoklarda
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- KÜPE -->
-
-        <div class="featured-card">
-
-            <img
-                src="resimler/incikupe.jpg"
-                alt="İnci Küpe"
-                onerror="this.src='resimler/urun1.jpg'"
-            >
-
-            <div class="featured-info">
-
-                <h3>
-                    İnci Küpe
-                </h3>
-
-                <p>
-                    Çok Yakında Stoklarda
-                </p>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     ÜRÜNLER
-========================= -->
-
-<section
-    class="products-section"
-    id="urunler"
->
-
-    <h2 class="section-title">
-        Ürünler
-    </h2>
-
 
     <div id="productContainer"></div>
 
 </section>
 
 
+<!-- ÖNE ÇIKANLAR -->
+<section id="one-cikanlar">
 
-<!-- =========================
-     FOOTER
-========================= -->
+    <h2 class="section-title">
+        Öne Çıkanlar
+    </h2>
 
-<footer id="iletisim">
+    <div class="featured-grid">
 
-    <div class="footer-logo">
-        VELORA
+        <div class="featured-card"
+             onclick="filterCategory('Bileklik','Su Yolu')">
+
+            <img src="resimler/su-yolu-bileklik.jpg"
+                 alt="Su Yolu Bileklik">
+
+            <div class="featured-info">
+                <h3>Su Yolu Bileklik</h3>
+                <p>Çok Yakında Stoklarda</p>
+            </div>
+
+        </div>
+
+
+        <div class="featured-card"
+             onclick="filterCategory('Yüzük','Günlük')">
+
+            <img src="resimler/yuzuk.jpg"
+                 alt="Zarif Yüzük">
+
+            <div class="featured-info">
+                <h3>Zarif Yüzük</h3>
+                <p>Çok Yakında Stoklarda</p>
+            </div>
+
+        </div>
+
+
+        <div class="featured-card"
+             onclick="filterCategory('Kolye','İnci')">
+
+            <img src="resimler/kolye.jpg"
+                 alt="İnci Kolye">
+
+            <div class="featured-info">
+                <h3>İnci Kolye</h3>
+                <p>Çok Yakında Stoklarda</p>
+            </div>
+
+        </div>
+
+
+        <div class="featured-card"
+             onclick="filterCategory('Küpe','İnci')">
+
+            <img src="resimler/incikupe.jpg"
+                 alt="İnci Küpe">
+
+            <div class="featured-info">
+                <h3>İnci Küpe</h3>
+                <p>Çok Yakında Stoklarda</p>
+            </div>
+
+        </div>
+
     </div>
 
-    <p>
-        Zarafetin modern hali.
+</section>
+
+
+<!-- İLETİŞİM -->
+<section id="iletisim">
+
+    <h2 class="section-title">
+        İletişim
+    </h2>
+
+    <p class="contact-text">
+        VELORA koleksiyonumuz çok yakında stoklarda olacak.
+        Yeni ürünler, özel koleksiyonlar ve güncellemeler için
+        bizi takip etmeye devam edin.
     </p>
 
-    <p style="margin-top:10px;">
-        © 2026 VELORA
-    </p>
+</section>
 
+
+<footer>
+    © 2026 VELORA — Zarafetin modern hali.
 </footer>
 
 
-
 <script>
-
-
-/* =========================================
-   ÜRÜNLER
-========================================= */
 
 const products = [
 
     /* YÜZÜK */
 
     {
-        id: 0,
+        id: 1,
         name: "Zarif Yüzük",
         category: "Yüzük",
         subcategory: "Günlük",
@@ -1399,7 +778,7 @@ const products = [
     },
 
     {
-        id: 1,
+        id: 2,
         name: "Taşlı Yüzük",
         category: "Yüzük",
         subcategory: "Taşlı",
@@ -1407,7 +786,7 @@ const products = [
     },
 
     {
-        id: 2,
+        id: 3,
         name: "Kalp Detaylı Yüzük",
         category: "Yüzük",
         subcategory: "Kalpli",
@@ -1415,7 +794,7 @@ const products = [
     },
 
     {
-        id: 3,
+        id: 4,
         name: "Minimal Yüzük",
         category: "Yüzük",
         subcategory: "Minimal",
@@ -1426,7 +805,7 @@ const products = [
     /* BİLEKLİK */
 
     {
-        id: 4,
+        id: 5,
         name: "Minimal Bileklik",
         category: "Bileklik",
         subcategory: "Minimal",
@@ -1434,7 +813,7 @@ const products = [
     },
 
     {
-        id: 5,
+        id: 6,
         name: "Taşlı Bileklik",
         category: "Bileklik",
         subcategory: "Taşlı",
@@ -1442,7 +821,7 @@ const products = [
     },
 
     {
-        id: 6,
+        id: 7,
         name: "Su Yolu Bileklik",
         category: "Bileklik",
         subcategory: "Su Yolu",
@@ -1450,7 +829,7 @@ const products = [
     },
 
     {
-        id: 7,
+        id: 8,
         name: "Zincir Bileklik",
         category: "Bileklik",
         subcategory: "Zincir",
@@ -1461,7 +840,7 @@ const products = [
     /* KÜPE */
 
     {
-        id: 8,
+        id: 9,
         name: "İnci Küpe",
         category: "Küpe",
         subcategory: "İnci",
@@ -1469,7 +848,7 @@ const products = [
     },
 
     {
-        id: 9,
+        id: 10,
         name: "Halka Küpe",
         category: "Küpe",
         subcategory: "Halka",
@@ -1477,7 +856,7 @@ const products = [
     },
 
     {
-        id: 10,
+        id: 11,
         name: "Taşlı Küpe",
         category: "Küpe",
         subcategory: "Taşlı",
@@ -1485,7 +864,7 @@ const products = [
     },
 
     {
-        id: 11,
+        id: 12,
         name: "Minimal Küpe",
         category: "Küpe",
         subcategory: "Minimal",
@@ -1496,7 +875,7 @@ const products = [
     /* KOLYE */
 
     {
-        id: 12,
+        id: 13,
         name: "İnci Kolye",
         category: "Kolye",
         subcategory: "İnci",
@@ -1504,7 +883,7 @@ const products = [
     },
 
     {
-        id: 13,
+        id: 14,
         name: "İnce Zincir Kolye",
         category: "Kolye",
         subcategory: "Zincir",
@@ -1512,7 +891,7 @@ const products = [
     },
 
     {
-        id: 14,
+        id: 15,
         name: "Minimal Kolye",
         category: "Kolye",
         subcategory: "Minimal",
@@ -1520,7 +899,7 @@ const products = [
     },
 
     {
-        id: 15,
+        id: 16,
         name: "Taşlı Kolye",
         category: "Kolye",
         subcategory: "Taşlı",
@@ -1530,27 +909,17 @@ const products = [
 ];
 
 
-/* =========================================
-   YILDIZLAR
-========================================= */
-
-const selectedStars =
-    Array(products.length).fill(0);
+let selectedStars = Array(products.length + 1).fill(0);
 
 
-/* =========================================
-   ÜRÜNLERİ GÖSTER
-========================================= */
+/* ÜRÜNLERİ GÖSTER */
 
 function renderProducts(list = products) {
 
     const container =
-        document.getElementById(
-            "productContainer"
-        );
+        document.getElementById("productContainer");
 
     container.innerHTML = "";
-
 
     const categories = [
         "Yüzük",
@@ -1562,19 +931,19 @@ function renderProducts(list = products) {
 
     categories.forEach(category => {
 
-
         const categoryProducts =
-            list.filter(product =>
-                product.category === category
+            list.filter(
+                product =>
+                    product.category === category
             );
 
 
-        if (
-            categoryProducts.length === 0
-        ) {
+        if (categoryProducts.length === 0) {
             return;
         }
 
+
+        /* SADECE ANA KATEGORİ BAŞLIĞI */
 
         const heading =
             document.createElement("h2");
@@ -1588,264 +957,171 @@ function renderProducts(list = products) {
         container.appendChild(heading);
 
 
-        const subcategories = [
-            ...new Set(
-                categoryProducts.map(
-                    product =>
-                        product.subcategory
-                )
-            )
-        ];
+        /* ÜRÜN GRİDİ */
+
+        const grid =
+            document.createElement("div");
+
+        grid.className =
+            "product-grid";
 
 
-        subcategories.forEach(
-            subcategory => {
+        categoryProducts.forEach(product => {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "product-card";
 
 
-                const subProducts =
-                    categoryProducts.filter(
-                        product =>
-                            product.subcategory ===
-                            subcategory
-                    );
+            card.innerHTML = `
+
+                <img
+                    class="product-image"
+                    src="${product.image}"
+                    alt="${product.name}"
+                    onerror="this.src='resimler/urun1.jpg'"
+                >
+
+                <div class="product-info">
+
+                    <h3 class="product-name">
+                        ${product.name}
+                    </h3>
+
+                    <div class="product-category">
+                        ${product.subcategory}
+                    </div>
+
+                    <div class="stock-status">
+                        Çok Yakında Stoklarda
+                    </div>
+
+                    <button
+                        class="stock-button"
+                        disabled
+                    >
+                        Yakında Stoklarda
+                    </button>
 
 
-                const subHeading =
-                    document.createElement(
-                        "h3"
-                    );
+                    <div class="review-box">
 
-                subHeading.className =
-                    "subcategory-heading";
-
-                subHeading.textContent =
-                    subcategory;
+                        <div
+                            class="stars"
+                            id="stars-${product.id}"
+                        >
+                            ${createStars(product.id)}
+                        </div>
 
 
-                container.appendChild(
-                    subHeading
-                );
+                        <textarea
+                            id="review-${product.id}"
+                            class="review-input"
+                            placeholder="Ürün hakkındaki düşüncenizi yazın..."
+                        ></textarea>
 
 
-                const grid =
-                    document.createElement(
-                        "div"
-                    );
-
-                grid.className =
-                    "product-grid";
-
-
-                subProducts.forEach(
-                    product => {
+                        <button
+                            class="review-button"
+                            onclick="addReview(${product.id})"
+                        >
+                            Yorumu Gönder
+                        </button>
 
 
-                        const card =
-                            document.createElement(
-                                "div"
-                            );
+                        <div
+                            class="reviews"
+                            id="reviews-${product.id}"
+                        ></div>
 
-                        card.className =
-                            "product-card";
+                    </div>
 
-
-                        card.innerHTML = `
-
-                            <img
-                                class="product-image"
-                                src="${product.image}"
-                                alt="${product.name}"
-                                onerror="this.src='resimler/urun1.jpg'"
-                            >
-
-                            <div class="product-info">
-
-                                <h3 class="product-name">
-                                    ${product.name}
-                                </h3>
-
-                                <div class="product-category">
-                                    ${product.subcategory}
-                                </div>
-
-                                <div class="stock-status">
-                                    Çok Yakında Stoklarda
-                                </div>
-
-                                <button
-                                    class="stock-button"
-                                    disabled
-                                >
-                                    Yakında Stoklarda
-                                </button>
+                </div>
+            `;
 
 
-                                <div class="review-box">
+            grid.appendChild(card);
 
-                                    <div
-                                        class="stars"
-                                        id="stars-${product.id}"
-                                    >
-                                        ${createStars(product.id)}
-                                    </div>
+        });
 
 
-                                    <textarea
-                                        id="review-${product.id}"
-                                        class="review-input"
-                                        placeholder="Ürün hakkındaki düşüncenizi yazın..."
-                                    ></textarea>
+        container.appendChild(grid);
 
 
-                                    <button
-                                        class="review-button"
-                                        onclick="addReview(${product.id})"
-                                    >
-                                        Yorumu Gönder
-                                    </button>
+        categoryProducts.forEach(product => {
 
+            loadReviews(product.id);
 
-                                    <div
-                                        class="reviews"
-                                        id="reviews-${product.id}"
-                                    ></div>
-
-                                </div>
-
-                            </div>
-                        `;
-
-
-                        grid.appendChild(card);
-
-
-                        container.appendChild(
-                            grid
-                        );
-
-
-                        loadReviews(
-                            product.id
-                        );
-
-                    }
-                );
-
-            }
-        );
+        });
 
     });
 
 }
 
 
-/* =========================================
-   YILDIZLAR
-========================================= */
+/* YILDIZLAR */
 
 function createStars(productId) {
 
     let html = "";
 
-
-    for (
-        let i = 1;
-        i <= 5;
-        i++
-    ) {
+    for (let i = 1; i <= 5; i++) {
 
         html += `
-
             <span
-                class="star"
-                onclick="selectStar(
-                    ${productId},
-                    ${i}
-                )"
+                class="star ${selectedStars[productId] >= i ? "active" : ""}"
+                onclick="selectStar(${productId}, ${i})"
             >
                 ★
             </span>
-
         `;
 
     }
-
 
     return html;
 }
 
 
-/* =========================================
-   YILDIZ SEÇ
-========================================= */
+function selectStar(productId, rating) {
 
-function selectStar(
-    productId,
-    starNumber
-) {
-
-    selectedStars[
-        productId
-    ] = starNumber;
-
+    selectedStars[productId] = rating;
 
     const stars =
-        document.querySelectorAll(
-            `#stars-${productId} .star`
+        document.getElementById(
+            `stars-${productId}`
         );
 
+    if (stars) {
 
-    stars.forEach(
-        (star, index) => {
+        stars.innerHTML =
+            createStars(productId);
 
-            if (
-                index <
-                starNumber
-            ) {
-
-                star.classList.add(
-                    "active"
-                );
-
-            } else {
-
-                star.classList.remove(
-                    "active"
-                );
-
-            }
-
-        }
-    );
+    }
 
 }
 
 
-/* =========================================
-   YORUM EKLE
-========================================= */
+/* YORUM EKLE */
 
 function addReview(productId) {
 
-    const textArea =
+    const input =
         document.getElementById(
             `review-${productId}`
         );
 
-
     const text =
-        textArea.value.trim();
+        input.value.trim();
 
-
-    const stars =
+    const rating =
         selectedStars[productId];
 
 
-    if (!stars) {
+    if (!rating) {
 
-        alert(
-            "Lütfen yıldız puanı seçin."
-        );
+        alert("Lütfen yıldız puanı seçin.");
 
         return;
     }
@@ -1853,73 +1129,59 @@ function addReview(productId) {
 
     if (!text) {
 
-        alert(
-            "Lütfen yorumunuzu yazın."
-        );
+        alert("Lütfen yorumunuzu yazın.");
 
         return;
     }
 
 
+    const storageKey =
+        `velora-reviews-${productId}`;
+
+
     const reviews =
         JSON.parse(
-            localStorage.getItem(
-                `velora-reviews-${productId}`
-            )
+            localStorage.getItem(storageKey)
         ) || [];
 
 
     reviews.push({
-
-        stars: stars,
-
-        text: text
-
+        rating: rating,
+        text: text,
+        date: new Date().toLocaleDateString("tr-TR")
     });
 
 
     localStorage.setItem(
-
-        `velora-reviews-${productId}`,
-
+        storageKey,
         JSON.stringify(reviews)
-
     );
 
 
-    textArea.value = "";
+    input.value = "";
+
+    selectedStars[productId] = 0;
 
 
-    selectedStars[
-        productId
-    ] = 0;
+    const stars =
+        document.getElementById(
+            `stars-${productId}`
+        );
+
+    if (stars) {
+
+        stars.innerHTML =
+            createStars(productId);
+
+    }
 
 
     loadReviews(productId);
 
-
-    const starsElements =
-        document.querySelectorAll(
-            `#stars-${productId} .star`
-        );
-
-
-    starsElements.forEach(
-        star => {
-
-            star.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
 }
 
 
-/* =========================================
-   YORUMLARI YÜKLE
-========================================= */
+/* YORUMLARI YÜKLE */
 
 function loadReviews(productId) {
 
@@ -1928,89 +1190,84 @@ function loadReviews(productId) {
             `reviews-${productId}`
         );
 
-
     if (!container) {
         return;
     }
 
 
+    const storageKey =
+        `velora-reviews-${productId}`;
+
+
     const reviews =
         JSON.parse(
-            localStorage.getItem(
-                `velora-reviews-${productId}`
-            )
+            localStorage.getItem(storageKey)
         ) || [];
 
 
     container.innerHTML = "";
 
 
-    reviews.forEach(
-        review => {
+    reviews.forEach(review => {
 
-            const reviewElement =
-                document.createElement(
-                    "div"
-                );
+        const item =
+            document.createElement("div");
 
-
-            reviewElement.className =
-                "review";
+        item.className =
+            "review-item";
 
 
-            reviewElement.innerHTML = `
+        let stars = "";
 
-                <div class="review-stars">
+        for (let i = 1; i <= 5; i++) {
 
-                    ${"★".repeat(
-                        review.stars
-                    )}
-
-                    ${"☆".repeat(
-                        5 - review.stars
-                    )}
-
-                </div>
-
-                <div>
-                    ${escapeHtml(
-                        review.text
-                    )}
-                </div>
-
-            `;
-
-
-            container.appendChild(
-                reviewElement
-            );
+            stars +=
+                i <= review.rating
+                    ? "★"
+                    : "☆";
 
         }
-    );
+
+
+        item.innerHTML = `
+
+            <div class="review-stars">
+                ${stars}
+            </div>
+
+            <div>
+                ${escapeHtml(review.text)}
+            </div>
+
+            <small>
+                ${review.date}
+            </small>
+
+        `;
+
+
+        container.appendChild(item);
+
+    });
 
 }
 
 
-/* =========================================
-   GÜVENLİ METİN
-========================================= */
+/* GÜVENLİ METİN */
 
 function escapeHtml(text) {
 
     const div =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
     div.textContent = text;
 
     return div.innerHTML;
+
 }
 
 
-/* =========================================
-   KATEGORİ FİLTRELEME
-========================================= */
+/* KATEGORİ FİLTRELEME */
 
 function filterCategory(
     category,
@@ -2025,10 +1282,8 @@ function filterCategory(
         filtered =
             products.filter(
                 product =>
-                    product.category ===
-                        category &&
-                    product.subcategory ===
-                        subcategory
+                    product.category === category &&
+                    product.subcategory === subcategory
             );
 
     } else {
@@ -2036,8 +1291,7 @@ function filterCategory(
         filtered =
             products.filter(
                 product =>
-                    product.category ===
-                    category
+                    product.category === category
             );
 
     }
@@ -2046,20 +1300,25 @@ function filterCategory(
     renderProducts(filtered);
 
 
-    document
-        .getElementById(
-            "urunler"
-        )
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+    setTimeout(() => {
+
+        const productsSection =
+            document.getElementById("urunler");
+
+        if (productsSection) {
+
+            productsSection.scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+    }, 50);
 
 }
 
 
-/* =========================================
-   BAŞLANGIÇ
-========================================= */
+/* SAYFA AÇILINCA TÜM ÜRÜNLER */
 
 renderProducts();
 
