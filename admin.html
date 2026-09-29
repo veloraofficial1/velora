@@ -1,1 +1,1273 @@
 
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELORA Admin</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7f1e8;
+    color: #3d3024;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* GİRİŞ */
+
+#loginScreen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 420px;
+    background: #fffaf3;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(80, 55, 30, .12);
+}
+
+.logo {
+    text-align: center;
+    font-size: 32px;
+    letter-spacing: 5px;
+    margin-bottom: 8px;
+}
+
+.login-subtitle {
+    text-align: center;
+    color: #8b765f;
+    margin-bottom: 30px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d9c9b5;
+    border-radius: 10px;
+    margin-top: 7px;
+    margin-bottom: 16px;
+    background: white;
+    font-size: 15px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #b18a54;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.primary-btn:hover {
+    background: #96713f;
+}
+
+.error {
+    color: #a33a32;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* PANEL */
+
+#adminPanel {
+    min-height: 100vh;
+}
+
+.topbar {
+    background: #fffaf3;
+    border-bottom: 1px solid #e2d6c6;
+    padding: 18px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.top-logo {
+    font-size: 25px;
+    letter-spacing: 4px;
+}
+
+.logout-btn {
+    border: 1px solid #cdbb9f;
+    background: transparent;
+    color: #5c4832;
+    padding: 9px 15px;
+    border-radius: 8px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 25px 0 35px;
+}
+
+.stat-card {
+    background: #fffaf3;
+    border: 1px solid #e2d6c6;
+    border-radius: 16px;
+    padding: 22px;
+}
+
+.stat-title {
+    color: #8b765f;
+    font-size: 14px;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.section {
+    background: #fffaf3;
+    border: 1px solid #e2d6c6;
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 25px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.refresh-btn {
+    border: 1px solid #cdbb9f;
+    background: white;
+    padding: 8px 13px;
+    border-radius: 8px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+th,
+td {
+    padding: 13px 10px;
+    border-bottom: 1px solid #eadfd2;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    color: #765f45;
+}
+
+.delete-btn {
+    border: none;
+    background: #a84d43;
+    color: white;
+    padding: 7px 10px;
+    border-radius: 7px;
+}
+
+.status-select {
+    width: auto;
+    margin: 0;
+    padding: 7px;
+}
+
+.order-items {
+    max-width: 260px;
+    white-space: normal;
+    line-height: 1.5;
+}
+
+.empty {
+    text-align: center;
+    color: #8b765f;
+    padding: 25px;
+}
+
+/* MOBİL */
+
+@media (max-width: 700px) {
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar {
+        padding: 15px;
+    }
+
+    .top-logo {
+        font-size: 20px;
+    }
+
+    .container {
+        padding: 20px 12px;
+    }
+
+    .section {
+        padding: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     ADMİN GİRİŞ
+========================= -->
+
+<div id="loginScreen">
+
+    <div class="login-box">
+
+        <div class="logo">
+            VELORA
+        </div>
+
+        <div class="login-subtitle">
+            Yönetim Paneli
+        </div>
+
+        <form id="loginForm">
+
+            <label>
+                Yönetici Kullanıcı Adı
+            </label>
+
+            <input
+                type="text"
+                id="adminUsername"
+                autocomplete="username"
+                required
+            >
+
+            <label>
+                Yönetici Şifresi
+            </label>
+
+            <input
+                type="password"
+                id="adminPassword"
+                autocomplete="current-password"
+                required
+            >
+
+            <button
+                type="submit"
+                class="primary-btn"
+            >
+                Yönetim Paneline Gir
+            </button>
+
+            <div
+                id="loginError"
+                class="error"
+            ></div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ADMİN PANELİ
+========================= -->
+
+<div
+    id="adminPanel"
+    class="hidden"
+>
+
+    <header class="topbar">
+
+        <div class="top-logo">
+            VELORA
+        </div>
+
+        <button
+            class="logout-btn"
+            onclick="logout()"
+        >
+            Çıkış Yap
+        </button>
+
+    </header>
+
+
+    <main class="container">
+
+        <h1>
+            Yönetim Paneli
+        </h1>
+
+        <p>
+            VELORA mağazasını buradan yönetebilirsin.
+        </p>
+
+
+        <!-- İSTATİSTİKLER -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-title">
+                    Toplam Kullanıcı
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="userCount"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-title">
+                    Toplam Sipariş
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="orderCount"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-title">
+                    Toplam Sipariş Tutarı
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="revenue"
+                >
+                    -
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- KULLANICILAR -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <h2>
+                    Kullanıcılar
+                </h2>
+
+                <button
+                    class="refresh-btn"
+                    onclick="loadUsers()"
+                >
+                    Yenile
+                </button>
+
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Kullanıcı Adı</th>
+                            <th>E-posta</th>
+                            <th>Kayıt Tarihi</th>
+                            <th>İşlem</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="usersTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- SİPARİŞLER -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <h2>
+                    Siparişler
+                </h2>
+
+                <button
+                    class="refresh-btn"
+                    onclick="loadOrders()"
+                >
+                    Yenile
+                </button>
+
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Sipariş</th>
+                            <th>Müşteri</th>
+                            <th>İletişim</th>
+                            <th>Ürünler</th>
+                            <th>Toplam</th>
+                            <th>Durum</th>
+                            <th>İşlem</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="ordersTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+const API_URL =
+    "https://velora-backend-1-aft5.onrender.com";
+
+
+let adminToken =
+    localStorage.getItem("veloraAdminToken");
+
+
+/* =========================
+   SAYFA BAŞLANGICI
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        if (adminToken) {
+            showPanel();
+        }
+
+    }
+);
+
+
+/* =========================
+   ADMİN GİRİŞİ
+========================= */
+
+document
+    .getElementById("loginForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+            const username =
+                document
+                    .getElementById("adminUsername")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("adminPassword")
+                    .value;
+
+            const error =
+                document
+                    .getElementById("loginError");
+
+            error.textContent = "";
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/admin/login`,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    username,
+                                    password
+                                })
+                        }
+                    );
+
+                const data =
+                    await response.json();
+
+                if (!response.ok || !data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Giriş başarısız."
+                    );
+
+                }
+
+                adminToken =
+                    data.token;
+
+                localStorage.setItem(
+                    "veloraAdminToken",
+                    adminToken
+                );
+
+                showPanel();
+
+            } catch (error) {
+
+                console.error(error);
+
+                errorElement =
+                    document.getElementById(
+                        "loginError"
+                    );
+
+                errorElement.textContent =
+                    error.message ||
+                    "Giriş yapılamadı.";
+
+            }
+
+        }
+    );
+
+
+/* =========================
+   PANELİ GÖSTER
+========================= */
+
+async function showPanel() {
+
+    document
+        .getElementById("loginScreen")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("adminPanel")
+        .classList
+        .remove("hidden");
+
+    await loadAll();
+
+}
+
+
+/* =========================
+   TÜM VERİLER
+========================= */
+
+async function loadAll() {
+
+    try {
+
+        await loadStats();
+        await loadUsers();
+        await loadOrders();
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =========================
+   İSTATİSTİKLER
+========================= */
+
+async function loadStats() {
+
+    const response =
+        await fetch(
+            `${API_URL}/api/admin/stats`,
+            {
+                headers: {
+                    Authorization:
+                        `Bearer ${adminToken}`
+                }
+            }
+        );
+
+    if (response.status === 401) {
+        logout();
+        return;
+    }
+
+    const data =
+        await response.json();
+
+    document
+        .getElementById("userCount")
+        .textContent =
+        data.stats.users;
+
+    document
+        .getElementById("orderCount")
+        .textContent =
+        data.stats.orders;
+
+    document
+        .getElementById("revenue")
+        .textContent =
+        Number(data.stats.revenue)
+            .toLocaleString("tr-TR") +
+        " TL";
+}
+
+
+/* =========================
+   KULLANICILAR
+========================= */
+
+async function loadUsers() {
+
+    const table =
+        document.getElementById(
+            "usersTable"
+        );
+
+    table.innerHTML =
+        `<tr>
+            <td colspan="5" class="empty">
+                Yükleniyor...
+            </td>
+        </tr>`;
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/api/admin/users`,
+                {
+                    headers: {
+                        Authorization:
+                            `Bearer ${adminToken}`
+                    }
+                }
+            );
+
+        if (response.status === 401) {
+            logout();
+            return;
+        }
+
+        const data =
+            await response.json();
+
+        table.innerHTML = "";
+
+        if (
+            !data.users ||
+            data.users.length === 0
+        ) {
+
+            table.innerHTML =
+                `<tr>
+                    <td colspan="5" class="empty">
+                        Henüz kayıtlı kullanıcı yok.
+                    </td>
+                </tr>`;
+
+            return;
+        }
+
+        data.users.forEach(
+            user => {
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+                row.innerHTML = `
+                    <td>${user.id}</td>
+
+                    <td>
+                        ${escapeHtml(
+                            user.username
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            user.email
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatDate(
+                            user.created_at
+                        )}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteUser(${user.id})"
+                        >
+                            Sil
+                        </button>
+
+                    </td>
+                `;
+
+                table.appendChild(row);
+
+            }
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        table.innerHTML =
+            `<tr>
+                <td colspan="5" class="empty">
+                    Kullanıcılar yüklenemedi.
+                </td>
+            </tr>`;
+
+    }
+}
+
+
+/* =========================
+   KULLANICI SİL
+========================= */
+
+async function deleteUser(id) {
+
+    const confirmed =
+        confirm(
+            "Bu kullanıcıyı silmek istediğine emin misin?"
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/api/admin/users/${id}`,
+                {
+                    method: "DELETE",
+
+                    headers: {
+                        Authorization:
+                            `Bearer ${adminToken}`
+                    }
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.message ||
+                "Kullanıcı silinemedi."
+            );
+        }
+
+        await loadStats();
+        await loadUsers();
+
+    } catch (error) {
+
+        alert(
+            error.message
+        );
+
+    }
+}
+
+
+/* =========================
+   SİPARİŞLER
+========================= */
+
+async function loadOrders() {
+
+    const table =
+        document.getElementById(
+            "ordersTable"
+        );
+
+    table.innerHTML =
+        `<tr>
+            <td colspan="7" class="empty">
+                Siparişler yükleniyor...
+            </td>
+        </tr>`;
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/api/admin/orders`,
+                {
+                    headers: {
+                        Authorization:
+                            `Bearer ${adminToken}`
+                    }
+                }
+            );
+
+        if (response.status === 401) {
+            logout();
+            return;
+        }
+
+        const data =
+            await response.json();
+
+        table.innerHTML = "";
+
+        if (
+            !data.orders ||
+            data.orders.length === 0
+        ) {
+
+            table.innerHTML =
+                `<tr>
+                    <td colspan="7" class="empty">
+                        Henüz sipariş yok.
+                    </td>
+                </tr>`;
+
+            return;
+        }
+
+        data.orders.forEach(
+            order => {
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+                const items =
+                    order.items
+                        .map(
+                            item =>
+                                `${item.name || "Ürün"} × ${item.quantity || 1}`
+                        )
+                        .join("<br>");
+
+                row.innerHTML = `
+
+                    <td>
+                        #${order.id}
+                        <br>
+                        <small>
+                            ${formatDate(
+                                order.createdAt
+                            )}
+                        </small>
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${escapeHtml(
+                                order.customer.name
+                            )}
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            Hesap:
+                            ${escapeHtml(
+                                order.username
+                            )}
+                        </small>
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            order.customer.phone
+                        )}
+
+                        <br>
+
+                        ${escapeHtml(
+                            order.email
+                        )}
+
+                        <br>
+
+                        ${escapeHtml(
+                            order.customer.address
+                        )}
+                    </td>
+
+                    <td class="order-items">
+                        ${items || "-"}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${Number(
+                                order.total
+                            ).toLocaleString(
+                                "tr-TR"
+                            )} TL
+                        </strong>
+                    </td>
+
+                    <td>
+
+                        <select
+                            class="status-select"
+                            onchange="changeOrderStatus(
+                                ${order.id},
+                                this.value
+                            )"
+                        >
+
+                            ${statusOptions(
+                                order.status
+                            )}
+
+                        </select>
+
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteOrder(${order.id})"
+                        >
+                            Sil
+                        </button>
+
+                    </td>
+                `;
+
+                table.appendChild(row);
+
+            }
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        table.innerHTML =
+            `<tr>
+                <td colspan="7" class="empty">
+                    Siparişler yüklenemedi.
+                </td>
+            </tr>`;
+
+    }
+}
+
+
+/* =========================
+   SİPARİŞ DURUMU
+========================= */
+
+function statusOptions(current) {
+
+    const statuses = [
+        "Yeni",
+        "Hazırlanıyor",
+        "Kargoda",
+        "Teslim Edildi",
+        "İptal"
+    ];
+
+    return statuses
+        .map(
+            status => `
+                <option
+                    value="${status}"
+                    ${status === current
+                        ? "selected"
+                        : ""}
+                >
+                    ${status}
+                </option>
+            `
+        )
+        .join("");
+}
+
+
+async function changeOrderStatus(
+    id,
+    status
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/api/admin/orders/${id}/status`,
+                {
+                    method: "PATCH",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json",
+
+                        Authorization:
+                            `Bearer ${adminToken}`
+                    },
+
+                    body:
+                        JSON.stringify({
+                            status
+                        })
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Sipariş durumu değiştirilemedi."
+            );
+
+        }
+
+        await loadStats();
+
+    } catch (error) {
+
+        alert(
+            error.message
+        );
+
+        await loadOrders();
+
+    }
+}
+
+
+/* =========================
+   SİPARİŞ SİL
+========================= */
+
+async function deleteOrder(id) {
+
+    const confirmed =
+        confirm(
+            `#${id} numaralı siparişi silmek istediğine emin misin?`
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/api/admin/orders/${id}`,
+                {
+                    method: "DELETE",
+
+                    headers: {
+                        Authorization:
+                            `Bearer ${adminToken}`
+                    }
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Sipariş silinemedi."
+            );
+
+        }
+
+        await loadStats();
+        await loadOrders();
+
+    } catch (error) {
+
+        alert(
+            error.message
+        );
+
+    }
+}
+
+
+/* =========================
+   ÇIKIŞ
+========================= */
+
+function logout() {
+
+    localStorage.removeItem(
+        "veloraAdminToken"
+    );
+
+    adminToken = null;
+
+    document
+        .getElementById("adminPanel")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("loginScreen")
+        .classList
+        .remove("hidden");
+
+}
+
+
+/* =========================
+   TARİH
+========================= */
+
+function formatDate(date) {
+
+    if (!date) {
+        return "-";
+    }
+
+    return new Date(date)
+        .toLocaleString(
+            "tr-TR"
+        );
+}
+
+
+/* =========================
+   GÜVENLİ HTML
+========================= */
+
+function escapeHtml(value) {
+
+    if (value === null ||
+        value === undefined) {
+        return "";
+    }
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+</script>
+
+</body>
+</html>
