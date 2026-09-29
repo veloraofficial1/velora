@@ -1061,35 +1061,21 @@ autocomplete="off"
 
 <div class="account-section-buttons">
 
-<button
-class="account-section-button"
-id="favoritesMenuButton"
-type="button"
->
+<button class="account-section-button" id="favoritesMenuButton" type="button">
 ❤️ Favorilerim
 </button>
 
-<button
-class="account-section-button"
-id="ordersMenuButton"
-type="button"
->
+<button class="account-section-button" id="ordersMenuButton" type="button">
 📦 Siparişlerim
 </button>
 
 </div>
 
-<button
-id="changePasswordMenuButton"
-type="button"
->
+<button id="changePasswordMenuButton" type="button">
 🔑 Şifre Değiştir
 </button>
 
-<button
-id="logoutButton"
-type="button"
->
+<button id="logoutButton" type="button">
 🚪 Çıkış Yap
 </button>
 
@@ -1116,9 +1102,7 @@ Koleksiyonu Keşfet
 
 <section>
 
-<h2 class="section-title">
-Kategoriler
-</h2>
+<h2 class="section-title">Kategoriler</h2>
 
 <div class="category-grid">
 
@@ -1148,9 +1132,7 @@ Kategoriler
 
 <section id="urunler">
 
-<h2 class="section-title">
-Koleksiyon
-</h2>
+<h2 class="section-title">Koleksiyon</h2>
 
 <div id="searchResultInfo" class="search-result-info"></div>
 
@@ -1160,54 +1142,40 @@ Koleksiyon
 
 <section id="one-cikanlar">
 
-<h2 class="section-title">
-Öne Çıkanlar
-</h2>
+<h2 class="section-title">Öne Çıkanlar</h2>
 
 <div class="featured-grid">
 
 <div class="featured-card" onclick="filterCategory('Bileklik','Su Yolu')">
-
 <img src="resimler/su-yolu-bileklik.jpg" alt="Su Yolu Bileklik">
-
 <div class="featured-info">
 <h3>Su Yolu Bileklik</h3>
 <p>Çok Yakında Stoklarda</p>
 </div>
-
 </div>
 
 <div class="featured-card" onclick="filterCategory('Yüzük','Günlük')">
-
 <img src="resimler/yuzuk.jpg" alt="Zarif Yüzük">
-
 <div class="featured-info">
 <h3>Zarif Yüzük</h3>
 <p>Çok Yakında Stoklarda</p>
 </div>
-
 </div>
 
 <div class="featured-card" onclick="filterCategory('Kolye','İnci')">
-
 <img src="resimler/kolye.jpg" alt="İnci Kolye">
-
 <div class="featured-info">
 <h3>İnci Kolye</h3>
 <p>Çok Yakında Stoklarda</p>
 </div>
-
 </div>
 
 <div class="featured-card" onclick="filterCategory('Küpe','İnci')">
-
 <img src="resimler/incikupe.jpg" alt="İnci Küpe">
-
 <div class="featured-info">
 <h3>İnci Küpe</h3>
 <p>Çok Yakında Stoklarda</p>
 </div>
-
 </div>
 
 </div>
@@ -1216,9 +1184,7 @@ Koleksiyon
 
 <section id="iletisim">
 
-<h2 class="section-title">
-İletişim
-</h2>
+<h2 class="section-title">İletişim</h2>
 
 <p class="contact-text">
 VELORA koleksiyonumuz çok yakında stoklarda olacak.
@@ -1248,14 +1214,18 @@ Yeni ürünler, özel koleksiyonlar ve güncellemeler için bizi takip etmeye de
 <input
 type="text"
 id="loginUsername"
+name="login"
 placeholder="Kullanıcı adı veya e-posta"
+autocomplete="username"
 required
 >
 
 <input
 type="password"
 id="loginPassword"
+name="password"
 placeholder="Şifre"
+autocomplete="current-password"
 required
 >
 
@@ -1289,36 +1259,13 @@ Hesap Oluştur
 
 <form class="auth-form" id="registerAuthForm">
 
-<input
-type="text"
-id="registerUsername"
-placeholder="Kullanıcı adı"
-minlength="3"
-required
->
+<input type="text" id="registerUsername" placeholder="Kullanıcı adı" minlength="3" required>
 
-<input
-type="email"
-id="registerEmail"
-placeholder="E-posta"
-required
->
+<input type="email" id="registerEmail" placeholder="E-posta" required>
 
-<input
-type="password"
-id="registerPassword"
-placeholder="Şifre"
-minlength="6"
-required
->
+<input type="password" id="registerPassword" placeholder="Şifre" minlength="6" required>
 
-<input
-type="password"
-id="registerPasswordConfirm"
-placeholder="Şifre tekrar"
-minlength="6"
-required
->
+<input type="password" id="registerPasswordConfirm" placeholder="Şifre tekrar" minlength="6" required>
 
 <button type="submit" class="auth-submit">
 Hesap Oluştur
@@ -1330,9 +1277,7 @@ Hesap Oluştur
 
 <div class="auth-switch">
 Zaten hesabın var mı?
-<button type="button" onclick="showLogin()">
-Giriş Yap
-</button>
+<button type="button" onclick="showLogin()">Giriş Yap</button>
 </div>
 
 </div>
@@ -1343,12 +1288,7 @@ Giriş Yap
 
 <form class="auth-form" id="verifyAuthForm">
 
-<input
-type="email"
-id="verificationEmail"
-placeholder="E-posta"
-required
->
+<input type="email" id="verificationEmail" placeholder="E-posta" required>
 
 <input
 type="text"
@@ -1374,9 +1314,7 @@ Kodu Tekrar Gönder
 </div>
 
 <div class="auth-switch">
-<button type="button" onclick="showLogin()">
-Giriş Yap
-</button>
+<button type="button" onclick="showLogin()">Giriş Yap</button>
 </div>
 
 </div>
@@ -1387,12 +1325,7 @@ Giriş Yap
 
 <form class="auth-form" id="forgotAuthForm">
 
-<input
-type="email"
-id="forgotEmail"
-placeholder="E-posta"
-required
->
+<input type="email" id="forgotEmail" placeholder="E-posta" required>
 
 <button type="submit" class="auth-submit">
 Kod Gönder
@@ -1410,9 +1343,7 @@ Kodu aldın mı?
 </div>
 
 <div class="auth-switch">
-<button type="button" onclick="showLogin()">
-Giriş Yap
-</button>
+<button type="button" onclick="showLogin()">Giriş Yap</button>
 </div>
 
 </div>
@@ -1423,12 +1354,7 @@ Giriş Yap
 
 <form class="auth-form" id="resetAuthForm">
 
-<input
-type="email"
-id="resetEmail"
-placeholder="E-posta"
-required
->
+<input type="email" id="resetEmail" placeholder="E-posta" required>
 
 <input
 type="text"
@@ -1439,21 +1365,9 @@ maxlength="6"
 required
 >
 
-<input
-type="password"
-id="resetPassword"
-placeholder="Yeni şifre"
-minlength="6"
-required
->
+<input type="password" id="resetPassword" placeholder="Yeni şifre" minlength="6" required>
 
-<input
-type="password"
-id="resetPasswordConfirm"
-placeholder="Yeni şifre tekrar"
-minlength="6"
-required
->
+<input type="password" id="resetPasswordConfirm" placeholder="Yeni şifre tekrar" minlength="6" required>
 
 <button type="submit" class="auth-submit">
 Şifreyi Sıfırla
@@ -1464,9 +1378,7 @@ required
 <div id="resetMessage" class="auth-message"></div>
 
 <div class="auth-switch">
-<button type="button" onclick="showLogin()">
-Giriş Yap
-</button>
+<button type="button" onclick="showLogin()">Giriş Yap</button>
 </div>
 
 </div>
@@ -1477,28 +1389,11 @@ Giriş Yap
 
 <form class="auth-form" id="changeAuthForm">
 
-<input
-type="password"
-id="currentPassword"
-placeholder="Mevcut şifre"
-required
->
+<input type="password" id="currentPassword" placeholder="Mevcut şifre" required>
 
-<input
-type="password"
-id="newPassword"
-placeholder="Yeni şifre"
-minlength="6"
-required
->
+<input type="password" id="newPassword" placeholder="Yeni şifre" minlength="6" required>
 
-<input
-type="password"
-id="newPasswordConfirm"
-placeholder="Yeni şifre tekrar"
-minlength="6"
-required
->
+<input type="password" id="newPasswordConfirm" placeholder="Yeni şifre tekrar" minlength="6" required>
 
 <button type="submit" class="auth-submit">
 Şifreyi Değiştir
@@ -1509,9 +1404,7 @@ required
 <div id="changePasswordMessage" class="auth-message"></div>
 
 <div class="auth-switch">
-<button type="button" onclick="closeAuth()">
-Kapat
-</button>
+<button type="button" onclick="closeAuth()">Kapat</button>
 </div>
 
 </div>
@@ -1645,12 +1538,7 @@ Aradığınız kriterlere uygun ürün bulunamadı.
 return;
 }
 
-[
-"Yüzük",
-"Bileklik",
-"Küpe",
-"Kolye"
-].forEach(category=>{
+["Yüzük","Bileklik","Küpe","Kolye"].forEach(category=>{
 
 const categoryProducts=list.filter(product=>product.category===category);
 
@@ -1694,9 +1582,7 @@ onerror="this.src='resimler/urun1.jpg'"
 
 <div class="product-info">
 
-<h3 class="product-name">
-${escapeHtml(product.name)}
-</h3>
+<h3 class="product-name">${escapeHtml(product.name)}</h3>
 
 <div class="product-category">
 ${escapeHtml(product.subcategory)}
@@ -1722,10 +1608,7 @@ class="review-input"
 placeholder="Ürün hakkındaki düşüncenizi yazın..."
 ></textarea>
 
-<button
-class="review-button"
-onclick="addReview(${product.id})"
->
+<button class="review-button" onclick="addReview(${product.id})">
 Yorumu Gönder
 </button>
 
@@ -1757,12 +1640,9 @@ const filtered=subcategory
 document.getElementById("productSearch").value="";
 
 document.getElementById("searchResultInfo").textContent=
-subcategory
-?`${category} › ${subcategory}`
-:`${category} ürünleri`;
+subcategory?`${category} › ${subcategory}`:`${category} ürünleri`;
 
 renderProducts(filtered);
-
 scrollToProducts();
 
 }
@@ -1773,17 +1653,12 @@ document.getElementById("productSearch").value="";
 document.getElementById("searchResultInfo").textContent="Tüm Ürünler";
 
 renderProducts(products);
-
 scrollToProducts();
 
 }
 
 function filterFeatured(){
-
-document.getElementById("one-cikanlar").scrollIntoView({
-behavior:"smooth"
-});
-
+document.getElementById("one-cikanlar").scrollIntoView({behavior:"smooth"});
 }
 
 function searchProducts(){
@@ -1793,9 +1668,7 @@ const query=document.getElementById("productSearch").value.trim().toLocaleLowerC
 if(!query){
 
 document.getElementById("searchResultInfo").textContent="";
-
 renderProducts(products);
-
 return;
 
 }
@@ -1810,7 +1683,6 @@ document.getElementById("searchResultInfo").textContent=
 `${filtered.length} ürün bulundu: "${query}"`;
 
 renderProducts(filtered);
-
 scrollToProducts();
 
 }
@@ -1822,9 +1694,7 @@ setTimeout(()=>{
 const section=document.getElementById("urunler");
 
 if(section){
-section.scrollIntoView({
-behavior:"smooth"
-});
+section.scrollIntoView({behavior:"smooth"});
 }
 
 },50);
@@ -1852,7 +1722,6 @@ return;
 }
 
 const key=`velora-reviews-${productId}`;
-
 const reviews=JSON.parse(localStorage.getItem(key)||"[]");
 
 reviews.push({
@@ -1891,7 +1760,6 @@ container.innerHTML="";
 reviews.forEach(review=>{
 
 const item=document.createElement("div");
-
 item.className="review-item";
 
 let stars="";
@@ -1952,9 +1820,7 @@ const token=localStorage.getItem("veloraToken");
 if(!token){
 
 alert("Favorilere eklemek için önce giriş yapmalısınız.");
-
 openAuth();
-
 return;
 
 }
@@ -2027,7 +1893,6 @@ return;
 closeAccountMenu();
 
 const modal=document.getElementById("favoritesModal");
-
 modal.classList.add("active");
 
 const container=document.getElementById("favoritesContainer");
@@ -2060,13 +1925,11 @@ product=>favoriteProductIds.includes(Number(product.id))
 container.innerHTML="";
 
 const grid=document.createElement("div");
-
 grid.className="favorite-list";
 
 favoriteProducts.forEach(product=>{
 
 const item=document.createElement("div");
-
 item.className="favorite-item";
 
 item.innerHTML=`
@@ -2125,7 +1988,6 @@ id=>id!==Number(productId)
 );
 
 await openFavorites();
-
 renderProducts(products);
 
 }catch(error){
@@ -2337,7 +2199,6 @@ ${escapeHtml(name)} × ${escapeHtml(quantity)}
 }
 
 const orderCard=document.createElement("div");
-
 orderCard.className="order-card";
 
 orderCard.innerHTML=`
@@ -2464,6 +2325,12 @@ el.className="auth-message";
 
 }
 
+
+/* DÜZELTİLDİ:
+   Hesap butonuna basıldığında artık kayıt yerine
+   doğrudan giriş ekranı açılıyor.
+*/
+
 function openAuth(){
 
 const token=localStorage.getItem("veloraToken");
@@ -2471,14 +2338,13 @@ const token=localStorage.getItem("veloraToken");
 if(token){
 
 toggleAccountMenu();
-
 return;
 
 }
 
 document.getElementById("authModal").classList.add("active");
 
-showRegister();
+showLogin();
 
 }
 
@@ -2561,34 +2427,16 @@ async function register(event){
 
 event.preventDefault();
 
-const username=document.getElementById(
-"registerUsername"
-).value.trim();
-
-const email=document.getElementById(
-"registerEmail"
-).value.trim();
-
-const password=document.getElementById(
-"registerPassword"
-).value;
-
-const confirm=document.getElementById(
-"registerPasswordConfirm"
-).value;
-
-const message=document.getElementById(
-"registerMessage"
-);
+const username=document.getElementById("registerUsername").value.trim();
+const email=document.getElementById("registerEmail").value.trim();
+const password=document.getElementById("registerPassword").value;
+const confirm=document.getElementById("registerPasswordConfirm").value;
+const message=document.getElementById("registerMessage");
 
 if(password!==confirm){
 
-message.className=
-"auth-message error-message";
-
-message.textContent=
-"Şifreler aynı olmalı.";
-
+message.className="auth-message error-message";
+message.textContent="Şifreler aynı olmalı.";
 return;
 
 }
@@ -2606,16 +2454,15 @@ headers:{
 "Content-Type":"application/json"
 },
 body:JSON.stringify({
-username:username,
-email:email,
-password:password,
+username,
+email,
+password,
 passwordConfirm:confirm
 })
 }
 );
 
-message.className=
-"auth-message success-message";
+message.className="auth-message success-message";
 
 message.textContent=
 data.message||
@@ -2623,21 +2470,15 @@ data.message||
 
 showVerifyEmail(email);
 
-document.getElementById(
-"verifyMessage"
-).className=
+document.getElementById("verifyMessage").className=
 "auth-message success-message";
 
-document.getElementById(
-"verifyMessage"
-).textContent=
+document.getElementById("verifyMessage").textContent=
 "6 haneli doğrulama kodu e-posta adresine gönderildi.";
 
 }catch(error){
 
-message.className=
-"auth-message error-message";
-
+message.className="auth-message error-message";
 message.textContent=error.message;
 
 }
@@ -2648,17 +2489,9 @@ async function verifyEmail(event){
 
 event.preventDefault();
 
-const email=document.getElementById(
-"verificationEmail"
-).value.trim();
-
-const code=document.getElementById(
-"verificationCode"
-).value.trim();
-
-const message=document.getElementById(
-"verifyMessage"
-);
+const email=document.getElementById("verificationEmail").value.trim();
+const code=document.getElementById("verificationCode").value.trim();
+const message=document.getElementById("verifyMessage");
 
 message.className="auth-message";
 message.textContent="Doğrulanıyor...";
@@ -2679,8 +2512,7 @@ code
 }
 );
 
-message.className=
-"auth-message success-message";
+message.className="auth-message success-message";
 
 message.textContent=
 data.message||
@@ -2690,9 +2522,7 @@ setTimeout(showLogin,900);
 
 }catch(error){
 
-message.className=
-"auth-message error-message";
-
+message.className="auth-message error-message";
 message.textContent=error.message;
 
 }
@@ -2701,22 +2531,13 @@ message.textContent=error.message;
 
 async function resendVerificationCode(){
 
-const email=document.getElementById(
-"verificationEmail"
-).value.trim();
-
-const message=document.getElementById(
-"verifyMessage"
-);
+const email=document.getElementById("verificationEmail").value.trim();
+const message=document.getElementById("verifyMessage");
 
 if(!email){
 
-message.className=
-"auth-message error-message";
-
-message.textContent=
-"Önce e-posta adresini yaz.";
-
+message.className="auth-message error-message";
+message.textContent="Önce e-posta adresini yaz.";
 return;
 
 }
@@ -2737,8 +2558,7 @@ body:JSON.stringify({email})
 }
 );
 
-message.className=
-"auth-message success-message";
+message.className="auth-message success-message";
 
 message.textContent=
 data.message||
@@ -2746,9 +2566,7 @@ data.message||
 
 }catch(error){
 
-message.className=
-"auth-message error-message";
-
+message.className="auth-message error-message";
 message.textContent=error.message;
 
 }
@@ -2756,31 +2574,38 @@ message.textContent=error.message;
 }
 
 
-/* DÜZELTİLDİ: E-posta veya kullanıcı adı ile giriş */
+/* =====================================================
+   GÜNCELLENMİŞ GİRİŞ SİSTEMİ
+   ===================================================== */
 
 async function login(event){
 
 event.preventDefault();
 
-const loginValue=document.getElementById(
-"loginUsername"
-).value.trim();
+const form=event.currentTarget;
 
-const password=document.getElementById(
-"loginPassword"
-).value;
+const loginInput=form.querySelector("#loginUsername");
+const passwordInput=form.querySelector("#loginPassword");
+const message=document.getElementById("loginMessage");
 
-const message=document.getElementById(
-"loginMessage"
-);
+const loginValue=(loginInput?.value||"").trim();
+const password=passwordInput?.value||"";
 
-if(!loginValue || !password){
+if(!loginValue){
 
-message.className=
-"auth-message error-message";
-
+message.className="auth-message error-message";
 message.textContent=
-"E-posta/kullanıcı adı ve şifre gereklidir.";
+"Lütfen e-posta adresinizi veya kullanıcı adınızı girin.";
+
+return;
+
+}
+
+if(!password){
+
+message.className="auth-message error-message";
+message.textContent=
+"Lütfen şifrenizi girin.";
 
 return;
 
@@ -2855,6 +2680,8 @@ setTimeout(closeAuth,600);
 
 }catch(error){
 
+console.error("LOGIN ERROR:",error);
+
 message.className=
 "auth-message error-message";
 
@@ -2865,17 +2692,17 @@ error.message||"Giriş yapılamadı.";
 
 }
 
+
+/* =====================================================
+   ŞİFRE İŞLEMLERİ
+   ===================================================== */
+
 async function forgotPassword(event){
 
 event.preventDefault();
 
-const email=document.getElementById(
-"forgotEmail"
-).value.trim();
-
-const message=document.getElementById(
-"forgotMessage"
-);
+const email=document.getElementById("forgotEmail").value.trim();
+const message=document.getElementById("forgotMessage");
 
 message.className="auth-message";
 message.textContent="Kod gönderiliyor...";
@@ -2893,16 +2720,13 @@ body:JSON.stringify({email})
 }
 );
 
-message.className=
-"auth-message success-message";
+message.className="auth-message success-message";
 
 message.textContent=
 data.message||
 "Sıfırlama kodu gönderildi.";
 
-document.getElementById(
-"resetEmail"
-).value=email;
+document.getElementById("resetEmail").value=email;
 
 setTimeout(
 ()=>showResetPassword(email),
@@ -2911,9 +2735,7 @@ setTimeout(
 
 }catch(error){
 
-message.className=
-"auth-message error-message";
-
+message.className="auth-message error-message";
 message.textContent=error.message;
 
 }
@@ -2924,34 +2746,16 @@ async function resetPassword(event){
 
 event.preventDefault();
 
-const email=document.getElementById(
-"resetEmail"
-).value.trim();
-
-const code=document.getElementById(
-"resetCode"
-).value.trim();
-
-const password=document.getElementById(
-"resetPassword"
-).value;
-
-const confirm=document.getElementById(
-"resetPasswordConfirm"
-).value;
-
-const message=document.getElementById(
-"resetMessage"
-);
+const email=document.getElementById("resetEmail").value.trim();
+const code=document.getElementById("resetCode").value.trim();
+const password=document.getElementById("resetPassword").value;
+const confirm=document.getElementById("resetPasswordConfirm").value;
+const message=document.getElementById("resetMessage");
 
 if(password!==confirm){
 
-message.className=
-"auth-message error-message";
-
-message.textContent=
-"Şifreler aynı olmalı.";
-
+message.className="auth-message error-message";
+message.textContent="Şifreler aynı olmalı.";
 return;
 
 }
@@ -2977,8 +2781,7 @@ passwordConfirm:confirm
 }
 );
 
-message.className=
-"auth-message success-message";
+message.className="auth-message success-message";
 
 message.textContent=
 data.message||
@@ -2988,9 +2791,7 @@ setTimeout(showLogin,900);
 
 }catch(error){
 
-message.className=
-"auth-message error-message";
-
+message.className="auth-message error-message";
 message.textContent=error.message;
 
 }
@@ -3008,30 +2809,15 @@ showLogin();
 return;
 }
 
-const currentPassword=document.getElementById(
-"currentPassword"
-).value;
-
-const newPassword=document.getElementById(
-"newPassword"
-).value;
-
-const newPasswordConfirm=document.getElementById(
-"newPasswordConfirm"
-).value;
-
-const message=document.getElementById(
-"changePasswordMessage"
-);
+const currentPassword=document.getElementById("currentPassword").value;
+const newPassword=document.getElementById("newPassword").value;
+const newPasswordConfirm=document.getElementById("newPasswordConfirm").value;
+const message=document.getElementById("changePasswordMessage");
 
 if(newPassword!==newPasswordConfirm){
 
-message.className=
-"auth-message error-message";
-
-message.textContent=
-"Yeni şifreler aynı olmalı.";
-
+message.className="auth-message error-message";
+message.textContent="Yeni şifreler aynı olmalı.";
 return;
 
 }
@@ -3057,24 +2843,19 @@ newPasswordConfirm
 }
 );
 
-message.className=
-"auth-message success-message";
+message.className="auth-message success-message";
 
 message.textContent=
 data.message||
 "Şifren başarıyla değiştirildi.";
 
-document.getElementById(
-"changeAuthForm"
-).reset();
+document.getElementById("changeAuthForm").reset();
 
 setTimeout(closeAuth,900);
 
 }catch(error){
 
-message.className=
-"auth-message error-message";
-
+message.className="auth-message error-message";
 message.textContent=error.message;
 
 }
@@ -3088,7 +2869,6 @@ const token=localStorage.getItem("veloraToken");
 if(!token){
 
 updateAccountUI();
-
 return;
 
 }
@@ -3191,7 +2971,6 @@ localStorage.removeItem("veloraUser");
 favoriteProductIds=[];
 
 closeAccountMenu();
-
 updateAccountUI();
 
 alert("Hesabınızdan çıkış yapıldı.");
@@ -3213,6 +2992,11 @@ document.getElementById(
 ).classList.remove("active");
 
 }
+
+
+/* =====================================================
+   SAYFA BAŞLANGICI
+   ===================================================== */
 
 document.addEventListener(
 "DOMContentLoaded",
