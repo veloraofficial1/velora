@@ -4,8 +4,7 @@
    VELORA BACKEND
 ========================================= */
 
-const API_URL =
-    "https://velora-backend-1-aft5.onrender.com";
+const API_URL = "https://velora-backend-1-aft5.onrender.com";
 
 
 /* =========================================
@@ -13,7 +12,6 @@ const API_URL =
 ========================================= */
 
 const products = [
-
     {
         id: 1,
         name: "Zarif Yüzük",
@@ -21,7 +19,6 @@ const products = [
         subcategory: "Günlük",
         image: "resimler/yuzuk.jpg"
     },
-
     {
         id: 2,
         name: "Taşlı Yüzük",
@@ -29,7 +26,6 @@ const products = [
         subcategory: "Taşlı",
         image: "resimler/tasli-yuzuk.jpg"
     },
-
     {
         id: 3,
         name: "Kalp Detaylı Yüzük",
@@ -37,7 +33,6 @@ const products = [
         subcategory: "Kalpli",
         image: "resimler/kalp-yuzuk.jpg"
     },
-
     {
         id: 4,
         name: "Minimal Yüzük",
@@ -45,7 +40,6 @@ const products = [
         subcategory: "Minimal",
         image: "resimler/minimal-yuzuk.jpg"
     },
-
     {
         id: 5,
         name: "Minimal Bileklik",
@@ -53,7 +47,6 @@ const products = [
         subcategory: "Minimal",
         image: "resimler/bileklik.jpg"
     },
-
     {
         id: 6,
         name: "Taşlı Bileklik",
@@ -61,7 +54,6 @@ const products = [
         subcategory: "Taşlı",
         image: "resimler/tasli-bileklik.jpg"
     },
-
     {
         id: 7,
         name: "Su Yolu Bileklik",
@@ -69,7 +61,6 @@ const products = [
         subcategory: "Su Yolu",
         image: "resimler/su-yolu-bileklik.jpg"
     },
-
     {
         id: 8,
         name: "Zincir Bileklik",
@@ -77,7 +68,6 @@ const products = [
         subcategory: "Zincir",
         image: "resimler/zincir-bileklik.jpg"
     },
-
     {
         id: 9,
         name: "İnci Küpe",
@@ -85,7 +75,6 @@ const products = [
         subcategory: "İnci",
         image: "resimler/incikupe.jpg"
     },
-
     {
         id: 10,
         name: "Halka Küpe",
@@ -93,7 +82,6 @@ const products = [
         subcategory: "Halka",
         image: "resimler/halka-kupe.jpg"
     },
-
     {
         id: 11,
         name: "Taşlı Küpe",
@@ -101,7 +89,6 @@ const products = [
         subcategory: "Taşlı",
         image: "resimler/tasli-kupe.jpg"
     },
-
     {
         id: 12,
         name: "Minimal Küpe",
@@ -109,7 +96,6 @@ const products = [
         subcategory: "Minimal",
         image: "resimler/minimal-kupe.jpg"
     },
-
     {
         id: 13,
         name: "İnci Kolye",
@@ -117,7 +103,6 @@ const products = [
         subcategory: "İnci",
         image: "resimler/kolye.jpg"
     },
-
     {
         id: 14,
         name: "İnce Zincir Kolye",
@@ -125,7 +110,6 @@ const products = [
         subcategory: "Zincir",
         image: "resimler/zincir-kolye.jpg"
     },
-
     {
         id: 15,
         name: "Minimal Kolye",
@@ -133,7 +117,6 @@ const products = [
         subcategory: "Minimal",
         image: "resimler/minimal-kolye.jpg"
     },
-
     {
         id: 16,
         name: "Taşlı Kolye",
@@ -141,12 +124,9 @@ const products = [
         subcategory: "Taşlı",
         image: "resimler/tasli-kolye.jpg"
     }
-
 ];
 
-
-let selectedStars =
-    Array(products.length + 1).fill(0);
+let selectedStars = Array(products.length + 1).fill(0);
 
 
 /* =========================================
@@ -155,59 +135,37 @@ let selectedStars =
 
 function renderProducts(list = products) {
 
-    const container =
-        document.getElementById("productContainer");
+    const container = document.getElementById("productContainer");
 
     if (!container) return;
 
     container.innerHTML = "";
 
-    const categories = [
-        "Yüzük",
-        "Bileklik",
-        "Küpe",
-        "Kolye"
-    ];
+    const categories = ["Yüzük", "Bileklik", "Küpe", "Kolye"];
 
     categories.forEach(category => {
 
-        const categoryProducts =
-            list.filter(
-                product =>
-                    product.category === category
-            );
+        const categoryProducts = list.filter(
+            product => product.category === category
+        );
 
-        if (categoryProducts.length === 0) {
-            return;
-        }
+        if (!categoryProducts.length) return;
 
-        const heading =
-            document.createElement("h2");
-
-        heading.className =
-            "category-heading";
-
-        heading.textContent =
-            category;
+        const heading = document.createElement("h2");
+        heading.className = "category-heading";
+        heading.textContent = category;
 
         container.appendChild(heading);
 
-        const grid =
-            document.createElement("div");
-
-        grid.className =
-            "product-grid";
+        const grid = document.createElement("div");
+        grid.className = "product-grid";
 
         categoryProducts.forEach(product => {
 
-            const card =
-                document.createElement("div");
-
-            card.className =
-                "product-card";
+            const card = document.createElement("div");
+            card.className = "product-card";
 
             card.innerHTML = `
-
                 <img
                     class="product-image"
                     src="${product.image}"
@@ -261,24 +219,18 @@ function renderProducts(list = products) {
                         </div>
 
                     </div>
-
                 </div>
             `;
 
             grid.appendChild(card);
-
         });
 
         container.appendChild(grid);
 
         categoryProducts.forEach(product => {
-
             loadReviews(product.id);
-
         });
-
     });
-
 }
 
 
@@ -291,7 +243,6 @@ function createStars(productId) {
     let html = "";
 
     for (let i = 1; i <= 5; i++) {
-
         html += `
             <span
                 class="star ${selectedStars[productId] >= i ? "active" : ""}"
@@ -299,31 +250,21 @@ function createStars(productId) {
                 ★
             </span>
         `;
-
     }
 
     return html;
-
 }
 
 
 function selectStar(productId, rating) {
 
-    selectedStars[productId] =
-        rating;
+    selectedStars[productId] = rating;
 
-    const stars =
-        document.getElementById(
-            `stars-${productId}`
-        );
+    const stars = document.getElementById(`stars-${productId}`);
 
     if (stars) {
-
-        stars.innerHTML =
-            createStars(productId);
-
+        stars.innerHTML = createStars(productId);
     }
-
 }
 
 
@@ -333,55 +274,32 @@ function selectStar(productId, rating) {
 
 function addReview(productId) {
 
-    const input =
-        document.getElementById(
-            `review-${productId}`
-        );
+    const input = document.getElementById(`review-${productId}`);
 
-    const text =
-        input.value.trim();
+    if (!input) return;
 
-    const rating =
-        selectedStars[productId];
+    const text = input.value.trim();
+    const rating = selectedStars[productId];
 
     if (!rating) {
-
-        alert(
-            "Lütfen yıldız puanı seçin."
-        );
-
+        alert("Lütfen yıldız puanı seçin.");
         return;
-
     }
 
     if (!text) {
-
-        alert(
-            "Lütfen yorumunuzu yazın."
-        );
-
+        alert("Lütfen yorumunuzu yazın.");
         return;
-
     }
 
-    const storageKey =
-        `velora-reviews-${productId}`;
+    const storageKey = `velora-reviews-${productId}`;
 
     const reviews =
-        JSON.parse(
-            localStorage.getItem(storageKey)
-        ) || [];
+        JSON.parse(localStorage.getItem(storageKey) || "[]");
 
     reviews.push({
-
-        rating: rating,
-
-        text: text,
-
-        date:
-            new Date()
-                .toLocaleDateString("tr-TR")
-
+        rating,
+        text,
+        date: new Date().toLocaleDateString("tr-TR")
     });
 
     localStorage.setItem(
@@ -390,23 +308,15 @@ function addReview(productId) {
     );
 
     input.value = "";
-
     selectedStars[productId] = 0;
 
-    const stars =
-        document.getElementById(
-            `stars-${productId}`
-        );
+    const stars = document.getElementById(`stars-${productId}`);
 
     if (stars) {
-
-        stars.innerHTML =
-            createStars(productId);
-
+        stars.innerHTML = createStars(productId);
     }
 
     loadReviews(productId);
-
 }
 
 
@@ -417,80 +327,49 @@ function addReview(productId) {
 function loadReviews(productId) {
 
     const container =
-        document.getElementById(
-            `reviews-${productId}`
-        );
+        document.getElementById(`reviews-${productId}`);
 
-    if (!container) {
-        return;
-    }
+    if (!container) return;
 
-    const storageKey =
-        `velora-reviews-${productId}`;
+    const storageKey = `velora-reviews-${productId}`;
 
     const reviews =
-        JSON.parse(
-            localStorage.getItem(storageKey)
-        ) || [];
+        JSON.parse(localStorage.getItem(storageKey) || "[]");
 
     container.innerHTML = "";
 
     reviews.forEach(review => {
 
-        const item =
-            document.createElement("div");
+        const item = document.createElement("div");
 
-        item.className =
-            "review-item";
+        item.className = "review-item";
 
         let stars = "";
 
         for (let i = 1; i <= 5; i++) {
-
-            stars +=
-                i <= review.rating
-                    ? "★"
-                    : "☆";
-
+            stars += i <= review.rating ? "★" : "☆";
         }
 
         item.innerHTML = `
+            <div class="review-stars">${stars}</div>
 
-            <div class="review-stars">
-                ${stars}
-            </div>
+            <div>${escapeHtml(review.text)}</div>
 
-            <div>
-                ${escapeHtml(review.text)}
-            </div>
-
-            <small>
-                ${review.date}
-            </small>
-
+            <small>${review.date}</small>
         `;
 
         container.appendChild(item);
-
     });
-
 }
 
 
-/* =========================================
-   GÜVENLİ METİN
-========================================= */
-
 function escapeHtml(text) {
 
-    const div =
-        document.createElement("div");
+    const div = document.createElement("div");
 
-    div.textContent =
-        text;
+    div.textContent = text;
 
     return div.innerHTML;
-
 }
 
 
@@ -498,54 +377,41 @@ function escapeHtml(text) {
    KATEGORİ FİLTRELEME
 ========================================= */
 
-function filterCategory(
-    category,
-    subcategory = null
-) {
+function filterCategory(category, subcategory = null) {
 
     let filtered;
 
     if (subcategory) {
-
-        filtered =
-            products.filter(
-                product =>
-                    product.category === category &&
-                    product.subcategory === subcategory
-            );
-
+        filtered = products.filter(
+            product =>
+                product.category === category &&
+                product.subcategory === subcategory
+        );
     } else {
-
-        filtered =
-            products.filter(
-                product =>
-                    product.category === category
-            );
-
+        filtered = products.filter(
+            product => product.category === category
+        );
     }
 
     renderProducts(filtered);
 
     setTimeout(() => {
 
-        const productsSection =
+        const section =
             document.getElementById("urunler");
 
-        if (productsSection) {
-
-            productsSection.scrollIntoView({
+        if (section) {
+            section.scrollIntoView({
                 behavior: "smooth"
             });
-
         }
 
     }, 50);
-
 }
 
 
 /* =========================================
-   HESAP SİSTEMİ
+   HESAP FORMLARI
 ========================================= */
 
 function hideAllAuthForms() {
@@ -561,268 +427,14 @@ function hideAllAuthForms() {
 
     forms.forEach(id => {
 
-        const element =
-            document.getElementById(id);
+        const element = document.getElementById(id);
 
         if (element) {
-
             element.style.display = "none";
-
         }
-
     });
-
 }
 
-
-/* =========================================
-   MODALI AÇ
-========================================= */
-
-function openAuth() {
-
-    const token =
-        localStorage.getItem("veloraToken");
-
-    if (token) {
-
-        toggleAccountMenu();
-
-        return;
-
-    }
-
-    const modal =
-        document.getElementById("authModal");
-
-    if (modal) {
-
-        modal.classList.add("active");
-
-    }
-
-    showLogin();
-
-}
-
-
-/* =========================================
-   MODALI KAPAT
-========================================= */
-
-function closeAuth() {
-
-    const modal =
-        document.getElementById("authModal");
-
-    if (modal) {
-
-        modal.classList.remove("active");
-
-    }
-
-}
-
-
-/* =========================================
-   GİRİŞ EKRANI
-========================================= */
-
-function showLogin() {
-
-    hideAllAuthForms();
-
-    const form =
-        document.getElementById("loginForm");
-
-    if (form) {
-
-        form.style.display = "block";
-
-    }
-
-    clearAuthMessages();
-
-}
-
-
-/* =========================================
-   KAYIT EKRANI
-========================================= */
-
-function showRegister() {
-
-    hideAllAuthForms();
-
-    const form =
-        document.getElementById("registerForm");
-
-    if (form) {
-
-        form.style.display = "block";
-
-    }
-
-    clearAuthMessages();
-
-}
-
-
-/* =========================================
-   DOĞRULAMA EKRANI
-========================================= */
-
-function showVerifyEmail(email) {
-
-    hideAllAuthForms();
-
-    const form =
-        document.getElementById("verifyEmailForm");
-
-    if (form) {
-
-        form.style.display = "block";
-
-    }
-
-    const emailInput =
-        document.getElementById(
-            "verificationEmail"
-        );
-
-    const codeInput =
-        document.getElementById(
-            "verificationCode"
-        );
-
-    if (emailInput) {
-
-        emailInput.value = email;
-
-    }
-
-    if (codeInput) {
-
-        codeInput.value = "";
-
-    }
-
-}
-
-
-/* =========================================
-   ŞİFREMİ UNUTTUM
-========================================= */
-
-function showForgotPassword() {
-
-    hideAllAuthForms();
-
-    const form =
-        document.getElementById(
-            "forgotPasswordForm"
-        );
-
-    if (form) {
-
-        form.style.display = "block";
-
-    }
-
-    clearAuthMessages();
-
-}
-
-
-/* =========================================
-   ŞİFRE YENİLE
-========================================= */
-
-function showResetPassword(email) {
-
-    hideAllAuthForms();
-
-    const form =
-        document.getElementById(
-            "resetPasswordForm"
-        );
-
-    if (form) {
-
-        form.style.display = "block";
-
-    }
-
-    const emailInput =
-        document.getElementById(
-            "resetEmail"
-        );
-
-    if (emailInput) {
-
-        emailInput.value = email;
-
-    }
-
-}
-
-
-/* =========================================
-   ŞİFRE DEĞİŞTİR
-========================================= */
-
-function showChangePassword() {
-
-    const token =
-        localStorage.getItem("veloraToken");
-
-    if (!token) {
-
-        showLogin();
-
-        const modal =
-            document.getElementById("authModal");
-
-        if (modal) {
-
-            modal.classList.add("active");
-
-        }
-
-        return;
-
-    }
-
-    hideAllAuthForms();
-
-    const form =
-        document.getElementById(
-            "changePasswordForm"
-        );
-
-    if (form) {
-
-        form.style.display = "block";
-
-    }
-
-    const modal =
-        document.getElementById("authModal");
-
-    if (modal) {
-
-        modal.classList.add("active");
-
-    }
-
-    clearAuthMessages();
-
-}
-
-
-/* =========================================
-   MESAJLARI TEMİZLE
-========================================= */
 
 function clearAuthMessages() {
 
@@ -837,18 +449,165 @@ function clearAuthMessages() {
 
     ids.forEach(id => {
 
-        const element =
-            document.getElementById(id);
+        const element = document.getElementById(id);
 
         if (element) {
-
             element.textContent = "";
             element.className = "auth-message";
-
         }
-
     });
+}
 
+
+/* =========================================
+   AUTH MODAL
+========================================= */
+
+function openAuth() {
+
+    const token = localStorage.getItem("veloraToken");
+
+    if (token) {
+        toggleAccountMenu();
+        return;
+    }
+
+    const modal = document.getElementById("authModal");
+
+    if (modal) {
+        modal.classList.add("active");
+    }
+
+    showLogin();
+}
+
+
+function closeAuth() {
+
+    const modal = document.getElementById("authModal");
+
+    if (modal) {
+        modal.classList.remove("active");
+    }
+}
+
+
+function showLogin() {
+
+    hideAllAuthForms();
+
+    const form = document.getElementById("loginForm");
+
+    if (form) {
+        form.style.display = "block";
+    }
+
+    clearAuthMessages();
+}
+
+
+function showRegister() {
+
+    hideAllAuthForms();
+
+    const form = document.getElementById("registerForm");
+
+    if (form) {
+        form.style.display = "block";
+    }
+
+    clearAuthMessages();
+}
+
+
+function showVerifyEmail(email = "") {
+
+    hideAllAuthForms();
+
+    const form = document.getElementById("verifyEmailForm");
+
+    if (form) {
+        form.style.display = "block";
+    }
+
+    const emailInput =
+        document.getElementById("verificationEmail");
+
+    const codeInput =
+        document.getElementById("verificationCode");
+
+    if (emailInput && email) {
+        emailInput.value = email;
+    }
+
+    if (codeInput) {
+        codeInput.value = "";
+    }
+}
+
+
+function showForgotPassword() {
+
+    hideAllAuthForms();
+
+    const form =
+        document.getElementById("forgotPasswordForm");
+
+    if (form) {
+        form.style.display = "block";
+    }
+
+    clearAuthMessages();
+}
+
+
+function showResetPassword(email = "") {
+
+    hideAllAuthForms();
+
+    const form =
+        document.getElementById("resetPasswordForm");
+
+    if (form) {
+        form.style.display = "block";
+    }
+
+    const emailInput =
+        document.getElementById("resetEmail");
+
+    if (emailInput && email) {
+        emailInput.value = email;
+    }
+}
+
+
+function showChangePassword() {
+
+    const token =
+        localStorage.getItem("veloraToken");
+
+    if (!token) {
+        showLogin();
+        return;
+    }
+
+    hideAllAuthForms();
+
+    const form =
+        document.getElementById("changePasswordForm");
+
+    if (form) {
+        form.style.display = "block";
+    }
+
+    const modal =
+        document.getElementById("authModal");
+
+    if (modal) {
+        modal.classList.add("active");
+    }
+
+    clearAuthMessages();
 }
 
 
@@ -856,46 +615,32 @@ function clearAuthMessages() {
    API
 ========================================= */
 
-async function apiRequest(
-    endpoint,
-    options = {}
-) {
+async function apiRequest(endpoint, options = {}) {
 
-    const response =
-        await fetch(
-            `${API_URL}${endpoint}`,
-            {
-                ...options,
+    const response = await fetch(
+        `${API_URL}${endpoint}`,
+        {
+            ...options,
 
-                headers: {
-                    "Content-Type":
-                        "application/json",
-
-                    ...(options.headers || {})
-                }
+            headers: {
+                "Content-Type": "application/json",
+                ...(options.headers || {})
             }
-        );
-
+        }
+    );
 
     let data = {};
 
     try {
-
-        data =
-            await response.json();
-
+        data = await response.json();
     } catch {
-
         data = {};
-
     }
-
 
     return {
         response,
         data
     };
-
 }
 
 
@@ -908,38 +653,21 @@ async function register(event) {
     event.preventDefault();
 
     const username =
-        document
-            .getElementById("registerUsername")
-            .value
-            .trim();
+        document.getElementById("registerUsername").value.trim();
 
     const email =
-        document
-            .getElementById("registerEmail")
-            .value
-            .trim();
+        document.getElementById("registerEmail").value.trim();
 
     const password =
-        document
-            .getElementById("registerPassword")
-            .value;
+        document.getElementById("registerPassword").value;
 
     const passwordConfirm =
-        document
-            .getElementById(
-                "registerPasswordConfirm"
-            )
-            .value;
+        document.getElementById("registerPasswordConfirm").value;
 
     const message =
-        document
-            .getElementById(
-                "registerMessage"
-            );
-
+        document.getElementById("registerMessage");
 
     if (password !== passwordConfirm) {
-
         message.className =
             "auth-message error-message";
 
@@ -947,12 +675,9 @@ async function register(event) {
             "Şifreler aynı değil.";
 
         return;
-
     }
 
-
     if (password.length < 6) {
-
         message.className =
             "auth-message error-message";
 
@@ -960,48 +685,34 @@ async function register(event) {
             "Şifre en az 6 karakter olmalıdır.";
 
         return;
-
     }
 
-
-    message.className =
-        "auth-message";
-
-    message.textContent =
-        "Hesap oluşturuluyor...";
-
+    message.className = "auth-message";
+    message.textContent = "Hesap oluşturuluyor...";
 
     try {
 
-        const {
-            response,
-            data
-        } =
+        const { response, data } =
             await apiRequest(
                 "/api/auth/register",
                 {
                     method: "POST",
 
-                    body:
-                        JSON.stringify({
-                            username,
-                            email,
-                            password,
-                            passwordConfirm
-                        })
+                    body: JSON.stringify({
+                        username,
+                        email,
+                        password,
+                        passwordConfirm
+                    })
                 }
             );
 
-
         if (!response.ok) {
-
             throw new Error(
                 data.message ||
                 "Hesap oluşturulamadı."
             );
-
         }
-
 
         if (data.verificationRequired) {
 
@@ -1012,17 +723,11 @@ async function register(event) {
                 "Doğrulama kodu e-posta adresine gönderildi.";
 
             setTimeout(() => {
-
-                showVerifyEmail(
-                    data.email || email
-                );
-
+                showVerifyEmail(data.email || email);
             }, 700);
 
             return;
-
         }
-
 
         message.className =
             "auth-message success-message";
@@ -1030,12 +735,7 @@ async function register(event) {
         message.textContent =
             "Hesabınız oluşturuldu.";
 
-        setTimeout(() => {
-
-            showLogin();
-
-        }, 1000);
-
+        setTimeout(showLogin, 1000);
 
     } catch (error) {
 
@@ -1047,14 +747,12 @@ async function register(event) {
         message.textContent =
             error.message ||
             "Bir hata oluştu.";
-
     }
-
 }
 
 
 /* =========================================
-   E-POSTA DOĞRULA
+   E-POSTA DOĞRULAMA
 ========================================= */
 
 async function verifyEmail(event) {
@@ -1062,27 +760,13 @@ async function verifyEmail(event) {
     event.preventDefault();
 
     const email =
-        document
-            .getElementById(
-                "verificationEmail"
-            )
-            .value
-            .trim();
+        document.getElementById("verificationEmail").value.trim();
 
     const code =
-        document
-            .getElementById(
-                "verificationCode"
-            )
-            .value
-            .trim();
+        document.getElementById("verificationCode").value.trim();
 
     const message =
-        document
-            .getElementById(
-                "verifyMessage"
-            );
-
+        document.getElementById("verifyMessage");
 
     if (!/^\d{6}$/.test(code)) {
 
@@ -1093,46 +777,32 @@ async function verifyEmail(event) {
             "Lütfen 6 haneli doğrulama kodunu gir.";
 
         return;
-
     }
 
-
-    message.className =
-        "auth-message";
-
-    message.textContent =
-        "E-posta doğrulanıyor...";
-
+    message.className = "auth-message";
+    message.textContent = "E-posta doğrulanıyor...";
 
     try {
 
-        const {
-            response,
-            data
-        } =
+        const { response, data } =
             await apiRequest(
                 "/api/auth/verify-email",
                 {
                     method: "POST",
 
-                    body:
-                        JSON.stringify({
-                            email,
-                            code
-                        })
+                    body: JSON.stringify({
+                        email,
+                        code
+                    })
                 }
             );
 
-
         if (!response.ok) {
-
             throw new Error(
                 data.message ||
                 "Doğrulama başarısız."
             );
-
         }
-
 
         message.className =
             "auth-message success-message";
@@ -1140,13 +810,7 @@ async function verifyEmail(event) {
         message.textContent =
             "E-posta adresin doğrulandı. Giriş yapabilirsin.";
 
-
-        setTimeout(() => {
-
-            showLogin();
-
-        }, 1200);
-
+        setTimeout(showLogin, 1200);
 
     } catch (error) {
 
@@ -1158,68 +822,41 @@ async function verifyEmail(event) {
         message.textContent =
             error.message ||
             "Doğrulama sırasında hata oluştu.";
-
     }
-
 }
 
-
-/* =========================================
-   DOĞRULAMA KODU TEKRAR GÖNDER
-========================================= */
 
 async function resendVerificationCode() {
 
     const email =
-        document
-            .getElementById(
-                "verificationEmail"
-            )
-            .value
-            .trim();
+        document.getElementById("verificationEmail").value.trim();
 
     const message =
-        document
-            .getElementById(
-                "verifyMessage"
-            );
+        document.getElementById("verifyMessage");
 
-
-    message.className =
-        "auth-message";
-
-    message.textContent =
-        "Yeni kod gönderiliyor...";
-
+    message.className = "auth-message";
+    message.textContent = "Yeni kod gönderiliyor...";
 
     try {
 
-        const {
-            response,
-            data
-        } =
+        const { response, data } =
             await apiRequest(
                 "/api/auth/resend-verification",
                 {
                     method: "POST",
 
-                    body:
-                        JSON.stringify({
-                            email
-                        })
+                    body: JSON.stringify({
+                        email
+                    })
                 }
             );
 
-
         if (!response.ok) {
-
             throw new Error(
                 data.message ||
                 "Kod gönderilemedi."
             );
-
         }
-
 
         message.className =
             "auth-message success-message";
@@ -1237,9 +874,7 @@ async function resendVerificationCode() {
         message.textContent =
             error.message ||
             "Kod gönderilemedi.";
-
     }
-
 }
 
 
@@ -1252,53 +887,31 @@ async function login(event) {
     event.preventDefault();
 
     const username =
-        document
-            .getElementById(
-                "loginUsername"
-            )
-            .value
-            .trim();
+        document.getElementById("loginUsername").value.trim();
 
     const password =
-        document
-            .getElementById(
-                "loginPassword"
-            )
-            .value;
+        document.getElementById("loginPassword").value;
 
     const message =
-        document
-            .getElementById(
-                "loginMessage"
-            );
+        document.getElementById("loginMessage");
 
-
-    message.className =
-        "auth-message";
-
-    message.textContent =
-        "Giriş yapılıyor...";
-
+    message.className = "auth-message";
+    message.textContent = "Giriş yapılıyor...";
 
     try {
 
-        const {
-            response,
-            data
-        } =
+        const { response, data } =
             await apiRequest(
                 "/api/auth/login",
                 {
                     method: "POST",
 
-                    body:
-                        JSON.stringify({
-                            username,
-                            password
-                        })
+                    body: JSON.stringify({
+                        username,
+                        password
+                    })
                 }
             );
-
 
         if (
             !response.ok &&
@@ -1312,42 +925,31 @@ async function login(event) {
                 "Önce e-posta adresini doğrulamalısın.";
 
             setTimeout(() => {
-
                 showVerifyEmail(
                     data.email || username
                 );
-
             }, 700);
 
             return;
-
         }
 
-
         if (!response.ok) {
-
             throw new Error(
                 data.message ||
                 "Giriş yapılamadı."
             );
-
         }
 
-
         if (!data.token) {
-
             throw new Error(
                 "Sunucudan giriş anahtarı alınamadı."
             );
-
         }
-
 
         localStorage.setItem(
             "veloraToken",
             data.token
         );
-
 
         if (data.user) {
 
@@ -1355,9 +957,7 @@ async function login(event) {
                 "veloraUser",
                 JSON.stringify(data.user)
             );
-
         }
-
 
         message.className =
             "auth-message success-message";
@@ -1365,16 +965,9 @@ async function login(event) {
         message.textContent =
             "Giriş başarılı!";
 
-
         updateAccountUI();
 
-
-        setTimeout(() => {
-
-            closeAuth();
-
-        }, 700);
-
+        setTimeout(closeAuth, 700);
 
     } catch (error) {
 
@@ -1386,14 +979,12 @@ async function login(event) {
         message.textContent =
             error.message ||
             "Kullanıcı adı veya şifre hatalı.";
-
     }
-
 }
 
 
 /* =========================================
-   ŞİFREMİ UNUTTUM
+   ŞİFRE SIFIRLAMA
 ========================================= */
 
 async function forgotPassword(event) {
@@ -1401,55 +992,34 @@ async function forgotPassword(event) {
     event.preventDefault();
 
     const email =
-        document
-            .getElementById(
-                "forgotEmail"
-            )
-            .value
-            .trim();
+        document.getElementById("forgotEmail").value.trim();
 
     const message =
-        document
-            .getElementById(
-                "forgotMessage"
-            );
+        document.getElementById("forgotMessage");
 
-
-    message.className =
-        "auth-message";
-
-    message.textContent =
-        "Kod gönderiliyor...";
-
+    message.className = "auth-message";
+    message.textContent = "Kod gönderiliyor...";
 
     try {
 
-        const {
-            response,
-            data
-        } =
+        const { response, data } =
             await apiRequest(
                 "/api/auth/forgot-password",
                 {
                     method: "POST",
 
-                    body:
-                        JSON.stringify({
-                            email
-                        })
+                    body: JSON.stringify({
+                        email
+                    })
                 }
             );
 
-
         if (!response.ok) {
-
             throw new Error(
                 data.message ||
                 "Kod gönderilemedi."
             );
-
         }
-
 
         message.className =
             "auth-message success-message";
@@ -1457,13 +1027,9 @@ async function forgotPassword(event) {
         message.textContent =
             "Şifre yenileme kodu e-posta adresine gönderildi.";
 
-
         setTimeout(() => {
-
             showResetPassword(email);
-
         }, 800);
-
 
     } catch (error) {
 
@@ -1475,56 +1041,28 @@ async function forgotPassword(event) {
         message.textContent =
             error.message ||
             "Kod gönderilemedi.";
-
     }
-
 }
 
-
-/* =========================================
-   ŞİFREYİ YENİLE
-========================================= */
 
 async function resetPassword(event) {
 
     event.preventDefault();
 
     const email =
-        document
-            .getElementById(
-                "resetEmail"
-            )
-            .value
-            .trim();
+        document.getElementById("resetEmail").value.trim();
 
     const code =
-        document
-            .getElementById(
-                "resetCode"
-            )
-            .value
-            .trim();
+        document.getElementById("resetCode").value.trim();
 
     const password =
-        document
-            .getElementById(
-                "resetPassword"
-            )
-            .value;
+        document.getElementById("resetPassword").value;
 
     const passwordConfirm =
-        document
-            .getElementById(
-                "resetPasswordConfirm"
-            )
-            .value;
+        document.getElementById("resetPasswordConfirm").value;
 
     const message =
-        document
-            .getElementById(
-                "resetMessage"
-            );
-
+        document.getElementById("resetMessage");
 
     if (password !== passwordConfirm) {
 
@@ -1535,9 +1073,7 @@ async function resetPassword(event) {
             "Yeni şifreler aynı değil.";
 
         return;
-
     }
-
 
     if (password.length < 6) {
 
@@ -1548,48 +1084,34 @@ async function resetPassword(event) {
             "Şifre en az 6 karakter olmalıdır.";
 
         return;
-
     }
 
-
-    message.className =
-        "auth-message";
-
-    message.textContent =
-        "Şifre yenileniyor...";
-
+    message.className = "auth-message";
+    message.textContent = "Şifre yenileniyor...";
 
     try {
 
-        const {
-            response,
-            data
-        } =
+        const { response, data } =
             await apiRequest(
                 "/api/auth/reset-password",
                 {
                     method: "POST",
 
-                    body:
-                        JSON.stringify({
-                            email,
-                            code,
-                            password,
-                            passwordConfirm
-                        })
+                    body: JSON.stringify({
+                        email,
+                        code,
+                        password,
+                        passwordConfirm
+                    })
                 }
             );
 
-
         if (!response.ok) {
-
             throw new Error(
                 data.message ||
                 "Şifre yenilenemedi."
             );
-
         }
-
 
         message.className =
             "auth-message success-message";
@@ -1597,13 +1119,7 @@ async function resetPassword(event) {
         message.textContent =
             "Şifren başarıyla yenilendi.";
 
-
-        setTimeout(() => {
-
-            showLogin();
-
-        }, 1200);
-
+        setTimeout(showLogin, 1200);
 
     } catch (error) {
 
@@ -1615,9 +1131,7 @@ async function resetPassword(event) {
         message.textContent =
             error.message ||
             "Şifre yenilenemedi.";
-
     }
-
 }
 
 
@@ -1630,47 +1144,24 @@ async function changePassword(event) {
     event.preventDefault();
 
     const token =
-        localStorage.getItem(
-            "veloraToken"
-        );
-
+        localStorage.getItem("veloraToken");
 
     if (!token) {
-
         showLogin();
-
         return;
-
     }
 
-
     const currentPassword =
-        document
-            .getElementById(
-                "currentPassword"
-            )
-            .value;
+        document.getElementById("currentPassword").value;
 
     const newPassword =
-        document
-            .getElementById(
-                "newPassword"
-            )
-            .value;
+        document.getElementById("newPassword").value;
 
     const newPasswordConfirm =
-        document
-            .getElementById(
-                "newPasswordConfirm"
-            )
-            .value;
+        document.getElementById("newPasswordConfirm").value;
 
     const message =
-        document
-            .getElementById(
-                "changePasswordMessage"
-            );
-
+        document.getElementById("changePasswordMessage");
 
     if (newPassword !== newPasswordConfirm) {
 
@@ -1681,9 +1172,7 @@ async function changePassword(event) {
             "Yeni şifreler aynı değil.";
 
         return;
-
     }
-
 
     if (newPassword.length < 6) {
 
@@ -1694,52 +1183,37 @@ async function changePassword(event) {
             "Yeni şifre en az 6 karakter olmalıdır.";
 
         return;
-
     }
 
-
-    message.className =
-        "auth-message";
-
-    message.textContent =
-        "Şifre değiştiriliyor...";
-
+    message.className = "auth-message";
+    message.textContent = "Şifre değiştiriliyor...";
 
     try {
 
-        const {
-            response,
-            data
-        } =
+        const { response, data } =
             await apiRequest(
                 "/api/auth/change-password",
                 {
                     method: "POST",
 
                     headers: {
-                        "Authorization":
-                            `Bearer ${token}`
+                        Authorization: `Bearer ${token}`
                     },
 
-                    body:
-                        JSON.stringify({
-                            currentPassword,
-                            newPassword,
-                            newPasswordConfirm
-                        })
+                    body: JSON.stringify({
+                        currentPassword,
+                        newPassword,
+                        newPasswordConfirm
+                    })
                 }
             );
 
-
         if (!response.ok) {
-
             throw new Error(
                 data.message ||
                 "Şifre değiştirilemedi."
             );
-
         }
-
 
         message.className =
             "auth-message success-message";
@@ -1747,32 +1221,11 @@ async function changePassword(event) {
         message.textContent =
             "Şifren başarıyla değiştirildi.";
 
+        document.getElementById("currentPassword").value = "";
+        document.getElementById("newPassword").value = "";
+        document.getElementById("newPasswordConfirm").value = "";
 
-        document
-            .getElementById(
-                "currentPassword"
-            )
-            .value = "";
-
-        document
-            .getElementById(
-                "newPassword"
-            )
-            .value = "";
-
-        document
-            .getElementById(
-                "newPasswordConfirm"
-            )
-            .value = "";
-
-
-        setTimeout(() => {
-
-            closeAuth();
-
-        }, 1200);
-
+        setTimeout(closeAuth, 1200);
 
     } catch (error) {
 
@@ -1784,9 +1237,7 @@ async function changePassword(event) {
         message.textContent =
             error.message ||
             "Şifre değiştirilemedi.";
-
     }
-
 }
 
 
@@ -1797,47 +1248,30 @@ async function changePassword(event) {
 async function loadCurrentUser() {
 
     const token =
-        localStorage.getItem(
-            "veloraToken"
-        );
-
+        localStorage.getItem("veloraToken");
 
     if (!token) {
-
         updateAccountUI();
-
         return;
-
     }
-
 
     try {
 
-        const {
-            response,
-            data
-        } =
+        const { response, data } =
             await apiRequest(
                 "/api/auth/me",
                 {
                     method: "GET",
 
                     headers: {
-                        "Authorization":
-                            `Bearer ${token}`
+                        Authorization: `Bearer ${token}`
                     }
                 }
             );
 
-
         if (!response.ok) {
-
-            throw new Error(
-                "Oturum geçersiz."
-            );
-
+            throw new Error("Oturum geçersiz.");
         }
-
 
         if (data.user) {
 
@@ -1845,12 +1279,9 @@ async function loadCurrentUser() {
                 "veloraUser",
                 JSON.stringify(data.user)
             );
-
         }
 
-
         updateAccountUI();
-
 
     } catch (error) {
 
@@ -1859,110 +1290,73 @@ async function loadCurrentUser() {
             error.message
         );
 
-
-        localStorage.removeItem(
-            "veloraToken"
-        );
-
-        localStorage.removeItem(
-            "veloraUser"
-        );
-
+        localStorage.removeItem("veloraToken");
+        localStorage.removeItem("veloraUser");
 
         updateAccountUI();
-
     }
-
 }
 
 
 /* =========================================
-   ŞİFRE DEĞİŞTİR BUTONU EKLE
+   ŞİFRE DEĞİŞTİR BUTONU
 ========================================= */
 
 function ensureChangePasswordButton() {
 
     const menu =
-        document.getElementById(
-            "accountMenu"
-        );
+        document.getElementById("accountMenu");
 
     if (!menu) return;
 
-
-    let button =
+    if (
         document.getElementById(
             "changePasswordMenuButton"
-        );
+        )
+    ) {
+        return;
+    }
 
+    const button =
+        document.createElement("button");
 
-    if (!button) {
+    button.id =
+        "changePasswordMenuButton";
 
-        button =
-            document.createElement("button");
+    button.type = "button";
 
-        button.id =
-            "changePasswordMenuButton";
+    button.textContent =
+        "🔑 Şifre Değiştir";
 
-        button.type =
-            "button";
-
-        button.textContent =
-            "🔑 Şifre Değiştir";
-
-
-        button.onclick = function(event) {
+    button.addEventListener(
+        "click",
+        function(event) {
 
             event.stopPropagation();
 
             menu.classList.remove("active");
 
-            const modal =
-                document.getElementById(
-                    "authModal"
-                );
-
-            if (modal) {
-
-                modal.classList.add("active");
-
-            }
-
             showChangePassword();
-
-        };
-
-
-        /*
-           Menüdeki çıkış butonundan önce ekle.
-           Çıkış butonu bulunamazsa sona ekle.
-        */
-
-        const logoutButton =
-            Array.from(
-                menu.querySelectorAll("button")
-            ).find(button =>
-                button.textContent
-                    .toLowerCase()
-                    .includes("çıkış")
-            );
-
-
-        if (logoutButton) {
-
-            menu.insertBefore(
-                button,
-                logoutButton
-            );
-
-        } else {
-
-            menu.appendChild(button);
-
         }
+    );
 
+    const logoutButton =
+        Array.from(
+            menu.querySelectorAll("button")
+        ).find(button =>
+            button.textContent
+                .toLowerCase()
+                .includes("çıkış")
+        );
+
+    if (logoutButton) {
+        menu.insertBefore(
+            button,
+            logoutButton
+        );
+    } else {
+        menu.appendChild(button);
     }
-
 }
 
 
@@ -1973,18 +1367,13 @@ function ensureChangePasswordButton() {
 function toggleAccountMenu() {
 
     const menu =
-        document.getElementById(
-            "accountMenu"
-        );
+        document.getElementById("accountMenu");
 
     if (!menu) return;
 
-
     ensureChangePasswordButton();
 
-
     menu.classList.toggle("active");
-
 }
 
 
@@ -1995,50 +1384,31 @@ function toggleAccountMenu() {
 function updateAccountUI() {
 
     const token =
-        localStorage.getItem(
-            "veloraToken"
-        );
+        localStorage.getItem("veloraToken");
 
     const userText =
-        localStorage.getItem(
-            "veloraUser"
-        );
-
+        localStorage.getItem("veloraUser");
 
     const button =
-        document.getElementById(
-            "accountButton"
-        );
+        document.getElementById("accountButton");
 
     const username =
-        document.getElementById(
-            "accountUsername"
-        );
+        document.getElementById("accountUsername");
 
     const email =
-        document.getElementById(
-            "accountEmail"
-        );
-
+        document.getElementById("accountEmail");
 
     if (!button) return;
-
 
     if (token && userText) {
 
         let user = null;
 
         try {
-
-            user =
-                JSON.parse(userText);
-
+            user = JSON.parse(userText);
         } catch {
-
             user = null;
-
         }
-
 
         if (user) {
 
@@ -2047,56 +1417,33 @@ function updateAccountUI() {
                 user.email ||
                 "Hesabım";
 
-
             button.textContent =
                 `👤 ${displayName}`;
 
-
             if (username) {
-
-                username.textContent =
-                    displayName;
-
+                username.textContent = displayName;
             }
-
 
             if (email) {
-
                 email.textContent =
-                    user.email ||
-                    "";
-
+                    user.email || "";
             }
-
 
             ensureChangePasswordButton();
 
             return;
-
         }
-
     }
 
-
-    button.textContent =
-        "👤 Hesap";
-
+    button.textContent = "👤 Hesap";
 
     if (username) {
-
-        username.textContent =
-            "Hesabım";
-
+        username.textContent = "Hesabım";
     }
-
 
     if (email) {
-
-        email.textContent =
-            "";
-
+        email.textContent = "";
     }
-
 }
 
 
@@ -2106,150 +1453,110 @@ function updateAccountUI() {
 
 function logout() {
 
-    localStorage.removeItem(
-        "veloraToken"
-    );
-
-    localStorage.removeItem(
-        "veloraUser"
-    );
-
+    localStorage.removeItem("veloraToken");
+    localStorage.removeItem("veloraUser");
 
     const menu =
-        document.getElementById(
-            "accountMenu"
-        );
+        document.getElementById("accountMenu");
 
     if (menu) {
-
-        menu.classList.remove(
-            "active"
-        );
-
+        menu.classList.remove("active");
     }
-
 
     updateAccountUI();
 
-
-    alert(
-        "Hesabınızdan çıkış yapıldı."
-    );
-
+    alert("Hesabınızdan çıkış yapıldı.");
 }
 
 
 /* =========================================
-   HESAP BUTONU
-========================================= */
-
-const accountButton =
-    document.getElementById(
-        "accountButton"
-    );
-
-
-if (accountButton) {
-
-    accountButton.addEventListener(
-        "click",
-        function(event) {
-
-            event.stopPropagation();
-
-            const token =
-                localStorage.getItem(
-                    "veloraToken"
-                );
-
-
-            if (token) {
-
-                toggleAccountMenu();
-
-            } else {
-
-                openAuth();
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   HESAP MENÜSÜ DIŞINA TIKLAMA
+   SAYFA HAZIR OLUNCA
 ========================================= */
 
 document.addEventListener(
-    "click",
-    function(event) {
+    "DOMContentLoaded",
+    function() {
 
-        const accountArea =
-            document.querySelector(
-                ".account-area"
+        const accountButton =
+            document.getElementById("accountButton");
+
+        if (accountButton) {
+
+            accountButton.addEventListener(
+                "click",
+                function(event) {
+
+                    event.stopPropagation();
+
+                    const token =
+                        localStorage.getItem(
+                            "veloraToken"
+                        );
+
+                    if (token) {
+                        toggleAccountMenu();
+                    } else {
+                        openAuth();
+                    }
+                }
             );
-
-        const menu =
-            document.getElementById(
-                "accountMenu"
-            );
-
-
-        if (
-            accountArea &&
-            menu &&
-            !accountArea.contains(event.target)
-        ) {
-
-            menu.classList.remove(
-                "active"
-            );
-
         }
+
+
+        document.addEventListener(
+            "click",
+            function(event) {
+
+                const accountArea =
+                    document.querySelector(
+                        ".account-area"
+                    );
+
+                const menu =
+                    document.getElementById(
+                        "accountMenu"
+                    );
+
+                if (
+                    accountArea &&
+                    menu &&
+                    !accountArea.contains(
+                        event.target
+                    )
+                ) {
+                    menu.classList.remove(
+                        "active"
+                    );
+                }
+            }
+        );
+
+
+        const authModal =
+            document.getElementById(
+                "authModal"
+            );
+
+        if (authModal) {
+
+            authModal.addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target === authModal
+                    ) {
+                        closeAuth();
+                    }
+                }
+            );
+        }
+
+
+        renderProducts();
+        loadCurrentUser();
 
     }
 );
-
-
-/* =========================================
-   MODAL DIŞINA TIKLAMA
-========================================= */
-
-const authModal =
-    document.getElementById(
-        "authModal"
-    );
-
-
-if (authModal) {
-
-    authModal.addEventListener(
-        "click",
-        function(event) {
-
-            if (
-                event.target === this
-            ) {
-
-                closeAuth();
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   SAYFA AÇILINCA
-========================================= */
-
-renderProducts();
-
-loadCurrentUser();
 
 </script>
