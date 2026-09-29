@@ -4,112 +4,363 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VELORA | Zarif Takılar</title>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:Georgia,"Times New Roman",serif;background:#f7f1e7;color:#4c3b2b}
-header{position:sticky;top:0;z-index:1000;background:rgba(247,241,231,.97);border-bottom:1px solid #d6c2a5;padding:18px 6%;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:30px;font-weight:bold;letter-spacing:6px;color:#9b7445;text-decoration:none}
+
+header{
+position:sticky;top:0;z-index:1000;
+background:rgba(247,241,231,.97);
+border-bottom:1px solid #d6c2a5;
+padding:18px 6%;
+display:flex;align-items:center;justify-content:space-between
+}
+
+.logo{
+font-size:30px;font-weight:bold;letter-spacing:6px;
+color:#9b7445;text-decoration:none
+}
+
 nav{display:flex;align-items:center;gap:24px}
-nav a,.dropbtn{text-decoration:none;color:#5a4632;font-size:16px;cursor:pointer;background:none;border:none;font-family:inherit}
+
+nav a,.dropbtn{
+text-decoration:none;color:#5a4632;font-size:16px;
+cursor:pointer;background:none;border:none;font-family:inherit
+}
+
 nav a:hover,.dropbtn:hover{color:#a67c48}
+
 .dropdown{position:relative}
-.dropdown-content{display:none;position:absolute;top:30px;left:0;min-width:180px;background:#fffaf3;border:1px solid #dbc8ad;box-shadow:0 10px 25px rgba(70,50,30,.12);padding:8px 0}
-.dropdown-content a{display:block;padding:10px 16px;font-size:14px;color:#5a4632}
+
+.dropdown-content{
+display:none;position:absolute;top:30px;left:0;min-width:180px;
+background:#fffaf3;border:1px solid #dbc8ad;
+box-shadow:0 10px 25px rgba(70,50,30,.12);
+padding:8px 0
+}
+
+.dropdown-content a{
+display:block;padding:10px 16px;font-size:14px;color:#5a4632
+}
+
 .dropdown-content a:hover{background:#f1e5d3}
+
 .dropdown:hover .dropdown-content{display:block}
+
 .account-area{position:relative}
-.account-button{border:1px solid #b99669;background:#fffaf3;color:#705333;padding:9px 15px;font-family:inherit;cursor:pointer;transition:.3s}
+
+.account-button{
+border:1px solid #b99669;background:#fffaf3;color:#705333;
+padding:9px 15px;font-family:inherit;cursor:pointer;transition:.3s
+}
+
 .account-button:hover{background:#b99669;color:white}
-.account-menu{display:none;position:absolute;right:0;top:42px;width:240px;background:#fffaf3;border:1px solid #dbc8ad;box-shadow:0 10px 25px rgba(70,50,30,.15);padding:18px}
+
+.account-menu{
+display:none;position:absolute;right:0;top:42px;width:240px;
+background:#fffaf3;border:1px solid #dbc8ad;
+box-shadow:0 10px 25px rgba(70,50,30,.15);padding:18px
+}
+
 .account-menu.active{display:block}
+
 .account-menu h3{color:#85633d;margin-bottom:8px}
-.account-menu p{font-size:14px;color:#6b5640;margin-bottom:15px;word-break:break-word}
-.account-menu button{width:100%;padding:10px;border:1px solid #b99669;background:#b99669;color:white;font-family:inherit;cursor:pointer;margin-top:7px}
+
+.account-menu p{
+font-size:14px;color:#6b5640;margin-bottom:15px;
+word-break:break-word
+}
+
+.account-menu button{
+width:100%;padding:10px;border:1px solid #b99669;
+background:#b99669;color:white;font-family:inherit;
+cursor:pointer;margin-top:7px
+}
+
 .account-menu button:hover{background:#9f7749}
-.hero{min-height:580px;background:linear-gradient(rgba(65,48,32,.32),rgba(65,48,32,.32)),url("resimler/urun1.jpg") center/cover no-repeat;display:flex;justify-content:center;align-items:center;text-align:center;padding:40px 20px}
+
+.hero{
+min-height:580px;
+background:linear-gradient(rgba(65,48,32,.32),rgba(65,48,32,.32)),
+url("resimler/urun1.jpg") center/cover no-repeat;
+display:flex;justify-content:center;align-items:center;
+text-align:center;padding:40px 20px
+}
+
 .hero-content{color:white;max-width:800px}
-.hero h1{font-size:62px;letter-spacing:8px;margin-bottom:20px}
+
+.hero h1{
+font-size:62px;letter-spacing:8px;margin-bottom:20px
+}
+
 .hero p{font-size:23px;letter-spacing:2px}
-.hero-button{display:inline-block;margin-top:30px;padding:13px 30px;background:#f8eee0;color:#705333;text-decoration:none;border:1px solid #c7aa82;transition:.3s}
+
+.hero-button{
+display:inline-block;margin-top:30px;padding:13px 30px;
+background:#f8eee0;color:#705333;text-decoration:none;
+border:1px solid #c7aa82;transition:.3s
+}
+
 .hero-button:hover{background:#d9bd94;color:white}
+
 section{padding:80px 6%}
-.section-title{text-align:center;font-size:38px;color:#85633d;margin-bottom:45px;letter-spacing:3px}
-.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:1200px;margin:auto}
-.category-card{position:relative;height:280px;overflow:hidden;cursor:pointer;border:1px solid #d8c2a4}
-.category-card img{width:100%;height:100%;object-fit:cover;transition:.5s}
+
+.section-title{
+text-align:center;font-size:38px;color:#85633d;
+margin-bottom:45px;letter-spacing:3px
+}
+
+.category-grid{
+display:grid;grid-template-columns:repeat(4,1fr);
+gap:22px;max-width:1200px;margin:auto
+}
+
+.category-card{
+position:relative;height:280px;overflow:hidden;
+cursor:pointer;border:1px solid #d8c2a4
+}
+
+.category-card img{
+width:100%;height:100%;object-fit:cover;transition:.5s
+}
+
 .category-card:hover img{transform:scale(1.06)}
-.category-overlay{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;background:rgba(55,40,25,.28);color:white;font-size:27px;letter-spacing:3px}
+
+.category-overlay{
+position:absolute;inset:0;display:flex;
+justify-content:center;align-items:center;
+background:rgba(55,40,25,.28);color:white;
+font-size:27px;letter-spacing:3px
+}
+
 #urunler{background:#fbf7f0}
-.category-heading{text-align:center;font-size:34px;color:#8b6943;margin:65px 0 30px;letter-spacing:3px}
+
+.category-heading{
+text-align:center;font-size:34px;color:#8b6943;
+margin:65px 0 30px;letter-spacing:3px
+}
+
 .category-heading:first-child{margin-top:0}
-.product-grid{max-width:1250px;margin:0 auto 50px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.product-card{background:#fffdf9;border:1px solid #dfccb2;overflow:hidden;transition:.3s}
-.product-card:hover{transform:translateY(-5px);box-shadow:0 12px 25px rgba(90,65,40,.12)}
-.product-image{width:100%;height:260px;object-fit:cover;display:block}
+
+.product-grid{
+max-width:1250px;margin:0 auto 50px;
+display:grid;grid-template-columns:repeat(4,1fr);gap:24px
+}
+
+.product-card{
+background:#fffdf9;border:1px solid #dfccb2;
+overflow:hidden;transition:.3s
+}
+
+.product-card:hover{
+transform:translateY(-5px);
+box-shadow:0 12px 25px rgba(90,65,40,.12)
+}
+
+.product-image{
+width:100%;height:260px;object-fit:cover;display:block
+}
+
 .product-info{padding:20px;text-align:center}
-.product-name{font-size:21px;color:#5d4631;margin-bottom:8px}
-.product-category{color:#a18058;font-size:14px;margin-bottom:14px}
-.stock-status{color:#a67c48;font-size:15px;font-weight:bold;margin-bottom:12px}
-.stock-button{width:100%;padding:11px;border:1px solid #cdb18c;background:#eee4d6;color:#8b7357;font-family:inherit;cursor:not-allowed}
-.review-box{margin-top:20px;padding-top:15px;border-top:1px solid #eadbc8}
+
+.product-name{
+font-size:21px;color:#5d4631;margin-bottom:8px
+}
+
+.product-category{
+color:#a18058;font-size:14px;margin-bottom:14px
+}
+
+.stock-status{
+color:#a67c48;font-size:15px;font-weight:bold;margin-bottom:12px
+}
+
+.stock-button{
+width:100%;padding:11px;border:1px solid #cdb18c;
+background:#eee4d6;color:#8b7357;
+font-family:inherit;cursor:not-allowed
+}
+
+.review-box{
+margin-top:20px;padding-top:15px;
+border-top:1px solid #eadbc8
+}
+
 .stars{margin-bottom:10px}
-.star{font-size:22px;color:#c9b39a;cursor:pointer;margin:0 2px}
+
+.star{
+font-size:22px;color:#c9b39a;
+cursor:pointer;margin:0 2px
+}
+
 .star.active{color:#b3864e}
-.review-input{width:100%;min-height:70px;resize:vertical;padding:10px;border:1px solid #d9c5a9;background:#fffaf4;color:#4c3b2b;font-family:inherit;outline:none}
+
+.review-input{
+width:100%;min-height:70px;resize:vertical;
+padding:10px;border:1px solid #d9c5a9;
+background:#fffaf4;color:#4c3b2b;
+font-family:inherit;outline:none
+}
+
 .review-input:focus{border-color:#b58c5b}
-.review-button{width:100%;margin-top:8px;padding:9px;border:1px solid #b99669;background:#b99669;color:white;cursor:pointer;font-family:inherit}
+
+.review-button{
+width:100%;margin-top:8px;padding:9px;
+border:1px solid #b99669;background:#b99669;
+color:white;cursor:pointer;font-family:inherit
+}
+
 .review-button:hover{background:#9f7749}
+
 .reviews{margin-top:15px;text-align:left}
-.review-item{padding:10px;margin-bottom:8px;background:#f7efe3;border-left:3px solid #b99669;font-size:14px}
+
+.review-item{
+padding:10px;margin-bottom:8px;background:#f7efe3;
+border-left:3px solid #b99669;font-size:14px
+}
+
 .review-stars{color:#b3864e;margin-bottom:5px}
+
 #one-cikanlar{background:#efe3d2}
-.featured-grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.featured-card{background:#fffaf3;border:1px solid #d9c3a5;overflow:hidden;cursor:pointer;transition:.3s}
+
+.featured-grid{
+max-width:1100px;margin:auto;
+display:grid;grid-template-columns:repeat(4,1fr);gap:20px
+}
+
+.featured-card{
+background:#fffaf3;border:1px solid #d9c3a5;
+overflow:hidden;cursor:pointer;transition:.3s
+}
+
 .featured-card:hover{transform:translateY(-5px)}
-.featured-card img{width:100%;height:230px;object-fit:cover}
+
+.featured-card img{
+width:100%;height:230px;object-fit:cover
+}
+
 .featured-info{padding:18px;text-align:center}
-.featured-info h3{color:#664d35;margin-bottom:7px}
-.featured-info p{color:#a17b50;font-size:14px}
+
+.featured-info h3{
+color:#664d35;margin-bottom:7px
+}
+
+.featured-info p{
+color:#a17b50;font-size:14px
+}
+
 #iletisim{text-align:center;background:#f7f1e7}
-.contact-text{max-width:650px;margin:auto;line-height:1.8;color:#6b5640}
-footer{background:#4d3b2a;color:#f5e9d8;text-align:center;padding:25px;font-size:14px}
-.modal{display:none;position:fixed;inset:0;background:rgba(40,28,18,.55);z-index:5000;justify-content:center;align-items:center;padding:20px}
+
+.contact-text{
+max-width:650px;margin:auto;line-height:1.8;color:#6b5640
+}
+
+footer{
+background:#4d3b2a;color:#f5e9d8;
+text-align:center;padding:25px;font-size:14px
+}
+
+.modal{
+display:none;position:fixed;inset:0;
+background:rgba(40,28,18,.55);z-index:5000;
+justify-content:center;align-items:center;padding:20px
+}
+
 .modal.active{display:flex}
-.modal-box{width:100%;max-width:420px;max-height:90vh;overflow:auto;background:#fffaf3;border:1px solid #d6c2a5;padding:30px;box-shadow:0 15px 40px rgba(40,28,18,.25);position:relative}
-.modal-box h2{text-align:center;color:#85633d;margin-bottom:25px;letter-spacing:2px}
-.close-modal{position:absolute;top:10px;right:15px;border:none;background:none;color:#80674c;font-size:25px;cursor:pointer}
-.auth-form{display:flex;flex-direction:column;gap:12px}
-.auth-form input{width:100%;padding:12px;border:1px solid #d9c5a9;background:#fffdf9;color:#4c3b2b;font-family:inherit;outline:none}
+
+.modal-box{
+width:100%;max-width:420px;max-height:90vh;
+overflow:auto;background:#fffaf3;
+border:1px solid #d6c2a5;padding:30px;
+box-shadow:0 15px 40px rgba(40,28,18,.25);
+position:relative
+}
+
+.modal-box h2{
+text-align:center;color:#85633d;
+margin-bottom:25px;letter-spacing:2px
+}
+
+.close-modal{
+position:absolute;top:10px;right:15px;
+border:none;background:none;color:#80674c;
+font-size:25px;cursor:pointer
+}
+
+.auth-form{
+display:flex;flex-direction:column;gap:12px
+}
+
+.auth-form input{
+width:100%;padding:12px;
+border:1px solid #d9c5a9;
+background:#fffdf9;color:#4c3b2b;
+font-family:inherit;outline:none
+}
+
 .auth-form input:focus{border-color:#b58c5b}
-.auth-submit{padding:12px;border:1px solid #a67c48;background:#a67c48;color:white;font-family:inherit;cursor:pointer;margin-top:5px}
+
+.auth-submit{
+padding:12px;border:1px solid #a67c48;
+background:#a67c48;color:white;
+font-family:inherit;cursor:pointer;margin-top:5px
+}
+
 .auth-submit:hover{background:#8d673d}
-.auth-switch{text-align:center;margin-top:18px;color:#6b5640;font-size:14px}
-.auth-switch button{border:none;background:none;color:#9b7445;cursor:pointer;font-family:inherit;font-weight:bold}
-.auth-message{margin-top:12px;text-align:center;font-size:14px;min-height:20px}
+
+.auth-switch{
+text-align:center;margin-top:18px;
+color:#6b5640;font-size:14px
+}
+
+.auth-switch button{
+border:none;background:none;color:#9b7445;
+cursor:pointer;font-family:inherit;font-weight:bold
+}
+
+.auth-message{
+margin-top:12px;text-align:center;
+font-size:14px;min-height:20px
+}
+
 .success-message{color:#58704d}
 .error-message{color:#a05243}
+
 @media(max-width:1100px){
 .product-grid{grid-template-columns:repeat(2,1fr)}
 .category-grid{grid-template-columns:repeat(2,1fr)}
 .featured-grid{grid-template-columns:repeat(2,1fr)}
-header{gap:15px}nav{gap:14px}
+header{gap:15px}
+nav{gap:14px}
 }
+
 @media(max-width:700px){
 header{flex-direction:column;gap:15px}
 nav{flex-wrap:wrap;justify-content:center}
-.hero{min-height:470px}.hero h1{font-size:40px;letter-spacing:5px}.hero p{font-size:18px}
+.hero{min-height:470px}
+.hero h1{font-size:40px;letter-spacing:5px}
+.hero p{font-size:18px}
 .category-grid,.product-grid,.featured-grid{grid-template-columns:1fr}
-.dropdown-content{position:absolute;left:50%;transform:translateX(-50%)}
-.account-menu{position:fixed;top:150px;right:20px;left:20px;width:auto}
+.dropdown-content{
+position:absolute;left:50%;
+transform:translateX(-50%)
+}
+.account-menu{
+position:fixed;top:150px;right:20px;left:20px;width:auto
+}
 }
 </style>
 </head>
+
 <body>
 
 <header>
 <a href="#" class="logo">VELORA</a>
+
 <nav>
+
 <div class="dropdown">
 <button class="dropbtn">Yüzük ▾</button>
 <div class="dropdown-content">
@@ -119,6 +370,7 @@ nav{flex-wrap:wrap;justify-content:center}
 <a href="#urunler" onclick="filterCategory('Yüzük','Minimal')">Minimal</a>
 </div>
 </div>
+
 <div class="dropdown">
 <button class="dropbtn">Bileklik ▾</button>
 <div class="dropdown-content">
@@ -128,6 +380,7 @@ nav{flex-wrap:wrap;justify-content:center}
 <a href="#urunler" onclick="filterCategory('Bileklik','Zincir')">Zincir</a>
 </div>
 </div>
+
 <div class="dropdown">
 <button class="dropbtn">Küpe ▾</button>
 <div class="dropdown-content">
@@ -137,6 +390,7 @@ nav{flex-wrap:wrap;justify-content:center}
 <a href="#urunler" onclick="filterCategory('Küpe','Minimal')">Minimal</a>
 </div>
 </div>
+
 <div class="dropdown">
 <button class="dropbtn">Kolye ▾</button>
 <div class="dropdown-content">
@@ -146,17 +400,32 @@ nav{flex-wrap:wrap;justify-content:center}
 <a href="#urunler" onclick="filterCategory('Kolye','Taşlı')">Taşlı</a>
 </div>
 </div>
+
 <a href="#one-cikanlar">Öne Çıkanlar</a>
 <a href="#iletisim">İletişim</a>
+
 <div class="account-area">
-<button id="accountButton" class="account-button" type="button">👤 Hesap</button>
+
+<button id="accountButton" class="account-button" type="button">
+👤 Hesap
+</button>
+
 <div id="accountMenu" class="account-menu">
+
 <h3 id="accountUsername">Hesabım</h3>
 <p id="accountEmail"></p>
-<button id="changePasswordMenuButton" type="button">🔑 Şifre Değiştir</button>
-<button id="logoutButton" type="button">Çıkış Yap</button>
+
+<button id="changePasswordMenuButton" type="button">
+🔑 Şifre Değiştir
+</button>
+
+<button id="logoutButton" type="button">
+Çıkış Yap
+</button>
+
 </div>
 </div>
+
 </nav>
 </header>
 
@@ -169,570 +438,1803 @@ nav{flex-wrap:wrap;justify-content:center}
 </section>
 
 <section>
+
 <h2 class="section-title">Kategoriler</h2>
+
 <div class="category-grid">
-<div class="category-card" onclick="filterCategory('Yüzük')"><img src="resimler/yuzuk.jpg" alt="Yüzük"><div class="category-overlay">Yüzük</div></div>
-<div class="category-card" onclick="filterCategory('Bileklik')"><img src="resimler/bileklik.jpg" alt="Bileklik"><div class="category-overlay">Bileklik</div></div>
-<div class="category-card" onclick="filterCategory('Küpe')"><img src="resimler/incikupe.jpg" alt="Küpe"><div class="category-overlay">Küpe</div></div>
-<div class="category-card" onclick="filterCategory('Kolye')"><img src="resimler/kolye.jpg" alt="Kolye"><div class="category-overlay">Kolye</div></div>
+
+<div class="category-card" onclick="filterCategory('Yüzük')">
+<img src="resimler/yuzuk.jpg" alt="Yüzük">
+<div class="category-overlay">Yüzük</div>
+</div>
+
+<div class="category-card" onclick="filterCategory('Bileklik')">
+<img src="resimler/bileklik.jpg" alt="Bileklik">
+<div class="category-overlay">Bileklik</div>
+</div>
+
+<div class="category-card" onclick="filterCategory('Küpe')">
+<img src="resimler/incikupe.jpg" alt="Küpe">
+<div class="category-overlay">Küpe</div>
+</div>
+
+<div class="category-card" onclick="filterCategory('Kolye')">
+<img src="resimler/kolye.jpg" alt="Kolye">
+<div class="category-overlay">Kolye</div>
+</div>
+
 </div>
 </section>
 
 <section id="urunler">
+
 <h2 class="section-title">Koleksiyon</h2>
+
 <div id="productContainer"></div>
+
 </section>
 
 <section id="one-cikanlar">
+
 <h2 class="section-title">Öne Çıkanlar</h2>
+
 <div class="featured-grid">
-<div class="featured-card" onclick="filterCategory('Bileklik','Su Yolu')"><img src="resimler/su-yolu-bileklik.jpg" alt="Su Yolu Bileklik"><div class="featured-info"><h3>Su Yolu Bileklik</h3><p>Çok Yakında Stoklarda</p></div></div>
-<div class="featured-card" onclick="filterCategory('Yüzük','Günlük')"><img src="resimler/yuzuk.jpg" alt="Zarif Yüzük"><div class="featured-info"><h3>Zarif Yüzük</h3><p>Çok Yakında Stoklarda</p></div></div>
-<div class="featured-card" onclick="filterCategory('Kolye','İnci')"><img src="resimler/kolye.jpg" alt="İnci Kolye"><div class="featured-info"><h3>İnci Kolye</h3><p>Çok Yakında Stoklarda</p></div></div>
-<div class="featured-card" onclick="filterCategory('Küpe','İnci')"><img src="resimler/incikupe.jpg" alt="İnci Küpe"><div class="featured-info"><h3>İnci Küpe</h3><p>Çok Yakında Stoklarda</p></div></div>
+
+<div class="featured-card" onclick="filterCategory('Bileklik','Su Yolu')">
+<img src="resimler/su-yolu-bileklik.jpg" alt="Su Yolu Bileklik">
+<div class="featured-info">
+<h3>Su Yolu Bileklik</h3>
+<p>Çok Yakında Stoklarda</p>
+</div>
+</div>
+
+<div class="featured-card" onclick="filterCategory('Yüzük','Günlük')">
+<img src="resimler/yuzuk.jpg" alt="Zarif Yüzük">
+<div class="featured-info">
+<h3>Zarif Yüzük</h3>
+<p>Çok Yakında Stoklarda</p>
+</div>
+</div>
+
+<div class="featured-card" onclick="filterCategory('Kolye','İnci')">
+<img src="resimler/kolye.jpg" alt="İnci Kolye">
+<div class="featured-info">
+<h3>İnci Kolye</h3>
+<p>Çok Yakında Stoklarda</p>
+</div>
+</div>
+
+<div class="featured-card" onclick="filterCategory('Küpe','İnci')">
+<img src="resimler/incikupe.jpg" alt="İnci Küpe">
+<div class="featured-info">
+<h3>İnci Küpe</h3>
+<p>Çok Yakında Stoklarda</p>
+</div>
+</div>
+
 </div>
 </section>
 
 <section id="iletisim">
+
 <h2 class="section-title">İletişim</h2>
-<p class="contact-text">VELORA koleksiyonumuz çok yakında stoklarda olacak. Yeni ürünler, özel koleksiyonlar ve güncellemeler için bizi takip etmeye devam edin.</p>
+
+<p class="contact-text">
+VELORA koleksiyonumuz çok yakında stoklarda olacak.
+Yeni ürünler, özel koleksiyonlar ve güncellemeler için bizi takip etmeye devam edin.
+</p>
+
 </section>
 
-<footer>© 2026 VELORA — Zarafetin modern hali.</footer>
+<footer>
+© 2026 VELORA — Zarafetin modern hali.
+</footer>
+
 
 <div id="authModal" class="modal">
+
 <div class="modal-box">
+
 <button class="close-modal" id="closeAuthButton" type="button">×</button>
 
+
+<!-- GİRİŞ -->
+
 <div id="loginForm">
+
 <h2>Giriş Yap</h2>
+
 <form class="auth-form" id="loginAuthForm">
-<input type="text" id="loginUsername" placeholder="Kullanıcı adı veya e-posta" required>
-<input type="password" id="loginPassword" placeholder="Şifre" required>
-<button type="submit" class="auth-submit">Giriş Yap</button>
+
+<input
+type="text"
+id="loginUsername"
+placeholder="Kullanıcı adı veya e-posta"
+required
+>
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Şifre"
+required
+>
+
+<button type="submit" class="auth-submit">
+Giriş Yap
+</button>
+
 </form>
+
 <div id="loginMessage" class="auth-message"></div>
-<div class="auth-switch">Hesabın yok mu? <button type="button" onclick="showRegister()">Hesap Oluştur</button></div>
-<div class="auth-switch">Şifreni mi unuttun? <button type="button" onclick="showForgotPassword()">Şifremi Unuttum</button></div>
+
+<div class="auth-switch">
+Hesabın yok mu?
+<button type="button" onclick="showRegister()">
+Hesap Oluştur
+</button>
 </div>
+
+<div class="auth-switch">
+Şifreni mi unuttun?
+<button type="button" onclick="showForgotPassword()">
+Şifremi Unuttum
+</button>
+</div>
+
+</div>
+
+
+<!-- KAYIT -->
 
 <div id="registerForm" style="display:none;">
+
 <h2>Hesap Oluştur</h2>
+
 <form class="auth-form" id="registerAuthForm">
-<input type="text" id="registerUsername" placeholder="Kullanıcı adı" minlength="3" required>
-<input type="email" id="registerEmail" placeholder="E-posta" required>
-<input type="password" id="registerPassword" placeholder="Şifre" minlength="6" required>
-<input type="password" id="registerPasswordConfirm" placeholder="Şifre tekrar" minlength="6" required>
-<button type="submit" class="auth-submit">Hesap Oluştur</button>
+
+<input
+type="text"
+id="registerUsername"
+placeholder="Kullanıcı adı"
+minlength="3"
+required
+>
+
+<input
+type="email"
+id="registerEmail"
+placeholder="E-posta"
+required
+>
+
+<!-- TELEFON NUMARASI EKLENDİ -->
+
+<input
+type="tel"
+id="registerPhone"
+placeholder="Telefon numarası (05XXXXXXXXX)"
+inputmode="numeric"
+maxlength="11"
+pattern="05[0-9]{9}"
+required
+>
+
+<input
+type="password"
+id="registerPassword"
+placeholder="Şifre"
+minlength="6"
+required
+>
+
+<input
+type="password"
+id="registerPasswordConfirm"
+placeholder="Şifre tekrar"
+minlength="6"
+required
+>
+
+<button type="submit" class="auth-submit">
+Hesap Oluştur
+</button>
+
 </form>
+
 <div id="registerMessage" class="auth-message"></div>
-<div class="auth-switch">Zaten hesabın var mı? <button type="button" onclick="showLogin()">Giriş Yap</button></div>
+
+<div class="auth-switch">
+Zaten hesabın var mı?
+<button type="button" onclick="showLogin()">
+Giriş Yap
+</button>
 </div>
+
+</div>
+
+
+<!-- E-POSTA DOĞRULAMA -->
 
 <div id="verifyEmailForm" style="display:none;">
+
 <h2>E-posta Doğrulama</h2>
+
 <form class="auth-form" id="verifyAuthForm">
-<input type="email" id="verificationEmail" placeholder="E-posta" required>
-<input type="text" id="verificationCode" placeholder="6 haneli doğrulama kodu" inputmode="numeric" maxlength="6" required>
-<button type="submit" class="auth-submit">E-postayı Doğrula</button>
+
+<input
+type="email"
+id="verificationEmail"
+placeholder="E-posta"
+required
+>
+
+<input
+type="text"
+id="verificationCode"
+placeholder="6 haneli doğrulama kodu"
+inputmode="numeric"
+maxlength="6"
+required
+>
+
+<button type="submit" class="auth-submit">
+E-postayı Doğrula
+</button>
+
 </form>
+
 <div id="verifyMessage" class="auth-message"></div>
-<div class="auth-switch"><button type="button" onclick="resendVerificationCode()">Kodu Tekrar Gönder</button></div>
-<div class="auth-switch"><button type="button" onclick="showLogin()">Giriş Yap</button></div>
+
+<div class="auth-switch">
+<button type="button" onclick="resendVerificationCode()">
+Kodu Tekrar Gönder
+</button>
 </div>
+
+<div class="auth-switch">
+<button type="button" onclick="showLogin()">
+Giriş Yap
+</button>
+</div>
+
+</div>
+
+
+<!-- ŞİFREMİ UNUTTUM -->
 
 <div id="forgotPasswordForm" style="display:none;">
+
 <h2>Şifremi Unuttum</h2>
+
 <form class="auth-form" id="forgotAuthForm">
-<input type="email" id="forgotEmail" placeholder="E-posta" required>
-<button type="submit" class="auth-submit">Kod Gönder</button>
+
+<input
+type="email"
+id="forgotEmail"
+placeholder="E-posta"
+required
+>
+
+<button type="submit" class="auth-submit">
+Kod Gönder
+</button>
+
 </form>
+
 <div id="forgotMessage" class="auth-message"></div>
-<div class="auth-switch">Kodu aldın mı? <button type="button" onclick="showResetPassword()">Şifreyi Sıfırla</button></div>
-<div class="auth-switch"><button type="button" onclick="showLogin()">Giriş Yap</button></div>
+
+<div class="auth-switch">
+Kodu aldın mı?
+<button type="button" onclick="showResetPassword()">
+Şifreyi Sıfırla
+</button>
 </div>
+
+<div class="auth-switch">
+<button type="button" onclick="showLogin()">
+Giriş Yap
+</button>
+</div>
+
+</div>
+
+
+<!-- ŞİFRE SIFIRLAMA -->
 
 <div id="resetPasswordForm" style="display:none;">
+
 <h2>Şifreyi Sıfırla</h2>
+
 <form class="auth-form" id="resetAuthForm">
-<input type="email" id="resetEmail" placeholder="E-posta" required>
-<input type="text" id="resetCode" placeholder="6 haneli sıfırlama kodu" inputmode="numeric" maxlength="6" required>
-<input type="password" id="resetPassword" placeholder="Yeni şifre" minlength="6" required>
-<input type="password" id="resetPasswordConfirm" placeholder="Yeni şifre tekrar" minlength="6" required>
-<button type="submit" class="auth-submit">Şifreyi Sıfırla</button>
+
+<input
+type="email"
+id="resetEmail"
+placeholder="E-posta"
+required
+>
+
+<input
+type="text"
+id="resetCode"
+placeholder="6 haneli sıfırlama kodu"
+inputmode="numeric"
+maxlength="6"
+required
+>
+
+<input
+type="password"
+id="resetPassword"
+placeholder="Yeni şifre"
+minlength="6"
+required
+>
+
+<input
+type="password"
+id="resetPasswordConfirm"
+placeholder="Yeni şifre tekrar"
+minlength="6"
+required
+>
+
+<button type="submit" class="auth-submit">
+Şifreyi Sıfırla
+</button>
+
 </form>
+
 <div id="resetMessage" class="auth-message"></div>
-<div class="auth-switch"><button type="button" onclick="showLogin()">Giriş Yap</button></div>
+
+<div class="auth-switch">
+<button type="button" onclick="showLogin()">
+Giriş Yap
+</button>
 </div>
+
+</div>
+
+
+<!-- ŞİFRE DEĞİŞTİR -->
 
 <div id="changePasswordForm" style="display:none;">
+
 <h2>Şifre Değiştir</h2>
+
 <form class="auth-form" id="changeAuthForm">
-<input type="password" id="currentPassword" placeholder="Mevcut şifre" required>
-<input type="password" id="newPassword" placeholder="Yeni şifre" minlength="6" required>
-<input type="password" id="newPasswordConfirm" placeholder="Yeni şifre tekrar" minlength="6" required>
-<button type="submit" class="auth-submit">Şifreyi Değiştir</button>
+
+<input
+type="password"
+id="currentPassword"
+placeholder="Mevcut şifre"
+required
+>
+
+<input
+type="password"
+id="newPassword"
+placeholder="Yeni şifre"
+minlength="6"
+required
+>
+
+<input
+type="password"
+id="newPasswordConfirm"
+placeholder="Yeni şifre tekrar"
+minlength="6"
+required
+>
+
+<button type="submit" class="auth-submit">
+Şifreyi Değiştir
+</button>
+
 </form>
+
 <div id="changePasswordMessage" class="auth-message"></div>
-<div class="auth-switch"><button type="button" onclick="closeAuth()">Kapat</button></div>
+
+<div class="auth-switch">
+<button type="button" onclick="closeAuth()">
+Kapat
+</button>
+</div>
+
 </div>
 
 </div>
 </div>
+
 
 <script>
+
 const API_URL = "https://velora-backend-1-aft5.onrender.com";
 
+
 const products = [
+
 {id:1,name:"Zarif Yüzük",category:"Yüzük",subcategory:"Günlük",image:"resimler/yuzuk.jpg"},
+
 {id:2,name:"Taşlı Yüzük",category:"Yüzük",subcategory:"Taşlı",image:"resimler/tasli-yuzuk.jpg"},
+
 {id:3,name:"Kalp Detaylı Yüzük",category:"Yüzük",subcategory:"Kalpli",image:"resimler/kalp-yuzuk.jpg"},
+
 {id:4,name:"Minimal Yüzük",category:"Yüzük",subcategory:"Minimal",image:"resimler/minimal-yuzuk.jpg"},
+
 {id:5,name:"Minimal Bileklik",category:"Bileklik",subcategory:"Minimal",image:"resimler/bileklik.jpg"},
+
 {id:6,name:"Taşlı Bileklik",category:"Bileklik",subcategory:"Taşlı",image:"resimler/tasli-bileklik.jpg"},
+
 {id:7,name:"Su Yolu Bileklik",category:"Bileklik",subcategory:"Su Yolu",image:"resimler/su-yolu-bileklik.jpg"},
+
 {id:8,name:"Zincir Bileklik",category:"Bileklik",subcategory:"Zincir",image:"resimler/zincir-bileklik.jpg"},
+
 {id:9,name:"İnci Küpe",category:"Küpe",subcategory:"İnci",image:"resimler/incikupe.jpg"},
+
 {id:10,name:"Halka Küpe",category:"Küpe",subcategory:"Halka",image:"resimler/halka-kupe.jpg"},
+
 {id:11,name:"Taşlı Küpe",category:"Küpe",subcategory:"Taşlı",image:"resimler/tasli-kupe.jpg"},
+
 {id:12,name:"Minimal Küpe",category:"Küpe",subcategory:"Minimal",image:"resimler/minimal-kupe.jpg"},
+
 {id:13,name:"İnci Kolye",category:"Kolye",subcategory:"İnci",image:"resimler/kolye.jpg"},
+
 {id:14,name:"İnce Zincir Kolye",category:"Kolye",subcategory:"Zincir",image:"resimler/zincir-kolye.jpg"},
+
 {id:15,name:"Minimal Kolye",category:"Kolye",subcategory:"Minimal",image:"resimler/minimal-kolye.jpg"},
+
 {id:16,name:"Taşlı Kolye",category:"Kolye",subcategory:"Taşlı",image:"resimler/tasli-kolye.jpg"}
+
 ];
+
 
 let selectedStars = Array(products.length + 1).fill(0);
 
-function escapeHtml(text) {
-const div = document.createElement("div");
-div.textContent = String(text ?? "");
+
+function escapeHtml(text){
+
+const div=document.createElement("div");
+
+div.textContent=String(text ?? "");
+
 return div.innerHTML;
+
 }
 
-function createStars(productId) {
-let html = "";
-for (let i=1;i<=5;i++) {
-html += `<span class="star ${selectedStars[productId] >= i ? "active" : ""}" onclick="selectStar(${productId},${i})">★</span>`;
+
+function createStars(productId){
+
+let html="";
+
+for(let i=1;i<=5;i++){
+
+html += `<span class="star ${selectedStars[productId]>=i?"active":""}" onclick="selectStar(${productId},${i})">★</span>`;
+
 }
+
 return html;
+
 }
 
-function renderProducts(list=products) {
+
+function renderProducts(list=products){
+
 const container=document.getElementById("productContainer");
+
 if(!container)return;
+
 container.innerHTML="";
+
+
 ["Yüzük","Bileklik","Küpe","Kolye"].forEach(category=>{
+
 const categoryProducts=list.filter(product=>product.category===category);
+
 if(!categoryProducts.length)return;
+
+
 const heading=document.createElement("h2");
+
 heading.className="category-heading";
+
 heading.textContent=category;
+
 container.appendChild(heading);
+
+
 const grid=document.createElement("div");
+
 grid.className="product-grid";
+
+
 categoryProducts.forEach(product=>{
+
 const card=document.createElement("div");
+
 card.className="product-card";
+
+
 card.innerHTML=`
-<img class="product-image" src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" onerror="this.src='resimler/urun1.jpg'">
+
+<img
+class="product-image"
+src="${escapeHtml(product.image)}"
+alt="${escapeHtml(product.name)}"
+onerror="this.src='resimler/urun1.jpg'"
+>
+
 <div class="product-info">
-<h3 class="product-name">${escapeHtml(product.name)}</h3>
-<div class="product-category">${escapeHtml(product.subcategory)}</div>
-<div class="stock-status">Çok Yakında Stoklarda</div>
-<button class="stock-button" disabled>Yakında Stoklarda</button>
-<div class="review-box">
-<div class="stars" id="stars-${product.id}">${createStars(product.id)}</div>
-<textarea id="review-${product.id}" class="review-input" placeholder="Ürün hakkındaki düşüncenizi yazın..."></textarea>
-<button class="review-button" onclick="addReview(${product.id})">Yorumu Gönder</button>
-<div class="reviews" id="reviews-${product.id}"></div>
+
+<h3 class="product-name">
+${escapeHtml(product.name)}
+</h3>
+
+<div class="product-category">
+${escapeHtml(product.subcategory)}
 </div>
-</div>`;
+
+<div class="stock-status">
+Çok Yakında Stoklarda
+</div>
+
+<button class="stock-button" disabled>
+Yakında Stoklarda
+</button>
+
+<div class="review-box">
+
+<div class="stars" id="stars-${product.id}">
+${createStars(product.id)}
+</div>
+
+<textarea
+id="review-${product.id}"
+class="review-input"
+placeholder="Ürün hakkındaki düşüncenizi yazın..."
+></textarea>
+
+<button
+class="review-button"
+onclick="addReview(${product.id})"
+>
+Yorumu Gönder
+</button>
+
+<div
+class="reviews"
+id="reviews-${product.id}"
+></div>
+
+</div>
+</div>
+`;
+
 grid.appendChild(card);
+
 });
+
+
 container.appendChild(grid);
+
 categoryProducts.forEach(product=>loadReviews(product.id));
+
 });
+
 }
+
 
 function selectStar(productId,rating){
+
 selectedStars[productId]=rating;
+
 const stars=document.getElementById(`stars-${productId}`);
+
 if(stars)stars.innerHTML=createStars(productId);
+
 }
+
 
 function addReview(productId){
+
 const input=document.getElementById(`review-${productId}`);
+
 const text=input.value.trim();
+
 const rating=selectedStars[productId];
-if(!rating){alert("Lütfen yıldız puanı seçin.");return;}
-if(!text){alert("Lütfen yorumunuzu yazın.");return;}
-const key=`velora-reviews-${productId}`;
-const reviews=JSON.parse(localStorage.getItem(key)||"[]");
-reviews.push({rating,text,date:new Date().toLocaleDateString("tr-TR")});
-localStorage.setItem(key,JSON.stringify(reviews));
-input.value="";
-selectedStars[productId]=0;
-const stars=document.getElementById(`stars-${productId}`);
-if(stars)stars.innerHTML=createStars(productId);
-loadReviews(productId);
+
+
+if(!rating){
+
+alert("Lütfen yıldız puanı seçin.");
+
+return;
+
 }
+
+
+if(!text){
+
+alert("Lütfen yorumunuzu yazın.");
+
+return;
+
+}
+
+
+const key=`velora-reviews-${productId}`;
+
+const reviews=JSON.parse(localStorage.getItem(key)||"[]");
+
+reviews.push({
+
+rating,
+
+text,
+
+date:new Date().toLocaleDateString("tr-TR")
+
+});
+
+
+localStorage.setItem(key,JSON.stringify(reviews));
+
+input.value="";
+
+selectedStars[productId]=0;
+
+
+const stars=document.getElementById(`stars-${productId}`);
+
+if(stars)stars.innerHTML=createStars(productId);
+
+loadReviews(productId);
+
+}
+
 
 function loadReviews(productId){
+
 const container=document.getElementById(`reviews-${productId}`);
+
 if(!container)return;
-const reviews=JSON.parse(localStorage.getItem(`velora-reviews-${productId}`)||"[]");
+
+
+const reviews=JSON.parse(
+localStorage.getItem(`velora-reviews-${productId}`)||"[]"
+);
+
+
 container.innerHTML="";
+
+
 reviews.forEach(review=>{
+
 const item=document.createElement("div");
+
 item.className="review-item";
+
+
 let stars="";
-for(let i=1;i<=5;i++)stars+=i<=Number(review.rating)?"★":"☆";
-item.innerHTML=`<div class="review-stars">${stars}</div><div>${escapeHtml(review.text)}</div><small>${escapeHtml(review.date)}</small>`;
-container.appendChild(item);
-});
+
+for(let i=1;i<=5;i++){
+
+stars+=i<=Number(review.rating)?"★":"☆";
+
 }
+
+
+item.innerHTML=`
+
+<div class="review-stars">${stars}</div>
+
+<div>${escapeHtml(review.text)}</div>
+
+<small>${escapeHtml(review.date)}</small>
+
+`;
+
+
+container.appendChild(item);
+
+});
+
+}
+
 
 function filterCategory(category,subcategory=null){
+
 const filtered=subcategory
-?products.filter(p=>p.category===category&&p.subcategory===subcategory)
-:products.filter(p=>p.category===category);
+
+?products.filter(
+p=>p.category===category&&p.subcategory===subcategory
+)
+
+:products.filter(
+p=>p.category===category
+);
+
+
 renderProducts(filtered);
+
+
 setTimeout(()=>{
+
 const section=document.getElementById("urunler");
-if(section)section.scrollIntoView({behavior:"smooth"});
-},50);
+
+if(section){
+
+section.scrollIntoView({
+behavior:"smooth"
+});
+
 }
+
+},50);
+
+}
+
 
 function hideAllAuthForms(){
-["loginForm","registerForm","verifyEmailForm","forgotPasswordForm","resetPasswordForm","changePasswordForm"].forEach(id=>{
+
+[
+"loginForm",
+"registerForm",
+"verifyEmailForm",
+"forgotPasswordForm",
+"resetPasswordForm",
+"changePasswordForm"
+].forEach(id=>{
+
 const el=document.getElementById(id);
+
 if(el)el.style.display="none";
+
 });
+
 }
+
 
 function clearAuthMessages(){
-["loginMessage","registerMessage","verifyMessage","forgotMessage","resetMessage","changePasswordMessage"].forEach(id=>{
+
+[
+"loginMessage",
+"registerMessage",
+"verifyMessage",
+"forgotMessage",
+"resetMessage",
+"changePasswordMessage"
+].forEach(id=>{
+
 const el=document.getElementById(id);
-if(el){el.textContent="";el.className="auth-message";}
-});
+
+if(el){
+
+el.textContent="";
+
+el.className="auth-message";
+
 }
+
+});
+
+}
+
 
 function openAuth(){
+
 const token=localStorage.getItem("veloraToken");
-if(token){toggleAccountMenu();return;}
-document.getElementById("authModal").classList.add("active");
-showLogin();
+
+
+if(token){
+
+toggleAccountMenu();
+
+return;
+
 }
+
+
+document.getElementById("authModal").classList.add("active");
+
+showLogin();
+
+}
+
 
 function closeAuth(){
+
 document.getElementById("authModal").classList.remove("active");
+
 }
+
 
 function showLogin(){
+
 hideAllAuthForms();
+
 clearAuthMessages();
+
 document.getElementById("loginForm").style.display="block";
+
 }
+
 
 function showRegister(){
+
 hideAllAuthForms();
+
 clearAuthMessages();
+
 document.getElementById("registerForm").style.display="block";
+
 }
+
 
 function showVerifyEmail(email=""){
+
 hideAllAuthForms();
+
 clearAuthMessages();
+
 document.getElementById("verifyEmailForm").style.display="block";
-if(email)document.getElementById("verificationEmail").value=email;
+
+
+if(email){
+
+document.getElementById("verificationEmail").value=email;
+
 }
+
+}
+
 
 function showForgotPassword(){
+
 hideAllAuthForms();
+
 clearAuthMessages();
+
 document.getElementById("forgotPasswordForm").style.display="block";
+
 }
+
 
 function showResetPassword(email=""){
+
 hideAllAuthForms();
+
 clearAuthMessages();
+
 document.getElementById("resetPasswordForm").style.display="block";
-if(email)document.getElementById("resetEmail").value=email;
+
+
+if(email){
+
+document.getElementById("resetEmail").value=email;
+
 }
+
+}
+
 
 function showChangePassword(){
-if(!localStorage.getItem("veloraToken")){openAuth();return;}
-hideAllAuthForms();
-clearAuthMessages();
-document.getElementById("authModal").classList.add("active");
-document.getElementById("changePasswordForm").style.display="block";
+
+if(!localStorage.getItem("veloraToken")){
+
+openAuth();
+
+return;
+
 }
+
+
+hideAllAuthForms();
+
+clearAuthMessages();
+
+document.getElementById("authModal").classList.add("active");
+
+document.getElementById("changePasswordForm").style.display="block";
+
+}
+
 
 async function apiRequest(path,options={}){
+
 const response=await fetch(`${API_URL}${path}`,options);
+
 let data={};
+
 const text=await response.text();
-try{data=text?JSON.parse(text):{};}catch{data={message:text||"Sunucudan geçersiz yanıt geldi."};}
-if(!response.ok)throw new Error(data.message||"İşlem başarısız.");
-return data;
+
+
+try{
+
+data=text?JSON.parse(text):{};
+
+}catch{
+
+data={
+message:text||"Sunucudan geçersiz yanıt geldi."
+};
+
 }
+
+
+if(!response.ok){
+
+throw new Error(data.message||"İşlem başarısız.");
+
+}
+
+
+return data;
+
+}
+
+
+/* KAYIT */
 
 async function register(event){
+
 event.preventDefault();
-const username=document.getElementById("registerUsername").value.trim();
-const email=document.getElementById("registerEmail").value.trim();
-const password=document.getElementById("registerPassword").value;
-const confirm=document.getElementById("registerPasswordConfirm").value;
+
+
+const username=document
+.getElementById("registerUsername")
+.value
+.trim();
+
+
+const email=document
+.getElementById("registerEmail")
+.value
+.trim();
+
+
+const phone=document
+.getElementById("registerPhone")
+.value
+.trim()
+.replace(/\s/g,"");
+
+
+const password=document
+.getElementById("registerPassword")
+.value;
+
+
+const confirm=document
+.getElementById("registerPasswordConfirm")
+.value;
+
+
 const message=document.getElementById("registerMessage");
-if(password!==confirm){
+
+
+/* TELEFON KONTROLÜ */
+
+if(!/^05[0-9]{9}$/.test(phone)){
+
 message.className="auth-message error-message";
-message.textContent="Şifreler aynı olmalı.";
+
+message.textContent=
+"Geçerli bir telefon numarası girin. Örnek: 05551234567";
+
 return;
+
 }
-message.className="auth-message";
-message.textContent="Hesap oluşturuluyor...";
-try{
-const data=await apiRequest("/api/auth/register",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({username,email,password,passwordConfirm:confirm})
-});
-message.className="auth-message success-message";
-message.textContent=data.message||"Hesap oluşturuldu. E-postanı doğrula.";
-showVerifyEmail(email);
-document.getElementById("verifyMessage").className="auth-message success-message";
-document.getElementById("verifyMessage").textContent="6 haneli doğrulama kodu e-posta adresine gönderildi.";
-}catch(error){
+
+
+/* ŞİFRE KONTROLÜ */
+
+if(password!==confirm){
+
 message.className="auth-message error-message";
+
+message.textContent="Şifreler aynı olmalı.";
+
+return;
+
+}
+
+
+message.className="auth-message";
+
+message.textContent="Hesap oluşturuluyor...";
+
+
+try{
+
+const data=await apiRequest(
+"/api/auth/register",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+username,
+email,
+phone,
+password,
+passwordConfirm:confirm
+
+})
+
+}
+);
+
+
+message.className="auth-message success-message";
+
+message.textContent=
+data.message||
+"Hesap oluşturuldu. E-postanı doğrula.";
+
+
+showVerifyEmail(email);
+
+
+document.getElementById("verifyMessage").className=
+"auth-message success-message";
+
+
+document.getElementById("verifyMessage").textContent=
+"6 haneli doğrulama kodu e-posta adresine gönderildi.";
+
+
+}catch(error){
+
+message.className="auth-message error-message";
+
 message.textContent=error.message;
+
 }
+
 }
+
 
 async function verifyEmail(event){
+
 event.preventDefault();
-const email=document.getElementById("verificationEmail").value.trim();
-const code=document.getElementById("verificationCode").value.trim();
+
+
+const email=document
+.getElementById("verificationEmail")
+.value
+.trim();
+
+
+const code=document
+.getElementById("verificationCode")
+.value
+.trim();
+
+
 const message=document.getElementById("verifyMessage");
+
+
 message.className="auth-message";
+
 message.textContent="Doğrulanıyor...";
+
+
 try{
-const data=await apiRequest("/api/auth/verify-email",{
+
+const data=await apiRequest(
+"/api/auth/verify-email",
+{
+
 method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({email,code})
-});
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+email,
+code
+})
+
+}
+);
+
+
 message.className="auth-message success-message";
-message.textContent=data.message||"E-posta doğrulandı.";
+
+message.textContent=
+data.message||
+"E-posta doğrulandı.";
+
+
 setTimeout(showLogin,900);
+
+
 }catch(error){
+
 message.className="auth-message error-message";
+
 message.textContent=error.message;
+
 }
+
 }
+
 
 async function resendVerificationCode(){
-const email=document.getElementById("verificationEmail").value.trim();
+
+const email=document
+.getElementById("verificationEmail")
+.value
+.trim();
+
+
 const message=document.getElementById("verifyMessage");
-if(!email){message.className="auth-message error-message";message.textContent="Önce e-posta adresini yaz.";return;}
-message.className="auth-message";
-message.textContent="Kod gönderiliyor...";
-try{
-const data=await apiRequest("/api/auth/resend-verification",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({email})
-});
-message.className="auth-message success-message";
-message.textContent=data.message||"Yeni kod gönderildi.";
-}catch(error){
+
+
+if(!email){
+
 message.className="auth-message error-message";
+
+message.textContent=
+"Önce e-posta adresini yaz.";
+
+return;
+
+}
+
+
+message.className="auth-message";
+
+message.textContent="Kod gönderiliyor...";
+
+
+try{
+
+const data=await apiRequest(
+"/api/auth/resend-verification",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({email})
+
+}
+);
+
+
+message.className="auth-message success-message";
+
+message.textContent=
+data.message||
+"Yeni kod gönderildi.";
+
+
+}catch(error){
+
+message.className="auth-message error-message";
+
 message.textContent=error.message;
+
 }
+
 }
+
 
 async function login(event){
+
 event.preventDefault();
-const username=document.getElementById("loginUsername").value.trim();
-const password=document.getElementById("loginPassword").value;
+
+
+const username=document
+.getElementById("loginUsername")
+.value
+.trim();
+
+
+const password=document
+.getElementById("loginPassword")
+.value;
+
+
 const message=document.getElementById("loginMessage");
+
+
 message.className="auth-message";
+
 message.textContent="Giriş yapılıyor...";
+
+
 try{
-const data=await apiRequest("/api/auth/login",{
+
+const data=await apiRequest(
+"/api/auth/login",
+{
+
 method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({username,password})
-});
-localStorage.setItem("veloraToken",data.token);
-if(data.user)localStorage.setItem("veloraUser",JSON.stringify(data.user));
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+username,
+password
+})
+
+}
+);
+
+
+localStorage.setItem(
+"veloraToken",
+data.token
+);
+
+
+if(data.user){
+
+localStorage.setItem(
+"veloraUser",
+JSON.stringify(data.user)
+);
+
+}
+
+
 message.className="auth-message success-message";
+
 message.textContent="Giriş başarılı!";
+
+
 updateAccountUI();
+
+
 setTimeout(closeAuth,600);
+
+
 }catch(error){
+
 message.className="auth-message error-message";
+
 message.textContent=error.message;
+
 }
+
 }
+
 
 async function forgotPassword(event){
+
 event.preventDefault();
-const email=document.getElementById("forgotEmail").value.trim();
+
+
+const email=document
+.getElementById("forgotEmail")
+.value
+.trim();
+
+
 const message=document.getElementById("forgotMessage");
+
+
 message.className="auth-message";
+
 message.textContent="Kod gönderiliyor...";
+
+
 try{
-const data=await apiRequest("/api/auth/forgot-password",{
+
+const data=await apiRequest(
+"/api/auth/forgot-password",
+{
+
 method:"POST",
-headers:{"Content-Type":"application/json"},
+
+headers:{
+"Content-Type":"application/json"
+},
+
 body:JSON.stringify({email})
-});
+
+}
+);
+
+
 message.className="auth-message success-message";
-message.textContent=data.message||"Sıfırlama kodu gönderildi.";
+
+message.textContent=
+data.message||
+"Sıfırlama kodu gönderildi.";
+
+
 document.getElementById("resetEmail").value=email;
-setTimeout(()=>showResetPassword(email),700);
+
+
+setTimeout(
+()=>showResetPassword(email),
+700
+);
+
+
 }catch(error){
+
 message.className="auth-message error-message";
+
 message.textContent=error.message;
+
 }
+
 }
+
 
 async function resetPassword(event){
+
 event.preventDefault();
-const email=document.getElementById("resetEmail").value.trim();
-const code=document.getElementById("resetCode").value.trim();
-const password=document.getElementById("resetPassword").value;
-const confirm=document.getElementById("resetPasswordConfirm").value;
+
+
+const email=document
+.getElementById("resetEmail")
+.value
+.trim();
+
+
+const code=document
+.getElementById("resetCode")
+.value
+.trim();
+
+
+const password=document
+.getElementById("resetPassword")
+.value;
+
+
+const confirm=document
+.getElementById("resetPasswordConfirm")
+.value;
+
+
 const message=document.getElementById("resetMessage");
+
+
 if(password!==confirm){
+
 message.className="auth-message error-message";
+
 message.textContent="Şifreler aynı olmalı.";
+
 return;
+
 }
+
+
 message.className="auth-message";
+
 message.textContent="Şifre sıfırlanıyor...";
+
+
 try{
-const data=await apiRequest("/api/auth/reset-password",{
+
+const data=await apiRequest(
+"/api/auth/reset-password",
+{
+
 method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({email,code,password,passwordConfirm:confirm})
-});
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+email,
+code,
+password,
+passwordConfirm:confirm
+
+})
+
+}
+);
+
+
 message.className="auth-message success-message";
-message.textContent=data.message||"Şifren başarıyla değiştirildi.";
+
+message.textContent=
+data.message||
+"Şifren başarıyla değiştirildi.";
+
+
 setTimeout(showLogin,900);
+
+
 }catch(error){
+
 message.className="auth-message error-message";
+
 message.textContent=error.message;
+
 }
+
 }
+
 
 async function changePassword(event){
+
 event.preventDefault();
+
+
 const token=localStorage.getItem("veloraToken");
-if(!token){showLogin();return;}
-const currentPassword=document.getElementById("currentPassword").value;
-const newPassword=document.getElementById("newPassword").value;
-const newPasswordConfirm=document.getElementById("newPasswordConfirm").value;
-const message=document.getElementById("changePasswordMessage");
-if(newPassword!==newPasswordConfirm){
-message.className="auth-message error-message";
-message.textContent="Yeni şifreler aynı olmalı.";
+
+
+if(!token){
+
+showLogin();
+
 return;
+
 }
-message.className="auth-message";
-message.textContent="Şifre değiştiriliyor...";
-try{
-const data=await apiRequest("/api/auth/change-password",{
-method:"POST",
-headers:{"Content-Type":"application/json","Authorization":`Bearer ${token}`},
-body:JSON.stringify({currentPassword,newPassword,newPasswordConfirm})
-});
-message.className="auth-message success-message";
-message.textContent=data.message||"Şifren başarıyla değiştirildi.";
-document.getElementById("changeAuthForm").reset();
-setTimeout(closeAuth,900);
-}catch(error){
+
+
+const currentPassword=document
+.getElementById("currentPassword")
+.value;
+
+
+const newPassword=document
+.getElementById("newPassword")
+.value;
+
+
+const newPasswordConfirm=document
+.getElementById("newPasswordConfirm")
+.value;
+
+
+const message=document
+.getElementById("changePasswordMessage");
+
+
+if(newPassword!==newPasswordConfirm){
+
 message.className="auth-message error-message";
+
+message.textContent=
+"Yeni şifreler aynı olmalı.";
+
+return;
+
+}
+
+
+message.className="auth-message";
+
+message.textContent=
+"Şifre değiştiriliyor...";
+
+
+try{
+
+const data=await apiRequest(
+"/api/auth/change-password",
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json",
+
+"Authorization":`Bearer ${token}`
+
+},
+
+body:JSON.stringify({
+
+currentPassword,
+newPassword,
+newPasswordConfirm
+
+})
+
+}
+);
+
+
+message.className="auth-message success-message";
+
+message.textContent=
+data.message||
+"Şifren başarıyla değiştirildi.";
+
+
+document
+.getElementById("changeAuthForm")
+.reset();
+
+
+setTimeout(closeAuth,900);
+
+
+}catch(error){
+
+message.className="auth-message error-message";
+
 message.textContent=error.message;
+
 }
+
 }
+
 
 async function loadCurrentUser(){
+
 const token=localStorage.getItem("veloraToken");
-if(!token){updateAccountUI();return;}
+
+
+if(!token){
+
+updateAccountUI();
+
+return;
+
+}
+
+
 try{
-const data=await apiRequest("/api/auth/me",{headers:{"Authorization":`Bearer ${token}`}});
-if(data.user)localStorage.setItem("veloraUser",JSON.stringify(data.user));
+
+const data=await apiRequest(
+"/api/auth/me",
+{
+
+headers:{
+"Authorization":`Bearer ${token}`
+}
+
+}
+);
+
+
+if(data.user){
+
+localStorage.setItem(
+"veloraUser",
+JSON.stringify(data.user)
+);
+
+}
+
+
 updateAccountUI();
+
+
 }catch(error){
+
 localStorage.removeItem("veloraToken");
+
 localStorage.removeItem("veloraUser");
+
 updateAccountUI();
+
 }
+
 }
+
 
 function toggleAccountMenu(){
+
 const menu=document.getElementById("accountMenu");
+
 menu.classList.toggle("active");
+
 }
+
 
 function updateAccountUI(){
+
 const token=localStorage.getItem("veloraToken");
+
 const userText=localStorage.getItem("veloraUser");
+
 const button=document.getElementById("accountButton");
+
 const username=document.getElementById("accountUsername");
+
 const email=document.getElementById("accountEmail");
+
+
 if(token&&userText){
+
 try{
+
 const user=JSON.parse(userText);
-const displayName=user.username||user.email||"Hesabım";
+
+const displayName=
+user.username||
+user.email||
+"Hesabım";
+
+
 button.textContent=`👤 ${displayName}`;
+
 username.textContent=displayName;
+
 email.textContent=user.email||"";
+
 return;
+
 }catch{}
+
 }
+
+
 button.textContent="👤 Hesap";
+
 username.textContent="Hesabım";
+
 email.textContent="";
+
 }
+
 
 function logout(){
+
 localStorage.removeItem("veloraToken");
+
 localStorage.removeItem("veloraUser");
-document.getElementById("accountMenu").classList.remove("active");
+
+
+document
+.getElementById("accountMenu")
+.classList.remove("active");
+
+
 updateAccountUI();
+
 alert("Hesabınızdan çıkış yapıldı.");
+
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
-document.getElementById("accountButton").addEventListener("click",event=>{
-event.stopPropagation();
-if(localStorage.getItem("veloraToken"))toggleAccountMenu();
-else openAuth();
-});
-document.getElementById("logoutButton").addEventListener("click",logout);
-document.getElementById("changePasswordMenuButton").addEventListener("click",showChangePassword);
-document.getElementById("closeAuthButton").addEventListener("click",closeAuth);
-document.getElementById("loginAuthForm").addEventListener("submit",login);
-document.getElementById("registerAuthForm").addEventListener("submit",register);
-document.getElementById("verifyAuthForm").addEventListener("submit",verifyEmail);
-document.getElementById("forgotAuthForm").addEventListener("submit",forgotPassword);
-document.getElementById("resetAuthForm").addEventListener("submit",resetPassword);
-document.getElementById("changeAuthForm").addEventListener("submit",changePassword);
 
-document.getElementById("authModal").addEventListener("click",event=>{
-if(event.target===event.currentTarget)closeAuth();
+document.addEventListener("DOMContentLoaded",()=>{
+
+
+document
+.getElementById("accountButton")
+.addEventListener("click",event=>{
+
+event.stopPropagation();
+
+if(localStorage.getItem("veloraToken")){
+
+toggleAccountMenu();
+
+}else{
+
+openAuth();
+
+}
+
 });
+
+
+document
+.getElementById("logoutButton")
+.addEventListener("click",logout);
+
+
+document
+.getElementById("changePasswordMenuButton")
+.addEventListener(
+"click",
+showChangePassword
+);
+
+
+document
+.getElementById("closeAuthButton")
+.addEventListener(
+"click",
+closeAuth
+);
+
+
+document
+.getElementById("loginAuthForm")
+.addEventListener(
+"submit",
+login
+);
+
+
+document
+.getElementById("registerAuthForm")
+.addEventListener(
+"submit",
+register
+);
+
+
+document
+.getElementById("verifyAuthForm")
+.addEventListener(
+"submit",
+verifyEmail
+);
+
+
+document
+.getElementById("forgotAuthForm")
+.addEventListener(
+"submit",
+forgotPassword
+);
+
+
+document
+.getElementById("resetAuthForm")
+.addEventListener(
+"submit",
+resetPassword
+);
+
+
+document
+.getElementById("changeAuthForm")
+.addEventListener(
+"submit",
+changePassword
+);
+
+
+document
+.getElementById("authModal")
+.addEventListener("click",event=>{
+
+if(event.target===event.currentTarget){
+
+closeAuth();
+
+}
+
+});
+
+
 document.addEventListener("click",event=>{
+
 const area=document.querySelector(".account-area");
+
 const menu=document.getElementById("accountMenu");
-if(area&&!area.contains(event.target))menu.classList.remove("active");
+
+
+if(area&&!area.contains(event.target)){
+
+menu.classList.remove("active");
+
+}
+
 });
+
+
 renderProducts();
+
 loadCurrentUser();
+
 });
+
 </script>
+
 </body>
 </html>
