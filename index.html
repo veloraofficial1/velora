@@ -1305,15 +1305,6 @@ required
 >
 
 <input
-type="tel"
-id="registerPhone"
-placeholder="Telefon numarası (05XXXXXXXXX)"
-inputmode="numeric"
-maxlength="11"
-required
->
-
-<input
 type="password"
 id="registerPassword"
 placeholder="Şifre"
@@ -2567,7 +2558,7 @@ document.getElementById("changePasswordForm").style.display="block";
 }
 
 
-/* KAYIT - TELEFON KONTROLÜ DÜZELTİLDİ */
+/* KAYIT */
 
 async function register(event){
 
@@ -2581,24 +2572,6 @@ const email=document.getElementById(
 "registerEmail"
 ).value.trim();
 
-const message=document.getElementById(
-"registerMessage"
-);
-
-
-/*
-Telefon alanındaki boşluk, parantez,
-tire gibi karakterleri temizliyoruz.
-Böylece kullanıcı yanlışlıkla boşluk koysa
-bile 11 haneli 05XXXXXXXXX formatı kontrol edilir.
-*/
-
-const phone=document.getElementById(
-"registerPhone"
-).value
-.replace(/\D/g,"")
-.trim();
-
 const password=document.getElementById(
 "registerPassword"
 ).value;
@@ -2607,25 +2580,9 @@ const confirm=document.getElementById(
 "registerPasswordConfirm"
 ).value;
 
-
-/*
-Türkiye cep telefonu kontrolü:
-05 + 9 rakam = toplam 11 hane
-Örnek: 05551234567
-*/
-
-if(phone.length!==11 || !phone.startsWith("05")){
-
-message.className=
-"auth-message error-message";
-
-message.textContent=
-"Telefon numarası 05XXXXXXXXX formatında olmalıdır. Örnek: 05551234567";
-
-return;
-
-}
-
+const message=document.getElementById(
+"registerMessage"
+);
 
 if(password!==confirm){
 
@@ -2654,7 +2611,6 @@ headers:{
 body:JSON.stringify({
 username:username,
 email:email,
-phone:phone,
 password:password,
 passwordConfirm:confirm
 })
