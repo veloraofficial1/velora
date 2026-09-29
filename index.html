@@ -22,10 +22,7 @@ body{
     color:#222;
 }
 
-/* =========================
-   HEADER
-========================= */
-
+/* HEADER */
 header{
     width:100%;
     background:#f5eee5;
@@ -69,10 +66,6 @@ nav a:hover{
     color:#9d8063;
 }
 
-/* =========================
-   ACCOUNT BUTTON
-========================= */
-
 .account-area{
     position:relative;
 }
@@ -81,249 +74,92 @@ nav a:hover{
     border:none;
     background:#d8c2a9;
     color:#2b241e;
-    padding:13px 20px;
-    border-radius:28px;
+    padding:12px 18px;
+    border-radius:25px;
     cursor:pointer;
     font-size:14px;
     font-weight:bold;
-    transition:.2s;
 }
 
 .account-button:hover{
     background:#cbb094;
-    transform:translateY(-1px);
 }
 
-/* =========================
-   BÜYÜK SAĞ MENÜ
-========================= */
-
+/* BÜYÜK HESAP MENÜSÜ */
 .account-menu{
     display:none;
     position:fixed;
-    top:18px;
-    right:18px;
-
-    width:390px;
-    max-width:calc(100vw - 36px);
-
-    min-height:calc(100vh - 36px);
-
-    background:#fffaf5;
-
-    border:1px solid #e3d7c8;
-    border-radius:24px;
-
-    box-shadow:
-        0 20px 60px rgba(45,35,25,.18);
-
-    padding:28px;
-
-    z-index:5000;
-
-    animation:menuOpen .25s ease;
+    top:20px;
+    right:20px;
+    width:380px;
+    min-height:calc(100vh - 40px);
+    background:#fff;
+    border:1px solid #e1d6ca;
+    border-radius:18px;
+    box-shadow:0 15px 45px rgba(0,0,0,.18);
+    padding:25px;
+    z-index:2000;
+    flex-direction:column;
 }
 
 .account-menu.active{
     display:flex;
-    flex-direction:column;
 }
-
-@keyframes menuOpen{
-
-    from{
-        opacity:0;
-        transform:translateX(35px) scale(.97);
-    }
-
-    to{
-        opacity:1;
-        transform:translateX(0) scale(1);
-    }
-
-}
-
-/* Menü üst */
-
-.account-menu-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding-bottom:25px;
-
-    border-bottom:1px solid #e8ded4;
-
-    margin-bottom:22px;
-}
-
-.account-menu-title{
-    font-size:22px;
-    font-weight:bold;
-    letter-spacing:1px;
-}
-
-.close-account-menu{
-    width:42px;
-    height:42px;
-
-    border:none;
-    border-radius:50%;
-
-    background:#f0e8df;
-
-    cursor:pointer;
-
-    font-size:23px;
-
-    transition:.2s;
-}
-
-.close-account-menu:hover{
-    background:#e2d4c5;
-}
-
-/* Kullanıcı */
 
 .account-user{
-    padding:20px;
-
-    background:#f5eee5;
-
-    border-radius:16px;
-
-    margin-bottom:18px;
+    padding:15px 10px 18px;
+    border-bottom:1px solid #eee;
+    margin-bottom:15px;
 }
 
 .account-user strong{
     display:block;
-
-    font-size:18px;
-
-    margin-bottom:7px;
+    margin-bottom:6px;
+    font-size:20px;
 }
 
 .account-user span{
-    display:block;
-
     font-size:13px;
-
     color:#777;
 }
 
-/* Menü butonları */
-
-.account-menu-items{
-    display:flex;
-    flex-direction:column;
-    gap:9px;
-}
-
-.account-menu button.menu-item{
+.account-menu button{
     width:100%;
-
     border:none;
-
-    background:transparent;
-
+    background:none;
     text-align:left;
-
-    padding:16px 15px;
-
-    border-radius:13px;
-
+    padding:15px 12px;
+    border-radius:10px;
     cursor:pointer;
-
     font-size:15px;
-
-    color:#302a25;
-
-    transition:.2s;
+    margin-bottom:5px;
 }
 
-.account-menu button.menu-item:hover{
-    background:#f1e8de;
-    transform:translateX(3px);
+.account-menu button:hover{
+    background:#f6f0e9;
 }
 
-/* Alt bölüm */
-
-.account-menu-bottom{
+.account-menu .menu-login-button{
     margin-top:auto;
-
-    padding-top:20px;
-
-    border-top:1px solid #e8ded4;
-}
-
-.login-menu-button{
-    width:100%;
-
-    border:none;
-
-    padding:16px;
-
-    border-radius:14px;
-
     background:#d8c2a9;
-
     color:#2b241e;
-
-    font-size:15px;
-
+    text-align:center;
     font-weight:bold;
-
-    cursor:pointer;
-
-    transition:.2s;
 }
 
-.login-menu-button:hover{
+.account-menu .menu-login-button:hover{
     background:#cbb094;
 }
 
-.logout-menu-button{
-    margin-top:10px;
-
-    width:100%;
-
-    border:1px solid #decfc0;
-
-    padding:14px;
-
-    border-radius:14px;
-
-    background:#fff;
-
-    color:#765f4b;
-
-    font-size:14px;
-
-    cursor:pointer;
-}
-
-.logout-menu-button:hover{
-    background:#f7eee6;
-}
-
-/* =========================
-   HERO
-========================= */
-
+/* HERO */
 .hero{
     min-height:620px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     text-align:center;
-
     background:
-        linear-gradient(
-            rgba(255,255,255,.72),
-            rgba(255,255,255,.72)
-        ),
+        linear-gradient(rgba(255,255,255,.72),rgba(255,255,255,.72)),
         url("resimler/hero.jpg") center/cover;
 }
 
@@ -341,16 +177,11 @@ nav a:hover{
 
 .hero-button{
     display:inline-block;
-
     background:#d8c2a9;
     color:#2b241e;
-
     text-decoration:none;
-
     padding:14px 28px;
-
     border-radius:30px;
-
     font-weight:bold;
 }
 
@@ -358,10 +189,7 @@ nav a:hover{
     background:#cbb094;
 }
 
-/* =========================
-   SEARCH
-========================= */
-
+/* SEARCH */
 .search-section{
     padding:45px 20px 20px;
     text-align:center;
@@ -370,166 +198,113 @@ nav a:hover{
 .search-box{
     max-width:650px;
     margin:auto;
-
     display:flex;
     gap:10px;
 }
 
 .search-box input{
     flex:1;
-
     padding:15px 18px;
-
     border:1px solid #ddd0c2;
-
     border-radius:30px;
-
     outline:none;
-
     font-size:15px;
 }
 
 .search-box button{
     border:none;
-
     background:#d8c2a9;
-
     padding:0 25px;
-
     border-radius:30px;
-
     cursor:pointer;
-
     font-weight:bold;
 }
 
-/* =========================
-   CATEGORIES
-========================= */
-
+/* CATEGORIES */
 .categories{
     max-width:1250px;
-
     margin:40px auto;
-
     padding:0 20px;
 }
 
 .section-title{
     text-align:center;
-
     font-size:30px;
-
     margin-bottom:30px;
-
     letter-spacing:2px;
 }
 
 .category-grid{
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:20px;
 }
 
 .category-card{
     min-height:180px;
-
     border-radius:15px;
-
     background:#f5eee5;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     text-align:center;
-
     cursor:pointer;
-
     transition:.25s;
-
     border:1px solid #eadfd3;
 }
 
 .category-card:hover{
     transform:translateY(-5px);
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.08);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .category-card h3{
     font-size:22px;
 }
 
-/* =========================
-   PRODUCTS
-========================= */
-
+/* PRODUCTS */
 #urunler{
     max-width:1250px;
-
     margin:80px auto;
-
     padding:0 20px;
 }
 
 .search-result-info{
     text-align:center;
-
     margin:-15px 0 25px;
-
     color:#777;
 }
 
 .product-category-title{
     font-size:25px;
-
     margin:40px 0 20px;
-
     padding-bottom:10px;
-
     border-bottom:1px solid #e7ddd2;
 }
 
 .product-grid{
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:22px;
 }
 
 .product-card{
     background:#fff;
-
     border:1px solid #eee4da;
-
     border-radius:15px;
-
     overflow:hidden;
-
     transition:.25s;
 }
 
 .product-card:hover{
     transform:translateY(-5px);
-
-    box-shadow:
-        0 12px 30px rgba(0,0,0,.08);
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
 }
 
 .product-image{
     width:100%;
     height:270px;
-
     object-fit:cover;
-
     background:#f7f2ed;
 }
 
@@ -539,15 +314,12 @@ nav a:hover{
 
 .product-info h3{
     font-size:17px;
-
     margin-bottom:7px;
 }
 
 .product-info p{
     color:#888;
-
     font-size:13px;
-
     margin-bottom:12px;
 }
 
@@ -558,13 +330,9 @@ nav a:hover{
 
 .product-actions button{
     flex:1;
-
     border:none;
-
     padding:10px;
-
     border-radius:8px;
-
     cursor:pointer;
 }
 
@@ -576,36 +344,22 @@ nav a:hover{
     background:#f1ebe4;
 }
 
-/* =========================
-   FEATURED
-========================= */
-
+/* FEATURED */
 #one-cikanlar{
     max-width:1250px;
-
     margin:80px auto;
-
     padding:0 20px;
 }
 
-/* =========================
-   MODALS
-========================= */
-
+/* MODALS */
 .modal{
     display:none;
-
     position:fixed;
-
     inset:0;
-
     background:rgba(0,0,0,.5);
-
     z-index:3000;
-
     align-items:center;
     justify-content:center;
-
     padding:20px;
 }
 
@@ -615,34 +369,22 @@ nav a:hover{
 
 .modal-box{
     width:100%;
-
     max-width:450px;
-
     background:#fff;
-
     border-radius:15px;
-
     padding:30px;
-
     position:relative;
-
     max-height:90vh;
-
     overflow:auto;
 }
 
 .close-modal{
     position:absolute;
-
     right:18px;
     top:15px;
-
     border:none;
-
     background:none;
-
     font-size:25px;
-
     cursor:pointer;
 }
 
@@ -652,71 +394,47 @@ nav a:hover{
 
 .modal-box input{
     width:100%;
-
     padding:13px;
-
     margin-bottom:12px;
-
     border:1px solid #ddd;
-
     border-radius:8px;
 }
 
 .modal-main-button{
     width:100%;
-
     padding:13px;
-
     border:none;
-
     border-radius:8px;
-
     background:#d8c2a9;
-
     cursor:pointer;
-
     font-weight:bold;
 }
 
 .modal-switch{
     text-align:center;
-
     margin-top:15px;
-
     color:#8b6f52;
-
     cursor:pointer;
-
     font-size:14px;
 }
 
 .message{
     margin-top:12px;
-
     font-size:14px;
-
     text-align:center;
 }
 
-/* =========================
-   FOOTER
-========================= */
-
+/* FOOTER */
 footer{
     background:#f5eee5;
-
     border-top:1px solid #e3d7c8;
-
     padding:50px 20px;
-
     text-align:center;
-
     margin-top:80px;
 }
 
 footer h2{
     letter-spacing:6px;
-
     margin-bottom:15px;
 }
 
@@ -724,16 +442,12 @@ footer p{
     color:#777;
 }
 
-/* =========================
-   MOBILE
-========================= */
-
+/* RESPONSIVE */
 @media(max-width:900px){
 
     .category-grid,
     .product-grid{
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
     }
 
     nav{
@@ -750,13 +464,11 @@ footer p{
 
     .logo{
         font-size:23px;
-
         letter-spacing:4px;
     }
 
     .account-button{
-        padding:10px 13px;
-
+        padding:10px 12px;
         font-size:12px;
     }
 
@@ -766,7 +478,6 @@ footer p{
 
     .hero-content h1{
         font-size:38px;
-
         letter-spacing:6px;
     }
 
@@ -783,60 +494,31 @@ footer p{
         padding:13px;
     }
 
-    /* Mobilde menü daha geniş */
-
+    /* MOBİL MENÜ */
     .account-menu{
         top:10px;
-
         right:10px;
-
-        width:
-            calc(100vw - 20px);
-
-        max-width:none;
-
-        min-height:
-            calc(100vh - 20px);
-
-        border-radius:20px;
-
-        padding:22px;
+        width:calc(100vw - 20px);
+        min-height:calc(100vh - 20px);
+        padding:20px;
     }
 
 }
 
-/* =========================
-   MENÜ AÇIKKEN ARKA PLAN
-========================= */
-
-#menuOverlay{
-    display:none;
-
+/* MENÜ AÇILINCA SAYFAYI HAFİF KARART */
+body:has(.account-menu.active)::after{
+    content:"";
     position:fixed;
-
     inset:0;
-
-    background:
-        rgba(35,28,22,.25);
-
-    backdrop-filter:blur(2px);
-
-    z-index:4500;
+    background:rgba(0,0,0,.18);
+    z-index:1500;
+    pointer-events:none;
 }
 
-#menuOverlay.active{
-    display:block;
-}
 </style>
 </head>
 
-
 <body>
-
-
-<!-- =========================
-     HEADER
-========================= -->
 
 <header>
 
@@ -845,7 +527,6 @@ footer p{
         <div class="logo">
             VELORA
         </div>
-
 
         <nav>
 
@@ -867,7 +548,6 @@ footer p{
 
         </nav>
 
-
         <div class="account-area">
 
             <button
@@ -878,6 +558,60 @@ footer p{
                 👤 Hesap Oluştur
             </button>
 
+            <div
+                id="accountMenu"
+                class="account-menu"
+            >
+
+                <div class="account-user">
+
+                    <strong id="accountUsername">
+                        Hesabım
+                    </strong>
+
+                    <span id="accountEmail"></span>
+
+                </div>
+
+                <button
+                    type="button"
+                    onclick="openFavorites()"
+                >
+                    ❤️ Favorilerim
+                </button>
+
+                <button
+                    type="button"
+                    onclick="openOrders()"
+                >
+                    📦 Siparişlerim
+                </button>
+
+                <button
+                    type="button"
+                    onclick="openChangePassword()"
+                >
+                    🔑 Şifre Değiştir
+                </button>
+
+                <button
+                    type="button"
+                    onclick="logout()"
+                >
+                    🚪 Çıkış Yap
+                </button>
+
+                <button
+                    id="menuLoginButton"
+                    class="menu-login-button"
+                    type="button"
+                    onclick="openLoginFromMenu()"
+                >
+                    🔐 Oturum Aç
+                </button>
+
+            </div>
+
         </div>
 
     </div>
@@ -885,118 +619,7 @@ footer p{
 </header>
 
 
-<!-- MENÜ ARKA PLAN -->
-
-<div
-    id="menuOverlay"
-    onclick="closeAccountMenu()"
-></div>
-
-
-<!-- =========================
-     BÜYÜK HESAP MENÜSÜ
-========================= -->
-
-<div
-    id="accountMenu"
-    class="account-menu"
->
-
-    <div class="account-menu-header">
-
-        <div class="account-menu-title">
-            Hesabım
-        </div>
-
-        <button
-            class="close-account-menu"
-            type="button"
-            onclick="closeAccountMenu()"
-        >
-            ×
-        </button>
-
-    </div>
-
-
-    <div class="account-user">
-
-        <strong id="accountUsername">
-            Hesabım
-        </strong>
-
-        <span id="accountEmail"></span>
-
-    </div>
-
-
-    <div class="account-menu-items">
-
-        <button
-            type="button"
-            class="menu-item"
-            onclick="openFavorites()"
-        >
-            ❤️ &nbsp; Favorilerim
-        </button>
-
-
-        <button
-            type="button"
-            class="menu-item"
-            onclick="openOrders()"
-        >
-            📦 &nbsp; Siparişlerim
-        </button>
-
-
-        <button
-            type="button"
-            class="menu-item"
-            onclick="openChangePassword()"
-        >
-            🔑 &nbsp; Şifre Değiştir
-        </button>
-
-    </div>
-
-
-    <!-- EN ALT -->
-
-    <div class="account-menu-bottom">
-
-        <button
-            id="menuLoginButton"
-            type="button"
-            class="login-menu-button"
-            onclick="openLoginFromMenu()"
-        >
-            🔐 &nbsp; Oturum Aç
-        </button>
-
-
-        <button
-            id="menuLogoutButton"
-            type="button"
-            class="logout-menu-button"
-            onclick="logout()"
-        >
-            🚪 &nbsp; Çıkış Yap
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     ANA SAYFA
-========================= -->
-
 <main id="anasayfa">
-
-
-    <!-- HERO -->
 
     <section class="hero">
 
@@ -1022,8 +645,6 @@ footer p{
     </section>
 
 
-    <!-- SEARCH -->
-
     <section class="search-section">
 
         <div class="search-box">
@@ -1032,10 +653,7 @@ footer p{
                 id="searchInput"
                 type="text"
                 placeholder="Ürün ara..."
-                onkeydown="
-                    if(event.key==='Enter')
-                    searchProducts()
-                "
+                onkeydown="if(event.key==='Enter') searchProducts()"
             >
 
             <button
@@ -1050,8 +668,6 @@ footer p{
     </section>
 
 
-    <!-- CATEGORIES -->
-
     <section
         id="kategoriler"
         class="categories"
@@ -1060,7 +676,6 @@ footer p{
         <h2 class="section-title">
             Kategoriler
         </h2>
-
 
         <div class="category-grid">
 
@@ -1073,7 +688,6 @@ footer p{
                 </h3>
             </div>
 
-
             <div
                 class="category-card"
                 onclick="filterCategory('Bileklik')"
@@ -1083,7 +697,6 @@ footer p{
                 </h3>
             </div>
 
-
             <div
                 class="category-card"
                 onclick="filterCategory('Küpe')"
@@ -1092,7 +705,6 @@ footer p{
                     Küpe
                 </h3>
             </div>
-
 
             <div
                 class="category-card"
@@ -1107,11 +719,6 @@ footer p{
 
     </section>
 
-
-    <!-- =========================
-         KOLEKSİYON
-         BAŞLANGIÇTA BOŞ
-    ========================= -->
 
     <section id="urunler">
 
@@ -1129,8 +736,6 @@ footer p{
     </section>
 
 
-    <!-- FEATURED -->
-
     <section id="one-cikanlar">
 
         <h2 class="section-title">
@@ -1143,8 +748,6 @@ footer p{
 
 </main>
 
-
-<!-- FOOTER -->
 
 <footer>
 
@@ -1159,9 +762,7 @@ footer p{
 </footer>
 
 
-<!-- =========================
-     AUTH MODAL
-========================= -->
+<!-- AUTH MODAL -->
 
 <div
     id="authModal"
@@ -1178,15 +779,11 @@ footer p{
             ×
         </button>
 
-
-        <!-- LOGIN -->
-
         <div id="loginForm">
 
             <h2>
                 Giriş Yap
             </h2>
-
 
             <input
                 id="loginUsername"
@@ -1194,13 +791,11 @@ footer p{
                 placeholder="Kullanıcı adı"
             >
 
-
             <input
                 id="loginPassword"
                 type="password"
                 placeholder="Şifre"
             >
-
 
             <button
                 class="modal-main-button"
@@ -1210,15 +805,12 @@ footer p{
                 Giriş Yap
             </button>
 
-
             <div
                 class="modal-switch"
                 onclick="showRegister()"
             >
-                Hesabın yok mu?
-                Kayıt Ol
+                Hesabın yok mu? Kayıt Ol
             </div>
-
 
             <div
                 id="loginMessage"
@@ -1227,8 +819,6 @@ footer p{
 
         </div>
 
-
-        <!-- REGISTER -->
 
         <div
             id="registerForm"
@@ -1239,13 +829,11 @@ footer p{
                 Kayıt Ol
             </h2>
 
-
             <input
                 id="registerUsername"
                 type="text"
                 placeholder="Kullanıcı adı"
             >
-
 
             <input
                 id="registerEmail"
@@ -1253,13 +841,11 @@ footer p{
                 placeholder="E-posta"
             >
 
-
             <input
                 id="registerPassword"
                 type="password"
                 placeholder="Şifre"
             >
-
 
             <button
                 class="modal-main-button"
@@ -1269,15 +855,12 @@ footer p{
                 Kayıt Ol
             </button>
 
-
             <div
                 class="modal-switch"
                 onclick="showLogin()"
             >
-                Zaten hesabın var mı?
-                Giriş Yap
+                Zaten hesabın var mı? Giriş Yap
             </div>
-
 
             <div
                 id="registerMessage"
@@ -1291,7 +874,7 @@ footer p{
 </div>
 
 
-<!-- FAVORITES -->
+<!-- FAVORITES MODAL -->
 
 <div
     id="favoritesModal"
@@ -1303,18 +886,14 @@ footer p{
         <button
             class="close-modal"
             type="button"
-            onclick="
-                closeModal('favoritesModal')
-            "
+            onclick="closeModal('favoritesModal')"
         >
             ×
         </button>
 
-
         <h2>
             Favorilerim
         </h2>
-
 
         <div id="favoritesContainer"></div>
 
@@ -1323,7 +902,7 @@ footer p{
 </div>
 
 
-<!-- ORDERS -->
+<!-- ORDERS MODAL -->
 
 <div
     id="ordersModal"
@@ -1335,18 +914,14 @@ footer p{
         <button
             class="close-modal"
             type="button"
-            onclick="
-                closeModal('ordersModal')
-            "
+            onclick="closeModal('ordersModal')"
         >
             ×
         </button>
 
-
         <h2>
             Siparişlerim
         </h2>
-
 
         <div id="ordersContainer"></div>
 
@@ -1355,7 +930,7 @@ footer p{
 </div>
 
 
-<!-- CHANGE PASSWORD -->
+<!-- CHANGE PASSWORD MODAL -->
 
 <div
     id="changePasswordModal"
@@ -1367,18 +942,14 @@ footer p{
         <button
             class="close-modal"
             type="button"
-            onclick="
-                closeModal('changePasswordModal')
-            "
+            onclick="closeModal('changePasswordModal')"
         >
             ×
         </button>
 
-
         <h2>
             Şifre Değiştir
         </h2>
-
 
         <input
             id="oldPassword"
@@ -1386,13 +957,11 @@ footer p{
             placeholder="Mevcut şifre"
         >
 
-
         <input
             id="newPassword"
             type="password"
             placeholder="Yeni şifre"
         >
-
 
         <button
             class="modal-main-button"
@@ -1401,7 +970,6 @@ footer p{
         >
             Şifreyi Değiştir
         </button>
-
 
         <div
             id="changePasswordMessage"
@@ -1415,17 +983,11 @@ footer p{
 
 <script>
 
-/* =========================
-   API
-========================= */
-
 const API_URL =
     "https://velora-backend-1-aft5.onrender.com";
 
 
-/* =========================
-   PRODUCTS
-========================= */
+/* ÜRÜNLER */
 
 const products = [
 
@@ -1563,41 +1125,27 @@ const products = [
 let favoriteProductIds = [];
 
 
-/* =========================
-   API REQUEST
-========================= */
+/* API */
 
-async function apiRequest(
-    path,
-    options={}
-){
+async function apiRequest(path, options = {}){
 
     const response =
         await fetch(
             API_URL + path,
             {
                 ...options,
-
                 headers:{
-                    "Content-Type":
-                        "application/json",
-
+                    "Content-Type":"application/json",
                     ...(options.headers || {})
                 }
             }
         );
 
-
     let data = {};
 
-
     try{
-
-        data =
-            await response.json();
-
+        data = await response.json();
     }catch{}
-
 
     if(!response.ok){
 
@@ -1609,176 +1157,68 @@ async function apiRequest(
 
     }
 
-
     return data;
 
 }
 
 
-/* =========================
-   ACCOUNT MENU
-========================= */
+/* AUTH UI */
 
-function openAccountMenu(){
+function showLogin(){
 
-    const menu =
-        document.getElementById(
-            "accountMenu"
-        );
+    document.getElementById(
+        "loginForm"
+    ).style.display = "block";
 
-    const overlay =
-        document.getElementById(
-            "menuOverlay"
-        );
+    document.getElementById(
+        "registerForm"
+    ).style.display = "none";
 
-
-    menu.classList.add("active");
-
-    overlay.classList.add("active");
-
-    updateAccountMenuButtons();
+    document.getElementById(
+        "loginMessage"
+    ).textContent = "";
 
 }
 
 
-function closeAccountMenu(){
+function showRegister(){
+
+    document.getElementById(
+        "loginForm"
+    ).style.display = "none";
+
+    document.getElementById(
+        "registerForm"
+    ).style.display = "block";
+
+    document.getElementById(
+        "registerMessage"
+    ).textContent = "";
+
+}
+
+
+function closeAuth(){
 
     document
-        .getElementById("accountMenu")
-        .classList.remove("active");
-
-    document
-        .getElementById("menuOverlay")
+        .getElementById("authModal")
         .classList.remove("active");
 
 }
 
 
-function toggleAccountMenu(){
-
-    const menu =
-        document.getElementById(
-            "accountMenu"
-        );
-
-
-    if(menu.classList.contains("active")){
-
-        closeAccountMenu();
-
-    }else{
-
-        openAccountMenu();
-
-    }
-
-}
-
-
-/* =========================
-   ACCOUNT BUTTON
-========================= */
-
-document
-    .getElementById("accountButton")
-    .addEventListener(
-        "click",
-        event=>{
-
-            event.stopPropagation();
-
-
-            if(
-                localStorage.getItem(
-                    "veloraToken"
-                )
-            ){
-
-                openAccountMenu();
-
-            }else{
-
-                /*
-                 * ÇIKIŞ YAPILDIYSA
-                 * HESAP OLUŞTUR EKRANI
-                 */
-
-                document
-                    .getElementById(
-                        "authModal"
-                    )
-                    .classList.add("active");
-
-                showRegister();
-
-            }
-
-        }
-    );
-
-
-/* =========================
-   MENU BUTTONS
-========================= */
-
-function updateAccountMenuButtons(){
+function openAuth(){
 
     const token =
-        localStorage.getItem(
-            "veloraToken"
-        );
-
-
-    const loginButton =
-        document.getElementById(
-            "menuLoginButton"
-        );
-
-
-    const logoutButton =
-        document.getElementById(
-            "menuLogoutButton"
-        );
-
+        localStorage.getItem("veloraToken");
 
     if(token){
 
-        /*
-         * GİRİŞ YAPILMIŞSA
-         * Oturum Aç gizli
-         */
+        toggleAccountMenu();
 
-        loginButton.style.display =
-            "none";
-
-        logoutButton.style.display =
-            "block";
-
-    }else{
-
-        /*
-         * ÇIKIŞ YAPILMIŞSA
-         * Oturum Aç görünür
-         */
-
-        loginButton.style.display =
-            "block";
-
-        logoutButton.style.display =
-            "none";
+        return;
 
     }
-
-}
-
-
-/* =========================
-   OTURUM AÇ
-========================= */
-
-function openLoginFromMenu(){
-
-    closeAccountMenu();
 
     document
         .getElementById("authModal")
@@ -1789,64 +1229,94 @@ function openLoginFromMenu(){
 }
 
 
-/* =========================
-   AUTH
-========================= */
+/* ACCOUNT MENU */
 
-function showLogin(){
+function toggleAccountMenu(){
 
-    document
-        .getElementById("loginForm")
-        .style.display =
-            "block";
+    const menu =
+        document.getElementById("accountMenu");
 
-    document
-        .getElementById("registerForm")
-        .style.display =
-            "none";
-
-    document
-        .getElementById("loginMessage")
-        .textContent =
-            "";
+    menu.classList.toggle("active");
 
 }
 
 
-function showRegister(){
+function openLoginFromMenu(){
 
     document
-        .getElementById("loginForm")
-        .style.display =
-            "none";
-
-    document
-        .getElementById("registerForm")
-        .style.display =
-            "block";
-
-    document
-        .getElementById("registerMessage")
-        .textContent =
-            "";
-
-}
-
-
-function closeAuth(){
+        .getElementById("accountMenu")
+        .classList.remove("active");
 
     document
         .getElementById("authModal")
-        .classList.remove(
-            "active"
-        );
+        .classList.add("active");
+
+    showLogin();
 
 }
 
 
-/* =========================
-   ACCOUNT UI
-========================= */
+/* ACCOUNT BUTTON */
+
+document
+    .getElementById("accountButton")
+    .addEventListener(
+        "click",
+        event=>{
+
+            event.stopPropagation();
+
+            if(
+                localStorage.getItem(
+                    "veloraToken"
+                )
+            ){
+
+                toggleAccountMenu();
+
+            }else{
+
+                document
+                    .getElementById("authModal")
+                    .classList.add("active");
+
+                showRegister();
+
+            }
+
+        }
+    );
+
+
+/* MENÜ DIŞINA TIKLAMA */
+
+document.addEventListener(
+    "click",
+    event=>{
+
+        const area =
+            document.querySelector(
+                ".account-area"
+            );
+
+        if(
+            area &&
+            !area.contains(event.target)
+        ){
+
+            document
+                .getElementById(
+                    "accountMenu"
+                )
+                .classList.remove("active");
+
+        }
+
+    }
+);
+
+
+/* ACCOUNT UI */
 
 function updateAccountUI(){
 
@@ -1855,63 +1325,60 @@ function updateAccountUI(){
             "veloraToken"
         );
 
-
     const userText =
         localStorage.getItem(
             "veloraUser"
         );
-
 
     const button =
         document.getElementById(
             "accountButton"
         );
 
-
     const username =
         document.getElementById(
             "accountUsername"
         );
-
 
     const email =
         document.getElementById(
             "accountEmail"
         );
 
+    const loginButton =
+        document.getElementById(
+            "menuLoginButton"
+        );
 
-    if(
-        token &&
-        userText
-    ){
+
+    if(token && userText){
 
         try{
 
             const user =
-                JSON.parse(
-                    userText
-                );
-
+                JSON.parse(userText);
 
             const displayName =
                 user.username ||
                 user.email ||
                 "Hesabım";
 
-
             button.textContent =
                 "👤 Hesabım";
 
-
             username.textContent =
                 displayName;
-
 
             email.textContent =
                 user.email || "";
 
 
-            updateAccountMenuButtons();
+            if(loginButton){
+
+                loginButton.style.display =
+                    "none";
+
+            }
 
             return;
 
@@ -1923,23 +1390,23 @@ function updateAccountUI(){
     button.textContent =
         "👤 Hesap Oluştur";
 
-
     username.textContent =
         "Hesabım";
 
-
-    email.textContent =
-        "";
+    email.textContent = "";
 
 
-    updateAccountMenuButtons();
+    if(loginButton){
+
+        loginButton.style.display =
+            "block";
+
+    }
 
 }
 
 
-/* =========================
-   REGISTER
-========================= */
+/* REGISTER */
 
 async function register(){
 
@@ -1951,7 +1418,6 @@ async function register(){
             .value
             .trim();
 
-
     const email =
         document
             .getElementById(
@@ -1960,14 +1426,12 @@ async function register(){
             .value
             .trim();
 
-
     const password =
         document
             .getElementById(
                 "registerPassword"
             )
             .value;
-
 
     const message =
         document.getElementById(
@@ -1996,13 +1460,11 @@ async function register(){
                 "/api/auth/register",
                 {
                     method:"POST",
-
-                    body:
-                        JSON.stringify({
-                            username,
-                            email,
-                            password
-                        })
+                    body:JSON.stringify({
+                        username,
+                        email,
+                        password
+                    })
                 }
             );
 
@@ -2010,7 +1472,6 @@ async function register(){
         message.textContent =
             data.message ||
             "Kayıt başarılı. E-postanızı doğrulayın.";
-
 
     }catch(error){
 
@@ -2022,9 +1483,7 @@ async function register(){
 }
 
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
 
 async function login(){
 
@@ -2036,14 +1495,12 @@ async function login(){
             .value
             .trim();
 
-
     const password =
         document
             .getElementById(
                 "loginPassword"
             )
             .value;
-
 
     const message =
         document.getElementById(
@@ -2071,12 +1528,10 @@ async function login(){
                 "/api/auth/login",
                 {
                     method:"POST",
-
-                    body:
-                        JSON.stringify({
-                            username,
-                            password
-                        })
+                    body:JSON.stringify({
+                        username,
+                        password
+                    })
                 }
             );
 
@@ -2108,12 +1563,6 @@ async function login(){
         updateAccountUI();
 
 
-        /*
-         * ÜRÜNLER BURADA
-         * OTOMATİK AÇILMIYOR.
-         */
-
-
         setTimeout(
             ()=>{
                 closeAuth();
@@ -2132,9 +1581,7 @@ async function login(){
 }
 
 
-/* =========================
-   CURRENT USER
-========================= */
+/* CURRENT USER */
 
 async function loadCurrentUser(){
 
@@ -2161,7 +1608,7 @@ async function loadCurrentUser(){
                 {
                     headers:{
                         "Authorization":
-                            `Bearer ${token}`
+                        `Bearer ${token}`
                     }
                 }
             );
@@ -2184,11 +1631,6 @@ async function loadCurrentUser(){
         updateAccountUI();
 
 
-        /*
-         * BURADA DA ÜRÜNLER
-         * OTOMATİK RENDER EDİLMİYOR.
-         */
-
     }catch(error){
 
         localStorage.removeItem(
@@ -2199,9 +1641,7 @@ async function loadCurrentUser(){
             "veloraUser"
         );
 
-
         favoriteProductIds = [];
-
 
         updateAccountUI();
 
@@ -2210,9 +1650,7 @@ async function loadCurrentUser(){
 }
 
 
-/* =========================
-   LOGOUT
-========================= */
+/* LOGOUT */
 
 function logout(){
 
@@ -2224,27 +1662,22 @@ function logout(){
         "veloraUser"
     );
 
-
     favoriteProductIds = [];
 
 
-    closeAccountMenu();
+    document
+        .getElementById(
+            "accountMenu"
+        )
+        .classList.remove("active");
 
 
     updateAccountUI();
 
-
-    /*
-     * ÇIKIŞTAN SONRA DA
-     * TÜM ÜRÜNLER OTOMATİK GELMEZ.
-     */
-
 }
 
 
-/* =========================
-   FAVORITES
-========================= */
+/* FAVORITES */
 
 async function loadFavorites(){
 
@@ -2271,7 +1704,7 @@ async function loadFavorites(){
                 {
                     headers:{
                         "Authorization":
-                            `Bearer ${token}`
+                        `Bearer ${token}`
                     }
                 }
             );
@@ -2320,12 +1753,10 @@ async function loadFavorites(){
 }
 
 
-/* =========================
-   RENDER PRODUCTS
-========================= */
+/* RENDER PRODUCTS */
 
 function renderProducts(
-    list=products
+    list = products
 ){
 
     const container =
@@ -2347,7 +1778,6 @@ function renderProducts(
     if(!list.length){
 
         container.innerHTML = `
-
             <p style="
                 text-align:center;
                 color:#888;
@@ -2355,7 +1785,6 @@ function renderProducts(
             ">
                 Aradığınız ürün bulunamadı.
             </p>
-
         `;
 
         return;
@@ -2390,10 +1819,8 @@ function renderProducts(
                     "h3"
                 );
 
-
             title.className =
                 "product-category-title";
-
 
             title.textContent =
                 category;
@@ -2409,7 +1836,6 @@ function renderProducts(
                     "div"
                 );
 
-
             grid.className =
                 "product-grid";
 
@@ -2419,7 +1845,9 @@ function renderProducts(
 
                     const isFavorite =
                         favoriteProductIds.includes(
-                            Number(product.id)
+                            Number(
+                                product.id
+                            )
                         );
 
 
@@ -2427,7 +1855,6 @@ function renderProducts(
                         document.createElement(
                             "div"
                         );
-
 
                     card.className =
                         "product-card";
@@ -2459,9 +1886,7 @@ function renderProducts(
                                 <button
                                     class="detail-btn"
                                     onclick="
-                                        productDetail(
-                                            ${product.id}
-                                        )
+                                        productDetail(${product.id})
                                     "
                                 >
                                     İncele
@@ -2470,22 +1895,19 @@ function renderProducts(
                                 <button
                                     class="favorite-btn"
                                     onclick="
-                                        toggleFavorite(
-                                            ${product.id}
-                                        )
+                                        toggleFavorite(${product.id})
                                     "
                                 >
                                     ${
                                         isFavorite
-                                            ? "❤️"
-                                            : "♡"
+                                        ? "❤️"
+                                        : "♡"
                                     }
                                 </button>
 
                             </div>
 
                         </div>
-
                     `;
 
 
@@ -2507,13 +1929,11 @@ function renderProducts(
 }
 
 
-/* =========================
-   CATEGORY
-========================= */
+/* CATEGORY FILTER */
 
 function filterCategory(
     category,
-    subcategory=null
+    subcategory = null
 ){
 
     let filtered =
@@ -2561,9 +1981,7 @@ function filterCategory(
 
 
     document
-        .getElementById(
-            "urunler"
-        )
+        .getElementById("urunler")
         .scrollIntoView({
             behavior:"smooth"
         });
@@ -2571,9 +1989,7 @@ function filterCategory(
 }
 
 
-/* =========================
-   SHOW ALL
-========================= */
+/* SHOW ALL */
 
 function showAllProducts(){
 
@@ -2581,7 +1997,6 @@ function showAllProducts(){
         document.getElementById(
             "searchResultInfo"
         );
-
 
     info.textContent =
         "Tüm Ürünler";
@@ -2593,9 +2008,7 @@ function showAllProducts(){
 
 
     document
-        .getElementById(
-            "urunler"
-        )
+        .getElementById("urunler")
         .scrollIntoView({
             behavior:"smooth"
         });
@@ -2603,9 +2016,7 @@ function showAllProducts(){
 }
 
 
-/* =========================
-   SEARCH
-========================= */
+/* SEARCH */
 
 function searchProducts(){
 
@@ -2621,11 +2032,12 @@ function searchProducts(){
 
     if(!input){
 
-        document
-            .getElementById(
+        const info =
+            document.getElementById(
                 "searchResultInfo"
-            )
-            .textContent = "";
+            );
+
+        info.textContent = "";
 
 
         document
@@ -2634,7 +2046,6 @@ function searchProducts(){
             )
             .innerHTML = "";
 
-
         return;
 
     }
@@ -2642,31 +2053,25 @@ function searchProducts(){
 
     const filtered =
         products.filter(
-            product => {
+            product=>{
 
                 return (
 
                     product.name
                         .toLowerCase()
-                        .includes(
-                            input
-                        )
+                        .includes(input)
 
                     ||
 
                     product.category
                         .toLowerCase()
-                        .includes(
-                            input
-                        )
+                        .includes(input)
 
                     ||
 
                     product.subcategory
                         .toLowerCase()
-                        .includes(
-                            input
-                        )
+                        .includes(input)
 
                 );
 
@@ -2674,12 +2079,14 @@ function searchProducts(){
         );
 
 
-    document
-        .getElementById(
+    const info =
+        document.getElementById(
             "searchResultInfo"
-        )
-        .textContent =
-            `"${input}" için sonuçlar`;
+        );
+
+
+    info.textContent =
+        `"${input}" için sonuçlar`;
 
 
     renderProducts(
@@ -2688,8 +2095,21 @@ function searchProducts(){
 
 
     document
+        .getElementById("urunler")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* FEATURED */
+
+function filterFeatured(){
+
+    document
         .getElementById(
-            "urunler"
+            "one-cikanlar"
         )
         .scrollIntoView({
             behavior:"smooth"
@@ -2698,9 +2118,7 @@ function searchProducts(){
 }
 
 
-/* =========================
-   FAVORITE TOGGLE
-========================= */
+/* FAVORITE TOGGLE */
 
 async function toggleFavorite(
     productId
@@ -2718,13 +2136,9 @@ async function toggleFavorite(
             .getElementById(
                 "authModal"
             )
-            .classList.add(
-                "active"
-            );
-
+            .classList.add("active");
 
         showLogin();
-
 
         return;
 
@@ -2745,10 +2159,9 @@ async function toggleFavorite(
                 `/api/favorites/${productId}`,
                 {
                     method:"DELETE",
-
                     headers:{
                         "Authorization":
-                            `Bearer ${token}`
+                        `Bearer ${token}`
                     }
                 }
             );
@@ -2761,24 +2174,20 @@ async function toggleFavorite(
                         Number(productId)
                 );
 
-
         }else{
 
             await apiRequest(
                 "/api/favorites",
                 {
                     method:"POST",
-
                     headers:{
                         "Authorization":
-                            `Bearer ${token}`
+                        `Bearer ${token}`
                     },
-
-                    body:
-                        JSON.stringify({
-                            product_id:
-                                productId
-                        })
+                    body:JSON.stringify({
+                        product_id:
+                            productId
+                    })
                 }
             );
 
@@ -2790,21 +2199,59 @@ async function toggleFavorite(
         }
 
 
-        const input =
-            document
-                .getElementById(
-                    "searchInput"
-                )
-                .value
-                .trim()
-                .toLowerCase();
+        const info =
+            document.getElementById(
+                "searchResultInfo"
+            );
+
+        const currentText =
+            info.textContent.trim();
 
 
-        if(input){
+        if(currentText){
 
-            searchProducts();
+            const input =
+                document
+                    .getElementById(
+                        "searchInput"
+                    )
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+
+            if(input){
+
+                const filtered =
+                    products.filter(
+                        product =>
+
+                            product.name
+                                .toLowerCase()
+                                .includes(input)
+
+                            ||
+
+                            product.category
+                                .toLowerCase()
+                                .includes(input)
+
+                            ||
+
+                            product.subcategory
+                                .toLowerCase()
+                                .includes(input)
+                    );
+
+
+                renderProducts(
+                    filtered
+                );
+
+            }
 
         }
+
 
     }catch(error){
 
@@ -2817,9 +2264,7 @@ async function toggleFavorite(
 }
 
 
-/* =========================
-   FAVORITES MODAL
-========================= */
+/* FAVORITES MODAL */
 
 async function openFavorites(){
 
@@ -2831,26 +2276,24 @@ async function openFavorites(){
 
     if(!token){
 
-        closeAccountMenu();
-
         document
             .getElementById(
                 "authModal"
             )
-            .classList.add(
-                "active"
-            );
-
+            .classList.add("active");
 
         showLogin();
-
 
         return;
 
     }
 
 
-    closeAccountMenu();
+    document
+        .getElementById(
+            "accountMenu"
+        )
+        .classList.remove("active");
 
 
     const modal =
@@ -2874,7 +2317,9 @@ async function openFavorites(){
         products.filter(
             product =>
                 favoriteProductIds.includes(
-                    Number(product.id)
+                    Number(
+                        product.id
+                    )
                 )
         );
 
@@ -2882,7 +2327,6 @@ async function openFavorites(){
     if(!favorites.length){
 
         container.innerHTML = `
-
             <p style="
                 color:#777;
                 text-align:center;
@@ -2890,7 +2334,6 @@ async function openFavorites(){
             ">
                 Henüz favori ürününüz yok.
             </p>
-
         `;
 
         return;
@@ -2899,54 +2342,54 @@ async function openFavorites(){
 
 
     container.innerHTML =
-        favorites.map(
-            product=>`
+        favorites
+            .map(
+                product=>`
 
-                <div style="
-                    display:flex;
-                    align-items:center;
-                    gap:12px;
-                    padding:10px 0;
-                    border-bottom:1px solid #eee;
-                ">
+                    <div style="
+                        display:flex;
+                        align-items:center;
+                        gap:12px;
+                        padding:10px 0;
+                        border-bottom:1px solid #eee;
+                    ">
 
-                    <img
-                        src="${product.image}"
-                        style="
-                            width:60px;
-                            height:60px;
-                            object-fit:cover;
-                            border-radius:8px;
-                        "
-                    >
+                        <img
+                            src="${product.image}"
+                            style="
+                                width:60px;
+                                height:60px;
+                                object-fit:cover;
+                                border-radius:8px;
+                            "
+                        >
 
-                    <div>
+                        <div>
 
-                        <strong>
-                            ${product.name}
-                        </strong>
+                            <strong>
+                                ${product.name}
+                            </strong>
 
-                        <div style="
-                            color:#888;
-                            font-size:12px;
-                            margin-top:4px;
-                        ">
-                            ${product.category}
+                            <div style="
+                                color:#888;
+                                font-size:12px;
+                                margin-top:4px;
+                            ">
+                                ${product.category}
+                            </div>
+
                         </div>
 
                     </div>
 
-                </div>
-
-            `
-        ).join("");
+                `
+            )
+            .join("");
 
 }
 
 
-/* =========================
-   ORDERS
-========================= */
+/* ORDERS */
 
 async function openOrders(){
 
@@ -2958,26 +2401,24 @@ async function openOrders(){
 
     if(!token){
 
-        closeAccountMenu();
-
         document
             .getElementById(
                 "authModal"
             )
-            .classList.add(
-                "active"
-            );
-
+            .classList.add("active");
 
         showLogin();
-
 
         return;
 
     }
 
 
-    closeAccountMenu();
+    document
+        .getElementById(
+            "accountMenu"
+        )
+        .classList.remove("active");
 
 
     const modal =
@@ -3009,7 +2450,7 @@ async function openOrders(){
                 {
                     headers:{
                         "Authorization":
-                            `Bearer ${token}`
+                        `Bearer ${token}`
                     }
                 }
             );
@@ -3024,7 +2465,6 @@ async function openOrders(){
         if(!orders.length){
 
             container.innerHTML = `
-
                 <p style="
                     color:#777;
                     text-align:center;
@@ -3032,7 +2472,6 @@ async function openOrders(){
                 ">
                     Henüz siparişiniz bulunmuyor.
                 </p>
-
             `;
 
             return;
@@ -3041,44 +2480,47 @@ async function openOrders(){
 
 
         container.innerHTML =
-            orders.map(
-                order=>`
+            orders
+                .map(
+                    order=>`
 
-                    <div style="
-                        padding:15px 0;
-                        border-bottom:1px solid #eee;
-                    ">
-
-                        <strong>
-                            Sipariş #${order.id}
-                        </strong>
-
-                        <p style="
-                            margin-top:7px;
-                            color:#777;
-                            font-size:13px;
+                        <div style="
+                            padding:15px 0;
+                            border-bottom:1px solid #eee;
                         ">
-                            Durum:
-                            ${order.status || "Alındı"}
-                        </p>
 
-                    </div>
+                            <strong>
+                                Sipariş #${order.id}
+                            </strong>
 
-                `
-            ).join("");
+                            <p style="
+                                margin-top:7px;
+                                color:#777;
+                                font-size:13px;
+                            ">
+                                Durum:
+                                ${
+                                    order.status ||
+                                    "Alındı"
+                                }
+                            </p>
+
+                        </div>
+
+                    `
+                )
+                .join("");
 
 
     }catch(error){
 
         container.innerHTML = `
-
             <p style="
                 color:#c00;
                 text-align:center;
             ">
                 ${error.message}
             </p>
-
         `;
 
     }
@@ -3086,22 +2528,22 @@ async function openOrders(){
 }
 
 
-/* =========================
-   CHANGE PASSWORD
-========================= */
+/* CHANGE PASSWORD */
 
 function openChangePassword(){
 
-    closeAccountMenu();
+    document
+        .getElementById(
+            "accountMenu"
+        )
+        .classList.remove("active");
 
 
     document
         .getElementById(
             "changePasswordModal"
         )
-        .classList.add(
-            "active"
-        );
+        .classList.add("active");
 
 }
 
@@ -3150,17 +2592,14 @@ async function changePassword(){
                 "/api/auth/change-password",
                 {
                     method:"POST",
-
                     headers:{
                         "Authorization":
-                            `Bearer ${token}`
+                        `Bearer ${token}`
                     },
-
-                    body:
-                        JSON.stringify({
-                            oldPassword,
-                            newPassword
-                        })
+                    body:JSON.stringify({
+                        oldPassword,
+                        newPassword
+                    })
                 }
             );
 
@@ -3180,17 +2619,13 @@ async function changePassword(){
 }
 
 
-/* =========================
-   MODAL CLOSE
-========================= */
+/* MODAL CLOSE */
 
 function closeModal(id){
 
     document
         .getElementById(id)
-        .classList.remove(
-            "active"
-        );
+        .classList.remove("active");
 
 }
 
@@ -3222,9 +2657,7 @@ document
     );
 
 
-/* =========================
-   PRODUCT DETAIL
-========================= */
+/* PRODUCT DETAIL */
 
 function productDetail(
     productId
@@ -3254,21 +2687,21 @@ function productDetail(
 }
 
 
-/* =========================
-   BAŞLANGIÇ
-========================= */
+/* BAŞLANGIÇ */
 
 document.addEventListener(
     "DOMContentLoaded",
     async ()=>{
 
         /*
-         * DİKKAT:
+         * Ürünler başlangıçta
+         * otomatik gösterilmez.
          *
-         * renderProducts() YOK.
-         *
-         * Site ilk açıldığında
-         * ürünler görünmez.
+         * Ürünler yalnızca:
+         * - kategori seçilince
+         * - arama yapılınca
+         * - showAllProducts çağrılınca
+         * gösterilir.
          */
 
         await loadCurrentUser();
