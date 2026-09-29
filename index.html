@@ -2557,9 +2557,6 @@ document.getElementById("changePasswordForm").style.display="block";
 
 }
 
-
-/* KAYIT */
-
 async function register(event){
 
 event.preventDefault();
@@ -2758,11 +2755,14 @@ message.textContent=error.message;
 
 }
 
+
+/* DÜZELTİLDİ: E-posta veya kullanıcı adı ile giriş */
+
 async function login(event){
 
 event.preventDefault();
 
-const username=document.getElementById(
+const loginValue=document.getElementById(
 "loginUsername"
 ).value.trim();
 
@@ -2774,10 +2774,39 @@ const message=document.getElementById(
 "loginMessage"
 );
 
+if(!loginValue || !password){
+
+message.className=
+"auth-message error-message";
+
+message.textContent=
+"E-posta/kullanıcı adı ve şifre gereklidir.";
+
+return;
+
+}
+
 message.className="auth-message";
 message.textContent="Giriş yapılıyor...";
 
 try{
+
+const isEmail=
+/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginValue);
+
+const loginData={
+password:password
+};
+
+if(isEmail){
+
+loginData.email=loginValue;
+
+}else{
+
+loginData.username=loginValue;
+
+}
 
 const data=await apiRequest(
 "/api/auth/login",
@@ -2786,12 +2815,17 @@ method:"POST",
 headers:{
 "Content-Type":"application/json"
 },
-body:JSON.stringify({
-username,
-password
-})
+body:JSON.stringify(loginData)
 }
 );
+
+if(!data.token){
+
+throw new Error(
+data.message||"Giriş yapılamadı."
+);
+
+}
 
 localStorage.setItem(
 "veloraToken",
@@ -2824,7 +2858,8 @@ setTimeout(closeAuth,600);
 message.className=
 "auth-message error-message";
 
-message.textContent=error.message;
+message.textContent=
+error.message||"Giriş yapılamadı.";
 
 }
 
