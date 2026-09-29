@@ -85,41 +85,36 @@ nav a:hover{
     background:#cbb094;
 }
 
-/* BÜYÜK HESAP MENÜSÜ */
 .account-menu{
     display:none;
-    position:fixed;
-    top:20px;
-    right:20px;
-    width:380px;
-    min-height:calc(100vh - 40px);
+    position:absolute;
+    right:0;
+    top:52px;
+    width:250px;
     background:#fff;
     border:1px solid #e1d6ca;
-    border-radius:18px;
-    box-shadow:0 15px 45px rgba(0,0,0,.18);
-    padding:25px;
-    z-index:2000;
-    flex-direction:column;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+    padding:15px;
 }
 
 .account-menu.active{
-    display:flex;
+    display:block;
 }
 
 .account-user{
-    padding:15px 10px 18px;
+    padding:10px;
     border-bottom:1px solid #eee;
-    margin-bottom:15px;
+    margin-bottom:8px;
 }
 
 .account-user strong{
     display:block;
-    margin-bottom:6px;
-    font-size:20px;
+    margin-bottom:4px;
 }
 
 .account-user span{
-    font-size:13px;
+    font-size:12px;
     color:#777;
 }
 
@@ -128,27 +123,14 @@ nav a:hover{
     border:none;
     background:none;
     text-align:left;
-    padding:15px 12px;
-    border-radius:10px;
+    padding:11px 10px;
+    border-radius:8px;
     cursor:pointer;
-    font-size:15px;
-    margin-bottom:5px;
+    font-size:14px;
 }
 
 .account-menu button:hover{
     background:#f6f0e9;
-}
-
-.account-menu .menu-login-button{
-    margin-top:auto;
-    background:#d8c2a9;
-    color:#2b241e;
-    text-align:center;
-    font-weight:bold;
-}
-
-.account-menu .menu-login-button:hover{
-    background:#cbb094;
 }
 
 /* HERO */
@@ -444,7 +426,6 @@ footer p{
 
 /* RESPONSIVE */
 @media(max-width:900px){
-
     .category-grid,
     .product-grid{
         grid-template-columns:repeat(2,1fr);
@@ -453,11 +434,9 @@ footer p{
     nav{
         display:none;
     }
-
 }
 
 @media(max-width:600px){
-
     .header-inner{
         padding:0 15px;
     }
@@ -493,59 +472,22 @@ footer p{
     .search-box button{
         padding:13px;
     }
-
-    /* MOBİL MENÜ */
-    .account-menu{
-        top:10px;
-        right:10px;
-        width:calc(100vw - 20px);
-        min-height:calc(100vh - 20px);
-        padding:20px;
-    }
-
 }
-
-/* MENÜ AÇILINCA SAYFAYI HAFİF KARART */
-body:has(.account-menu.active)::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.18);
-    z-index:1500;
-    pointer-events:none;
-}
-
 </style>
 </head>
 
 <body>
 
 <header>
-
     <div class="header-inner">
 
-        <div class="logo">
-            VELORA
-        </div>
+        <div class="logo">VELORA</div>
 
         <nav>
-
-            <a href="#anasayfa">
-                Ana Sayfa
-            </a>
-
-            <a href="#kategoriler">
-                Kategoriler
-            </a>
-
-            <a href="#urunler">
-                Koleksiyon
-            </a>
-
-            <a href="#one-cikanlar">
-                Öne Çıkanlar
-            </a>
-
+            <a href="#anasayfa">Ana Sayfa</a>
+            <a href="#kategoriler">Kategoriler</a>
+            <a href="#urunler">Koleksiyon</a>
+            <a href="#one-cikanlar">Öne Çıkanlar</a>
         </nav>
 
         <div class="account-area">
@@ -558,64 +500,33 @@ body:has(.account-menu.active)::after{
                 👤 Hesap Oluştur
             </button>
 
-            <div
-                id="accountMenu"
-                class="account-menu"
-            >
+            <div id="accountMenu" class="account-menu">
 
                 <div class="account-user">
-
-                    <strong id="accountUsername">
-                        Hesabım
-                    </strong>
-
+                    <strong id="accountUsername">Hesabım</strong>
                     <span id="accountEmail"></span>
-
                 </div>
 
-                <button
-                    type="button"
-                    onclick="openFavorites()"
-                >
+                <button type="button" onclick="openFavorites()">
                     ❤️ Favorilerim
                 </button>
 
-                <button
-                    type="button"
-                    onclick="openOrders()"
-                >
+                <button type="button" onclick="openOrders()">
                     📦 Siparişlerim
                 </button>
 
-                <button
-                    type="button"
-                    onclick="openChangePassword()"
-                >
+                <button type="button" onclick="openChangePassword()">
                     🔑 Şifre Değiştir
                 </button>
 
-                <button
-                    type="button"
-                    onclick="logout()"
-                >
+                <button type="button" onclick="logout()">
                     🚪 Çıkış Yap
                 </button>
 
-                <button
-                    id="menuLoginButton"
-                    class="menu-login-button"
-                    type="button"
-                    onclick="openLoginFromMenu()"
-                >
-                    🔐 Oturum Aç
-                </button>
-
             </div>
-
         </div>
 
     </div>
-
 </header>
 
 
@@ -625,18 +536,11 @@ body:has(.account-menu.active)::after{
 
         <div class="hero-content">
 
-            <h1>
-                VELORA
-            </h1>
+            <h1>VELORA</h1>
 
-            <p>
-                Zarafetin en sade hali.
-            </p>
+            <p>Zarafetin en sade hali.</p>
 
-            <a
-                href="#urunler"
-                class="hero-button"
-            >
+            <a href="#urunler" class="hero-button">
                 Koleksiyonu Keşfet
             </a>
 
@@ -656,10 +560,7 @@ body:has(.account-menu.active)::after{
                 onkeydown="if(event.key==='Enter') searchProducts()"
             >
 
-            <button
-                type="button"
-                onclick="searchProducts()"
-            >
+            <button type="button" onclick="searchProducts()">
                 Ara
             </button>
 
@@ -668,10 +569,7 @@ body:has(.account-menu.active)::after{
     </section>
 
 
-    <section
-        id="kategoriler"
-        class="categories"
-    >
+    <section id="kategoriler" class="categories">
 
         <h2 class="section-title">
             Kategoriler
@@ -683,36 +581,28 @@ body:has(.account-menu.active)::after{
                 class="category-card"
                 onclick="filterCategory('Yüzük')"
             >
-                <h3>
-                    Yüzük
-                </h3>
+                <h3>Yüzük</h3>
             </div>
 
             <div
                 class="category-card"
                 onclick="filterCategory('Bileklik')"
             >
-                <h3>
-                    Bileklik
-                </h3>
+                <h3>Bileklik</h3>
             </div>
 
             <div
                 class="category-card"
                 onclick="filterCategory('Küpe')"
             >
-                <h3>
-                    Küpe
-                </h3>
+                <h3>Küpe</h3>
             </div>
 
             <div
                 class="category-card"
                 onclick="filterCategory('Kolye')"
             >
-                <h3>
-                    Kolye
-                </h3>
+                <h3>Kolye</h3>
             </div>
 
         </div>
@@ -751,9 +641,7 @@ body:has(.account-menu.active)::after{
 
 <footer>
 
-    <h2>
-        VELORA
-    </h2>
+    <h2>VELORA</h2>
 
     <p>
         Zarif dokunuşlar, zamansız tasarımlar.
@@ -764,10 +652,7 @@ body:has(.account-menu.active)::after{
 
 <!-- AUTH MODAL -->
 
-<div
-    id="authModal"
-    class="modal"
->
+<div id="authModal" class="modal">
 
     <div class="modal-box">
 
@@ -781,9 +666,7 @@ body:has(.account-menu.active)::after{
 
         <div id="loginForm">
 
-            <h2>
-                Giriş Yap
-            </h2>
+            <h2>Giriş Yap</h2>
 
             <input
                 id="loginUsername"
@@ -820,14 +703,9 @@ body:has(.account-menu.active)::after{
         </div>
 
 
-        <div
-            id="registerForm"
-            style="display:none;"
-        >
+        <div id="registerForm" style="display:none;">
 
-            <h2>
-                Kayıt Ol
-            </h2>
+            <h2>Kayıt Ol</h2>
 
             <input
                 id="registerUsername"
@@ -876,10 +754,7 @@ body:has(.account-menu.active)::after{
 
 <!-- FAVORITES MODAL -->
 
-<div
-    id="favoritesModal"
-    class="modal"
->
+<div id="favoritesModal" class="modal">
 
     <div class="modal-box">
 
@@ -891,9 +766,7 @@ body:has(.account-menu.active)::after{
             ×
         </button>
 
-        <h2>
-            Favorilerim
-        </h2>
+        <h2>Favorilerim</h2>
 
         <div id="favoritesContainer"></div>
 
@@ -904,10 +777,7 @@ body:has(.account-menu.active)::after{
 
 <!-- ORDERS MODAL -->
 
-<div
-    id="ordersModal"
-    class="modal"
->
+<div id="ordersModal" class="modal">
 
     <div class="modal-box">
 
@@ -919,9 +789,7 @@ body:has(.account-menu.active)::after{
             ×
         </button>
 
-        <h2>
-            Siparişlerim
-        </h2>
+        <h2>Siparişlerim</h2>
 
         <div id="ordersContainer"></div>
 
@@ -932,10 +800,7 @@ body:has(.account-menu.active)::after{
 
 <!-- CHANGE PASSWORD MODAL -->
 
-<div
-    id="changePasswordModal"
-    class="modal"
->
+<div id="changePasswordModal" class="modal">
 
     <div class="modal-box">
 
@@ -947,9 +812,7 @@ body:has(.account-menu.active)::after{
             ×
         </button>
 
-        <h2>
-            Şifre Değiştir
-        </h2>
+        <h2>Şifre Değiştir</h2>
 
         <input
             id="oldPassword"
@@ -983,8 +846,8 @@ body:has(.account-menu.active)::after{
 
 <script>
 
-const API_URL =
-    "https://velora-backend-1-aft5.onrender.com";
+const API_URL = "https://velora-backend-1-aft5.onrender.com";
+
 
 
 /* ÜRÜNLER */
@@ -1122,24 +985,25 @@ const products = [
 ];
 
 
+
 let favoriteProductIds = [];
+
 
 
 /* API */
 
 async function apiRequest(path, options = {}){
 
-    const response =
-        await fetch(
-            API_URL + path,
-            {
-                ...options,
-                headers:{
-                    "Content-Type":"application/json",
-                    ...(options.headers || {})
-                }
+    const response = await fetch(
+        API_URL + path,
+        {
+            ...options,
+            headers:{
+                "Content-Type":"application/json",
+                ...(options.headers || {})
             }
-        );
+        }
+    );
 
     let data = {};
 
@@ -1148,54 +1012,42 @@ async function apiRequest(path, options = {}){
     }catch{}
 
     if(!response.ok){
-
         throw new Error(
             data.message ||
             data.error ||
             "Bir hata oluştu."
         );
-
     }
 
     return data;
-
 }
+
 
 
 /* AUTH UI */
 
 function showLogin(){
 
-    document.getElementById(
-        "loginForm"
-    ).style.display = "block";
+    document.getElementById("loginForm").style.display = "block";
 
-    document.getElementById(
-        "registerForm"
-    ).style.display = "none";
+    document.getElementById("registerForm").style.display = "none";
 
-    document.getElementById(
-        "loginMessage"
-    ).textContent = "";
+    document.getElementById("loginMessage").textContent = "";
 
 }
+
 
 
 function showRegister(){
 
-    document.getElementById(
-        "loginForm"
-    ).style.display = "none";
+    document.getElementById("loginForm").style.display = "none";
 
-    document.getElementById(
-        "registerForm"
-    ).style.display = "block";
+    document.getElementById("registerForm").style.display = "block";
 
-    document.getElementById(
-        "registerMessage"
-    ).textContent = "";
+    document.getElementById("registerMessage").textContent = "";
 
 }
+
 
 
 function closeAuth(){
@@ -1207,17 +1059,16 @@ function closeAuth(){
 }
 
 
+
 function openAuth(){
 
-    const token =
-        localStorage.getItem("veloraToken");
+    const token = localStorage.getItem("veloraToken");
 
     if(token){
 
         toggleAccountMenu();
 
         return;
-
     }
 
     document
@@ -1227,6 +1078,7 @@ function openAuth(){
     showLogin();
 
 }
+
 
 
 /* ACCOUNT MENU */
@@ -1241,79 +1093,54 @@ function toggleAccountMenu(){
 }
 
 
-function openLoginFromMenu(){
-
-    document
-        .getElementById("accountMenu")
-        .classList.remove("active");
-
-    document
-        .getElementById("authModal")
-        .classList.add("active");
-
-    showLogin();
-
-}
-
-
-/* ACCOUNT BUTTON */
 
 document
     .getElementById("accountButton")
-    .addEventListener(
-        "click",
-        event=>{
+    .addEventListener("click",event=>{
 
-            event.stopPropagation();
+        event.stopPropagation();
 
-            if(
-                localStorage.getItem(
-                    "veloraToken"
-                )
-            ){
+        if(localStorage.getItem("veloraToken")){
 
-                toggleAccountMenu();
+            toggleAccountMenu();
 
-            }else{
+        }else{
 
-                document
-                    .getElementById("authModal")
-                    .classList.add("active");
-
-                showRegister();
-
-            }
-
-        }
-    );
-
-
-/* MENÜ DIŞINA TIKLAMA */
-
-document.addEventListener(
-    "click",
-    event=>{
-
-        const area =
-            document.querySelector(
-                ".account-area"
-            );
-
-        if(
-            area &&
-            !area.contains(event.target)
-        ){
+            /*
+             * ÇIKIŞ YAPILMIŞSA
+             * HESAP OLUŞTUR EKRANI AÇILIR
+             */
 
             document
-                .getElementById(
-                    "accountMenu"
-                )
-                .classList.remove("active");
+                .getElementById("authModal")
+                .classList.add("active");
+
+            showRegister();
 
         }
 
+    });
+
+
+
+document.addEventListener("click",event=>{
+
+    const area =
+        document.querySelector(".account-area");
+
+    if(
+        area &&
+        !area.contains(event.target)
+    ){
+
+        document
+            .getElementById("accountMenu")
+            .classList.remove("active");
+
     }
-);
+
+});
+
 
 
 /* ACCOUNT UI */
@@ -1321,34 +1148,19 @@ document.addEventListener(
 function updateAccountUI(){
 
     const token =
-        localStorage.getItem(
-            "veloraToken"
-        );
+        localStorage.getItem("veloraToken");
 
     const userText =
-        localStorage.getItem(
-            "veloraUser"
-        );
+        localStorage.getItem("veloraUser");
 
     const button =
-        document.getElementById(
-            "accountButton"
-        );
+        document.getElementById("accountButton");
 
     const username =
-        document.getElementById(
-            "accountUsername"
-        );
+        document.getElementById("accountUsername");
 
     const email =
-        document.getElementById(
-            "accountEmail"
-        );
-
-    const loginButton =
-        document.getElementById(
-            "menuLoginButton"
-        );
+        document.getElementById("accountEmail");
 
 
     if(token && userText){
@@ -1363,22 +1175,18 @@ function updateAccountUI(){
                 user.email ||
                 "Hesabım";
 
+
             button.textContent =
                 "👤 Hesabım";
+
 
             username.textContent =
                 displayName;
 
+
             email.textContent =
                 user.email || "";
 
-
-            if(loginButton){
-
-                loginButton.style.display =
-                    "none";
-
-            }
 
             return;
 
@@ -1387,23 +1195,22 @@ function updateAccountUI(){
     }
 
 
+    /*
+     * GİRİŞ YAPILMADIĞINDA
+     */
+
     button.textContent =
         "👤 Hesap Oluştur";
+
 
     username.textContent =
         "Hesabım";
 
+
     email.textContent = "";
 
-
-    if(loginButton){
-
-        loginButton.style.display =
-            "block";
-
-    }
-
 }
+
 
 
 /* REGISTER */
@@ -1412,31 +1219,25 @@ async function register(){
 
     const username =
         document
-            .getElementById(
-                "registerUsername"
-            )
-            .value
-            .trim();
+        .getElementById("registerUsername")
+        .value
+        .trim();
 
     const email =
         document
-            .getElementById(
-                "registerEmail"
-            )
-            .value
-            .trim();
+        .getElementById("registerEmail")
+        .value
+        .trim();
 
     const password =
         document
-            .getElementById(
-                "registerPassword"
-            )
-            .value;
+        .getElementById("registerPassword")
+        .value;
+
 
     const message =
-        document.getElementById(
-            "registerMessage"
-        );
+        document
+        .getElementById("registerMessage");
 
 
     if(
@@ -1449,7 +1250,6 @@ async function register(){
             "Lütfen tüm alanları doldurun.";
 
         return;
-
     }
 
 
@@ -1483,41 +1283,34 @@ async function register(){
 }
 
 
+
 /* LOGIN */
 
 async function login(){
 
     const username =
         document
-            .getElementById(
-                "loginUsername"
-            )
-            .value
-            .trim();
+        .getElementById("loginUsername")
+        .value
+        .trim();
 
     const password =
         document
-            .getElementById(
-                "loginPassword"
-            )
-            .value;
+        .getElementById("loginPassword")
+        .value;
+
 
     const message =
-        document.getElementById(
-            "loginMessage"
-        );
+        document
+        .getElementById("loginMessage");
 
 
-    if(
-        !username ||
-        !password
-    ){
+    if(!username || !password){
 
         message.textContent =
             "Lütfen kullanıcı adı ve şifre girin.";
 
         return;
-
     }
 
 
@@ -1550,9 +1343,7 @@ async function login(){
 
             localStorage.setItem(
                 "veloraUser",
-                JSON.stringify(
-                    data.user
-                )
+                JSON.stringify(data.user)
             );
 
         }
@@ -1563,12 +1354,21 @@ async function login(){
         updateAccountUI();
 
 
-        setTimeout(
-            ()=>{
-                closeAuth();
-            },
-            600
-        );
+        /*
+         * BURADA ARTIK
+         * renderProducts(products)
+         * YOK.
+         *
+         * Böylece giriş yaptıktan sonra
+         * bütün ürünler otomatik açılmaz.
+         */
+
+
+        setTimeout(()=>{
+
+            closeAuth();
+
+        },600);
 
 
     }catch(error){
@@ -1581,14 +1381,13 @@ async function login(){
 }
 
 
+
 /* CURRENT USER */
 
 async function loadCurrentUser(){
 
     const token =
-        localStorage.getItem(
-            "veloraToken"
-        );
+        localStorage.getItem("veloraToken");
 
 
     if(!token){
@@ -1596,7 +1395,6 @@ async function loadCurrentUser(){
         updateAccountUI();
 
         return;
-
     }
 
 
@@ -1618,9 +1416,7 @@ async function loadCurrentUser(){
 
             localStorage.setItem(
                 "veloraUser",
-                JSON.stringify(
-                    data.user
-                )
+                JSON.stringify(data.user)
             );
 
         }
@@ -1629,6 +1425,18 @@ async function loadCurrentUser(){
         await loadFavorites();
 
         updateAccountUI();
+
+
+        /*
+         * ÖNEMLİ:
+         *
+         * Burada artık
+         * renderProducts(products)
+         * YOK.
+         *
+         * Ana sayfa açıldığında
+         * ürünler otomatik gelmez.
+         */
 
 
     }catch(error){
@@ -1650,6 +1458,7 @@ async function loadCurrentUser(){
 }
 
 
+
 /* LOGOUT */
 
 function logout(){
@@ -1662,19 +1471,26 @@ function logout(){
         "veloraUser"
     );
 
+
     favoriteProductIds = [];
 
 
     document
-        .getElementById(
-            "accountMenu"
-        )
+        .getElementById("accountMenu")
         .classList.remove("active");
 
 
     updateAccountUI();
 
+
+    /*
+     * Burada da artık
+     * renderProducts(products)
+     * YOK.
+     */
+
 }
+
 
 
 /* FAVORITES */
@@ -1682,17 +1498,13 @@ function logout(){
 async function loadFavorites(){
 
     const token =
-        localStorage.getItem(
-            "veloraToken"
-        );
-
+        localStorage.getItem("veloraToken");
 
     if(!token){
 
         favoriteProductIds = [];
 
         return;
-
     }
 
 
@@ -1713,29 +1525,25 @@ async function loadFavorites(){
         if(Array.isArray(data)){
 
             favoriteProductIds =
-                data.map(
-                    item =>
-                        Number(
-                            item.product_id ||
-                            item.productId ||
-                            item.id
-                        )
+                data.map(item =>
+                    Number(
+                        item.product_id ||
+                        item.productId ||
+                        item.id
+                    )
                 );
 
         }else if(
-            Array.isArray(
-                data.favorites
-            )
+            Array.isArray(data.favorites)
         ){
 
             favoriteProductIds =
-                data.favorites.map(
-                    item =>
-                        Number(
-                            item.product_id ||
-                            item.productId ||
-                            item.id
-                        )
+                data.favorites.map(item =>
+                    Number(
+                        item.product_id ||
+                        item.productId ||
+                        item.id
+                    )
                 );
 
         }else{
@@ -1753,11 +1561,10 @@ async function loadFavorites(){
 }
 
 
+
 /* RENDER PRODUCTS */
 
-function renderProducts(
-    list = products
-){
+function renderProducts(list = products){
 
     const container =
         document.getElementById(
@@ -1768,7 +1575,6 @@ function renderProducts(
     if(!container){
 
         return;
-
     }
 
 
@@ -1788,145 +1594,119 @@ function renderProducts(
         `;
 
         return;
-
     }
 
 
     const categories =
-        [
-            ...new Set(
-                list.map(
-                    product =>
-                        product.category
-                )
+        [...new Set(
+            list.map(product =>
+                product.category
             )
-        ];
+        )];
 
 
-    categories.forEach(
-        category=>{
+    categories.forEach(category=>{
 
-            const categoryProducts =
-                list.filter(
-                    product =>
-                        product.category ===
-                        category
-                );
-
-
-            const title =
-                document.createElement(
-                    "h3"
-                );
-
-            title.className =
-                "product-category-title";
-
-            title.textContent =
-                category;
-
-
-            container.appendChild(
-                title
+        const categoryProducts =
+            list.filter(
+                product =>
+                    product.category === category
             );
 
 
-            const grid =
-                document.createElement(
-                    "div"
+        const title =
+            document.createElement("h3");
+
+        title.className =
+            "product-category-title";
+
+        title.textContent =
+            category;
+
+
+        container.appendChild(title);
+
+
+        const grid =
+            document.createElement("div");
+
+        grid.className =
+            "product-grid";
+
+
+        categoryProducts.forEach(product=>{
+
+            const isFavorite =
+                favoriteProductIds.includes(
+                    Number(product.id)
                 );
 
-            grid.className =
-                "product-grid";
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "product-card";
 
 
-            categoryProducts.forEach(
-                product=>{
+            card.innerHTML = `
 
-                    const isFavorite =
-                        favoriteProductIds.includes(
-                            Number(
-                                product.id
-                            )
-                        );
+                <img
+                    class="product-image"
+                    src="${product.image}"
+                    alt="${product.name}"
+                    onerror="
+                        this.src='resimler/placeholder.jpg'
+                    "
+                >
 
+                <div class="product-info">
 
-                    const card =
-                        document.createElement(
-                            "div"
-                        );
+                    <h3>
+                        ${product.name}
+                    </h3>
 
-                    card.className =
-                        "product-card";
+                    <p>
+                        ${product.subcategory}
+                    </p>
 
+                    <div class="product-actions">
 
-                    card.innerHTML = `
-
-                        <img
-                            class="product-image"
-                            src="${product.image}"
-                            alt="${product.name}"
-                            onerror="
-                                this.src='resimler/placeholder.jpg'
+                        <button
+                            class="detail-btn"
+                            onclick="
+                                productDetail(${product.id})
                             "
                         >
+                            İncele
+                        </button>
 
-                        <div class="product-info">
+                        <button
+                            class="favorite-btn"
+                            onclick="
+                                toggleFavorite(${product.id})
+                            "
+                        >
+                            ${isFavorite ? "❤️" : "♡"}
+                        </button>
 
-                            <h3>
-                                ${product.name}
-                            </h3>
+                    </div>
 
-                            <p>
-                                ${product.subcategory}
-                            </p>
-
-                            <div class="product-actions">
-
-                                <button
-                                    class="detail-btn"
-                                    onclick="
-                                        productDetail(${product.id})
-                                    "
-                                >
-                                    İncele
-                                </button>
-
-                                <button
-                                    class="favorite-btn"
-                                    onclick="
-                                        toggleFavorite(${product.id})
-                                    "
-                                >
-                                    ${
-                                        isFavorite
-                                        ? "❤️"
-                                        : "♡"
-                                    }
-                                </button>
-
-                            </div>
-
-                        </div>
-                    `;
+                </div>
+            `;
 
 
-                    grid.appendChild(
-                        card
-                    );
+            grid.appendChild(card);
 
-                }
-            );
+        });
 
 
-            container.appendChild(
-                grid
-            );
+        container.appendChild(grid);
 
-        }
-    );
+    });
 
 }
+
 
 
 /* CATEGORY FILTER */
@@ -1939,8 +1719,7 @@ function filterCategory(
     let filtered =
         products.filter(
             product =>
-                product.category ===
-                category
+                product.category === category
         );
 
 
@@ -1975,9 +1754,7 @@ function filterCategory(
     }
 
 
-    renderProducts(
-        filtered
-    );
+    renderProducts(filtered);
 
 
     document
@@ -1987,6 +1764,7 @@ function filterCategory(
         });
 
 }
+
 
 
 /* SHOW ALL */
@@ -2002,9 +1780,7 @@ function showAllProducts(){
         "Tüm Ürünler";
 
 
-    renderProducts(
-        products
-    );
+    renderProducts(products);
 
 
     document
@@ -2016,18 +1792,17 @@ function showAllProducts(){
 }
 
 
+
 /* SEARCH */
 
 function searchProducts(){
 
     const input =
         document
-            .getElementById(
-                "searchInput"
-            )
-            .value
-            .trim()
-            .toLowerCase();
+        .getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
 
 
     if(!input){
@@ -2039,44 +1814,38 @@ function searchProducts(){
 
         info.textContent = "";
 
-
-        document
-            .getElementById(
-                "productContainer"
-            )
-            .innerHTML = "";
+        document.getElementById(
+            "productContainer"
+        ).innerHTML = "";
 
         return;
-
     }
 
 
     const filtered =
-        products.filter(
-            product=>{
+        products.filter(product=>{
 
-                return (
+            return (
 
-                    product.name
-                        .toLowerCase()
-                        .includes(input)
+                product.name
+                    .toLowerCase()
+                    .includes(input)
 
-                    ||
+                ||
 
-                    product.category
-                        .toLowerCase()
-                        .includes(input)
+                product.category
+                    .toLowerCase()
+                    .includes(input)
 
-                    ||
+                ||
 
-                    product.subcategory
-                        .toLowerCase()
-                        .includes(input)
+                product.subcategory
+                    .toLowerCase()
+                    .includes(input)
 
-                );
+            );
 
-            }
-        );
+        });
 
 
     const info =
@@ -2089,9 +1858,7 @@ function searchProducts(){
         `"${input}" için sonuçlar`;
 
 
-    renderProducts(
-        filtered
-    );
+    renderProducts(filtered);
 
 
     document
@@ -2103,14 +1870,13 @@ function searchProducts(){
 }
 
 
+
 /* FEATURED */
 
 function filterFeatured(){
 
     document
-        .getElementById(
-            "one-cikanlar"
-        )
+        .getElementById("one-cikanlar")
         .scrollIntoView({
             behavior:"smooth"
         });
@@ -2118,30 +1884,24 @@ function filterFeatured(){
 }
 
 
+
 /* FAVORITE TOGGLE */
 
-async function toggleFavorite(
-    productId
-){
+async function toggleFavorite(productId){
 
     const token =
-        localStorage.getItem(
-            "veloraToken"
-        );
+        localStorage.getItem("veloraToken");
 
 
     if(!token){
 
         document
-            .getElementById(
-                "authModal"
-            )
+            .getElementById("authModal")
             .classList.add("active");
 
         showLogin();
 
         return;
-
     }
 
 
@@ -2170,8 +1930,7 @@ async function toggleFavorite(
             favoriteProductIds =
                 favoriteProductIds.filter(
                     id =>
-                        id !==
-                        Number(productId)
+                        id !== Number(productId)
                 );
 
         }else{
@@ -2185,8 +1944,7 @@ async function toggleFavorite(
                         `Bearer ${token}`
                     },
                     body:JSON.stringify({
-                        product_id:
-                            productId
+                        product_id:productId
                     })
                 }
             );
@@ -2198,6 +1956,11 @@ async function toggleFavorite(
 
         }
 
+
+        /*
+         * Kullanıcı zaten bir ürün listesine
+         * geldiyse mevcut görünümü koruyoruz.
+         */
 
         const info =
             document.getElementById(
@@ -2212,41 +1975,37 @@ async function toggleFavorite(
 
             const input =
                 document
-                    .getElementById(
-                        "searchInput"
-                    )
-                    .value
-                    .trim()
-                    .toLowerCase();
+                .getElementById("searchInput")
+                .value
+                .trim()
+                .toLowerCase();
 
 
             if(input){
 
                 const filtered =
-                    products.filter(
-                        product =>
+                    products.filter(product=>
 
-                            product.name
-                                .toLowerCase()
-                                .includes(input)
+                        product.name
+                            .toLowerCase()
+                            .includes(input)
 
-                            ||
+                        ||
 
-                            product.category
-                                .toLowerCase()
-                                .includes(input)
+                        product.category
+                            .toLowerCase()
+                            .includes(input)
 
-                            ||
+                        ||
 
-                            product.subcategory
-                                .toLowerCase()
-                                .includes(input)
+                        product.subcategory
+                            .toLowerCase()
+                            .includes(input)
+
                     );
 
 
-                renderProducts(
-                    filtered
-                );
+                renderProducts(filtered);
 
             }
 
@@ -2255,13 +2014,12 @@ async function toggleFavorite(
 
     }catch(error){
 
-        alert(
-            error.message
-        );
+        alert(error.message);
 
     }
 
 }
+
 
 
 /* FAVORITES MODAL */
@@ -2269,30 +2027,23 @@ async function toggleFavorite(
 async function openFavorites(){
 
     const token =
-        localStorage.getItem(
-            "veloraToken"
-        );
+        localStorage.getItem("veloraToken");
 
 
     if(!token){
 
         document
-            .getElementById(
-                "authModal"
-            )
+            .getElementById("authModal")
             .classList.add("active");
 
         showLogin();
 
         return;
-
     }
 
 
     document
-        .getElementById(
-            "accountMenu"
-        )
+        .getElementById("accountMenu")
         .classList.remove("active");
 
 
@@ -2302,9 +2053,7 @@ async function openFavorites(){
         );
 
 
-    modal.classList.add(
-        "active"
-    );
+    modal.classList.add("active");
 
 
     const container =
@@ -2314,13 +2063,10 @@ async function openFavorites(){
 
 
     const favorites =
-        products.filter(
-            product =>
-                favoriteProductIds.includes(
-                    Number(
-                        product.id
-                    )
-                )
+        products.filter(product =>
+            favoriteProductIds.includes(
+                Number(product.id)
+            )
         );
 
 
@@ -2337,56 +2083,52 @@ async function openFavorites(){
         `;
 
         return;
-
     }
 
 
     container.innerHTML =
-        favorites
-            .map(
-                product=>`
+        favorites.map(product=>`
+
+            <div style="
+                display:flex;
+                align-items:center;
+                gap:12px;
+                padding:10px 0;
+                border-bottom:1px solid #eee;
+            ">
+
+                <img
+                    src="${product.image}"
+                    style="
+                        width:60px;
+                        height:60px;
+                        object-fit:cover;
+                        border-radius:8px;
+                    "
+                >
+
+                <div>
+
+                    <strong>
+                        ${product.name}
+                    </strong>
 
                     <div style="
-                        display:flex;
-                        align-items:center;
-                        gap:12px;
-                        padding:10px 0;
-                        border-bottom:1px solid #eee;
+                        color:#888;
+                        font-size:12px;
+                        margin-top:4px;
                     ">
-
-                        <img
-                            src="${product.image}"
-                            style="
-                                width:60px;
-                                height:60px;
-                                object-fit:cover;
-                                border-radius:8px;
-                            "
-                        >
-
-                        <div>
-
-                            <strong>
-                                ${product.name}
-                            </strong>
-
-                            <div style="
-                                color:#888;
-                                font-size:12px;
-                                margin-top:4px;
-                            ">
-                                ${product.category}
-                            </div>
-
-                        </div>
-
+                        ${product.category}
                     </div>
 
-                `
-            )
-            .join("");
+                </div>
+
+            </div>
+
+        `).join("");
 
 }
+
 
 
 /* ORDERS */
@@ -2394,30 +2136,23 @@ async function openFavorites(){
 async function openOrders(){
 
     const token =
-        localStorage.getItem(
-            "veloraToken"
-        );
+        localStorage.getItem("veloraToken");
 
 
     if(!token){
 
         document
-            .getElementById(
-                "authModal"
-            )
+            .getElementById("authModal")
             .classList.add("active");
 
         showLogin();
 
         return;
-
     }
 
 
     document
-        .getElementById(
-            "accountMenu"
-        )
+        .getElementById("accountMenu")
         .classList.remove("active");
 
 
@@ -2427,9 +2162,7 @@ async function openOrders(){
         );
 
 
-    modal.classList.add(
-        "active"
-    );
+    modal.classList.add("active");
 
 
     const container =
@@ -2475,41 +2208,33 @@ async function openOrders(){
             `;
 
             return;
-
         }
 
 
         container.innerHTML =
-            orders
-                .map(
-                    order=>`
+            orders.map(order=>`
 
-                        <div style="
-                            padding:15px 0;
-                            border-bottom:1px solid #eee;
-                        ">
+                <div style="
+                    padding:15px 0;
+                    border-bottom:1px solid #eee;
+                ">
 
-                            <strong>
-                                Sipariş #${order.id}
-                            </strong>
+                    <strong>
+                        Sipariş #${order.id}
+                    </strong>
 
-                            <p style="
-                                margin-top:7px;
-                                color:#777;
-                                font-size:13px;
-                            ">
-                                Durum:
-                                ${
-                                    order.status ||
-                                    "Alındı"
-                                }
-                            </p>
+                    <p style="
+                        margin-top:7px;
+                        color:#777;
+                        font-size:13px;
+                    ">
+                        Durum:
+                        ${order.status || "Alındı"}
+                    </p>
 
-                        </div>
+                </div>
 
-                    `
-                )
-                .join("");
+            `).join("");
 
 
     }catch(error){
@@ -2528,59 +2253,51 @@ async function openOrders(){
 }
 
 
+
 /* CHANGE PASSWORD */
 
 function openChangePassword(){
 
     document
-        .getElementById(
-            "accountMenu"
-        )
+        .getElementById("accountMenu")
         .classList.remove("active");
 
 
     document
-        .getElementById(
-            "changePasswordModal"
-        )
+        .getElementById("changePasswordModal")
         .classList.add("active");
 
 }
 
 
+
 async function changePassword(){
 
     const token =
-        localStorage.getItem(
-            "veloraToken"
-        );
+        localStorage.getItem("veloraToken");
 
 
     if(!token){
 
         return;
-
     }
 
 
     const oldPassword =
         document
-            .getElementById(
-                "oldPassword"
-            )
-            .value;
+        .getElementById("oldPassword")
+        .value;
 
 
     const newPassword =
         document
-            .getElementById(
-                "newPassword"
-            )
-            .value;
+        .getElementById("newPassword")
+        .value;
 
 
     const message =
-        document.getElementById(
+        document
+        .getElementById(
             "changePasswordMessage"
         );
 
@@ -2619,6 +2336,7 @@ async function changePassword(){
 }
 
 
+
 /* MODAL CLOSE */
 
 function closeModal(id){
@@ -2630,38 +2348,32 @@ function closeModal(id){
 }
 
 
-document
-    .querySelectorAll(".modal")
-    .forEach(
-        modal=>{
 
-            modal.addEventListener(
-                "click",
-                event=>{
+document.querySelectorAll(".modal")
+    .forEach(modal=>{
 
-                    if(
-                        event.target ===
-                        modal
-                    ){
+        modal.addEventListener(
+            "click",
+            event=>{
 
-                        modal.classList.remove(
-                            "active"
-                        );
+                if(event.target === modal){
 
-                    }
+                    modal.classList.remove(
+                        "active"
+                    );
 
                 }
-            );
 
-        }
-    );
+            }
+        );
+
+    });
+
 
 
 /* PRODUCT DETAIL */
 
-function productDetail(
-    productId
-){
+function productDetail(productId){
 
     const product =
         products.find(
@@ -2674,7 +2386,6 @@ function productDetail(
     if(!product){
 
         return;
-
     }
 
 
@@ -2687,6 +2398,7 @@ function productDetail(
 }
 
 
+
 /* BAŞLANGIÇ */
 
 document.addEventListener(
@@ -2694,8 +2406,12 @@ document.addEventListener(
     async ()=>{
 
         /*
-         * Ürünler başlangıçta
-         * otomatik gösterilmez.
+         * ÖNEMLİ:
+         *
+         * Burada renderProducts() YOK.
+         *
+         * Böylece site ilk açıldığında
+         * ürünlerin tamamı görünmez.
          *
          * Ürünler yalnızca:
          * - kategori seçilince
