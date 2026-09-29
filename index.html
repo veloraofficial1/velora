@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VELORA</title>
+    <title>VELORA | Zarif Takılar</title>
 
     <style>
         * {
@@ -14,16 +14,17 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #111;
-            color: #fff;
+            background: #f8f5f0;
+            color: #222;
         }
 
         header {
+            background: #fff;
+            border-bottom: 1px solid #e5ddd3;
+            padding: 20px 6%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 20px 7%;
-            background: #111;
+            justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -32,208 +33,319 @@
         .logo {
             font-size: 28px;
             font-weight: bold;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
         }
 
         nav a {
-            color: white;
+            color: #222;
             text-decoration: none;
-            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #a67c52;
         }
 
         .cart-button {
-            background: #fff;
-            color: #111;
+            background: #222;
+            color: white;
             border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
+            padding: 12px 18px;
+            border-radius: 25px;
             cursor: pointer;
-            font-weight: bold;
+            font-size: 14px;
         }
 
         .hero {
-            min-height: 70vh;
+            min-height: 500px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 60px 20px;
-            background:
-                linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.65)),
-                url("urun1.jpg") center/cover;
+            padding: 70px 20px;
+            background: #eee7dd;
         }
 
         .hero-content h1 {
-            font-size: clamp(45px, 8vw, 90px);
+            font-size: 58px;
             letter-spacing: 8px;
             margin-bottom: 15px;
         }
 
         .hero-content p {
             font-size: 18px;
-            color: #ddd;
+            color: #666;
+            margin-bottom: 25px;
         }
 
-        .products {
-            padding: 70px 7%;
+        .hero-button {
+            display: inline-block;
+            background: #222;
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 25px;
+        }
+
+        .products-section {
+            padding: 70px 6%;
         }
 
         .section-title {
             text-align: center;
             margin-bottom: 40px;
-            font-size: 34px;
         }
 
-        .product-grid {
+        .section-title h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+        .products {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
         }
 
         .product {
-            background: #1b1b1b;
-            border-radius: 15px;
+            background: white;
+            border: 1px solid #e6ded4;
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
         }
 
         .product img {
             width: 100%;
-            height: 280px;
+            height: 300px;
             object-fit: cover;
+            display: block;
         }
 
         .product-info {
-            padding: 20px;
+            padding: 22px;
         }
 
         .product-info h3 {
-            margin-bottom: 10px;
+            font-size: 20px;
+            margin-bottom: 8px;
         }
 
         .price {
-            color: #ddd;
-            margin-bottom: 15px;
-        }
-
-        .add-cart {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            background: white;
-            color: #111;
-            cursor: pointer;
+            color: #9a7047;
+            font-size: 18px;
             font-weight: bold;
+            margin-bottom: 18px;
         }
 
-        .cart-panel,
-        .order-panel {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,.7);
-            z-index: 200;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .cart-box,
-        .order-box {
-            background: #1b1b1b;
+        .add-button {
             width: 100%;
-            max-width: 550px;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 25px;
-            border-radius: 15px;
+            border: none;
+            background: #222;
+            color: white;
+            padding: 13px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
         }
 
-        .cart-item {
+        .add-button:hover {
+            background: #9a7047;
+        }
+
+        .cart-panel {
+            position: fixed;
+            right: -420px;
+            top: 0;
+            width: 400px;
+            max-width: 100%;
+            height: 100vh;
+            background: white;
+            z-index: 1000;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+            padding: 25px;
+            overflow-y: auto;
+            transition: right 0.3s ease;
+        }
+
+        .cart-panel.open {
+            right: 0;
+        }
+
+        .cart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 10px;
-            padding: 15px 0;
-            border-bottom: 1px solid #333;
+            margin-bottom: 25px;
         }
 
-        .quantity {
+        .close-cart {
+            border: none;
+            background: none;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #eee;
+            padding: 18px 0;
+        }
+
+        .cart-item-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .quantity-controls {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
 
-        .quantity button {
+        .quantity-controls button {
             width: 30px;
             height: 30px;
-            border: none;
-            border-radius: 5px;
+            border: 1px solid #ddd;
+            background: #f8f5f0;
+            border-radius: 50%;
             cursor: pointer;
         }
 
-        .remove {
-            background: #8b0000;
-            color: white;
+        .remove-button {
             border: none;
-            padding: 7px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .cart-total {
-            font-size: 22px;
-            font-weight: bold;
-            margin: 25px 0;
-        }
-
-        .main-button {
-            width: 100%;
-            padding: 13px;
-            border: none;
-            border-radius: 8px;
-            background: white;
-            color: #111;
-            font-weight: bold;
+            background: none;
+            color: #a33;
             cursor: pointer;
             margin-top: 10px;
         }
 
-        .close-button {
-            background: #333;
-            color: white;
+        .cart-total {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 25px 0;
         }
 
-        .order-form input,
-        .order-form textarea {
+        .checkout-button {
             width: 100%;
-            margin-top: 8px;
-            margin-bottom: 15px;
-            padding: 12px;
-            border: 1px solid #444;
-            border-radius: 8px;
-            background: #111;
+            background: #222;
             color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
         }
 
-        .order-form textarea {
+        .order-section {
+            display: none;
+            padding: 60px 6%;
+            background: white;
+        }
+
+        .order-box {
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .order-box h2 {
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .form-group textarea {
             min-height: 100px;
             resize: vertical;
         }
 
-        .payment-box {
-            margin-top: 20px;
-            padding: 15px;
-            background: #111;
+        .order-summary {
+            background: #f8f5f0;
+            padding: 20px;
             border-radius: 10px;
-            border: 1px solid #333;
+            margin: 20px 0;
+        }
+
+        .payment-section {
+            display: none;
+            padding: 60px 6%;
+            background: #eee7dd;
+        }
+
+        .payment-box {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .payment-box h2 {
+            margin-bottom: 15px;
+        }
+
+        .payment-button {
+            width: 100%;
+            padding: 15px;
+            background: #222;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
         }
 
         footer {
+            background: #222;
+            color: white;
             text-align: center;
-            padding: 40px 20px;
-            color: #888;
+            padding: 30px;
+        }
+
+        @media (max-width: 800px) {
+            nav {
+                display: none;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 40px;
+            }
+
+            .cart-panel {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -250,33 +362,36 @@
     </nav>
 
     <button class="cart-button" onclick="openCart()">
-        Sepet (<span id="cart-count">0</span>)
+        🛒 Sepet (<span id="cartCount">0</span>)
     </button>
 </header>
 
 <section class="hero" id="anasayfa">
     <div class="hero-content">
         <h1>VELORA</h1>
-        <p>Zarafetin modern hali.</p>
+        <p>Zarafetin en sade hali.</p>
+        <a href="#koleksiyon" class="hero-button">Koleksiyonu Keşfet</a>
     </div>
 </section>
 
-<section class="products" id="koleksiyon">
-    <h2 class="section-title">Koleksiyon</h2>
+<section class="products-section" id="koleksiyon">
 
-    <div class="product-grid">
+    <div class="section-title">
+        <h2>VELORA Koleksiyonu</h2>
+        <p>Senin için seçilmiş zarif parçalar.</p>
+    </div>
+
+    <div class="products">
 
         <div class="product">
             <img src="resimler/yuzuk.jpg" alt="Zarif Yüzük">
 
             <div class="product-info">
                 <h3>Zarif Yüzük</h3>
-                <p class="price">499 TL</p>
+                <div class="price">499 TL</div>
 
-                <button
-                    class="add-cart"
-                    onclick="addToCart('Zarif Yüzük', 499)"
-                >
+                <button class="add-button"
+                    onclick="addToCart('Zarif Yüzük', 499, 'resimler/yuzuk.jpg')">
                     Sepete Ekle
                 </button>
             </div>
@@ -287,12 +402,10 @@
 
             <div class="product-info">
                 <h3>İnci Kolye</h3>
-                <p class="price">699 TL</p>
+                <div class="price">699 TL</div>
 
-                <button
-                    class="add-cart"
-                    onclick="addToCart('İnci Kolye', 699)"
-                >
+                <button class="add-button"
+                    onclick="addToCart('İnci Kolye', 699, 'resimler/kolye.jpg')">
                     Sepete Ekle
                 </button>
             </div>
@@ -303,12 +416,10 @@
 
             <div class="product-info">
                 <h3>Minimal Bileklik</h3>
-                <p class="price">399 TL</p>
+                <div class="price">399 TL</div>
 
-                <button
-                    class="add-cart"
-                    onclick="addToCart('Minimal Bileklik', 399)"
-                >
+                <button class="add-button"
+                    onclick="addToCart('Minimal Bileklik', 399, 'resimler/bileklik.jpg')">
                     Sepete Ekle
                 </button>
             </div>
@@ -317,467 +428,387 @@
     </div>
 </section>
 
-<div class="cart-panel" id="cart-panel">
-    <div class="cart-box">
-        <h2>Sepetim</h2>
+<section class="order-section" id="orderSection">
 
-        <div id="cart-items"></div>
-
-        <div class="cart-total">
-            Toplam: <span id="cart-total">0</span> TL
-        </div>
-
-        <button class="main-button" onclick="openOrderForm()">
-            Siparişe Geç
-        </button>
-
-        <button class="main-button close-button" onclick="closeCart()">
-            Kapat
-        </button>
-    </div>
-</div>
-
-<div class="order-panel" id="order-panel">
     <div class="order-box">
 
         <h2>Sipariş Bilgileri</h2>
 
-        <form class="order-form" onsubmit="submitOrder(event)">
+        <form id="orderForm">
 
-            <label>Ad Soyad</label>
-            <input
-                type="text"
-                id="customer-name"
-                required
-            >
-
-            <label>Telefon</label>
-            <input
-                type="tel"
-                id="customer-phone"
-                required
-            >
-
-            <label>Teslimat Adresi</label>
-            <textarea
-                id="customer-address"
-                required
-            ></textarea>
-
-            <label>Sipariş Notu</label>
-            <textarea
-                id="order-note"
-                placeholder="İsteğe bağlı"
-            ></textarea>
-
-            <h3>Sipariş Özeti</h3>
-
-            <div id="order-summary"></div>
-
-            <div class="cart-total">
-                Toplam: <span id="order-total">0</span> TL
+            <div class="form-group">
+                <label>Ad Soyad</label>
+                <input type="text" id="customerName" required>
             </div>
 
-            <button
-                type="submit"
-                class="main-button"
-            >
+            <div class="form-group">
+                <label>Telefon</label>
+                <input type="tel" id="customerPhone" required>
+            </div>
+
+            <div class="form-group">
+                <label>Teslimat Adresi</label>
+                <textarea id="customerAddress" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Sipariş Notu</label>
+                <textarea id="customerNote"></textarea>
+            </div>
+
+            <div class="order-summary" id="orderSummary"></div>
+
+            <button type="submit" class="checkout-button">
                 Siparişi Oluştur
             </button>
 
         </form>
 
-        <div class="payment-box" id="payment-box" style="display:none;">
+    </div>
 
-            <h3>Test Ödeme</h3>
+</section>
 
-            <p>
-                Bu bölüm şu anda test amaçlıdır.
-            </p>
+<section class="payment-section" id="paymentSection">
 
-            <button
-                class="main-button"
-                onclick="makeTestPayment()"
-            >
-                Test Ödemesi Yap
-            </button>
+    <div class="payment-box">
 
-        </div>
+        <h2>Test Ödeme</h2>
 
-        <button
-            class="main-button close-button"
-            onclick="closeOrderForm()"
-        >
-            Kapat
+        <p id="paymentTotal"></p>
+
+        <p style="margin-top:10px;color:#777;">
+            Bu bölüm test amaçlıdır.
+        </p>
+
+        <button class="payment-button" onclick="makeTestPayment()">
+            Test Ödemesini Tamamla
         </button>
 
     </div>
+
+</section>
+
+<div class="cart-panel" id="cartPanel">
+
+    <div class="cart-header">
+        <h2>Sepetim</h2>
+
+        <button class="close-cart" onclick="closeCart()">
+            ×
+        </button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+        Toplam: <span id="cartTotal">0</span> TL
+    </div>
+
+    <button class="checkout-button" onclick="goToCheckout()">
+        Siparişe Geç
+    </button>
+
 </div>
 
 <footer id="iletisim">
-    <p>© 2026 VELORA. Tüm hakları saklıdır.</p>
+    <p>© 2026 VELORA — Zarif Takılar</p>
 </footer>
 
 <script>
 
-    const BACKEND_URL =
-        "https://velora-backend-o0f5.onrender.com";
+const BACKEND_URL = "https://velora-backend-o0f5.onrender.com";
 
-    let cart = [];
+let cart = [];
 
-    let currentOrder = null;
+let currentOrder = null;
 
-    function addToCart(name, price) {
+function addToCart(name, price, image) {
 
-        const existingProduct =
-            cart.find(item => item.name === name);
+    const existingProduct = cart.find(item => item.name === name);
 
-        if (existingProduct) {
-
-            existingProduct.quantity++;
-
-        } else {
-
-            cart.push({
-                name: name,
-                price: price,
-                quantity: 1
-            });
-
-        }
-
-        updateCart();
-
-    }
-
-    function updateCart() {
-
-        const cartItems =
-            document.getElementById("cart-items");
-
-        const cartCount =
-            document.getElementById("cart-count");
-
-        const cartTotal =
-            document.getElementById("cart-total");
-
-        cartItems.innerHTML = "";
-
-        let total = 0;
-        let count = 0;
-
-        cart.forEach((item, index) => {
-
-            total += item.price * item.quantity;
-            count += item.quantity;
-
-            const div =
-                document.createElement("div");
-
-            div.className = "cart-item";
-
-            div.innerHTML = `
-
-                <div>
-                    <strong>${item.name}</strong>
-                    <br>
-                    ${item.price} TL
-                </div>
-
-                <div class="quantity">
-
-                    <button onclick="changeQuantity(${index}, -1)">
-                        -
-                    </button>
-
-                    <span>${item.quantity}</span>
-
-                    <button onclick="changeQuantity(${index}, 1)">
-                        +
-                    </button>
-
-                </div>
-
-                <button
-                    class="remove"
-                    onclick="removeFromCart(${index})"
-                >
-                    Sil
-                </button>
-
-            `;
-
-            cartItems.appendChild(div);
-
+    if (existingProduct) {
+        existingProduct.quantity++;
+    } else {
+        cart.push({
+            name: name,
+            price: price,
+            image: image,
+            quantity: 1
         });
-
-        cartCount.textContent = count;
-        cartTotal.textContent = total;
-
-    }
-
-    function changeQuantity(index, amount) {
-
-        cart[index].quantity += amount;
-
-        if (cart[index].quantity <= 0) {
-
-            cart.splice(index, 1);
-
-        }
-
-        updateCart();
-
-    }
-
-    function removeFromCart(index) {
-
-        cart.splice(index, 1);
-
-        updateCart();
-
-    }
-
-    function openCart() {
-
-        updateCart();
-
-        document.getElementById("cart-panel").style.display =
-            "flex";
-
-    }
-
-    function closeCart() {
-
-        document.getElementById("cart-panel").style.display =
-            "none";
-
-    }
-
-    function openOrderForm() {
-
-        if (cart.length === 0) {
-
-            alert("Sepetiniz boş.");
-
-            return;
-
-        }
-
-        closeCart();
-
-        updateOrderSummary();
-
-        document.getElementById("order-panel").style.display =
-            "flex";
-
-    }
-
-    function closeOrderForm() {
-
-        document.getElementById("order-panel").style.display =
-            "none";
-
-    }
-
-    function updateOrderSummary() {
-
-        const summary =
-            document.getElementById("order-summary");
-
-        const totalElement =
-            document.getElementById("order-total");
-
-        summary.innerHTML = "";
-
-        let total = 0;
-
-        cart.forEach(item => {
-
-            const itemTotal =
-                item.price * item.quantity;
-
-            total += itemTotal;
-
-            const p =
-                document.createElement("p");
-
-            p.textContent =
-                `${item.name} x${item.quantity} — ${itemTotal} TL`;
-
-            summary.appendChild(p);
-
-        });
-
-        totalElement.textContent = total;
-
-    }
-
-    async function submitOrder(event) {
-
-        event.preventDefault();
-
-        if (cart.length === 0) {
-
-            alert("Sepetiniz boş.");
-
-            return;
-
-        }
-
-        const name =
-            document.getElementById("customer-name").value;
-
-        const phone =
-            document.getElementById("customer-phone").value;
-
-        const address =
-            document.getElementById("customer-address").value;
-
-        const note =
-            document.getElementById("order-note").value;
-
-        const total =
-            cart.reduce(
-                (sum, item) =>
-                    sum + item.price * item.quantity,
-                0
-            );
-
-        currentOrder = {
-
-            customer: {
-                name: name,
-                phone: phone,
-                address: address
-            },
-
-            note: note,
-
-            items: cart,
-
-            total: total
-
-        };
-
-        try {
-
-            const response =
-                await fetch(
-                    `${BACKEND_URL}/api/order`,
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-
-                        body: JSON.stringify(currentOrder)
-                    }
-                );
-
-            const data =
-                await response.json();
-
-            if (!data.success) {
-
-                alert("Sipariş gönderilemedi.");
-
-                return;
-
-            }
-
-            document.getElementById("payment-box").style.display =
-                "block";
-
-            alert(
-                "Sipariş bilgileri başarıyla alındı. Şimdi test ödeme yapabilirsiniz."
-            );
-
-        } catch (error) {
-
-            console.error(error);
-
-            alert(
-                "Sunucuya bağlanılamadı. Lütfen daha sonra tekrar deneyin."
-            );
-
-        }
-
-    }
-
-    async function makeTestPayment() {
-
-        if (!currentOrder) {
-
-            alert("Önce sipariş oluşturmalısınız.");
-
-            return;
-
-        }
-
-        try {
-
-            const response =
-                await fetch(
-                    `${BACKEND_URL}/api/test-payment`,
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-
-                        body: JSON.stringify({
-                            total: currentOrder.total
-                        })
-                    }
-                );
-
-            const data =
-                await response.json();
-
-            if (
-                data.success &&
-                data.paymentStatus === "paid"
-            ) {
-
-                alert(
-                    "Test ödeme başarılı! Siparişiniz alındı."
-                );
-
-                cart = [];
-
-                currentOrder = null;
-
-                updateCart();
-
-                closeOrderForm();
-
-                document.getElementById("payment-box").style.display =
-                    "none";
-
-                document.querySelector(".order-form").reset();
-
-            } else {
-
-                alert("Test ödeme başarısız.");
-
-            }
-
-        } catch (error) {
-
-            console.error(error);
-
-            alert(
-                "Ödeme sunucusuna bağlanılamadı."
-            );
-
-        }
-
     }
 
     updateCart();
+
+    alert(name + " sepete eklendi!");
+}
+
+function updateCart() {
+
+    const cartItems = document.getElementById("cartItems");
+    const cartCount = document.getElementById("cartCount");
+    const cartTotal = document.getElementById("cartTotal");
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+    let count = 0;
+
+    cart.forEach((item, index) => {
+
+        total += item.price * item.quantity;
+        count += item.quantity;
+
+        const div = document.createElement("div");
+
+        div.className = "cart-item";
+
+        div.innerHTML = `
+            <div class="cart-item-top">
+                <strong>${item.name}</strong>
+                <span>${item.price * item.quantity} TL</span>
+            </div>
+
+            <div class="quantity-controls">
+                <button onclick="decreaseQuantity(${index})">−</button>
+
+                <span>${item.quantity}</span>
+
+                <button onclick="increaseQuantity(${index})">+</button>
+            </div>
+
+            <button class="remove-button" onclick="removeItem(${index})">
+                Ürünü kaldır
+            </button>
+        `;
+
+        cartItems.appendChild(div);
+    });
+
+    cartCount.textContent = count;
+    cartTotal.textContent = total;
+}
+
+function increaseQuantity(index) {
+
+    cart[index].quantity++;
+
+    updateCart();
+}
+
+function decreaseQuantity(index) {
+
+    if (cart[index].quantity > 1) {
+        cart[index].quantity--;
+    } else {
+        cart.splice(index, 1);
+    }
+
+    updateCart();
+}
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+}
+
+function openCart() {
+
+    document.getElementById("cartPanel").classList.add("open");
+}
+
+function closeCart() {
+
+    document.getElementById("cartPanel").classList.remove("open");
+}
+
+function goToCheckout() {
+
+    if (cart.length === 0) {
+        alert("Sepetiniz boş.");
+        return;
+    }
+
+    closeCart();
+
+    document.getElementById("orderSection").style.display = "block";
+
+    document.getElementById("orderSection").scrollIntoView({
+        behavior: "smooth"
+    });
+
+    showOrderSummary();
+}
+
+function showOrderSummary() {
+
+    const summary = document.getElementById("orderSummary");
+
+    let html = "<h3>Sipariş Özeti</h3>";
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        const itemTotal = item.price * item.quantity;
+
+        total += itemTotal;
+
+        html += `
+            <p style="margin-top:10px;">
+                ${item.name} × ${item.quantity}
+                — ${itemTotal} TL
+            </p>
+        `;
+    });
+
+    html += `
+        <hr style="margin:15px 0;">
+        <strong>Toplam: ${total} TL</strong>
+    `;
+
+    summary.innerHTML = html;
+}
+
+document.getElementById("orderForm").addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    if (cart.length === 0) {
+        alert("Sepetiniz boş.");
+        return;
+    }
+
+    const name = document.getElementById("customerName").value;
+    const phone = document.getElementById("customerPhone").value;
+    const address = document.getElementById("customerAddress").value;
+    const note = document.getElementById("customerNote").value;
+
+    let total = 0;
+
+    cart.forEach(item => {
+        total += item.price * item.quantity;
+    });
+
+    currentOrder = {
+        customer: {
+            name: name,
+            phone: phone,
+            address: address,
+            note: note
+        },
+        items: cart,
+        total: total
+    };
+
+    try {
+
+        const response = await fetch(BACKEND_URL + "/api/order", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(currentOrder)
+
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+
+            document.getElementById("orderSection").style.display = "none";
+
+            document.getElementById("paymentSection").style.display = "block";
+
+            document.getElementById("paymentTotal").textContent =
+                "Ödenecek tutar: " + total + " TL";
+
+            document.getElementById("paymentSection").scrollIntoView({
+                behavior: "smooth"
+            });
+
+        } else {
+
+            alert("Sipariş gönderilemedi.");
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Sunucuya bağlanılamadı.");
+
+    }
+
+});
+
+async function makeTestPayment() {
+
+    if (!currentOrder) {
+        alert("Önce sipariş oluşturmalısınız.");
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            BACKEND_URL + "/api/test-payment",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    total: currentOrder.total
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.success) {
+
+            alert("Test ödeme başarılı! 🎉");
+
+            cart = [];
+
+            currentOrder = null;
+
+            updateCart();
+
+            document.getElementById("paymentSection").style.display = "none";
+
+            document.getElementById("orderForm").reset();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        } else {
+
+            alert("Ödeme başarısız.");
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Ödeme sunucusuna bağlanılamadı.");
+
+    }
+
+}
+
+updateCart();
 
 </script>
 
