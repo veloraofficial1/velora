@@ -22,7 +22,6 @@
             color: #4c3b2b;
         }
 
-        /* HEADER */
         header {
             position: sticky;
             top: 0;
@@ -46,7 +45,7 @@
         nav {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 24px;
         }
 
         nav a,
@@ -96,7 +95,67 @@
             display: block;
         }
 
+        /* HESAP BUTONU */
+
+        .account-area {
+            position: relative;
+        }
+
+        .account-button {
+            border: 1px solid #b99669;
+            background: #fffaf3;
+            color: #705333;
+            padding: 9px 15px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .account-button:hover {
+            background: #b99669;
+            color: white;
+        }
+
+        .account-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 42px;
+            width: 240px;
+            background: #fffaf3;
+            border: 1px solid #dbc8ad;
+            box-shadow: 0 10px 25px rgba(70, 50, 30, 0.15);
+            padding: 18px;
+        }
+
+        .account-menu.active {
+            display: block;
+        }
+
+        .account-menu h3 {
+            color: #85633d;
+            margin-bottom: 8px;
+        }
+
+        .account-menu p {
+            font-size: 14px;
+            color: #6b5640;
+            margin-bottom: 15px;
+            word-break: break-word;
+        }
+
+        .account-menu button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #b99669;
+            background: #b99669;
+            color: white;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
         /* HERO */
+
         .hero {
             min-height: 580px;
             background:
@@ -144,7 +203,6 @@
             color: white;
         }
 
-        /* SECTION */
         section {
             padding: 80px 6%;
         }
@@ -157,7 +215,8 @@
             letter-spacing: 3px;
         }
 
-        /* CATEGORY CARDS */
+        /* KATEGORİLER */
+
         .category-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -197,7 +256,8 @@
             letter-spacing: 3px;
         }
 
-        /* PRODUCTS */
+        /* ÜRÜNLER */
+
         #urunler {
             background: #fbf7f0;
         }
@@ -275,7 +335,8 @@
             cursor: not-allowed;
         }
 
-        /* REVIEWS */
+        /* YORUMLAR */
+
         .review-box {
             margin-top: 20px;
             padding-top: 15px;
@@ -346,7 +407,8 @@
             margin-bottom: 5px;
         }
 
-        /* FEATURED */
+        /* ÖNE ÇIKANLAR */
+
         #one-cikanlar {
             background: #efe3d2;
         }
@@ -392,7 +454,8 @@
             font-size: 14px;
         }
 
-        /* CONTACT */
+        /* İLETİŞİM */
+
         #iletisim {
             text-align: center;
             background: #f7f1e7;
@@ -406,6 +469,7 @@
         }
 
         /* FOOTER */
+
         footer {
             background: #4d3b2a;
             color: #f5e9d8;
@@ -414,8 +478,120 @@
             font-size: 14px;
         }
 
-        /* MOBILE */
-        @media (max-width: 1000px) {
+        /* HESAP PENCERESİ */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(40, 28, 18, 0.55);
+            z-index: 5000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 420px;
+            background: #fffaf3;
+            border: 1px solid #d6c2a5;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(40, 28, 18, 0.25);
+            position: relative;
+        }
+
+        .modal-box h2 {
+            text-align: center;
+            color: #85633d;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            border: none;
+            background: none;
+            color: #80674c;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d9c5a9;
+            background: #fffdf9;
+            color: #4c3b2b;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .auth-form input:focus {
+            border-color: #b58c5b;
+        }
+
+        .auth-submit {
+            padding: 12px;
+            border: 1px solid #a67c48;
+            background: #a67c48;
+            color: white;
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .auth-submit:hover {
+            background: #8d673d;
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 18px;
+            color: #6b5640;
+            font-size: 14px;
+        }
+
+        .auth-switch button {
+            border: none;
+            background: none;
+            color: #9b7445;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+        }
+
+        .auth-message {
+            margin-top: 12px;
+            text-align: center;
+            font-size: 14px;
+            min-height: 20px;
+        }
+
+        .success-message {
+            color: #58704d;
+        }
+
+        .error-message {
+            color: #a05243;
+        }
+
+        /* MOBİL */
+
+        @media (max-width: 1100px) {
+
             .product-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -428,12 +604,17 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            header {
+                gap: 15px;
+            }
+
             nav {
                 gap: 14px;
             }
         }
 
         @media (max-width: 700px) {
+
             header {
                 flex-direction: column;
                 gap: 15px;
@@ -468,6 +649,14 @@
                 left: 50%;
                 transform: translateX(-50%);
             }
+
+            .account-menu {
+                position: fixed;
+                top: 150px;
+                right: 20px;
+                left: 20px;
+                width: auto;
+            }
         }
     </style>
 </head>
@@ -475,117 +664,201 @@
 <body>
 
 <header>
+
     <a href="#" class="logo">VELORA</a>
 
     <nav>
 
         <!-- YÜZÜK -->
         <div class="dropdown">
-            <button class="dropbtn">Yüzük ▾</button>
+
+            <button class="dropbtn">
+                Yüzük ▾
+            </button>
 
             <div class="dropdown-content">
-                <a href="#urunler" onclick="filterCategory('Yüzük','Günlük')">
+
+                <a href="#urunler"
+                   onclick="filterCategory('Yüzük','Günlük')">
                     Günlük
                 </a>
 
-                <a href="#urunler" onclick="filterCategory('Yüzük','Taşlı')">
+                <a href="#urunler"
+                   onclick="filterCategory('Yüzük','Taşlı')">
                     Taşlı
                 </a>
 
-                <a href="#urunler" onclick="filterCategory('Yüzük','Kalpli')">
+                <a href="#urunler"
+                   onclick="filterCategory('Yüzük','Kalpli')">
                     Kalpli
                 </a>
 
-                <a href="#urunler" onclick="filterCategory('Yüzük','Minimal')">
+                <a href="#urunler"
+                   onclick="filterCategory('Yüzük','Minimal')">
                     Minimal
                 </a>
+
             </div>
+
         </div>
+
 
         <!-- BİLEKLİK -->
         <div class="dropdown">
-            <button class="dropbtn">Bileklik ▾</button>
+
+            <button class="dropbtn">
+                Bileklik ▾
+            </button>
 
             <div class="dropdown-content">
-                <a href="#urunler" onclick="filterCategory('Bileklik','Minimal')">
+
+                <a href="#urunler"
+                   onclick="filterCategory('Bileklik','Minimal')">
                     Minimal
                 </a>
 
-                <a href="#urunler" onclick="filterCategory('Bileklik','Taşlı')">
+                <a href="#urunler"
+                   onclick="filterCategory('Bileklik','Taşlı')">
                     Taşlı
                 </a>
 
-                <a href="#urunler" onclick="filterCategory('Bileklik','Su Yolu')">
+                <a href="#urunler"
+                   onclick="filterCategory('Bileklik','Su Yolu')">
                     Su Yolu
                 </a>
 
-                <a href="#urunler" onclick="filterCategory('Bileklik','Zincir')">
+                <a href="#urunler"
+                   onclick="filterCategory('Bileklik','Zincir')">
                     Zincir
                 </a>
+
             </div>
+
         </div>
+
 
         <!-- KÜPE -->
         <div class="dropdown">
-            <button class="dropbtn">Küpe ▾</button>
+
+            <button class="dropbtn">
+                Küpe ▾
+            </button>
 
             <div class="dropdown-content">
-                <a href="#urunler" onclick="filterCategory('Küpe','İnci')">
+
+                <a href="#urunler"
+                   onclick="filterCategory('Küpe','İnci')">
                     İnci
                 </a>
 
-                <a href="#urunler" onclick="filterCategory('Küpe','Halka')">
+                <a href="#urunler"
+                   onclick="filterCategory('Küpe','Halka')">
                     Halka
                 </a>
 
-                <a href="#urunler" onclick="filterCategory('Küpe','Taşlı')">
+                <a href="#urunler"
+                   onclick="filterCategory('Küpe','Taşlı')">
                     Taşlı
                 </a>
 
-                <a href="#urunler" onclick="filterCategory('Küpe','Minimal')">
+                <a href="#urunler"
+                   onclick="filterCategory('Küpe','Minimal')">
                     Minimal
                 </a>
+
             </div>
+
         </div>
+
 
         <!-- KOLYE -->
         <div class="dropdown">
-            <button class="dropbtn">Kolye ▾</button>
+
+            <button class="dropbtn">
+                Kolye ▾
+            </button>
 
             <div class="dropdown-content">
-                <a href="#urunler" onclick="filterCategory('Kolye','İnci')">
+
+                <a href="#urunler"
+                   onclick="filterCategory('Kolye','İnci')">
                     İnci
                 </a>
 
-                <a href="#urunler" onclick="filterCategory('Kolye','Zincir')">
+                <a href="#urunler"
+                   onclick="filterCategory('Kolye','Zincir')">
                     Zincir
                 </a>
 
-                <a href="#urunler" onclick="filterCategory('Kolye','Minimal')">
+                <a href="#urunler"
+                   onclick="filterCategory('Kolye','Minimal')">
                     Minimal
                 </a>
 
-                <a href="#urunler" onclick="filterCategory('Kolye','Taşlı')">
+                <a href="#urunler"
+                   onclick="filterCategory('Kolye','Taşlı')">
                     Taşlı
                 </a>
+
             </div>
+
         </div>
 
-        <a href="#one-cikanlar">Öne Çıkanlar</a>
-        <a href="#iletisim">İletişim</a>
+
+        <a href="#one-cikanlar">
+            Öne Çıkanlar
+        </a>
+
+        <a href="#iletisim">
+            İletişim
+        </a>
+
+
+        <!-- HESAP -->
+
+        <div class="account-area">
+
+            <button
+                id="accountButton"
+                class="account-button"
+                onclick="openAuth()">
+                👤 Hesap
+            </button>
+
+            <div
+                id="accountMenu"
+                class="account-menu">
+
+                <h3 id="accountUsername">
+                    Hesabım
+                </h3>
+
+                <p id="accountEmail"></p>
+
+                <button onclick="logout()">
+                    Çıkış Yap
+                </button>
+
+            </div>
+
+        </div>
 
     </nav>
+
 </header>
 
 
 <!-- HERO -->
+
 <section class="hero">
 
     <div class="hero-content">
 
         <h1>VELORA</h1>
 
-        <p>Zarafetin modern hali.</p>
+        <p>
+            Zarafetin modern hali.
+        </p>
 
         <a href="#urunler" class="hero-button">
             Koleksiyonu Keşfet
@@ -597,6 +870,7 @@
 
 
 <!-- KATEGORİLER -->
+
 <section>
 
     <h2 class="section-title">
@@ -605,11 +879,13 @@
 
     <div class="category-grid">
 
-        <div class="category-card"
-             onclick="filterCategory('Yüzük')">
+        <div
+            class="category-card"
+            onclick="filterCategory('Yüzük')">
 
-            <img src="resimler/yuzuk.jpg"
-                 alt="Yüzük">
+            <img
+                src="resimler/yuzuk.jpg"
+                alt="Yüzük">
 
             <div class="category-overlay">
                 Yüzük
@@ -618,11 +894,13 @@
         </div>
 
 
-        <div class="category-card"
-             onclick="filterCategory('Bileklik')">
+        <div
+            class="category-card"
+            onclick="filterCategory('Bileklik')">
 
-            <img src="resimler/bileklik.jpg"
-                 alt="Bileklik">
+            <img
+                src="resimler/bileklik.jpg"
+                alt="Bileklik">
 
             <div class="category-overlay">
                 Bileklik
@@ -631,11 +909,13 @@
         </div>
 
 
-        <div class="category-card"
-             onclick="filterCategory('Küpe')">
+        <div
+            class="category-card"
+            onclick="filterCategory('Küpe')">
 
-            <img src="resimler/incikupe.jpg"
-                 alt="Küpe">
+            <img
+                src="resimler/incikupe.jpg"
+                alt="Küpe">
 
             <div class="category-overlay">
                 Küpe
@@ -644,11 +924,13 @@
         </div>
 
 
-        <div class="category-card"
-             onclick="filterCategory('Kolye')">
+        <div
+            class="category-card"
+            onclick="filterCategory('Kolye')">
 
-            <img src="resimler/kolye.jpg"
-                 alt="Kolye">
+            <img
+                src="resimler/kolye.jpg"
+                alt="Kolye">
 
             <div class="category-overlay">
                 Kolye
@@ -662,6 +944,7 @@
 
 
 <!-- ÜRÜNLER -->
+
 <section id="urunler">
 
     <h2 class="section-title">
@@ -674,6 +957,7 @@
 
 
 <!-- ÖNE ÇIKANLAR -->
+
 <section id="one-cikanlar">
 
     <h2 class="section-title">
@@ -682,57 +966,93 @@
 
     <div class="featured-grid">
 
-        <div class="featured-card"
-             onclick="filterCategory('Bileklik','Su Yolu')">
+        <div
+            class="featured-card"
+            onclick="filterCategory('Bileklik','Su Yolu')">
 
-            <img src="resimler/su-yolu-bileklik.jpg"
-                 alt="Su Yolu Bileklik">
+            <img
+                src="resimler/su-yolu-bileklik.jpg"
+                alt="Su Yolu Bileklik">
 
             <div class="featured-info">
-                <h3>Su Yolu Bileklik</h3>
-                <p>Çok Yakında Stoklarda</p>
+
+                <h3>
+                    Su Yolu Bileklik
+                </h3>
+
+                <p>
+                    Çok Yakında Stoklarda
+                </p>
+
             </div>
 
         </div>
 
 
-        <div class="featured-card"
-             onclick="filterCategory('Yüzük','Günlük')">
+        <div
+            class="featured-card"
+            onclick="filterCategory('Yüzük','Günlük')">
 
-            <img src="resimler/yuzuk.jpg"
-                 alt="Zarif Yüzük">
+            <img
+                src="resimler/yuzuk.jpg"
+                alt="Zarif Yüzük">
 
             <div class="featured-info">
-                <h3>Zarif Yüzük</h3>
-                <p>Çok Yakında Stoklarda</p>
+
+                <h3>
+                    Zarif Yüzük
+                </h3>
+
+                <p>
+                    Çok Yakında Stoklarda
+                </p>
+
             </div>
 
         </div>
 
 
-        <div class="featured-card"
-             onclick="filterCategory('Kolye','İnci')">
+        <div
+            class="featured-card"
+            onclick="filterCategory('Kolye','İnci')">
 
-            <img src="resimler/kolye.jpg"
-                 alt="İnci Kolye">
+            <img
+                src="resimler/kolye.jpg"
+                alt="İnci Kolye">
 
             <div class="featured-info">
-                <h3>İnci Kolye</h3>
-                <p>Çok Yakında Stoklarda</p>
+
+                <h3>
+                    İnci Kolye
+                </h3>
+
+                <p>
+                    Çok Yakında Stoklarda
+                </p>
+
             </div>
 
         </div>
 
 
-        <div class="featured-card"
-             onclick="filterCategory('Küpe','İnci')">
+        <div
+            class="featured-card"
+            onclick="filterCategory('Küpe','İnci')">
 
-            <img src="resimler/incikupe.jpg"
-                 alt="İnci Küpe">
+            <img
+                src="resimler/incikupe.jpg"
+                alt="İnci Küpe">
 
             <div class="featured-info">
-                <h3>İnci Küpe</h3>
-                <p>Çok Yakında Stoklarda</p>
+
+                <h3>
+                    İnci Küpe
+                </h3>
+
+                <p>
+                    Çok Yakında Stoklarda
+                </p>
+
             </div>
 
         </div>
@@ -743,6 +1063,7 @@
 
 
 <!-- İLETİŞİM -->
+
 <section id="iletisim">
 
     <h2 class="section-title">
@@ -750,24 +1071,169 @@
     </h2>
 
     <p class="contact-text">
+
         VELORA koleksiyonumuz çok yakında stoklarda olacak.
         Yeni ürünler, özel koleksiyonlar ve güncellemeler için
         bizi takip etmeye devam edin.
+
     </p>
 
 </section>
 
 
 <footer>
+
     © 2026 VELORA — Zarafetin modern hali.
+
 </footer>
+
+
+<!-- ========================= -->
+<!-- HESAP OLUŞTUR / GİRİŞ -->
+<!-- ========================= -->
+
+<div
+    id="authModal"
+    class="modal">
+
+    <div class="modal-box">
+
+        <button
+            class="close-modal"
+            onclick="closeAuth()">
+            ×
+        </button>
+
+
+        <!-- GİRİŞ -->
+
+        <div id="loginForm">
+
+            <h2>
+                Giriş Yap
+            </h2>
+
+            <form
+                class="auth-form"
+                onsubmit="login(event)">
+
+                <input
+                    type="text"
+                    id="loginUsername"
+                    placeholder="Kullanıcı adı veya e-posta"
+                    required>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Şifre"
+                    required>
+
+                <button
+                    type="submit"
+                    class="auth-submit">
+                    Giriş Yap
+                </button>
+
+            </form>
+
+            <div
+                id="loginMessage"
+                class="auth-message">
+            </div>
+
+            <div class="auth-switch">
+
+                Hesabın yok mu?
+
+                <button onclick="showRegister()">
+                    Hesap Oluştur
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- KAYIT -->
+
+        <div
+            id="registerForm"
+            style="display:none;">
+
+            <h2>
+                Hesap Oluştur
+            </h2>
+
+            <form
+                class="auth-form"
+                onsubmit="register(event)">
+
+                <input
+                    type="text"
+                    id="registerUsername"
+                    placeholder="Kullanıcı adı"
+                    minlength="3"
+                    required>
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="E-posta"
+                    required>
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Şifre"
+                    minlength="6"
+                    required>
+
+                <button
+                    type="submit"
+                    class="auth-submit">
+                    Hesap Oluştur
+                </button>
+
+            </form>
+
+            <div
+                id="registerMessage"
+                class="auth-message">
+            </div>
+
+            <div class="auth-switch">
+
+                Zaten hesabın var mı?
+
+                <button onclick="showLogin()">
+                    Giriş Yap
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 
 <script>
 
-const products = [
+/* =========================================
+   VELORA BACKEND
+========================================= */
 
-    /* YÜZÜK */
+const API_URL =
+    "https://velora-backend-1-aft5.onrender.com";
+
+
+/* =========================================
+   ÜRÜNLER
+========================================= */
+
+const products = [
 
     {
         id: 1,
@@ -802,8 +1268,6 @@ const products = [
     },
 
 
-    /* BİLEKLİK */
-
     {
         id: 5,
         name: "Minimal Bileklik",
@@ -837,8 +1301,6 @@ const products = [
     },
 
 
-    /* KÜPE */
-
     {
         id: 9,
         name: "İnci Küpe",
@@ -871,8 +1333,6 @@ const products = [
         image: "resimler/minimal-kupe.jpg"
     },
 
-
-    /* KOLYE */
 
     {
         id: 13,
@@ -909,10 +1369,13 @@ const products = [
 ];
 
 
-let selectedStars = Array(products.length + 1).fill(0);
+let selectedStars =
+    Array(products.length + 1).fill(0);
 
 
-/* ÜRÜNLERİ GÖSTER */
+/* =========================================
+   ÜRÜNLERİ GÖSTER
+========================================= */
 
 function renderProducts(list = products) {
 
@@ -943,8 +1406,6 @@ function renderProducts(list = products) {
         }
 
 
-        /* SADECE ANA KATEGORİ BAŞLIĞI */
-
         const heading =
             document.createElement("h2");
 
@@ -956,8 +1417,6 @@ function renderProducts(list = products) {
 
         container.appendChild(heading);
 
-
-        /* ÜRÜN GRİDİ */
 
         const grid =
             document.createElement("div");
@@ -1000,21 +1459,17 @@ function renderProducts(list = products) {
 
                     <button
                         class="stock-button"
-                        disabled
-                    >
+                        disabled>
                         Yakında Stoklarda
                     </button>
-
 
                     <div class="review-box">
 
                         <div
                             class="stars"
-                            id="stars-${product.id}"
-                        >
+                            id="stars-${product.id}">
                             ${createStars(product.id)}
                         </div>
-
 
                         <textarea
                             id="review-${product.id}"
@@ -1022,19 +1477,16 @@ function renderProducts(list = products) {
                             placeholder="Ürün hakkındaki düşüncenizi yazın..."
                         ></textarea>
 
-
                         <button
                             class="review-button"
-                            onclick="addReview(${product.id})"
-                        >
+                            onclick="addReview(${product.id})">
                             Yorumu Gönder
                         </button>
 
-
                         <div
                             class="reviews"
-                            id="reviews-${product.id}"
-                        ></div>
+                            id="reviews-${product.id}">
+                        </div>
 
                     </div>
 
@@ -1061,7 +1513,9 @@ function renderProducts(list = products) {
 }
 
 
-/* YILDIZLAR */
+/* =========================================
+   YILDIZLAR
+========================================= */
 
 function createStars(productId) {
 
@@ -1072,8 +1526,7 @@ function createStars(productId) {
         html += `
             <span
                 class="star ${selectedStars[productId] >= i ? "active" : ""}"
-                onclick="selectStar(${productId}, ${i})"
-            >
+                onclick="selectStar(${productId}, ${i})">
                 ★
             </span>
         `;
@@ -1086,7 +1539,8 @@ function createStars(productId) {
 
 function selectStar(productId, rating) {
 
-    selectedStars[productId] = rating;
+    selectedStars[productId] =
+        rating;
 
     const stars =
         document.getElementById(
@@ -1103,7 +1557,9 @@ function selectStar(productId, rating) {
 }
 
 
-/* YORUM EKLE */
+/* =========================================
+   YORUM EKLE
+========================================= */
 
 function addReview(productId) {
 
@@ -1121,7 +1577,9 @@ function addReview(productId) {
 
     if (!rating) {
 
-        alert("Lütfen yıldız puanı seçin.");
+        alert(
+            "Lütfen yıldız puanı seçin."
+        );
 
         return;
     }
@@ -1129,7 +1587,9 @@ function addReview(productId) {
 
     if (!text) {
 
-        alert("Lütfen yorumunuzu yazın.");
+        alert(
+            "Lütfen yorumunuzu yazın."
+        );
 
         return;
     }
@@ -1146,9 +1606,15 @@ function addReview(productId) {
 
 
     reviews.push({
+
         rating: rating,
+
         text: text,
-        date: new Date().toLocaleDateString("tr-TR")
+
+        date:
+            new Date()
+                .toLocaleDateString("tr-TR")
+
     });
 
 
@@ -1181,7 +1647,9 @@ function addReview(productId) {
 }
 
 
-/* YORUMLARI YÜKLE */
+/* =========================================
+   YORUMLARI YÜKLE
+========================================= */
 
 function loadReviews(productId) {
 
@@ -1253,21 +1721,26 @@ function loadReviews(productId) {
 }
 
 
-/* GÜVENLİ METİN */
+/* =========================================
+   GÜVENLİ METİN
+========================================= */
 
 function escapeHtml(text) {
 
     const div =
         document.createElement("div");
 
-    div.textContent = text;
+    div.textContent =
+        text;
 
     return div.innerHTML;
 
 }
 
 
-/* KATEGORİ FİLTRELEME */
+/* =========================================
+   KATEGORİ FİLTRELEME
+========================================= */
 
 function filterCategory(
     category,
@@ -1318,9 +1791,649 @@ function filterCategory(
 }
 
 
-/* SAYFA AÇILINCA TÜM ÜRÜNLER */
+/* =========================================
+   HESAP SİSTEMİ
+========================================= */
+
+
+/* MODALI AÇ */
+
+function openAuth() {
+
+    const token =
+        localStorage.getItem("veloraToken");
+
+    if (token) {
+
+        toggleAccountMenu();
+
+        return;
+    }
+
+
+    document
+        .getElementById("authModal")
+        .classList.add("active");
+
+}
+
+
+/* MODALI KAPAT */
+
+function closeAuth() {
+
+    document
+        .getElementById("authModal")
+        .classList.remove("active");
+
+}
+
+
+/* KAYIT EKRANI */
+
+function showRegister() {
+
+    document
+        .getElementById("loginForm")
+        .style.display = "none";
+
+    document
+        .getElementById("registerForm")
+        .style.display = "block";
+
+
+    clearAuthMessages();
+
+}
+
+
+/* GİRİŞ EKRANI */
+
+function showLogin() {
+
+    document
+        .getElementById("registerForm")
+        .style.display = "none";
+
+    document
+        .getElementById("loginForm")
+        .style.display = "block";
+
+
+    clearAuthMessages();
+
+}
+
+
+/* MESAJLARI TEMİZLE */
+
+function clearAuthMessages() {
+
+    document
+        .getElementById("loginMessage")
+        .textContent = "";
+
+    document
+        .getElementById("registerMessage")
+        .textContent = "";
+
+}
+
+
+/* =========================================
+   HESAP OLUŞTUR
+========================================= */
+
+async function register(event) {
+
+    event.preventDefault();
+
+
+    const username =
+        document
+            .getElementById("registerUsername")
+            .value
+            .trim();
+
+    const email =
+        document
+            .getElementById("registerEmail")
+            .value
+            .trim();
+
+    const password =
+        document
+            .getElementById("registerPassword")
+            .value;
+
+
+    const message =
+        document
+            .getElementById("registerMessage");
+
+
+    message.className =
+        "auth-message";
+
+    message.textContent =
+        "Hesap oluşturuluyor...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/api/auth/register`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        username,
+                        email,
+                        password
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Hesap oluşturulamadı."
+            );
+
+        }
+
+
+        message.className =
+            "auth-message success-message";
+
+        message.textContent =
+            "Hesabınız oluşturuldu. Giriş yapabilirsiniz.";
+
+
+        document
+            .getElementById("registerUsername")
+            .value = "";
+
+        document
+            .getElementById("registerEmail")
+            .value = "";
+
+        document
+            .getElementById("registerPassword")
+            .value = "";
+
+
+        setTimeout(() => {
+
+            showLogin();
+
+        }, 1200);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.className =
+            "auth-message error-message";
+
+        message.textContent =
+            error.message ||
+            "Bir hata oluştu.";
+
+    }
+
+}
+
+
+/* =========================================
+   GİRİŞ YAP
+========================================= */
+
+async function login(event) {
+
+    event.preventDefault();
+
+
+    const username =
+        document
+            .getElementById("loginUsername")
+            .value
+            .trim();
+
+    const password =
+        document
+            .getElementById("loginPassword")
+            .value;
+
+
+    const message =
+        document
+            .getElementById("loginMessage");
+
+
+    message.className =
+        "auth-message";
+
+    message.textContent =
+        "Giriş yapılıyor...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/api/auth/login`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        username,
+                        password
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Giriş yapılamadı."
+            );
+
+        }
+
+
+        /*
+            Backend'den gelen token'ı
+            tarayıcıda saklıyoruz.
+        */
+
+        localStorage.setItem(
+            "veloraToken",
+            data.token
+        );
+
+
+        /*
+            Backend kullanıcı bilgisi
+            döndürürse saklıyoruz.
+        */
+
+        if (data.user) {
+
+            localStorage.setItem(
+                "veloraUser",
+                JSON.stringify(data.user)
+            );
+
+        }
+
+
+        message.className =
+            "auth-message success-message";
+
+        message.textContent =
+            "Giriş başarılı!";
+
+
+        updateAccountUI();
+
+
+        setTimeout(() => {
+
+            closeAuth();
+
+        }, 700);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.className =
+            "auth-message error-message";
+
+        message.textContent =
+            error.message ||
+            "Kullanıcı adı veya şifre hatalı.";
+
+    }
+
+}
+
+
+/* =========================================
+   KULLANICI BİLGİSİNİ BACKEND'DEN AL
+========================================= */
+
+async function loadCurrentUser() {
+
+    const token =
+        localStorage.getItem("veloraToken");
+
+
+    if (!token) {
+
+        updateAccountUI();
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/api/auth/me`,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "Authorization":
+                            `Bearer ${token}`
+                    }
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Oturum geçersiz."
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (data.user) {
+
+            localStorage.setItem(
+                "veloraUser",
+                JSON.stringify(data.user)
+            );
+
+        }
+
+
+        updateAccountUI();
+
+
+    } catch (error) {
+
+        console.log(
+            "Oturum kontrolü:",
+            error.message
+        );
+
+
+        localStorage.removeItem(
+            "veloraToken"
+        );
+
+        localStorage.removeItem(
+            "veloraUser"
+        );
+
+
+        updateAccountUI();
+
+    }
+
+}
+
+
+/* =========================================
+   HESAP MENÜSÜ
+========================================= */
+
+function toggleAccountMenu() {
+
+    const menu =
+        document.getElementById(
+            "accountMenu"
+        );
+
+    menu.classList.toggle("active");
+
+}
+
+
+/* =========================================
+   HESAP ARAYÜZÜNÜ GÜNCELLE
+========================================= */
+
+function updateAccountUI() {
+
+    const token =
+        localStorage.getItem(
+            "veloraToken"
+        );
+
+    const userText =
+        localStorage.getItem(
+            "veloraUser"
+        );
+
+
+    const button =
+        document.getElementById(
+            "accountButton"
+        );
+
+
+    const username =
+        document.getElementById(
+            "accountUsername"
+        );
+
+    const email =
+        document.getElementById(
+            "accountEmail"
+        );
+
+
+    if (token && userText) {
+
+        let user;
+
+        try {
+
+            user =
+                JSON.parse(userText);
+
+        } catch {
+
+            user = null;
+
+        }
+
+
+        if (user) {
+
+            const displayName =
+                user.username ||
+                user.email ||
+                "Hesabım";
+
+
+            button.textContent =
+                `👤 ${displayName}`;
+
+
+            username.textContent =
+                displayName;
+
+
+            email.textContent =
+                user.email ||
+                "";
+
+            return;
+
+        }
+
+    }
+
+
+    button.textContent =
+        "👤 Hesap";
+
+}
+
+
+/* =========================================
+   ÇIKIŞ YAP
+========================================= */
+
+function logout() {
+
+    localStorage.removeItem(
+        "veloraToken"
+    );
+
+    localStorage.removeItem(
+        "veloraUser"
+    );
+
+
+    document
+        .getElementById("accountMenu")
+        .classList.remove("active");
+
+
+    updateAccountUI();
+
+
+    alert(
+        "Hesabınızdan çıkış yapıldı."
+    );
+
+}
+
+
+/* =========================================
+   HESAP BUTONUNA TIKLAMA
+========================================= */
+
+document
+    .getElementById("accountButton")
+    .addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            const token =
+                localStorage.getItem(
+                    "veloraToken"
+                );
+
+
+            if (token) {
+
+                toggleAccountMenu();
+
+            } else {
+
+                openAuth();
+
+            }
+
+        }
+    );
+
+
+/* =========================================
+   DIŞARI TIKLAYINCA HESAP MENÜSÜNÜ KAPAT
+========================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const accountArea =
+            document.querySelector(
+                ".account-area"
+            );
+
+        const menu =
+            document.getElementById(
+                "accountMenu"
+            );
+
+
+        if (
+            accountArea &&
+            !accountArea.contains(event.target)
+        ) {
+
+            menu.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   MODAL DIŞINA TIKLAYINCA KAPAT
+========================================= */
+
+document
+    .getElementById("authModal")
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === this
+            ) {
+
+                closeAuth();
+
+            }
+
+        }
+    );
+
+
+/* =========================================
+   SAYFA AÇILINCA
+========================================= */
 
 renderProducts();
+
+loadCurrentUser();
 
 </script>
 
