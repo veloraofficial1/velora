@@ -1,1271 +1,1191 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VELORA Admin</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-* {
-    box-sizing: border-box;
-}
+  <title>VELORA Admin Panel</title>
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f7f1e8;
-    color: #3d3024;
-}
-
-button {
-    cursor: pointer;
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* GİRİŞ */
-
-#loginScreen {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.login-box {
-    width: 100%;
-    max-width: 420px;
-    background: #fffaf3;
-    padding: 35px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(80, 55, 30, .12);
-}
-
-.logo {
-    text-align: center;
-    font-size: 32px;
-    letter-spacing: 5px;
-    margin-bottom: 8px;
-}
-
-.login-subtitle {
-    text-align: center;
-    color: #8b765f;
-    margin-bottom: 30px;
-}
-
-input,
-select {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid #d9c9b5;
-    border-radius: 10px;
-    margin-top: 7px;
-    margin-bottom: 16px;
-    background: white;
-    font-size: 15px;
-}
-
-label {
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.primary-btn {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 10px;
-    background: #b18a54;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-}
-
-.primary-btn:hover {
-    background: #96713f;
-}
-
-.error {
-    color: #a33a32;
-    margin-top: 15px;
-    text-align: center;
-}
-
-/* PANEL */
-
-#adminPanel {
-    min-height: 100vh;
-}
-
-.topbar {
-    background: #fffaf3;
-    border-bottom: 1px solid #e2d6c6;
-    padding: 18px 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-
-.top-logo {
-    font-size: 25px;
-    letter-spacing: 4px;
-}
-
-.logout-btn {
-    border: 1px solid #cdbb9f;
-    background: transparent;
-    color: #5c4832;
-    padding: 9px 15px;
-    border-radius: 8px;
-}
-
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 30px 20px;
-}
-
-h1 {
-    margin-top: 0;
-}
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin: 25px 0 35px;
-}
-
-.stat-card {
-    background: #fffaf3;
-    border: 1px solid #e2d6c6;
-    border-radius: 16px;
-    padding: 22px;
-}
-
-.stat-title {
-    color: #8b765f;
-    font-size: 14px;
-}
-
-.stat-value {
-    font-size: 28px;
-    font-weight: bold;
-    margin-top: 8px;
-}
-
-.section {
-    background: #fffaf3;
-    border: 1px solid #e2d6c6;
-    border-radius: 16px;
-    padding: 22px;
-    margin-bottom: 25px;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 18px;
-}
-
-.refresh-btn {
-    border: 1px solid #cdbb9f;
-    background: white;
-    padding: 8px 13px;
-    border-radius: 8px;
-}
-
-.table-wrap {
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 650px;
-}
-
-th,
-td {
-    padding: 13px 10px;
-    border-bottom: 1px solid #eadfd2;
-    text-align: left;
-    font-size: 14px;
-}
-
-th {
-    color: #765f45;
-}
-
-.delete-btn {
-    border: none;
-    background: #a84d43;
-    color: white;
-    padding: 7px 10px;
-    border-radius: 7px;
-}
-
-.status-select {
-    width: auto;
-    margin: 0;
-    padding: 7px;
-}
-
-.order-items {
-    max-width: 260px;
-    white-space: normal;
-    line-height: 1.5;
-}
-
-.empty {
-    text-align: center;
-    color: #8b765f;
-    padding: 25px;
-}
-
-/* MOBİL */
-
-@media (max-width: 700px) {
-
-    .stats {
-        grid-template-columns: 1fr;
+  <style>
+    * {
+      box-sizing: border-box;
     }
 
-    .topbar {
-        padding: 15px;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f6f0e5;
+      color: #3f3428;
     }
 
-    .top-logo {
-        font-size: 20px;
+    .hidden {
+      display: none !important;
+    }
+
+    header {
+      background: #3f3428;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      letter-spacing: 4px;
+      font-size: 24px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 11px 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .gold-btn {
+      background: #b89455;
+      color: white;
+    }
+
+    .gold-btn:hover {
+      background: #9f7c43;
+    }
+
+    .logout-btn {
+      background: white;
+      color: #3f3428;
+    }
+
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.08);
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-top: 0;
+      letter-spacing: 3px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #d8cbb8;
+      border-radius: 8px;
+      font-size: 15px;
+      background: white;
+    }
+
+    label {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .error {
+      background: #fbe4e4;
+      color: #a33;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      display: none;
     }
 
     .container {
-        padding: 20px 12px;
+      max-width: 1400px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .welcome {
+      margin-bottom: 25px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .stat {
+      background: white;
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.05);
+    }
+
+    .stat span {
+      display: block;
+      color: #8b7a64;
+      margin-bottom: 10px;
+    }
+
+    .stat strong {
+      font-size: 28px;
     }
 
     .section {
-        padding: 15px;
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.05);
+      overflow-x: auto;
     }
-}
-</style>
+
+    .section h2 {
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 13px;
+      border-bottom: 1px solid #eee;
+      vertical-align: middle;
+    }
+
+    th {
+      background: #f8f3eb;
+    }
+
+    .danger {
+      background: #b84b4b;
+      color: white;
+    }
+
+    .danger:hover {
+      background: #963939;
+    }
+
+    .refresh {
+      margin-bottom: 20px;
+    }
+
+    .status {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #d8cbb8;
+    }
+
+    .message {
+      padding: 12px;
+      background: #eee6d9;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    @media (max-width: 800px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      header {
+        padding: 16px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .login-box {
+        padding: 25px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- =========================
-     ADMİN GİRİŞ
-========================= -->
-
-<div id="loginScreen">
-
+  <!-- LOGIN -->
+  <div id="loginPage" class="login-page">
     <div class="login-box">
 
-        <div class="logo">
-            VELORA
-        </div>
+      <h2>VELORA</h2>
+      <p style="text-align:center;">Admin Paneli</p>
 
-        <div class="login-subtitle">
-            Yönetim Paneli
-        </div>
+      <div id="loginError" class="error"></div>
 
-        <form id="loginForm">
+      <form id="loginForm">
 
-            <label>
-                Yönetici Kullanıcı Adı
-            </label>
+        <label>Admin Kullanıcı Adı</label>
+        <input
+          id="adminUsername"
+          type="text"
+          placeholder="Kullanıcı adı"
+          required
+        >
 
-            <input
-                type="text"
-                id="adminUsername"
-                autocomplete="username"
-                required
-            >
-
-            <label>
-                Yönetici Şifresi
-            </label>
-
-            <input
-                type="password"
-                id="adminPassword"
-                autocomplete="current-password"
-                required
-            >
-
-            <button
-                type="submit"
-                class="primary-btn"
-            >
-                Yönetim Paneline Gir
-            </button>
-
-            <div
-                id="loginError"
-                class="error"
-            ></div>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     ADMİN PANELİ
-========================= -->
-
-<div
-    id="adminPanel"
-    class="hidden"
->
-
-    <header class="topbar">
-
-        <div class="top-logo">
-            VELORA
-        </div>
+        <label>Admin Şifresi</label>
+        <input
+          id="adminPassword"
+          type="password"
+          placeholder="Şifre"
+          required
+        >
 
         <button
-            class="logout-btn"
-            onclick="logout()"
+          type="submit"
+          class="gold-btn"
+          style="width:100%;"
         >
-            Çıkış Yap
+          Giriş Yap
         </button>
 
+      </form>
+
+    </div>
+  </div>
+
+
+  <!-- PANEL -->
+  <div id="adminPage" class="hidden">
+
+    <header>
+      <h1>VELORA ADMIN</h1>
+
+      <button
+        class="logout-btn"
+        onclick="logout()"
+      >
+        Çıkış Yap
+      </button>
     </header>
 
 
     <main class="container">
 
-        <h1>
-            Yönetim Paneli
-        </h1>
+      <div class="welcome">
+        <h2>Yönetim Paneli</h2>
+        <p>VELORA mağazasını buradan yönetebilirsin.</p>
+      </div>
 
-        <p>
-            VELORA mağazasını buradan yönetebilirsin.
-        </p>
+      <div id="globalMessage" class="message"></div>
 
-
-        <!-- İSTATİSTİKLER -->
-
-        <div class="stats">
-
-            <div class="stat-card">
-
-                <div class="stat-title">
-                    Toplam Kullanıcı
-                </div>
-
-                <div
-                    class="stat-value"
-                    id="userCount"
-                >
-                    -
-                </div>
-
-            </div>
+      <button
+        class="gold-btn refresh"
+        onclick="loadAll()"
+      >
+        Yenile
+      </button>
 
 
-            <div class="stat-card">
+      <!-- İSTATİSTİKLER -->
+      <div class="stats">
 
-                <div class="stat-title">
-                    Toplam Sipariş
-                </div>
-
-                <div
-                    class="stat-value"
-                    id="orderCount"
-                >
-                    -
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-title">
-                    Toplam Sipariş Tutarı
-                </div>
-
-                <div
-                    class="stat-value"
-                    id="revenue"
-                >
-                    -
-                </div>
-
-            </div>
-
+        <div class="stat">
+          <span>Toplam Kullanıcı</span>
+          <strong id="userCount">0</strong>
         </div>
 
+        <div class="stat">
+          <span>Toplam Sipariş</span>
+          <strong id="orderCount">0</strong>
+        </div>
 
-        <!-- KULLANICILAR -->
+        <div class="stat">
+          <span>Yeni Sipariş</span>
+          <strong id="newOrderCount">0</strong>
+        </div>
 
-        <section class="section">
+        <div class="stat">
+          <span>Toplam Tutar</span>
+          <strong id="totalAmount">0 TL</strong>
+        </div>
 
-            <div class="section-header">
-
-                <h2>
-                    Kullanıcılar
-                </h2>
-
-                <button
-                    class="refresh-btn"
-                    onclick="loadUsers()"
-                >
-                    Yenile
-                </button>
-
-            </div>
-
-            <div class="table-wrap">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-                            <th>ID</th>
-                            <th>Kullanıcı Adı</th>
-                            <th>E-posta</th>
-                            <th>Kayıt Tarihi</th>
-                            <th>İşlem</th>
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="usersTable">
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </section>
+      </div>
 
 
-        <!-- SİPARİŞLER -->
+      <!-- KULLANICILAR -->
+      <div class="section">
 
-        <section class="section">
+        <h2>Kullanıcılar</h2>
 
-            <div class="section-header">
+        <table>
 
-                <h2>
-                    Siparişler
-                </h2>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Kullanıcı Adı</th>
+              <th>E-posta</th>
+              <th>Kayıt Tarihi</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
 
-                <button
-                    class="refresh-btn"
-                    onclick="loadOrders()"
-                >
-                    Yenile
-                </button>
+          <tbody id="usersTable">
+          </tbody>
 
-            </div>
+        </table>
 
-            <div class="table-wrap">
+      </div>
 
-                <table>
 
-                    <thead>
+      <!-- SİPARİŞLER -->
+      <div class="section">
 
-                        <tr>
-                            <th>Sipariş</th>
-                            <th>Müşteri</th>
-                            <th>İletişim</th>
-                            <th>Ürünler</th>
-                            <th>Toplam</th>
-                            <th>Durum</th>
-                            <th>İşlem</th>
-                        </tr>
+        <h2>Siparişler</h2>
 
-                    </thead>
+        <table>
 
-                    <tbody id="ordersTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Müşteri</th>
+              <th>Telefon</th>
+              <th>Adres</th>
+              <th>Ürünler</th>
+              <th>Tutar</th>
+              <th>Durum</th>
+              <th>Tarih</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
 
-                    </tbody>
+          <tbody id="ordersTable">
+          </tbody>
 
-                </table>
+        </table>
 
-            </div>
-
-        </section>
+      </div>
 
     </main>
 
-</div>
+  </div>
 
 
 <script>
 
-const API_URL =
+  /*
+   * VELORA BACKEND
+   */
+  const API_URL =
     "https://velora-backend-1-aft5.onrender.com";
 
 
-let adminToken =
-    localStorage.getItem("veloraAdminToken");
+  /*
+   * ELEMENTLER
+   */
+  const loginPage =
+    document.getElementById("loginPage");
 
+  const adminPage =
+    document.getElementById("adminPage");
 
-/* =========================
-   SAYFA BAŞLANGICI
-========================= */
+  const loginForm =
+    document.getElementById("loginForm");
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+  const loginError =
+    document.getElementById("loginError");
 
-        if (adminToken) {
-            showPanel();
-        }
 
-    }
-);
+  /*
+   * HTML GÜVENLİĞİ
+   */
+  function escapeHtml(value) {
 
-
-/* =========================
-   ADMİN GİRİŞİ
-========================= */
-
-document
-    .getElementById("loginForm")
-    .addEventListener(
-        "submit",
-        async function(event) {
-
-            event.preventDefault();
-
-            const username =
-                document
-                    .getElementById("adminUsername")
-                    .value
-                    .trim();
-
-            const password =
-                document
-                    .getElementById("adminPassword")
-                    .value;
-
-            const error =
-                document
-                    .getElementById("loginError");
-
-            error.textContent = "";
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/api/admin/login`,
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify({
-                                    username,
-                                    password
-                                })
-                        }
-                    );
-
-                const data =
-                    await response.json();
-
-                if (!response.ok || !data.success) {
-
-                    throw new Error(
-                        data.message ||
-                        "Giriş başarısız."
-                    );
-
-                }
-
-                adminToken =
-                    data.token;
-
-                localStorage.setItem(
-                    "veloraAdminToken",
-                    adminToken
-                );
-
-                showPanel();
-
-            } catch (error) {
-
-                console.error(error);
-
-                errorElement =
-                    document.getElementById(
-                        "loginError"
-                    );
-
-                errorElement.textContent =
-                    error.message ||
-                    "Giriş yapılamadı.";
-
-            }
-
-        }
-    );
-
-
-/* =========================
-   PANELİ GÖSTER
-========================= */
-
-async function showPanel() {
-
-    document
-        .getElementById("loginScreen")
-        .classList
-        .add("hidden");
-
-    document
-        .getElementById("adminPanel")
-        .classList
-        .remove("hidden");
-
-    await loadAll();
-
-}
-
-
-/* =========================
-   TÜM VERİLER
-========================= */
-
-async function loadAll() {
-
-    try {
-
-        await loadStats();
-        await loadUsers();
-        await loadOrders();
-
-    } catch (error) {
-
-        console.error(error);
-
-    }
-
-}
-
-
-/* =========================
-   İSTATİSTİKLER
-========================= */
-
-async function loadStats() {
-
-    const response =
-        await fetch(
-            `${API_URL}/api/admin/stats`,
-            {
-                headers: {
-                    Authorization:
-                        `Bearer ${adminToken}`
-                }
-            }
-        );
-
-    if (response.status === 401) {
-        logout();
-        return;
-    }
-
-    const data =
-        await response.json();
-
-    document
-        .getElementById("userCount")
-        .textContent =
-        data.stats.users;
-
-    document
-        .getElementById("orderCount")
-        .textContent =
-        data.stats.orders;
-
-    document
-        .getElementById("revenue")
-        .textContent =
-        Number(data.stats.revenue)
-            .toLocaleString("tr-TR") +
-        " TL";
-}
-
-
-/* =========================
-   KULLANICILAR
-========================= */
-
-async function loadUsers() {
-
-    const table =
-        document.getElementById(
-            "usersTable"
-        );
-
-    table.innerHTML =
-        `<tr>
-            <td colspan="5" class="empty">
-                Yükleniyor...
-            </td>
-        </tr>`;
-
-    try {
-
-        const response =
-            await fetch(
-                `${API_URL}/api/admin/users`,
-                {
-                    headers: {
-                        Authorization:
-                            `Bearer ${adminToken}`
-                    }
-                }
-            );
-
-        if (response.status === 401) {
-            logout();
-            return;
-        }
-
-        const data =
-            await response.json();
-
-        table.innerHTML = "";
-
-        if (
-            !data.users ||
-            data.users.length === 0
-        ) {
-
-            table.innerHTML =
-                `<tr>
-                    <td colspan="5" class="empty">
-                        Henüz kayıtlı kullanıcı yok.
-                    </td>
-                </tr>`;
-
-            return;
-        }
-
-        data.users.forEach(
-            user => {
-
-                const row =
-                    document.createElement(
-                        "tr"
-                    );
-
-                row.innerHTML = `
-                    <td>${user.id}</td>
-
-                    <td>
-                        ${escapeHtml(
-                            user.username
-                        )}
-                    </td>
-
-                    <td>
-                        ${escapeHtml(
-                            user.email
-                        )}
-                    </td>
-
-                    <td>
-                        ${formatDate(
-                            user.created_at
-                        )}
-                    </td>
-
-                    <td>
-
-                        <button
-                            class="delete-btn"
-                            onclick="deleteUser(${user.id})"
-                        >
-                            Sil
-                        </button>
-
-                    </td>
-                `;
-
-                table.appendChild(row);
-
-            }
-        );
-
-    } catch (error) {
-
-        console.error(error);
-
-        table.innerHTML =
-            `<tr>
-                <td colspan="5" class="empty">
-                    Kullanıcılar yüklenemedi.
-                </td>
-            </tr>`;
-
-    }
-}
-
-
-/* =========================
-   KULLANICI SİL
-========================= */
-
-async function deleteUser(id) {
-
-    const confirmed =
-        confirm(
-            "Bu kullanıcıyı silmek istediğine emin misin?"
-        );
-
-    if (!confirmed) {
-        return;
-    }
-
-    try {
-
-        const response =
-            await fetch(
-                `${API_URL}/api/admin/users/${id}`,
-                {
-                    method: "DELETE",
-
-                    headers: {
-                        Authorization:
-                            `Bearer ${adminToken}`
-                    }
-                }
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-            throw new Error(
-                data.message ||
-                "Kullanıcı silinemedi."
-            );
-        }
-
-        await loadStats();
-        await loadUsers();
-
-    } catch (error) {
-
-        alert(
-            error.message
-        );
-
-    }
-}
-
-
-/* =========================
-   SİPARİŞLER
-========================= */
-
-async function loadOrders() {
-
-    const table =
-        document.getElementById(
-            "ordersTable"
-        );
-
-    table.innerHTML =
-        `<tr>
-            <td colspan="7" class="empty">
-                Siparişler yükleniyor...
-            </td>
-        </tr>`;
-
-    try {
-
-        const response =
-            await fetch(
-                `${API_URL}/api/admin/orders`,
-                {
-                    headers: {
-                        Authorization:
-                            `Bearer ${adminToken}`
-                    }
-                }
-            );
-
-        if (response.status === 401) {
-            logout();
-            return;
-        }
-
-        const data =
-            await response.json();
-
-        table.innerHTML = "";
-
-        if (
-            !data.orders ||
-            data.orders.length === 0
-        ) {
-
-            table.innerHTML =
-                `<tr>
-                    <td colspan="7" class="empty">
-                        Henüz sipariş yok.
-                    </td>
-                </tr>`;
-
-            return;
-        }
-
-        data.orders.forEach(
-            order => {
-
-                const row =
-                    document.createElement(
-                        "tr"
-                    );
-
-                const items =
-                    order.items
-                        .map(
-                            item =>
-                                `${item.name || "Ürün"} × ${item.quantity || 1}`
-                        )
-                        .join("<br>");
-
-                row.innerHTML = `
-
-                    <td>
-                        #${order.id}
-                        <br>
-                        <small>
-                            ${formatDate(
-                                order.createdAt
-                            )}
-                        </small>
-                    </td>
-
-                    <td>
-                        <strong>
-                            ${escapeHtml(
-                                order.customer.name
-                            )}
-                        </strong>
-
-                        <br>
-
-                        <small>
-                            Hesap:
-                            ${escapeHtml(
-                                order.username
-                            )}
-                        </small>
-                    </td>
-
-                    <td>
-                        ${escapeHtml(
-                            order.customer.phone
-                        )}
-
-                        <br>
-
-                        ${escapeHtml(
-                            order.email
-                        )}
-
-                        <br>
-
-                        ${escapeHtml(
-                            order.customer.address
-                        )}
-                    </td>
-
-                    <td class="order-items">
-                        ${items || "-"}
-                    </td>
-
-                    <td>
-                        <strong>
-                            ${Number(
-                                order.total
-                            ).toLocaleString(
-                                "tr-TR"
-                            )} TL
-                        </strong>
-                    </td>
-
-                    <td>
-
-                        <select
-                            class="status-select"
-                            onchange="changeOrderStatus(
-                                ${order.id},
-                                this.value
-                            )"
-                        >
-
-                            ${statusOptions(
-                                order.status
-                            )}
-
-                        </select>
-
-                    </td>
-
-                    <td>
-
-                        <button
-                            class="delete-btn"
-                            onclick="deleteOrder(${order.id})"
-                        >
-                            Sil
-                        </button>
-
-                    </td>
-                `;
-
-                table.appendChild(row);
-
-            }
-        );
-
-    } catch (error) {
-
-        console.error(error);
-
-        table.innerHTML =
-            `<tr>
-                <td colspan="7" class="empty">
-                    Siparişler yüklenemedi.
-                </td>
-            </tr>`;
-
-    }
-}
-
-
-/* =========================
-   SİPARİŞ DURUMU
-========================= */
-
-function statusOptions(current) {
-
-    const statuses = [
-        "Yeni",
-        "Hazırlanıyor",
-        "Kargoda",
-        "Teslim Edildi",
-        "İptal"
-    ];
-
-    return statuses
-        .map(
-            status => `
-                <option
-                    value="${status}"
-                    ${status === current
-                        ? "selected"
-                        : ""}
-                >
-                    ${status}
-                </option>
-            `
-        )
-        .join("");
-}
-
-
-async function changeOrderStatus(
-    id,
-    status
-) {
-
-    try {
-
-        const response =
-            await fetch(
-                `${API_URL}/api/admin/orders/${id}/status`,
-                {
-                    method: "PATCH",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json",
-
-                        Authorization:
-                            `Bearer ${adminToken}`
-                    },
-
-                    body:
-                        JSON.stringify({
-                            status
-                        })
-                }
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.message ||
-                "Sipariş durumu değiştirilemedi."
-            );
-
-        }
-
-        await loadStats();
-
-    } catch (error) {
-
-        alert(
-            error.message
-        );
-
-        await loadOrders();
-
-    }
-}
-
-
-/* =========================
-   SİPARİŞ SİL
-========================= */
-
-async function deleteOrder(id) {
-
-    const confirmed =
-        confirm(
-            `#${id} numaralı siparişi silmek istediğine emin misin?`
-        );
-
-    if (!confirmed) {
-        return;
-    }
-
-    try {
-
-        const response =
-            await fetch(
-                `${API_URL}/api/admin/orders/${id}`,
-                {
-                    method: "DELETE",
-
-                    headers: {
-                        Authorization:
-                            `Bearer ${adminToken}`
-                    }
-                }
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.message ||
-                "Sipariş silinemedi."
-            );
-
-        }
-
-        await loadStats();
-        await loadOrders();
-
-    } catch (error) {
-
-        alert(
-            error.message
-        );
-
-    }
-}
-
-
-/* =========================
-   ÇIKIŞ
-========================= */
-
-function logout() {
-
-    localStorage.removeItem(
-        "veloraAdminToken"
-    );
-
-    adminToken = null;
-
-    document
-        .getElementById("adminPanel")
-        .classList
-        .add("hidden");
-
-    document
-        .getElementById("loginScreen")
-        .classList
-        .remove("hidden");
-
-}
-
-
-/* =========================
-   TARİH
-========================= */
-
-function formatDate(date) {
-
-    if (!date) {
-        return "-";
-    }
-
-    return new Date(date)
-        .toLocaleString(
-            "tr-TR"
-        );
-}
-
-
-/* =========================
-   GÜVENLİ HTML
-========================= */
-
-function escapeHtml(value) {
-
-    if (value === null ||
-        value === undefined) {
-        return "";
+    if (value === null || value === undefined) {
+      return "";
     }
 
     return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-}
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+
+  /*
+   * GENEL MESAJ
+   */
+  function showMessage(message) {
+
+    const box =
+      document.getElementById("globalMessage");
+
+    box.textContent = message;
+    box.style.display = "block";
+
+    setTimeout(() => {
+      box.style.display = "none";
+    }, 4000);
+  }
+
+
+  /*
+   * API İSTEĞİ
+   */
+  async function apiRequest(
+    endpoint,
+    options = {}
+  ) {
+
+    const token =
+      localStorage.getItem("veloraAdminToken");
+
+    const headers = {
+      "Content-Type": "application/json",
+      ...(options.headers || {})
+    };
+
+    if (token) {
+      headers.Authorization =
+        "Bearer " + token;
+    }
+
+    const response =
+      await fetch(
+        API_URL + endpoint,
+        {
+          ...options,
+          headers
+        }
+      );
+
+
+    /*
+     * Önce response'u text olarak alıyoruz.
+     * Böylece HTML gelirse
+     * Unexpected token < hatası yerine
+     * gerçek cevabı görebileceğiz.
+     */
+    const text =
+      await response.text();
+
+
+    let data;
+
+    try {
+
+      data =
+        text ? JSON.parse(text) : {};
+
+    } catch (error) {
+
+      console.error(
+        "Sunucudan JSON yerine gelen cevap:",
+        text
+      );
+
+      throw new Error(
+        "Sunucu JSON yerine HTML/metin döndürdü. API adresini kontrol et."
+      );
+    }
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.message ||
+        data.error ||
+        "API isteği başarısız."
+      );
+
+    }
+
+    return data;
+  }
+
+
+  /*
+   * ADMİN GİRİŞ
+   */
+  loginForm.addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+      loginError.style.display = "none";
+
+      const username =
+        document
+          .getElementById("adminUsername")
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById("adminPassword")
+          .value;
+
+
+      try {
+
+        const data =
+          await apiRequest(
+            "/api/admin/login",
+            {
+              method: "POST",
+              body: JSON.stringify({
+                username,
+                password
+              })
+            }
+          );
+
+
+        if (!data.token) {
+          throw new Error(
+            "Sunucu token göndermedi."
+          );
+        }
+
+
+        localStorage.setItem(
+          "veloraAdminToken",
+          data.token
+        );
+
+
+        showAdminPanel();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        loginError.textContent =
+          error.message;
+
+        loginError.style.display =
+          "block";
+      }
+
+    }
+  );
+
+
+  /*
+   * PANELİ GÖSTER
+   */
+  function showAdminPanel() {
+
+    loginPage.classList.add("hidden");
+
+    adminPage.classList.remove("hidden");
+
+    loadAll();
+  }
+
+
+  /*
+   * ÇIKIŞ
+   */
+  function logout() {
+
+    localStorage.removeItem(
+      "veloraAdminToken"
+    );
+
+    adminPage.classList.add("hidden");
+
+    loginPage.classList.remove("hidden");
+
+    loginForm.reset();
+  }
+
+
+  /*
+   * TÜM VERİLERİ YÜKLE
+   */
+  async function loadAll() {
+
+    try {
+
+      await Promise.all([
+        loadStats(),
+        loadUsers(),
+        loadOrders()
+      ]);
+
+    } catch (error) {
+
+      console.error(error);
+
+      showMessage(
+        error.message
+      );
+
+    }
+
+  }
+
+
+  /*
+   * İSTATİSTİKLER
+   */
+  async function loadStats() {
+
+    const data =
+      await apiRequest(
+        "/api/admin/stats"
+      );
+
+
+    const stats =
+      data.stats || data;
+
+
+    document.getElementById(
+      "userCount"
+    ).textContent =
+      stats.userCount ??
+      stats.users ??
+      0;
+
+
+    document.getElementById(
+      "orderCount"
+    ).textContent =
+      stats.orderCount ??
+      stats.orders ??
+      0;
+
+
+    document.getElementById(
+      "newOrderCount"
+    ).textContent =
+      stats.newOrderCount ??
+      stats.newOrders ??
+      0;
+
+
+    const total =
+      Number(
+        stats.totalAmount ??
+        stats.total ??
+        0
+      );
+
+
+    document.getElementById(
+      "totalAmount"
+    ).textContent =
+      total.toLocaleString(
+        "tr-TR"
+      ) + " TL";
+
+  }
+
+
+  /*
+   * KULLANICILAR
+   */
+  async function loadUsers() {
+
+    const data =
+      await apiRequest(
+        "/api/admin/users"
+      );
+
+
+    const users =
+      Array.isArray(data)
+        ? data
+        : (
+            data.users ||
+            data.data ||
+            []
+          );
+
+
+    const table =
+      document.getElementById(
+        "usersTable"
+      );
+
+
+    table.innerHTML = "";
+
+
+    if (users.length === 0) {
+
+      table.innerHTML = `
+        <tr>
+          <td colspan="5">
+            Henüz kullanıcı yok.
+          </td>
+        </tr>
+      `;
+
+      return;
+    }
+
+
+    users.forEach(
+      function(user) {
+
+        const row =
+          document.createElement("tr");
+
+
+        row.innerHTML = `
+
+          <td>
+            ${escapeHtml(user.id)}
+          </td>
+
+          <td>
+            ${escapeHtml(user.username)}
+          </td>
+
+          <td>
+            ${escapeHtml(user.email)}
+          </td>
+
+          <td>
+            ${escapeHtml(
+              user.created_at ||
+              user.createdAt ||
+              ""
+            )}
+          </td>
+
+          <td>
+
+            <button
+              class="danger"
+              onclick="deleteUser(${Number(user.id)})"
+            >
+              Sil
+            </button>
+
+          </td>
+
+        `;
+
+
+        table.appendChild(row);
+
+      }
+    );
+
+  }
+
+
+  /*
+   * SİPARİŞLER
+   */
+  async function loadOrders() {
+
+    const data =
+      await apiRequest(
+        "/api/admin/orders"
+      );
+
+
+    const orders =
+      Array.isArray(data)
+        ? data
+        : (
+            data.orders ||
+            data.data ||
+            []
+          );
+
+
+    const table =
+      document.getElementById(
+        "ordersTable"
+      );
+
+
+    table.innerHTML = "";
+
+
+    if (orders.length === 0) {
+
+      table.innerHTML = `
+        <tr>
+          <td colspan="9">
+            Henüz sipariş yok.
+          </td>
+        </tr>
+      `;
+
+      return;
+    }
+
+
+    orders.forEach(
+      function(order) {
+
+        let itemsText = "";
+
+
+        try {
+
+          const items =
+            typeof order.items_json === "string"
+              ? JSON.parse(order.items_json)
+              : (
+                  order.items ||
+                  []
+                );
+
+
+          if (Array.isArray(items)) {
+
+            itemsText =
+              items
+                .map(
+                  item =>
+                    `${escapeHtml(
+                      item.name ||
+                      item.title ||
+                      "Ürün"
+                    )} x${
+                      item.quantity ||
+                      1
+                    }`
+                )
+                .join("<br>");
+
+          } else {
+
+            itemsText =
+              escapeHtml(
+                JSON.stringify(items)
+              );
+
+          }
+
+        } catch {
+
+          itemsText =
+            escapeHtml(
+              order.items_json ||
+              ""
+            );
+
+        }
+
+
+        const status =
+          order.status ||
+          "Yeni";
+
+
+        const row =
+          document.createElement("tr");
+
+
+        row.innerHTML = `
+
+          <td>
+            ${escapeHtml(order.id)}
+          </td>
+
+          <td>
+            ${escapeHtml(
+              order.customer_name ||
+              order.customerName ||
+              ""
+            )}
+          </td>
+
+          <td>
+            ${escapeHtml(
+              order.customer_phone ||
+              order.customerPhone ||
+              ""
+            )}
+          </td>
+
+          <td>
+            ${escapeHtml(
+              order.customer_address ||
+              order.customerAddress ||
+              ""
+            )}
+          </td>
+
+          <td>
+            ${itemsText}
+          </td>
+
+          <td>
+            ${escapeHtml(
+              order.total ||
+              0
+            )} TL
+          </td>
+
+          <td>
+
+            <select
+              class="status"
+              onchange="changeOrderStatus(
+                ${Number(order.id)},
+                this.value
+              )"
+            >
+
+              ${statusOption(
+                "Yeni",
+                status
+              )}
+
+              ${statusOption(
+                "Hazırlanıyor",
+                status
+              )}
+
+              ${statusOption(
+                "Kargoda",
+                status
+              )}
+
+              ${statusOption(
+                "Teslim Edildi",
+                status
+              )}
+
+              ${statusOption(
+                "İptal",
+                status
+              )}
+
+            </select>
+
+          </td>
+
+          <td>
+            ${escapeHtml(
+              order.created_at ||
+              order.createdAt ||
+              ""
+            )}
+          </td>
+
+          <td>
+
+            <button
+              class="danger"
+              onclick="deleteOrder(${Number(order.id)})"
+            >
+              Sil
+            </button>
+
+          </td>
+
+        `;
+
+
+        table.appendChild(row);
+
+      }
+    );
+
+  }
+
+
+  /*
+   * STATUS OPTION
+   */
+  function statusOption(
+    value,
+    current
+  ) {
+
+    return `
+      <option
+        value="${escapeHtml(value)}"
+        ${value === current ? "selected" : ""}
+      >
+        ${escapeHtml(value)}
+      </option>
+    `;
+
+  }
+
+
+  /*
+   * KULLANICI SİL
+   */
+  async function deleteUser(id) {
+
+    const confirmDelete =
+      confirm(
+        "Bu kullanıcıyı silmek istediğine emin misin?"
+      );
+
+
+    if (!confirmDelete) {
+      return;
+    }
+
+
+    try {
+
+      await apiRequest(
+        "/api/admin/users/" + id,
+        {
+          method: "DELETE"
+        }
+      );
+
+
+      showMessage(
+        "Kullanıcı silindi."
+      );
+
+
+      loadAll();
+
+    } catch (error) {
+
+      console.error(error);
+
+      showMessage(
+        error.message
+      );
+
+    }
+
+  }
+
+
+  /*
+   * SİPARİŞ DURUMU DEĞİŞTİR
+   */
+  async function changeOrderStatus(
+    id,
+    status
+  ) {
+
+    try {
+
+      await apiRequest(
+        "/api/admin/orders/" +
+        id +
+        "/status",
+        {
+          method: "PATCH",
+          body: JSON.stringify({
+            status
+          })
+        }
+      );
+
+
+      showMessage(
+        "Sipariş durumu güncellendi."
+      );
+
+
+      loadAll();
+
+    } catch (error) {
+
+      console.error(error);
+
+      showMessage(
+        error.message
+      );
+
+    }
+
+  }
+
+
+  /*
+   * SİPARİŞ SİL
+   */
+  async function deleteOrder(id) {
+
+    const confirmDelete =
+      confirm(
+        "Bu siparişi silmek istediğine emin misin?"
+      );
+
+
+    if (!confirmDelete) {
+      return;
+    }
+
+
+    try {
+
+      await apiRequest(
+        "/api/admin/orders/" + id,
+        {
+          method: "DELETE"
+        }
+      );
+
+
+      showMessage(
+        "Sipariş silindi."
+      );
+
+
+      loadAll();
+
+    } catch (error) {
+
+      console.error(error);
+
+      showMessage(
+        error.message
+      );
+
+    }
+
+  }
+
+
+  /*
+   * SAYFA AÇILDIĞINDA
+   */
+  window.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+      const token =
+        localStorage.getItem(
+          "veloraAdminToken"
+        );
+
+
+      if (token) {
+
+        showAdminPanel();
+
+      }
+
+    }
+  );
 
 </script>
 
