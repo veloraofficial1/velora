@@ -1,267 +1,427 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>VELORA</title>
+<title>VELORA</title>
 
-    <meta name="description" content="VELORA - Zarif ve şık takılar">
+<style>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #faf7f5;
-            color: #333;
-        }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8f5f0;
+    color: #222;
+}
 
-        header {
-            background: white;
-            padding: 20px 7%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
+header {
+    background: white;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 5px;
-            color: #9b6b52;
-        }
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
 
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+nav a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: #222;
+    font-weight: bold;
+}
 
-        nav a {
-            text-decoration: none;
-            color: #333;
-        }
+.cart-button {
+    background: #c9a86a;
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-        .cart-button {
-            border: none;
-            background: #9b6b52;
-            color: white;
-            padding: 10px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-        }
+.cart-button:hover {
+    background: #b89555;
+}
 
-        .hero {
-            min-height: 500px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, #f5e6dd, #fff);
-            padding: 30px;
-        }
+.hero {
+    min-height: 420px;
+    background:
+        linear-gradient(
+            rgba(238,231,221,0.55),
+            rgba(238,231,221,0.55)
+        ),
+        url("urun1.jpg") center/cover no-repeat;
 
-        .hero h1 {
-            font-size: 65px;
-            color: #9b6b52;
-            letter-spacing: 5px;
-            margin-bottom: 15px;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+}
 
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 25px;
-        }
+.hero-content {
+    background: rgba(255,255,255,0.75);
+    padding: 30px 40px;
+    border-radius: 15px;
+}
 
-        .hero button {
-            border: none;
-            background: #9b6b52;
-            color: white;
-            padding: 14px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+.hero-content h1 {
+    font-size: 56px;
+    letter-spacing: 8px;
+    margin-bottom: 15px;
+}
 
-        .products {
-            padding: 70px 7%;
-        }
+.hero-content p {
+    font-size: 20px;
+    color: #666;
+}
 
-        .products h2 {
-            text-align: center;
-            color: #9b6b52;
-            font-size: 35px;
-            margin-bottom: 40px;
-        }
+section {
+    padding: 70px 30px;
+}
 
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 32px;
+}
 
-        .product {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: 0.3s;
-        }
+.products {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
 
-        .product:hover {
-            transform: translateY(-5px);
-        }
+.product {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    padding-bottom: 25px;
+}
 
-        .product-image {
-            height: 280px;
-            background: #f5ebe4;
-        }
+.product img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
 
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.product h3 {
+    margin: 20px 10px 10px;
+}
 
-        .product-info {
-            padding: 20px;
-        }
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
 
-        .product-info h3 {
-            margin-bottom: 10px;
-        }
+button {
+    background: #c9a86a;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
 
-        .price {
-            color: #9b6b52;
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
+button:hover {
+    background: #b89555;
+}
 
-        .product-info button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 20px;
-            background: #9b6b52;
-            color: white;
-            cursor: pointer;
-        }
+.cart-panel {
+    display: none;
+    position: fixed;
+    right: 20px;
+    top: 85px;
+    width: 360px;
+    max-width: calc(100% - 40px);
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    z-index: 200;
+}
 
-        .contact {
-            padding: 60px 20px;
-            text-align: center;
-            background: #f5ebe4;
-        }
+.cart-panel.active {
+    display: block;
+}
 
-        .contact h2 {
-            color: #9b6b52;
-            margin-bottom: 15px;
-        }
+.cart-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
 
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
+.cart-item-title {
+    font-weight: bold;
+}
 
-        .cart-panel {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 360px;
-            height: 100%;
-            background: white;
-            z-index: 100;
-            padding: 25px;
-            box-shadow: -5px 0 20px rgba(0,0,0,0.2);
-            transition: 0.3s;
-            overflow-y: auto;
-        }
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
 
-        .cart-panel.active {
-            right: 0;
-        }
+.quantity button {
+    padding: 6px 10px;
+    border-radius: 7px;
+}
 
-        .close-cart {
-            float: right;
-            border: none;
-            background: none;
-            font-size: 28px;
-            cursor: pointer;
-        }
+.remove-btn {
+    background: #eee;
+    color: #222;
+    margin-top: 8px;
+}
 
-        .cart-panel h2 {
-            color: #9b6b52;
-            margin-bottom: 20px;
-        }
+.remove-btn:hover {
+    background: #ddd;
+}
 
-        .cart-item {
-            border-bottom: 1px solid #ddd;
-            padding: 15px 0;
-        }
+.total {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0;
+}
 
-        .quantity button {
-            padding: 5px 10px;
-            border: none;
-            background: #eee;
-            margin: 5px;
-            cursor: pointer;
-        }
+.form-box {
+    max-width: 650px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
 
-        .remove {
-            border: none;
-            background: none;
-            color: #b33;
-            cursor: pointer;
-        }
+.form-box input,
+.form-box textarea {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+}
 
-        .cart-total {
-            margin-top: 20px;
-            font-size: 22px;
-            font-weight: bold;
-            color: #9b6b52;
-        }
+.form-box textarea {
+    min-height: 100px;
+    resize: vertical;
+}
 
-        .order-button {
-            width: 100%;
-            margin-top: 15px;
-            padding: 13px;
-            border: none;
-            border-radius: 20px;
-            background: #9b6b52;
-            color: white;
-            cursor: pointer;
-        }
+.order-summary {
+    background: #f8f5f0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
 
-        @media (max-width: 800px) {
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
+.payment-box {
+    display: none;
+    max-width: 500px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+}
 
-            nav a {
-                display: none;
-            }
+.payment-box.active {
+    display: block;
+}
 
-            .hero h1 {
-                font-size: 45px;
-            }
+.payment-box h2 {
+    margin-top: 0;
+}
 
-            .cart-panel {
-                width: 100%;
-            }
-        }
-    </style>
+.payment-box input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.payment-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.test-note {
+    background: #fff8e8;
+    border: 1px solid #ead7a4;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    display: none;
+}
+
+.success {
+    background: #e8f7e8;
+    color: #246624;
+}
+
+.error {
+    background: #fdeaea;
+    color: #8a2222;
+}
+
+/* YORUM SİSTEMİ */
+
+.review-box {
+    margin: 20px;
+    padding: 18px;
+    background: #f8f5f0;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.review-box h4 {
+    margin-top: 0;
+}
+
+.rating-summary {
+    margin: 10px 0;
+    font-weight: bold;
+    color: #c9a86a;
+}
+
+.stars {
+    display: flex;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.star {
+    font-size: 28px;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.star:hover {
+    transform: scale(1.15);
+}
+
+.star.selected {
+    color: #c9a86a;
+}
+
+.review-box textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+}
+
+.review-box button {
+    margin-top: 10px;
+}
+
+.review-list {
+    margin-top: 15px;
+}
+
+.review {
+    border-top: 1px solid #ddd;
+    padding: 12px 0;
+}
+
+.review-stars {
+    color: #c9a86a;
+    font-size: 18px;
+}
+
+.review p {
+    margin: 7px 0;
+}
+
+.review small {
+    color: #777;
+}
+
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: 50px;
+}
+
+@media (max-width: 800px) {
+
+    header {
+        padding: 15px 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    nav {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav a {
+        margin: 0 8px;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+    }
+
+    .hero {
+        min-height: 350px;
+    }
+
+    .hero-content h1 {
+        font-size: 40px;
+    }
+
+    .hero-content {
+        padding: 25px 20px;
+    }
+
+    .cart-panel {
+        right: 10px;
+        top: 80px;
+        width: calc(100% - 20px);
+    }
+
+}
+
+</style>
 </head>
 
 <body>
@@ -274,98 +434,301 @@
         <a href="#anasayfa">Ana Sayfa</a>
         <a href="#koleksiyon">Koleksiyon</a>
         <a href="#iletisim">İletişim</a>
-
-        <button class="cart-button" onclick="toggleCart()">
-            🛒 Sepet (<span id="cartCount">0</span>)
-        </button>
     </nav>
+
+    <button class="cart-button" onclick="toggleCart()">
+        Sepet (<span id="cartCount">0</span>)
+    </button>
 
 </header>
 
 
 <section class="hero" id="anasayfa">
 
-    <div>
+    <div class="hero-content">
 
         <h1>VELORA</h1>
 
-        <p>Zarafetin ve şıklığın yeni adresi.</p>
+        <p>Zarif detaylar, zamansız stil.</p>
 
-        <button onclick="document.getElementById('koleksiyon').scrollIntoView()">
-            Koleksiyonu Keşfet
+    </div>
+
+</section>
+
+
+<section id="koleksiyon">
+
+    <h2 class="section-title">Koleksiyon</h2>
+
+    <div class="products">
+
+
+        <!-- YÜZÜK -->
+
+        <div class="product">
+
+            <img src="resimler/yuzuk.jpg" alt="Zarif Yüzük">
+
+            <h3>Zarif Yüzük</h3>
+
+            <div class="price">499 TL</div>
+
+            <button onclick="addToCart('Zarif Yüzük', 499)">
+                Sepete Ekle
+            </button>
+
+            <div class="review-box">
+
+                <h4>Ürün Değerlendirmeleri</h4>
+
+                <div
+                    class="rating-summary"
+                    id="rating-Zarif-Yüzük">
+                    Henüz değerlendirme yok
+                </div>
+
+                <div
+                    class="stars"
+                    data-product="Zarif Yüzük">
+
+                    <span class="star"
+                        onclick="selectRating('Zarif Yüzük', 1)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Zarif Yüzük', 2)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Zarif Yüzük', 3)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Zarif Yüzük', 4)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Zarif Yüzük', 5)">★</span>
+
+                </div>
+
+                <textarea
+                    id="review-Zarif-Yüzük"
+                    placeholder="Bu ürün hakkında yorumunuz...">
+                </textarea>
+
+                <button onclick="addReview('Zarif Yüzük')">
+                    Yorumu Gönder
+                </button>
+
+                <div
+                    class="review-list"
+                    id="reviews-Zarif-Yüzük">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- KOLYE -->
+
+        <div class="product">
+
+            <img src="resimler/kolye.jpg" alt="İnci Kolye">
+
+            <h3>İnci Kolye</h3>
+
+            <div class="price">699 TL</div>
+
+            <button onclick="addToCart('İnci Kolye', 699)">
+                Sepete Ekle
+            </button>
+
+            <div class="review-box">
+
+                <h4>Ürün Değerlendirmeleri</h4>
+
+                <div
+                    class="rating-summary"
+                    id="rating-İnci-Kolye">
+                    Henüz değerlendirme yok
+                </div>
+
+                <div
+                    class="stars"
+                    data-product="İnci Kolye">
+
+                    <span class="star"
+                        onclick="selectRating('İnci Kolye', 1)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('İnci Kolye', 2)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('İnci Kolye', 3)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('İnci Kolye', 4)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('İnci Kolye', 5)">★</span>
+
+                </div>
+
+                <textarea
+                    id="review-İnci-Kolye"
+                    placeholder="Bu ürün hakkında yorumunuz...">
+                </textarea>
+
+                <button onclick="addReview('İnci Kolye')">
+                    Yorumu Gönder
+                </button>
+
+                <div
+                    class="review-list"
+                    id="reviews-İnci-Kolye">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BİLEKLİK -->
+
+        <div class="product">
+
+            <img src="resimler/bileklik.jpg" alt="Minimal Bileklik">
+
+            <h3>Minimal Bileklik</h3>
+
+            <div class="price">399 TL</div>
+
+            <button onclick="addToCart('Minimal Bileklik', 399)">
+                Sepete Ekle
+            </button>
+
+            <div class="review-box">
+
+                <h4>Ürün Değerlendirmeleri</h4>
+
+                <div
+                    class="rating-summary"
+                    id="rating-Minimal-Bileklik">
+                    Henüz değerlendirme yok
+                </div>
+
+                <div
+                    class="stars"
+                    data-product="Minimal Bileklik">
+
+                    <span class="star"
+                        onclick="selectRating('Minimal Bileklik', 1)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Minimal Bileklik', 2)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Minimal Bileklik', 3)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Minimal Bileklik', 4)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Minimal Bileklik', 5)">★</span>
+
+                </div>
+
+                <textarea
+                    id="review-Minimal-Bileklik"
+                    placeholder="Bu ürün hakkında yorumunuz...">
+                </textarea>
+
+                <button onclick="addReview('Minimal Bileklik')">
+                    Yorumu Gönder
+                </button>
+
+                <div
+                    class="review-list"
+                    id="reviews-Minimal-Bileklik">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SEPET -->
+
+<div class="cart-panel" id="cartPanel">
+
+    <h2>Sepetim</h2>
+
+    <div id="cartItems"></div>
+
+    <div class="total">
+        Toplam:
+        <span id="cartTotal">0</span> TL
+    </div>
+
+    <button onclick="openOrderForm()">
+        Siparişi Oluştur
+    </button>
+
+</div>
+
+
+<!-- SİPARİŞ -->
+
+<section id="orderSection" style="display:none;">
+
+    <h2 class="section-title">
+        Sipariş Bilgileri
+    </h2>
+
+    <div class="form-box">
+
+        <div class="order-summary">
+
+            <h3>Sipariş Özeti</h3>
+
+            <div id="orderSummary"></div>
+
+            <strong>
+                Toplam:
+                <span id="orderTotal">0</span> TL
+            </strong>
+
+        </div>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Ad Soyad">
+
+        <input
+            type="tel"
+            id="phone"
+            placeholder="Telefon">
+
+        <textarea
+            id="address"
+            placeholder="Teslimat Adresi">
+        </textarea>
+
+        <textarea
+            id="note"
+            placeholder="Sipariş Notu">
+        </textarea>
+
+        <button onclick="createOrder()">
+            Siparişi Oluştur
         </button>
 
-    </div>
-
-</section>
-
-
-<section class="products" id="koleksiyon">
-
-    <h2>VELORA Koleksiyonu</h2>
-
-    <div class="product-grid">
-
-        <div class="product">
-
-            <div class="product-image">
-                <img src="resimler/yuzuk.jpg" alt="VELORA Zarif Yüzük">
-            </div>
-
-            <div class="product-info">
-
-                <h3>Zarif Yüzük</h3>
-
-                <div class="price">499 TL</div>
-
-                <button onclick="addToCart('Zarif Yüzük',499)">
-                    Sepete Ekle
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="product">
-
-            <div class="product-image">
-                <img src="resimler/kolye.jpg" alt="VELORA İnci Kolye">
-            </div>
-
-            <div class="product-info">
-
-                <h3>İnci Kolye</h3>
-
-                <div class="price">699 TL</div>
-
-                <button onclick="addToCart('İnci Kolye',699)">
-                    Sepete Ekle
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="product">
-
-            <div class="product-image">
-                <img src="resimler/bileklik.jpg" alt="VELORA Minimal Bileklik">
-            </div>
-
-            <div class="product-info">
-
-                <h3>Minimal Bileklik</h3>
-
-                <div class="price">399 TL</div>
-
-                <button onclick="addToCart('Minimal Bileklik',399)">
-                    Sepete Ekle
-                </button>
-
-            </div>
-
+        <div
+            id="orderMessage"
+            class="message">
         </div>
 
     </div>
@@ -373,49 +736,120 @@
 </section>
 
 
-<section class="contact" id="iletisim">
+<!-- TEST ÖDEME -->
 
-    <h2>VELORA</h2>
+<section
+    id="paymentSection"
+    style="display:none;">
 
-    <p>Zarif detaylar, güçlü stil.</p>
+    <div class="payment-box active">
+
+        <h2>Test Ödeme</h2>
+
+        <div class="test-note">
+
+            Bu yalnızca test ödeme ekranıdır.
+            Gerçek kart bilgilerini kullanmayın.
+
+        </div>
+
+        <p>
+
+            Ödenecek Tutar:
+
+            <strong>
+                <span id="paymentTotal">0</span> TL
+            </strong>
+
+        </p>
+
+        <input
+            type="text"
+            id="cardName"
+            placeholder="Kart Üzerindeki İsim">
+
+        <input
+            type="text"
+            id="cardNumber"
+            placeholder="Kart Numarası"
+            maxlength="19">
+
+        <div class="payment-row">
+
+            <input
+                type="text"
+                id="expiry"
+                placeholder="AA/YY"
+                maxlength="5">
+
+            <input
+                type="text"
+                id="cvv"
+                placeholder="CVV"
+                maxlength="3">
+
+        </div>
+
+        <button onclick="makeTestPayment()">
+            Ödemeyi Tamamla
+        </button>
+
+        <div
+            id="paymentMessage"
+            class="message">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- İLETİŞİM -->
+
+<section id="iletisim">
+
+    <h2 class="section-title">
+        İletişim
+    </h2>
+
+    <div style="text-align:center;">
+
+        <p>
+            VELORA hakkında bizimle iletişime geçebilirsiniz.
+        </p>
+
+    </div>
 
 </section>
 
 
 <footer>
 
-    © 2026 VELORA
+    <p>
+        © 2026 VELORA
+    </p>
 
 </footer>
 
 
-<div class="cart-panel" id="cartPanel">
-
-    <button class="close-cart" onclick="toggleCart()">×</button>
-
-    <h2>Sepetim</h2>
-
-    <div id="cartItems"></div>
-
-    <div class="cart-total">
-        Toplam: <span id="cartTotal">0</span> TL
-    </div>
-
-    <button class="order-button" onclick="order()">
-        Siparişe Geç
-    </button>
-
-</div>
-
-
 <script>
+
+const BACKEND_URL =
+    "https://velora-backend-1-aft5.onrender.com";
 
 let cart = [];
 
+let selectedRatings = {};
+
+
+/* =========================
+   SEPET
+========================= */
 
 function addToCart(name, price) {
 
-    let existing = cart.find(item => item.name === name);
+    const existing =
+        cart.find(item => item.name === name);
 
     if (existing) {
 
@@ -437,52 +871,75 @@ function addToCart(name, price) {
 
 function updateCart() {
 
-    let items = document.getElementById("cartItems");
+    const cartItems =
+        document.getElementById("cartItems");
 
-    items.innerHTML = "";
+    const cartCount =
+        document.getElementById("cartCount");
+
+    const cartTotal =
+        document.getElementById("cartTotal");
+
+    cartItems.innerHTML = "";
 
     let total = 0;
     let count = 0;
 
     cart.forEach((item, index) => {
 
-        total += item.price * item.quantity;
+        total +=
+            item.price * item.quantity;
 
         count += item.quantity;
 
-        items.innerHTML += `
-            <div class="cart-item">
+        const div =
+            document.createElement("div");
 
-                <strong>${item.name}</strong>
+        div.className = "cart-item";
 
+        div.innerHTML = `
+
+            <div class="cart-item-title">
+                ${item.name}
+            </div>
+
+            <div>
                 ${item.price} TL
+            </div>
 
-                <div class="quantity">
+            <div class="quantity">
 
-                    <button onclick="changeQuantity(${index},-1)">
-                        −
-                    </button>
+                <button
+                    onclick="changeQuantity(${index}, -1)">
+                    -
+                </button>
 
+                <span>
                     ${item.quantity}
+                </span>
 
-                    <button onclick="changeQuantity(${index},1)">
-                        +
-                    </button>
-
-                </div>
-
-                <button class="remove" onclick="removeItem(${index})">
-                    Ürünü Sil
+                <button
+                    onclick="changeQuantity(${index}, 1)">
+                    +
                 </button>
 
             </div>
+
+            <button
+                class="remove-btn"
+                onclick="removeItem(${index})">
+                Ürünü Sil
+            </button>
+
         `;
+
+        cartItems.appendChild(div);
 
     });
 
-    document.getElementById("cartTotal").textContent = total;
+    cartCount.textContent = count;
 
-    document.getElementById("cartCount").textContent = count;
+    cartTotal.textContent = total;
 }
 
 
@@ -492,7 +949,7 @@ function changeQuantity(index, amount) {
 
     if (cart[index].quantity <= 0) {
 
-        cart.splice(index,1);
+        cart.splice(index, 1);
 
     }
 
@@ -502,7 +959,7 @@ function changeQuantity(index, amount) {
 
 function removeItem(index) {
 
-    cart.splice(index,1);
+    cart.splice(index, 1);
 
     updateCart();
 }
@@ -510,24 +967,691 @@ function removeItem(index) {
 
 function toggleCart() {
 
-    document.getElementById("cartPanel").classList.toggle("active");
+    document
+        .getElementById("cartPanel")
+        .classList.toggle("active");
 
 }
 
 
-function order() {
+/* =========================
+   SİPARİŞ FORMU
+========================= */
+
+function openOrderForm() {
 
     if (cart.length === 0) {
 
         alert("Sepetiniz boş.");
 
-    } else {
+        return;
+    }
 
-        alert("Sipariş ekranını bir sonraki aşamada ekleyeceğiz.");
+    document
+        .getElementById("cartPanel")
+        .classList.remove("active");
+
+    document
+        .getElementById("orderSection")
+        .style.display = "block";
+
+    updateOrderSummary();
+
+    document
+        .getElementById("orderSection")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+function updateOrderSummary() {
+
+    const summary =
+        document.getElementById("orderSummary");
+
+    const totalElement =
+        document.getElementById("orderTotal");
+
+    summary.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        const itemTotal =
+            item.price * item.quantity;
+
+        total += itemTotal;
+
+        const p =
+            document.createElement("p");
+
+        p.textContent =
+            `${item.name} x ${item.quantity} = ${itemTotal} TL`;
+
+        summary.appendChild(p);
+
+    });
+
+    totalElement.textContent = total;
+}
+
+
+/* =========================
+   SİPARİŞ OLUŞTUR
+========================= */
+
+async function createOrder() {
+
+    const name =
+        document.getElementById("name")
+        .value
+        .trim();
+
+    const phone =
+        document.getElementById("phone")
+        .value
+        .trim();
+
+    const address =
+        document.getElementById("address")
+        .value
+        .trim();
+
+    const note =
+        document.getElementById("note")
+        .value
+        .trim();
+
+    if (!name || !phone || !address) {
+
+        showMessage(
+            "orderMessage",
+            "Lütfen gerekli alanları doldurun.",
+            "error"
+        );
+
+        return;
+    }
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        total +=
+            item.price * item.quantity;
+
+    });
+
+    const order = {
+
+        customer: {
+
+            name: name,
+
+            phone: phone,
+
+            address: address,
+
+            note: note
+
+        },
+
+        products: cart,
+
+        total: total
+
+    };
+
+    try {
+
+        const response =
+            await fetch(
+                `${BACKEND_URL}/api/order`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(order)
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if (data.success) {
+
+            document
+                .getElementById("paymentSection")
+                .style.display = "block";
+
+            document
+                .getElementById("paymentTotal")
+                .textContent = total;
+
+            document
+                .getElementById("paymentSection")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        } else {
+
+            showMessage(
+                "orderMessage",
+                "Sipariş oluşturulamadı.",
+                "error"
+            );
+
+        }
+
+    } catch (error) {
+
+        showMessage(
+            "orderMessage",
+            "Sunucuya bağlanılamadı.",
+            "error"
+        );
 
     }
 
 }
+
+
+/* =========================
+   TEST ÖDEME
+========================= */
+
+document
+    .getElementById("cardNumber")
+    .addEventListener(
+        "input",
+        function() {
+
+            let value =
+                this.value.replace(/\D/g, "");
+
+            value =
+                value.substring(0, 16);
+
+            let formatted = "";
+
+            for (
+                let i = 0;
+                i < value.length;
+                i++
+            ) {
+
+                if (
+                    i > 0 &&
+                    i % 4 === 0
+                ) {
+
+                    formatted += " ";
+
+                }
+
+                formatted += value[i];
+
+            }
+
+            this.value = formatted;
+
+        }
+    );
+
+
+document
+    .getElementById("expiry")
+    .addEventListener(
+        "input",
+        function() {
+
+            let value =
+                this.value.replace(/\D/g, "");
+
+            value =
+                value.substring(0, 4);
+
+            if (value.length >= 3) {
+
+                value =
+                    value.substring(0, 2)
+                    + "/"
+                    + value.substring(2);
+
+            }
+
+            this.value = value;
+
+        }
+    );
+
+
+document
+    .getElementById("cvv")
+    .addEventListener(
+        "input",
+        function() {
+
+            this.value =
+                this.value
+                    .replace(/\D/g, "")
+                    .substring(0, 3);
+
+        }
+    );
+
+
+async function makeTestPayment() {
+
+    const cardName =
+        document
+            .getElementById("cardName")
+            .value
+            .trim();
+
+    const cardNumber =
+        document
+            .getElementById("cardNumber")
+            .value
+            .trim();
+
+    const expiry =
+        document
+            .getElementById("expiry")
+            .value
+            .trim();
+
+    const cvv =
+        document
+            .getElementById("cvv")
+            .value
+            .trim();
+
+    if (
+        !cardName ||
+        !cardNumber ||
+        !expiry ||
+        !cvv
+    ) {
+
+        showMessage(
+            "paymentMessage",
+            "Lütfen test ödeme alanlarını doldurun.",
+            "error"
+        );
+
+        return;
+    }
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        total +=
+            item.price * item.quantity;
+
+    });
+
+    try {
+
+        const response =
+            await fetch(
+                `${BACKEND_URL}/api/test-payment`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            total: total
+                        })
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if (data.success) {
+
+            showMessage(
+                "paymentMessage",
+                "Test ödeme başarılı! Siparişiniz tamamlandı.",
+                "success"
+            );
+
+            cart = [];
+
+            updateCart();
+
+            document
+                .getElementById("name")
+                .value = "";
+
+            document
+                .getElementById("phone")
+                .value = "";
+
+            document
+                .getElementById("address")
+                .value = "";
+
+            document
+                .getElementById("note")
+                .value = "";
+
+            document
+                .getElementById("cardName")
+                .value = "";
+
+            document
+                .getElementById("cardNumber")
+                .value = "";
+
+            document
+                .getElementById("expiry")
+                .value = "";
+
+            document
+                .getElementById("cvv")
+                .value = "";
+
+        } else {
+
+            showMessage(
+                "paymentMessage",
+                "Test ödeme başarısız.",
+                "error"
+            );
+
+        }
+
+    } catch (error) {
+
+        showMessage(
+            "paymentMessage",
+            "Ödeme sunucusuna bağlanılamadı.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   MESAJ
+========================= */
+
+function showMessage(id, text, type) {
+
+    const element =
+        document.getElementById(id);
+
+    element.textContent = text;
+
+    element.className =
+        "message " + type;
+
+    element.style.display =
+        "block";
+}
+
+
+/* =========================
+   YORUM VE YILDIZ
+========================= */
+
+function getProductKey(product) {
+
+    return product
+        .replaceAll(" ", "-")
+        .replaceAll("İ", "I")
+        .replaceAll("ı", "i")
+        .replaceAll("ş", "s")
+        .replaceAll("Ş", "S")
+        .replaceAll("ğ", "g")
+        .replaceAll("Ğ", "G")
+        .replaceAll("ü", "u")
+        .replaceAll("Ü", "U")
+        .replaceAll("ö", "o")
+        .replaceAll("Ö", "O")
+        .replaceAll("ç", "c")
+        .replaceAll("Ç", "C");
+}
+
+
+function selectRating(product, rating) {
+
+    selectedRatings[product] =
+        rating;
+
+    const container =
+        document.querySelector(
+            `.stars[data-product="${product}"]`
+        );
+
+    const stars =
+        container.querySelectorAll(".star");
+
+    stars.forEach(
+        (star, index) => {
+
+            if (index < rating) {
+
+                star.classList.add(
+                    "selected"
+                );
+
+            } else {
+
+                star.classList.remove(
+                    "selected"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+function addReview(product) {
+
+    const rating =
+        selectedRatings[product];
+
+    const productKey =
+        getProductKey(product);
+
+    const textarea =
+        document.getElementById(
+            "review-" + productKey
+        );
+
+    const text =
+        textarea.value.trim();
+
+    if (!rating) {
+
+        alert(
+            "Lütfen yıldız puanı seçin."
+        );
+
+        return;
+    }
+
+    if (!text) {
+
+        alert(
+            "Lütfen yorumunuzu yazın."
+        );
+
+        return;
+    }
+
+    const key =
+        "velora_reviews_" + productKey;
+
+    const reviews =
+        JSON.parse(
+            localStorage.getItem(key)
+            || "[]"
+        );
+
+    reviews.push({
+
+        rating: rating,
+
+        text: text,
+
+        date:
+            new Date()
+                .toLocaleDateString("tr-TR")
+
+    });
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(reviews)
+    );
+
+    textarea.value = "";
+
+    selectedRatings[product] = 0;
+
+    const stars =
+        document.querySelectorAll(
+            `.stars[data-product="${product}"] .star`
+        );
+
+    stars.forEach(star => {
+
+        star.classList.remove(
+            "selected"
+        );
+
+    });
+
+    updateReviews(product);
+
+}
+
+
+function updateReviews(product) {
+
+    const productKey =
+        getProductKey(product);
+
+    const key =
+        "velora_reviews_" + productKey;
+
+    const reviews =
+        JSON.parse(
+            localStorage.getItem(key)
+            || "[]"
+        );
+
+    const list =
+        document.getElementById(
+            "reviews-" + productKey
+        );
+
+    const ratingElement =
+        document.getElementById(
+            "rating-" + productKey
+        );
+
+    list.innerHTML = "";
+
+    if (reviews.length === 0) {
+
+        ratingElement.textContent =
+            "Henüz değerlendirme yok";
+
+        return;
+    }
+
+    const total =
+        reviews.reduce(
+            (sum, review) =>
+                sum + review.rating,
+            0
+        );
+
+    const average =
+        (total / reviews.length)
+        .toFixed(1);
+
+    ratingElement.textContent =
+        `★ ${average}/5 (${reviews.length} değerlendirme)`;
+
+    reviews.forEach(review => {
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "review";
+
+        div.innerHTML = `
+
+            <div class="review-stars">
+                ${"★".repeat(review.rating)}
+            </div>
+
+            <p>
+                ${escapeHtml(review.text)}
+            </p>
+
+            <small>
+                ${review.date}
+            </small>
+
+        `;
+
+        list.appendChild(div);
+
+    });
+
+}
+
+
+function escapeHtml(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}
+
+
+function loadAllReviews() {
+
+    updateReviews("Zarif Yüzük");
+
+    updateReviews("İnci Kolye");
+
+    updateReviews("Minimal Bileklik");
+
+}
+
+
+loadAllReviews();
 
 </script>
 
