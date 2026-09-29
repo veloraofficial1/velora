@@ -182,7 +182,10 @@
       background: #963939;
     }
 
-    .refresh {
+    .admin-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
       margin-bottom: 20px;
     }
 
@@ -289,12 +292,25 @@
 
       <div id="globalMessage" class="message"></div>
 
-      <button
-        class="gold-btn refresh"
-        onclick="loadAll()"
-      >
-        Yenile
-      </button>
+
+      <!-- ADMİN İŞLEMLERİ -->
+      <div class="admin-actions">
+
+        <button
+          class="gold-btn"
+          onclick="loadAll()"
+        >
+          Yenile
+        </button>
+
+        <button
+          class="gold-btn"
+          onclick="migrateToSupabase()"
+        >
+          Supabase'e Taşı
+        </button>
+
+      </div>
 
 
       <!-- İSTATİSTİKLER -->
@@ -1026,6 +1042,67 @@
         ${escapeHtml(value)}
       </option>
     `;
+
+  }
+
+
+  /*
+   * SQLITE → SUPABASE TAŞIMA
+   */
+  async function migrateToSupabase() {
+
+    const confirmed =
+      confirm(
+        "SQLite verilerini Supabase'e aktarmak istediğine emin misin?"
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    try {
+
+      showMessage(
+        "Veriler Supabase'e aktarılıyor..."
+      );
+
+
+      const data =
+        await apiRequest(
+          "/api/admin/migrate-to-supabase",
+          {
+            method: "POST"
+          }
+        );
+
+
+      console.log(
+        "SUPABASE TAŞIMA SONUCU:",
+        data
+      );
+
+
+      showMessage(
+        `Taşıma tamamlandı: ${data.users} kullanıcı, ${data.orders} sipariş.`
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "SUPABASE TAŞIMA HATASI:",
+        error
+      );
+
+
+      showMessage(
+        "Taşıma başarısız: " +
+        error.message
+      );
+
+    }
 
   }
 
