@@ -7,6 +7,7 @@
 <title>VELORA</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -59,12 +60,24 @@ nav a {
 
 .hero {
     min-height: 420px;
-    background: #eee7dd;
+    background:
+        linear-gradient(
+            rgba(238,231,221,0.55),
+            rgba(238,231,221,0.55)
+        ),
+        url("urun1.jpg") center/cover no-repeat;
+
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 60px 20px;
+}
+
+.hero-content {
+    background: rgba(255,255,255,0.75);
+    padding: 30px 40px;
+    border-radius: 15px;
 }
 
 .hero-content h1 {
@@ -264,14 +277,6 @@ button:hover {
     font-size: 14px;
 }
 
-footer {
-    background: #222;
-    color: white;
-    text-align: center;
-    padding: 30px;
-    margin-top: 50px;
-}
-
 .message {
     margin-top: 15px;
     padding: 12px;
@@ -289,7 +294,93 @@ footer {
     color: #8a2222;
 }
 
+/* YORUM SİSTEMİ */
+
+.review-box {
+    margin: 20px;
+    padding: 18px;
+    background: #f8f5f0;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.review-box h4 {
+    margin-top: 0;
+}
+
+.rating-summary {
+    margin: 10px 0;
+    font-weight: bold;
+    color: #c9a86a;
+}
+
+.stars {
+    display: flex;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.star {
+    font-size: 28px;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.star:hover {
+    transform: scale(1.15);
+}
+
+.star.selected {
+    color: #c9a86a;
+}
+
+.review-box textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+}
+
+.review-box button {
+    margin-top: 10px;
+}
+
+.review-list {
+    margin-top: 15px;
+}
+
+.review {
+    border-top: 1px solid #ddd;
+    padding: 12px 0;
+}
+
+.review-stars {
+    color: #c9a86a;
+    font-size: 18px;
+}
+
+.review p {
+    margin: 7px 0;
+}
+
+.review small {
+    color: #777;
+}
+
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: 50px;
+}
+
 @media (max-width: 800px) {
+
     header {
         padding: 15px 20px;
         flex-wrap: wrap;
@@ -310,10 +401,26 @@ footer {
         max-width: 450px;
     }
 
+    .hero {
+        min-height: 350px;
+    }
+
     .hero-content h1 {
         font-size: 40px;
     }
+
+    .hero-content {
+        padding: 25px 20px;
+    }
+
+    .cart-panel {
+        right: 10px;
+        top: 80px;
+        width: calc(100% - 20px);
+    }
+
 }
+
 </style>
 </head>
 
@@ -335,6 +442,7 @@ footer {
 
 </header>
 
+
 <section class="hero" id="anasayfa">
 
     <div class="hero-content">
@@ -347,11 +455,15 @@ footer {
 
 </section>
 
+
 <section id="koleksiyon">
 
     <h2 class="section-title">Koleksiyon</h2>
 
     <div class="products">
+
+
+        <!-- YÜZÜK -->
 
         <div class="product">
 
@@ -365,7 +477,57 @@ footer {
                 Sepete Ekle
             </button>
 
+            <div class="review-box">
+
+                <h4>Ürün Değerlendirmeleri</h4>
+
+                <div
+                    class="rating-summary"
+                    id="rating-Zarif-Yüzük">
+                    Henüz değerlendirme yok
+                </div>
+
+                <div
+                    class="stars"
+                    data-product="Zarif Yüzük">
+
+                    <span class="star"
+                        onclick="selectRating('Zarif Yüzük', 1)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Zarif Yüzük', 2)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Zarif Yüzük', 3)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Zarif Yüzük', 4)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Zarif Yüzük', 5)">★</span>
+
+                </div>
+
+                <textarea
+                    id="review-Zarif-Yüzük"
+                    placeholder="Bu ürün hakkında yorumunuz...">
+                </textarea>
+
+                <button onclick="addReview('Zarif Yüzük')">
+                    Yorumu Gönder
+                </button>
+
+                <div
+                    class="review-list"
+                    id="reviews-Zarif-Yüzük">
+                </div>
+
+            </div>
+
         </div>
+
+
+        <!-- KOLYE -->
 
         <div class="product">
 
@@ -379,7 +541,57 @@ footer {
                 Sepete Ekle
             </button>
 
+            <div class="review-box">
+
+                <h4>Ürün Değerlendirmeleri</h4>
+
+                <div
+                    class="rating-summary"
+                    id="rating-İnci-Kolye">
+                    Henüz değerlendirme yok
+                </div>
+
+                <div
+                    class="stars"
+                    data-product="İnci Kolye">
+
+                    <span class="star"
+                        onclick="selectRating('İnci Kolye', 1)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('İnci Kolye', 2)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('İnci Kolye', 3)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('İnci Kolye', 4)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('İnci Kolye', 5)">★</span>
+
+                </div>
+
+                <textarea
+                    id="review-İnci-Kolye"
+                    placeholder="Bu ürün hakkında yorumunuz...">
+                </textarea>
+
+                <button onclick="addReview('İnci Kolye')">
+                    Yorumu Gönder
+                </button>
+
+                <div
+                    class="review-list"
+                    id="reviews-İnci-Kolye">
+                </div>
+
+            </div>
+
         </div>
+
+
+        <!-- BİLEKLİK -->
 
         <div class="product">
 
@@ -393,11 +605,61 @@ footer {
                 Sepete Ekle
             </button>
 
+            <div class="review-box">
+
+                <h4>Ürün Değerlendirmeleri</h4>
+
+                <div
+                    class="rating-summary"
+                    id="rating-Minimal-Bileklik">
+                    Henüz değerlendirme yok
+                </div>
+
+                <div
+                    class="stars"
+                    data-product="Minimal Bileklik">
+
+                    <span class="star"
+                        onclick="selectRating('Minimal Bileklik', 1)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Minimal Bileklik', 2)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Minimal Bileklik', 3)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Minimal Bileklik', 4)">★</span>
+
+                    <span class="star"
+                        onclick="selectRating('Minimal Bileklik', 5)">★</span>
+
+                </div>
+
+                <textarea
+                    id="review-Minimal-Bileklik"
+                    placeholder="Bu ürün hakkında yorumunuz...">
+                </textarea>
+
+                <button onclick="addReview('Minimal Bileklik')">
+                    Yorumu Gönder
+                </button>
+
+                <div
+                    class="review-list"
+                    id="reviews-Minimal-Bileklik">
+                </div>
+
+            </div>
+
         </div>
 
     </div>
 
 </section>
+
+
+<!-- SEPET -->
 
 <div class="cart-panel" id="cartPanel">
 
@@ -406,7 +668,8 @@ footer {
     <div id="cartItems"></div>
 
     <div class="total">
-        Toplam: <span id="cartTotal">0</span> TL
+        Toplam:
+        <span id="cartTotal">0</span> TL
     </div>
 
     <button onclick="openOrderForm()">
@@ -415,9 +678,14 @@ footer {
 
 </div>
 
+
+<!-- SİPARİŞ -->
+
 <section id="orderSection" style="display:none;">
 
-    <h2 class="section-title">Sipariş Bilgileri</h2>
+    <h2 class="section-title">
+        Sipariş Bilgileri
+    </h2>
 
     <div class="form-box">
 
@@ -428,7 +696,8 @@ footer {
             <div id="orderSummary"></div>
 
             <strong>
-                Toplam: <span id="orderTotal">0</span> TL
+                Toplam:
+                <span id="orderTotal">0</span> TL
             </strong>
 
         </div>
@@ -436,65 +705,74 @@ footer {
         <input
             type="text"
             id="name"
-            placeholder="Ad Soyad"
-        >
+            placeholder="Ad Soyad">
 
         <input
             type="tel"
             id="phone"
-            placeholder="Telefon"
-        >
+            placeholder="Telefon">
 
         <textarea
             id="address"
-            placeholder="Teslimat Adresi"
-        ></textarea>
+            placeholder="Teslimat Adresi">
+        </textarea>
 
         <textarea
             id="note"
-            placeholder="Sipariş Notu"
-        ></textarea>
+            placeholder="Sipariş Notu">
+        </textarea>
 
         <button onclick="createOrder()">
             Siparişi Oluştur
         </button>
 
-        <div id="orderMessage" class="message"></div>
+        <div
+            id="orderMessage"
+            class="message">
+        </div>
 
     </div>
 
 </section>
 
-<section id="paymentSection" style="display:none;">
+
+<!-- TEST ÖDEME -->
+
+<section
+    id="paymentSection"
+    style="display:none;">
 
     <div class="payment-box active">
 
         <h2>Test Ödeme</h2>
 
         <div class="test-note">
+
             Bu yalnızca test ödeme ekranıdır.
             Gerçek kart bilgilerini kullanmayın.
+
         </div>
 
         <p>
+
             Ödenecek Tutar:
+
             <strong>
                 <span id="paymentTotal">0</span> TL
             </strong>
+
         </p>
 
         <input
             type="text"
             id="cardName"
-            placeholder="Kart Üzerindeki İsim"
-        >
+            placeholder="Kart Üzerindeki İsim">
 
         <input
             type="text"
             id="cardNumber"
             placeholder="Kart Numarası"
-            maxlength="19"
-        >
+            maxlength="19">
 
         <div class="payment-row">
 
@@ -502,15 +780,13 @@ footer {
                 type="text"
                 id="expiry"
                 placeholder="AA/YY"
-                maxlength="5"
-            >
+                maxlength="5">
 
             <input
                 type="text"
                 id="cvv"
                 placeholder="CVV"
-                maxlength="3"
-            >
+                maxlength="3">
 
         </div>
 
@@ -518,56 +794,91 @@ footer {
             Ödemeyi Tamamla
         </button>
 
-        <div id="paymentMessage" class="message"></div>
+        <div
+            id="paymentMessage"
+            class="message">
+        </div>
 
     </div>
 
 </section>
+
+
+<!-- İLETİŞİM -->
 
 <section id="iletisim">
 
-    <h2 class="section-title">İletişim</h2>
+    <h2 class="section-title">
+        İletişim
+    </h2>
 
     <div style="text-align:center;">
-        <p>VELORA hakkında bizimle iletişime geçebilirsiniz.</p>
+
+        <p>
+            VELORA hakkında bizimle iletişime geçebilirsiniz.
+        </p>
+
     </div>
 
 </section>
 
+
 <footer>
 
-    <p>© 2026 VELORA</p>
+    <p>
+        © 2026 VELORA
+    </p>
 
 </footer>
 
+
 <script>
 
-const BACKEND_URL = "https://velora-backend-1-aft5.onrender.com";
+const BACKEND_URL =
+    "https://velora-backend-1-aft5.onrender.com";
 
 let cart = [];
 
+let selectedRatings = {};
+
+
+/* =========================
+   SEPET
+========================= */
+
 function addToCart(name, price) {
 
-    const existing = cart.find(item => item.name === name);
+    const existing =
+        cart.find(item => item.name === name);
 
     if (existing) {
+
         existing.quantity++;
+
     } else {
+
         cart.push({
             name: name,
             price: price,
             quantity: 1
         });
+
     }
 
     updateCart();
 }
 
+
 function updateCart() {
 
-    const cartItems = document.getElementById("cartItems");
-    const cartCount = document.getElementById("cartCount");
-    const cartTotal = document.getElementById("cartTotal");
+    const cartItems =
+        document.getElementById("cartItems");
+
+    const cartCount =
+        document.getElementById("cartCount");
+
+    const cartTotal =
+        document.getElementById("cartTotal");
 
     cartItems.innerHTML = "";
 
@@ -576,15 +887,21 @@ function updateCart() {
 
     cart.forEach((item, index) => {
 
-        total += item.price * item.quantity;
+        total +=
+            item.price * item.quantity;
+
         count += item.quantity;
 
-        const div = document.createElement("div");
+        const div =
+            document.createElement("div");
 
         div.className = "cart-item";
 
         div.innerHTML = `
-            <div class="cart-item-title">${item.name}</div>
+
+            <div class="cart-item-title">
+                ${item.name}
+            </div>
 
             <div>
                 ${item.price} TL
@@ -592,21 +909,28 @@ function updateCart() {
 
             <div class="quantity">
 
-                <button onclick="changeQuantity(${index}, -1)">
+                <button
+                    onclick="changeQuantity(${index}, -1)">
                     -
                 </button>
 
-                <span>${item.quantity}</span>
+                <span>
+                    ${item.quantity}
+                </span>
 
-                <button onclick="changeQuantity(${index}, 1)">
+                <button
+                    onclick="changeQuantity(${index}, 1)">
                     +
                 </button>
 
             </div>
 
-            <button class="remove-btn" onclick="removeItem(${index})">
+            <button
+                class="remove-btn"
+                onclick="removeItem(${index})">
                 Ürünü Sil
             </button>
+
         `;
 
         cartItems.appendChild(div);
@@ -614,19 +938,24 @@ function updateCart() {
     });
 
     cartCount.textContent = count;
+
     cartTotal.textContent = total;
 }
+
 
 function changeQuantity(index, amount) {
 
     cart[index].quantity += amount;
 
     if (cart[index].quantity <= 0) {
+
         cart.splice(index, 1);
+
     }
 
     updateCart();
 }
+
 
 function removeItem(index) {
 
@@ -635,12 +964,19 @@ function removeItem(index) {
     updateCart();
 }
 
+
 function toggleCart() {
 
     document
         .getElementById("cartPanel")
         .classList.toggle("active");
+
 }
+
+
+/* =========================
+   SİPARİŞ FORMU
+========================= */
 
 function openOrderForm() {
 
@@ -651,9 +987,13 @@ function openOrderForm() {
         return;
     }
 
-    document.getElementById("cartPanel").classList.remove("active");
+    document
+        .getElementById("cartPanel")
+        .classList.remove("active");
 
-    document.getElementById("orderSection").style.display = "block";
+    document
+        .getElementById("orderSection")
+        .style.display = "block";
 
     updateOrderSummary();
 
@@ -664,10 +1004,14 @@ function openOrderForm() {
         });
 }
 
+
 function updateOrderSummary() {
 
-    const summary = document.getElementById("orderSummary");
-    const totalElement = document.getElementById("orderTotal");
+    const summary =
+        document.getElementById("orderSummary");
+
+    const totalElement =
+        document.getElementById("orderTotal");
 
     summary.innerHTML = "";
 
@@ -675,11 +1019,13 @@ function updateOrderSummary() {
 
     cart.forEach(item => {
 
-        const itemTotal = item.price * item.quantity;
+        const itemTotal =
+            item.price * item.quantity;
 
         total += itemTotal;
 
-        const p = document.createElement("p");
+        const p =
+            document.createElement("p");
 
         p.textContent =
             `${item.name} x ${item.quantity} = ${itemTotal} TL`;
@@ -691,19 +1037,32 @@ function updateOrderSummary() {
     totalElement.textContent = total;
 }
 
+
+/* =========================
+   SİPARİŞ OLUŞTUR
+========================= */
+
 async function createOrder() {
 
     const name =
-        document.getElementById("name").value.trim();
+        document.getElementById("name")
+        .value
+        .trim();
 
     const phone =
-        document.getElementById("phone").value.trim();
+        document.getElementById("phone")
+        .value
+        .trim();
 
     const address =
-        document.getElementById("address").value.trim();
+        document.getElementById("address")
+        .value
+        .trim();
 
     const note =
-        document.getElementById("note").value.trim();
+        document.getElementById("note")
+        .value
+        .trim();
 
     if (!name || !phone || !address) {
 
@@ -720,17 +1079,23 @@ async function createOrder() {
 
     cart.forEach(item => {
 
-        total += item.price * item.quantity;
+        total +=
+            item.price * item.quantity;
 
     });
 
     const order = {
 
         customer: {
+
             name: name,
+
             phone: phone,
+
             address: address,
+
             note: note
+
         },
 
         products: cart,
@@ -741,27 +1106,34 @@ async function createOrder() {
 
     try {
 
-        const response = await fetch(
-            `${BACKEND_URL}/api/order`,
-            {
-                method: "POST",
+        const response =
+            await fetch(
+                `${BACKEND_URL}/api/order`,
+                {
+                    method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                body: JSON.stringify(order)
+                    body:
+                        JSON.stringify(order)
+                }
+            );
 
-            }
-        );
-
-        const data = await response.json();
+        const data =
+            await response.json();
 
         if (data.success) {
 
-            document.getElementById("paymentSection").style.display = "block";
+            document
+                .getElementById("paymentSection")
+                .style.display = "block";
 
-            document.getElementById("paymentTotal").textContent = total;
+            document
+                .getElementById("paymentTotal")
+                .textContent = total;
 
             document
                 .getElementById("paymentSection")
@@ -788,79 +1160,127 @@ async function createOrder() {
         );
 
     }
+
 }
+
+
+/* =========================
+   TEST ÖDEME
+========================= */
 
 document
     .getElementById("cardNumber")
-    .addEventListener("input", function() {
+    .addEventListener(
+        "input",
+        function() {
 
-        let value = this.value.replace(/\D/g, "");
+            let value =
+                this.value.replace(/\D/g, "");
 
-        value = value.substring(0, 16);
+            value =
+                value.substring(0, 16);
 
-        let formatted = "";
+            let formatted = "";
 
-        for (let i = 0; i < value.length; i++) {
+            for (
+                let i = 0;
+                i < value.length;
+                i++
+            ) {
 
-            if (i > 0 && i % 4 === 0) {
-                formatted += " ";
+                if (
+                    i > 0 &&
+                    i % 4 === 0
+                ) {
+
+                    formatted += " ";
+
+                }
+
+                formatted += value[i];
+
             }
 
-            formatted += value[i];
+            this.value = formatted;
 
         }
+    );
 
-        this.value = formatted;
-
-    });
 
 document
     .getElementById("expiry")
-    .addEventListener("input", function() {
+    .addEventListener(
+        "input",
+        function() {
 
-        let value = this.value.replace(/\D/g, "");
-
-        value = value.substring(0, 4);
-
-        if (value.length >= 3) {
+            let value =
+                this.value.replace(/\D/g, "");
 
             value =
-                value.substring(0, 2)
-                + "/"
-                + value.substring(2);
+                value.substring(0, 4);
+
+            if (value.length >= 3) {
+
+                value =
+                    value.substring(0, 2)
+                    + "/"
+                    + value.substring(2);
+
+            }
+
+            this.value = value;
 
         }
+    );
 
-        this.value = value;
-
-    });
 
 document
     .getElementById("cvv")
-    .addEventListener("input", function() {
+    .addEventListener(
+        "input",
+        function() {
 
-        this.value =
-            this.value
-                .replace(/\D/g, "")
-                .substring(0, 3);
+            this.value =
+                this.value
+                    .replace(/\D/g, "")
+                    .substring(0, 3);
 
-    });
+        }
+    );
+
 
 async function makeTestPayment() {
 
     const cardName =
-        document.getElementById("cardName").value.trim();
+        document
+            .getElementById("cardName")
+            .value
+            .trim();
 
     const cardNumber =
-        document.getElementById("cardNumber").value.trim();
+        document
+            .getElementById("cardNumber")
+            .value
+            .trim();
 
     const expiry =
-        document.getElementById("expiry").value.trim();
+        document
+            .getElementById("expiry")
+            .value
+            .trim();
 
     const cvv =
-        document.getElementById("cvv").value.trim();
+        document
+            .getElementById("cvv")
+            .value
+            .trim();
 
-    if (!cardName || !cardNumber || !expiry || !cvv) {
+    if (
+        !cardName ||
+        !cardNumber ||
+        !expiry ||
+        !cvv
+    ) {
 
         showMessage(
             "paymentMessage",
@@ -875,29 +1295,33 @@ async function makeTestPayment() {
 
     cart.forEach(item => {
 
-        total += item.price * item.quantity;
+        total +=
+            item.price * item.quantity;
 
     });
 
     try {
 
-        const response = await fetch(
-            `${BACKEND_URL}/api/test-payment`,
-            {
-                method: "POST",
+        const response =
+            await fetch(
+                `${BACKEND_URL}/api/test-payment`,
+                {
+                    method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                body: JSON.stringify({
-                    total: total
-                })
+                    body:
+                        JSON.stringify({
+                            total: total
+                        })
+                }
+            );
 
-            }
-        );
-
-        const data = await response.json();
+        const data =
+            await response.json();
 
         if (data.success) {
 
@@ -911,15 +1335,37 @@ async function makeTestPayment() {
 
             updateCart();
 
-            document.getElementById("name").value = "";
-            document.getElementById("phone").value = "";
-            document.getElementById("address").value = "";
-            document.getElementById("note").value = "";
+            document
+                .getElementById("name")
+                .value = "";
 
-            document.getElementById("cardName").value = "";
-            document.getElementById("cardNumber").value = "";
-            document.getElementById("expiry").value = "";
-            document.getElementById("cvv").value = "";
+            document
+                .getElementById("phone")
+                .value = "";
+
+            document
+                .getElementById("address")
+                .value = "";
+
+            document
+                .getElementById("note")
+                .value = "";
+
+            document
+                .getElementById("cardName")
+                .value = "";
+
+            document
+                .getElementById("cardNumber")
+                .value = "";
+
+            document
+                .getElementById("expiry")
+                .value = "";
+
+            document
+                .getElementById("cvv")
+                .value = "";
 
         } else {
 
@@ -940,7 +1386,13 @@ async function makeTestPayment() {
         );
 
     }
+
 }
+
+
+/* =========================
+   MESAJ
+========================= */
 
 function showMessage(id, text, type) {
 
@@ -952,8 +1404,254 @@ function showMessage(id, text, type) {
     element.className =
         "message " + type;
 
-    element.style.display = "block";
+    element.style.display =
+        "block";
 }
+
+
+/* =========================
+   YORUM VE YILDIZ
+========================= */
+
+function getProductKey(product) {
+
+    return product
+        .replaceAll(" ", "-")
+        .replaceAll("İ", "I")
+        .replaceAll("ı", "i")
+        .replaceAll("ş", "s")
+        .replaceAll("Ş", "S")
+        .replaceAll("ğ", "g")
+        .replaceAll("Ğ", "G")
+        .replaceAll("ü", "u")
+        .replaceAll("Ü", "U")
+        .replaceAll("ö", "o")
+        .replaceAll("Ö", "O")
+        .replaceAll("ç", "c")
+        .replaceAll("Ç", "C");
+}
+
+
+function selectRating(product, rating) {
+
+    selectedRatings[product] =
+        rating;
+
+    const container =
+        document.querySelector(
+            `.stars[data-product="${product}"]`
+        );
+
+    const stars =
+        container.querySelectorAll(".star");
+
+    stars.forEach(
+        (star, index) => {
+
+            if (index < rating) {
+
+                star.classList.add(
+                    "selected"
+                );
+
+            } else {
+
+                star.classList.remove(
+                    "selected"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+function addReview(product) {
+
+    const rating =
+        selectedRatings[product];
+
+    const productKey =
+        getProductKey(product);
+
+    const textarea =
+        document.getElementById(
+            "review-" + productKey
+        );
+
+    const text =
+        textarea.value.trim();
+
+    if (!rating) {
+
+        alert(
+            "Lütfen yıldız puanı seçin."
+        );
+
+        return;
+    }
+
+    if (!text) {
+
+        alert(
+            "Lütfen yorumunuzu yazın."
+        );
+
+        return;
+    }
+
+    const key =
+        "velora_reviews_" + productKey;
+
+    const reviews =
+        JSON.parse(
+            localStorage.getItem(key)
+            || "[]"
+        );
+
+    reviews.push({
+
+        rating: rating,
+
+        text: text,
+
+        date:
+            new Date()
+                .toLocaleDateString("tr-TR")
+
+    });
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(reviews)
+    );
+
+    textarea.value = "";
+
+    selectedRatings[product] = 0;
+
+    const stars =
+        document.querySelectorAll(
+            `.stars[data-product="${product}"] .star`
+        );
+
+    stars.forEach(star => {
+
+        star.classList.remove(
+            "selected"
+        );
+
+    });
+
+    updateReviews(product);
+
+}
+
+
+function updateReviews(product) {
+
+    const productKey =
+        getProductKey(product);
+
+    const key =
+        "velora_reviews_" + productKey;
+
+    const reviews =
+        JSON.parse(
+            localStorage.getItem(key)
+            || "[]"
+        );
+
+    const list =
+        document.getElementById(
+            "reviews-" + productKey
+        );
+
+    const ratingElement =
+        document.getElementById(
+            "rating-" + productKey
+        );
+
+    list.innerHTML = "";
+
+    if (reviews.length === 0) {
+
+        ratingElement.textContent =
+            "Henüz değerlendirme yok";
+
+        return;
+    }
+
+    const total =
+        reviews.reduce(
+            (sum, review) =>
+                sum + review.rating,
+            0
+        );
+
+    const average =
+        (total / reviews.length)
+        .toFixed(1);
+
+    ratingElement.textContent =
+        `★ ${average}/5 (${reviews.length} değerlendirme)`;
+
+    reviews.forEach(review => {
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "review";
+
+        div.innerHTML = `
+
+            <div class="review-stars">
+                ${"★".repeat(review.rating)}
+            </div>
+
+            <p>
+                ${escapeHtml(review.text)}
+            </p>
+
+            <small>
+                ${review.date}
+            </small>
+
+        `;
+
+        list.appendChild(div);
+
+    });
+
+}
+
+
+function escapeHtml(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}
+
+
+function loadAllReviews() {
+
+    updateReviews("Zarif Yüzük");
+
+    updateReviews("İnci Kolye");
+
+    updateReviews("Minimal Bileklik");
+
+}
+
+
+loadAllReviews();
 
 </script>
 
