@@ -156,7 +156,13 @@ font-size:17px;
 cursor:pointer
 }
 
-.dropdown{position:relative}
+/* =========================
+   KATEGORİ DROPDOWN
+========================= */
+
+.dropdown{
+position:relative
+}
 
 .dropdown-content{
 display:none;
@@ -167,7 +173,15 @@ min-width:180px;
 background:#fffaf3;
 border:1px solid #dbc8ad;
 box-shadow:0 10px 25px rgba(70,50,30,.12);
-padding:8px 0
+padding:8px 0;
+z-index:2500
+}
+
+/* Tıklanınca açık kalır */
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content,
+.dropdown.active .dropdown-content{
+display:block
 }
 
 .dropdown-content a{
@@ -177,8 +191,9 @@ font-size:14px;
 color:#5a4632
 }
 
-.dropdown-content a:hover{background:#f1e5d3}
-.dropdown:hover .dropdown-content{display:block}
+.dropdown-content a:hover{
+background:#f1e5d3
+}
 
 .account-area{
 position:relative;
@@ -1319,7 +1334,7 @@ type="button"
 
 <div class="dropdown">
 
-<button class="dropbtn">
+<button class="dropbtn" type="button">
 Yüzük ▾
 </button>
 
@@ -1346,7 +1361,7 @@ Minimal
 
 <div class="dropdown">
 
-<button class="dropbtn">
+<button class="dropbtn" type="button">
 Bileklik ▾
 </button>
 
@@ -1373,7 +1388,7 @@ Zincir
 
 <div class="dropdown">
 
-<button class="dropbtn">
+<button class="dropbtn" type="button">
 Küpe ▾
 </button>
 
@@ -1400,7 +1415,7 @@ Minimal
 
 <div class="dropdown">
 
-<button class="dropbtn">
+<button class="dropbtn" type="button">
 Kolye ▾
 </button>
 
@@ -1757,8 +1772,6 @@ type="button"
 ×
 </button>
 
-<!-- GİRİŞ -->
-
 <div id="loginForm">
 
 <h2>
@@ -1829,8 +1842,6 @@ onclick="showForgotPassword()"
 </div>
 
 </div>
-
-<!-- KAYIT -->
 
 <div
 id="registerForm"
@@ -1925,8 +1936,6 @@ Giriş Yap
 
 </div>
 
-<!-- E-POSTA DOĞRULAMA -->
-
 <div
 id="verifyEmailForm"
 style="display:none;"
@@ -1995,8 +2004,6 @@ Giriş Yap
 
 </div>
 
-<!-- ŞİFREMİ UNUTTUM -->
-
 <div
 id="forgotPasswordForm"
 style="display:none;"
@@ -2057,8 +2064,6 @@ Giriş Yap
 </div>
 
 </div>
-
-<!-- ŞİFRE SIFIRLAMA -->
 
 <div
 id="resetPasswordForm"
@@ -2132,8 +2137,6 @@ Giriş Yap
 </div>
 
 </div>
-
-<!-- ŞİFRE DEĞİŞTİR -->
 
 <div
 id="changePasswordForm"
@@ -4078,8 +4081,6 @@ document.getElementById(
 "registerMessage"
 );
 
-/* KONTROLLER */
-
 if(!username||!email||!password||!confirm){
 
 message.className=
@@ -4916,6 +4917,47 @@ document.getElementById(
 );
 
 
+/* =========================
+   KATEGORİ DROPDOWN MENÜLERİ
+========================= */
+
+document.querySelectorAll(".dropdown").forEach(
+dropdown=>{
+
+const button=
+dropdown.querySelector(".dropbtn");
+
+button.addEventListener(
+"click",
+event=>{
+
+event.preventDefault();
+event.stopPropagation();
+
+/* Diğer açık kategorileri kapat */
+
+document.querySelectorAll(
+".dropdown.active"
+).forEach(other=>{
+
+if(other!==dropdown){
+
+other.classList.remove("active");
+
+}
+
+});
+
+/* Tıklanan kategoriyi aç/kapat */
+
+dropdown.classList.toggle("active");
+
+});
+
+}
+);
+
+
 /* ARAMA */
 
 document.getElementById(
@@ -5116,11 +5158,15 @@ closeOrders();
 );
 
 
-/* DIŞARI TIKLAMA */
+/* =========================
+   DIŞARI TIKLAMA
+========================= */
 
 document.addEventListener(
 "click",
 event=>{
+
+/* HESAP MENÜSÜ */
 
 const accountArea=
 document.querySelector(".account-area");
@@ -5137,6 +5183,9 @@ accountMenu.classList.remove("active");
 
 }
 
+
+/* SOL MENÜ */
+
 const menuWrapper=
 document.querySelector(".menu-wrapper");
 
@@ -5149,6 +5198,21 @@ menuWrapper&&
 ){
 
 menuPanel.classList.remove("active");
+
+}
+
+
+/* KATEGORİ DROPDOWNLARI */
+
+if(!event.target.closest(".dropdown")){
+
+document.querySelectorAll(
+".dropdown.active"
+).forEach(dropdown=>{
+
+dropdown.classList.remove("active");
+
+});
 
 }
 
