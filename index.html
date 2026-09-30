@@ -3,212 +3,1399 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
+
 <title>VELORA | Zarif Takılar</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:Georgia,"Times New Roman",serif;background:#f7f1e7;color:#4c3b2b}
 
-header{position:sticky;top:0;z-index:1000;background:rgba(247,241,231,.98);border-bottom:1px solid #d6c2a5;padding:15px 5%;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.logo{font-size:30px;font-weight:bold;letter-spacing:6px;color:#9b7445;text-decoration:none;white-space:nowrap}
-.header-center{display:flex;align-items:center;gap:22px;flex:1;justify-content:center}
-nav{display:flex;align-items:center;gap:20px}
-nav a,.dropbtn{color:#5a4632;font-size:16px;cursor:pointer;background:none;border:none;font-family:inherit;text-decoration:none}
-nav a:hover,.dropbtn:hover{color:#a67c48}
+html{
+    scroll-behavior:smooth;
+}
 
-.menu-wrapper,.dropdown,.account-area{position:relative}
-.menu-button,.account-button,.cart-button{border:1px solid #b99669;background:#fffaf3;color:#705333;padding:9px 15px;font-family:inherit;cursor:pointer;transition:.3s;white-space:nowrap}
-.menu-button:hover,.account-button:hover,.cart-button:hover{background:#b99669;color:#fff}
+body{
+    font-family:Georgia,"Times New Roman",serif;
+    background:#f7f1e7;
+    color:#4c3b2b;
+}
 
-.menu-panel{display:none;position:absolute;top:45px;left:0;width:230px;background:#fffaf3;border:1px solid #dbc8ad;box-shadow:0 12px 30px rgba(70,50,30,.15);padding:10px;z-index:2000}
-.menu-panel.active{display:block}
-.menu-panel-title{font-size:18px;color:#85633d;padding:10px 12px;border-bottom:1px solid #eadbc8;margin-bottom:5px}
-.menu-panel button{display:block;width:100%;border:0;background:none;padding:11px 12px;text-align:left;font-family:inherit;font-size:15px;color:#5a4632;cursor:pointer}
-.menu-panel button:hover{background:#f1e5d3;color:#9b7445}
+button,
+a,
+input,
+textarea{
+    -webkit-tap-highlight-color:transparent;
+}
 
-.search-box{display:flex;align-items:center;width:300px;max-width:100%;border:1px solid #cdb18c;background:#fffaf3}
-.search-box input{width:100%;border:0;outline:0;padding:10px 12px;background:transparent;color:#4c3b2b;font-family:inherit;font-size:14px}
-.search-button{border:0;background:none;padding:0 12px;color:#806344;font-size:17px;cursor:pointer}
+button{
+    touch-action:manipulation;
+}
 
-.dropdown-content{display:none;position:absolute;top:calc(100% - 1px);left:0;min-width:180px;background:#fffaf3;border:1px solid #dbc8ad;box-shadow:0 10px 25px rgba(70,50,30,.12);padding:8px 0;z-index:2500}
-.dropdown:hover .dropdown-content{display:block}
-.dropdown-content a{display:block;padding:10px 16px;font-size:14px;color:#5a4632;text-decoration:none;white-space:nowrap}
-.dropdown-content a:hover{background:#f1e5d3;color:#9b7445}
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(247,241,231,.98);
+    border-bottom:1px solid #d6c2a5;
+    padding:15px 5%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
 
-.account-area{display:flex;align-items:center;gap:10px}
-.account-menu{display:none;position:absolute;right:0;top:42px;width:270px;background:#fffaf3;border:1px solid #dbc8ad;box-shadow:0 10px 25px rgba(70,50,30,.15);padding:18px;z-index:3000}
-.account-menu.active{display:block}
-.account-menu h3{color:#85633d;margin-bottom:8px}
-.account-menu p{font-size:14px;color:#6b5640;margin-bottom:15px;word-break:break-word}
-.account-menu button{width:100%;padding:10px;border:1px solid #b99669;background:#b99669;color:#fff;font-family:inherit;cursor:pointer;margin-top:7px}
-.account-menu button:hover{background:#9f7749}
-.account-section-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.account-section-button{padding:12px 8px!important;background:#fffaf3!important;color:#705333!important}
-.account-section-button:hover{background:#f1e5d3!important}
-#cartCount{font-weight:bold;margin-left:3px}
+.logo{
+    font-size:30px;
+    font-weight:bold;
+    letter-spacing:6px;
+    color:#9b7445;
+    text-decoration:none;
+    white-space:nowrap;
+}
 
-.hero-slider{position:relative;width:100%;height:calc(100vh - 90px);min-height:520px;max-height:760px;overflow:hidden;background:#eee3d3;touch-action:pan-y}
-.hero-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .7s ease;z-index:1}
-.hero-slide.active{opacity:1;visibility:visible;z-index:2}
-.hero-slide img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(35,25,15,.58),rgba(35,25,15,.25) 45%,rgba(35,25,15,.05))}
-.hero-content{position:absolute;left:8%;top:50%;transform:translateY(-50%);max-width:570px;color:#fffaf3;z-index:3}
-.hero-content span{display:block;font-size:13px;letter-spacing:6px;margin-bottom:18px}
-.hero-content h1{font-size:clamp(38px,5vw,72px);font-weight:normal;line-height:1.08;margin-bottom:20px;text-shadow:0 3px 15px rgba(0,0,0,.18)}
-.hero-content p{font-size:18px;line-height:1.6;margin-bottom:30px;max-width:460px}
-.hero-button{display:inline-block;padding:13px 27px;background:#f7f1e7;color:#5b4630;text-decoration:none;font-size:14px;transition:.3s}
-.hero-button:hover{background:#fff;transform:translateY(-2px)}
-.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border:1px solid rgba(255,255,255,.6);background:rgba(60,40,20,.18);color:#fff;font-size:38px;font-family:Georgia,serif;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center}
-.hero-prev{left:25px}.hero-next{right:25px}
-.hero-dots{position:absolute;left:50%;bottom:25px;transform:translateX(-50%);display:flex;gap:9px;z-index:10}
-.hero-dot{width:9px;height:9px;padding:0;border:1px solid #fff;border-radius:50%;background:transparent;cursor:pointer}
-.hero-dot.active{width:28px;border-radius:10px;background:#fff}
+.header-center{
+    display:flex;
+    align-items:center;
+    gap:22px;
+    flex:1;
+    justify-content:center;
+}
 
-section{padding:80px 6%}
-.section-title{text-align:center;font-size:38px;color:#85633d;margin-bottom:45px;letter-spacing:3px}
-.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:1200px;margin:auto}
-.category-card{position:relative;height:280px;overflow:hidden;cursor:pointer;border:1px solid #d8c2a4}
-.category-card img{width:100%;height:100%;object-fit:cover;transition:.5s}
-.category-card:hover img{transform:scale(1.06)}
-.category-overlay{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;background:rgba(55,40,25,.28);color:#fff;font-size:27px;letter-spacing:3px}
+nav{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
 
-#urunler{background:#fbf7f0}
-.search-result-info{text-align:center;color:#8b6943;font-size:16px;margin-top:-25px;margin-bottom:35px;min-height:20px}
-.category-heading{text-align:center;font-size:34px;color:#8b6943;margin:65px 0 30px;letter-spacing:3px}
-.category-heading:first-child{margin-top:0}
-.product-grid{max-width:1250px;margin:0 auto 50px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.product-card{position:relative;background:#fffdf9;border:1px solid #dfccb2;overflow:hidden;transition:.3s}
-.product-card:hover{transform:translateY(-5px);box-shadow:0 12px 25px rgba(90,65,40,.12)}
-.product-image{width:100%;height:260px;object-fit:cover;display:block}
-.favorite-button{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:1px solid #d5b993;background:rgba(255,250,243,.95);color:#9b7445;font-size:23px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5}
-.favorite-button.active{color:#a05243;border-color:#c79d91;background:#fffaf7}
-.product-info{padding:20px;text-align:center}
-.product-name{font-size:21px;color:#5d4631;margin-bottom:8px}
-.product-category{color:#a18058;font-size:14px;margin-bottom:14px}
-.stock-status{color:#a67c48;font-size:15px;font-weight:bold;margin-bottom:12px}
-.stock-button,.review-button,.checkout-submit{width:100%;padding:11px;border:1px solid #b99669;background:#b99669;color:#fff;font-family:inherit;cursor:pointer}
-.stock-button:hover,.review-button:hover,.checkout-submit:hover{background:#9f7749}
-.review-box{margin-top:20px;padding-top:15px;border-top:1px solid #eadbc8}
-.stars{margin-bottom:10px}.star{font-size:22px;color:#c9b39a;cursor:pointer;margin:0 2px}.star.active{color:#b3864e}
-.review-input{width:100%;min-height:70px;resize:vertical;padding:10px;border:1px solid #d9c5a9;background:#fffaf4;color:#4c3b2b;font-family:inherit;outline:0}
-.review-button{margin-top:8px}
-.reviews{margin-top:15px;text-align:left}
-.review-item{padding:10px;margin-bottom:8px;background:#f7efe3;border-left:3px solid #b99669;font-size:14px}
-.review-stars{color:#b3864e;margin-bottom:5px}
+nav a,
+.dropbtn{
+    color:#5a4632;
+    font-size:16px;
+    cursor:pointer;
+    background:none;
+    border:none;
+    font-family:inherit;
+    text-decoration:none;
+}
 
-#one-cikanlar{background:#efe3d2}
-.featured-grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.featured-card{background:#fffaf3;border:1px solid #d9c3a5;overflow:hidden;cursor:pointer;transition:.3s}
-.featured-card:hover{transform:translateY(-5px)}
-.featured-card img{width:100%;height:230px;object-fit:cover}
-.featured-info{padding:18px;text-align:center}
-.featured-info h3{color:#664d35;margin-bottom:7px}.featured-info p{color:#a17b50;font-size:14px}
+nav a:hover,
+.dropbtn:hover{
+    color:#a67c48;
+}
 
-#iletisim{text-align:center;background:#f7f1e7}
-.contact-text{max-width:650px;margin:auto;line-height:1.8;color:#6b5640}
-footer{background:#4d3b2a;color:#f5e9d8;text-align:center;padding:25px;font-size:14px}
+.menu-wrapper,
+.dropdown,
+.account-area{
+    position:relative;
+}
 
-.modal{display:none;position:fixed;inset:0;background:rgba(40,28,18,.55);z-index:5000;justify-content:center;align-items:center;padding:20px}
-.modal.active{display:flex}
-.modal-box{width:100%;max-width:480px;max-height:90vh;overflow:auto;background:#fffaf3;border:1px solid #d6c2a5;padding:30px;box-shadow:0 15px 40px rgba(40,28,18,.25);position:relative}
-.modal-box.large{max-width:850px}
-.modal-box h2{text-align:center;color:#85633d;margin-bottom:25px;letter-spacing:2px}
-.close-modal{position:absolute;top:10px;right:15px;border:0;background:none;color:#80674c;font-size:25px;cursor:pointer}
+.menu-button,
+.account-button,
+.cart-button{
+    border:1px solid #b99669;
+    background:#fffaf3;
+    color:#705333;
+    padding:9px 15px;
+    font-family:inherit;
+    cursor:pointer;
+    transition:.3s;
+    white-space:nowrap;
+}
 
-.cart-list{display:flex;flex-direction:column;gap:12px}
-.cart-item{display:flex;align-items:center;gap:14px;background:#f7efe3;border:1px solid #dfccb2;padding:12px}
-.cart-item img{width:75px;height:75px;object-fit:cover}
-.cart-item-info{flex:1}.cart-item-info h3{font-size:17px;color:#60482f;margin-bottom:5px}
-.cart-item-info p{font-size:13px;color:#96724c}
-.cart-remove{border:0;background:none;color:#a05243;cursor:pointer;font-family:inherit}
-.cart-empty{text-align:center;padding:35px 10px;color:#8a6a48}
-.cart-total{margin-top:20px;padding-top:18px;border-top:1px solid #d9c5a9;text-align:right;color:#60482f;font-size:19px}
-.cart-actions{display:flex;gap:10px;margin-top:18px}
-.cart-actions button{flex:1;padding:12px;border:1px solid #b99669;background:#b99669;color:#fff;font-family:inherit;cursor:pointer}
-.cart-actions button:hover{background:#9f7749}
-.cart-toast{position:fixed;right:25px;bottom:25px;background:#5c4631;color:#fff;padding:13px 18px;z-index:6000;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.menu-button:hover,
+.account-button:hover,
+.cart-button:hover{
+    background:#b99669;
+    color:#fff;
+}
 
-.cart-quantity{display:flex;align-items:center;gap:10px;margin-top:8px}
-.cart-quantity button{width:28px;height:28px;border:1px solid #b99669;background:#fffaf3;color:#705333;cursor:pointer}
-.cart-quantity span{min-width:20px;text-align:center}
-.checkout-panel{display:none;margin-top:20px;padding-top:20px;border-top:1px solid #d9c5a9}
-.checkout-panel.active{display:block}
-.checkout-form label{display:block;margin:10px 0 6px;color:#6b5640;font-size:14px}
-.checkout-form input,.checkout-form textarea{width:100%;padding:11px;border:1px solid #d9c5a9;background:#fffdf9;font-family:inherit}
-.checkout-form textarea{min-height:100px;resize:vertical}
-.checkout-submit{margin-top:15px}
-.checkout-note,.login-required-box{background:#f7efe3;padding:15px;margin-bottom:15px;line-height:1.6;font-size:14px}
-.login-required-box button{margin-top:12px;padding:10px 15px;border:1px solid #b99669;background:#b99669;color:#fff;font-family:inherit;cursor:pointer}
-.checkout-message{margin-top:12px;padding:10px;font-size:14px}
-.checkout-success{background:#e6f2e3;color:#507047}
-.checkout-error{background:#f7e4df;color:#8a493f}
+.menu-panel{
+    display:none;
+    position:absolute;
+    top:45px;
+    left:0;
+    width:230px;
+    background:#fffaf3;
+    border:1px solid #dbc8ad;
+    box-shadow:0 12px 30px rgba(70,50,30,.15);
+    padding:10px;
+    z-index:2000;
+}
 
-.auth-tabs{display:flex;border-bottom:1px solid #d9c5a9;margin-bottom:20px}
-.auth-tab{flex:1;border:0;background:none;padding:12px;color:#806344;font-family:inherit;cursor:pointer}
-.auth-tab.active{color:#9b7445;border-bottom:2px solid #b99669}
-.auth-form{display:none}.auth-form.active{display:block}
-.auth-form label{display:block;font-size:14px;color:#6b5640;margin-bottom:6px}
-.auth-form input{width:100%;padding:11px;margin-bottom:14px;border:1px solid #d9c5a9;background:#fffdf9;color:#4c3b2b;font-family:inherit;outline:0}
-.auth-submit{width:100%;padding:12px;border:1px solid #b99669;background:#b99669;color:#fff;font-family:inherit;cursor:pointer}
-.auth-link{border:0;background:none;color:#9b7445;cursor:pointer;font-family:inherit;margin-top:12px}
-.auth-message{margin-bottom:14px;padding:10px;display:none;font-size:14px}
-.auth-message.success-message{display:block;background:#e6f2e3;color:#507047}
-.auth-message.error-message{display:block;background:#f7e4df;color:#8a493f}
-.verify-info{font-size:14px;line-height:1.6;color:#6b5640;margin-bottom:15px}
+.menu-panel.active{
+    display:block;
+}
 
-.favorites-empty{text-align:center;padding:50px 20px;color:#85633d}
-.favorite-list{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
-.favorite-item{display:flex;gap:15px;background:#f7efe3;border:1px solid #dfccb2;padding:12px}
-.favorite-item img{width:90px;height:90px;object-fit:cover}
-.favorite-item-info{flex:1}.favorite-item-info h3{font-size:17px;color:#60482f;margin-bottom:5px}
-.favorite-item-info p{font-size:13px;color:#96724c;margin-bottom:10px}
-.favorite-remove{border:1px solid #c49b83;background:#fffaf3;color:#8a5144;padding:7px 10px;font-family:inherit;cursor:pointer}
+.menu-panel-title{
+    font-size:18px;
+    color:#85633d;
+    padding:10px 12px;
+    border-bottom:1px solid #eadbc8;
+    margin-bottom:5px;
+}
 
-.order-list{display:flex;flex-direction:column;gap:15px}
-.order-card{background:#f7efe3;border:1px solid #dfccb2;padding:18px;margin-bottom:15px}
-.order-top{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;margin-bottom:12px}
-.order-number{font-weight:bold;color:#60482f;font-size:18px}
-.order-date{font-size:13px;color:#806344;margin-top:5px}
-.order-status{padding:5px 10px;font-size:12px;border:1px solid #c9ae8c;background:#fffaf3;color:#806344}
-.order-items{margin-top:12px;padding-top:12px;border-top:1px solid #dfccb2;line-height:1.8}
-.order-total{margin-top:12px;padding-top:12px;border-top:1px solid #dfccb2;text-align:right;font-weight:bold;color:#60482f}
-.tracking-box,.order-address{margin-top:12px;padding:10px;background:#fffaf3;font-size:14px}
+.menu-panel button{
+    display:block;
+    width:100%;
+    border:0;
+    background:none;
+    padding:11px 12px;
+    text-align:left;
+    font-family:inherit;
+    font-size:15px;
+    color:#5a4632;
+    cursor:pointer;
+}
 
-.order-progress{display:flex;justify-content:space-between;gap:5px;margin:18px 0}
-.progress-step{flex:1;text-align:center;font-size:11px;color:#b8a38a;position:relative}
-.progress-dot{width:14px;height:14px;border-radius:50%;border:2px solid #cdb99c;background:#fffaf3;margin:0 auto 6px}
-.progress-step.active{color:#806344}
-.progress-step.active .progress-dot{background:#b99669;border-color:#b99669}
+.menu-panel button:hover{
+    background:#f1e5d3;
+    color:#9b7445;
+}
+
+.search-box{
+    display:flex;
+    align-items:center;
+    width:300px;
+    max-width:100%;
+    border:1px solid #cdb18c;
+    background:#fffaf3;
+}
+
+.search-box input{
+    width:100%;
+    border:0;
+    outline:0;
+    padding:10px 12px;
+    background:transparent;
+    color:#4c3b2b;
+    font-family:inherit;
+    font-size:14px;
+}
+
+.search-button{
+    border:0;
+    background:none;
+    padding:0 12px;
+    color:#806344;
+    font-size:17px;
+    cursor:pointer;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    top:calc(100% - 1px);
+    left:0;
+    min-width:180px;
+    background:#fffaf3;
+    border:1px solid #dbc8ad;
+    box-shadow:0 10px 25px rgba(70,50,30,.12);
+    padding:8px 0;
+    z-index:2500;
+}
+
+.dropdown:hover .dropdown-content{
+    display:block;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:10px 16px;
+    font-size:14px;
+    color:#5a4632;
+    text-decoration:none;
+    white-space:nowrap;
+}
+
+.dropdown-content a:hover{
+    background:#f1e5d3;
+    color:#9b7445;
+}
+
+.account-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.account-menu{
+    display:none;
+    position:absolute;
+    right:0;
+    top:42px;
+    width:270px;
+    background:#fffaf3;
+    border:1px solid #dbc8ad;
+    box-shadow:0 10px 25px rgba(70,50,30,.15);
+    padding:18px;
+    z-index:3000;
+}
+
+.account-menu.active{
+    display:block;
+}
+
+.account-menu h3{
+    color:#85633d;
+    margin-bottom:8px;
+}
+
+.account-menu p{
+    font-size:14px;
+    color:#6b5640;
+    margin-bottom:15px;
+    word-break:break-word;
+}
+
+.account-menu button{
+    width:100%;
+    padding:10px;
+    border:1px solid #b99669;
+    background:#b99669;
+    color:#fff;
+    font-family:inherit;
+    cursor:pointer;
+    margin-top:7px;
+}
+
+.account-menu button:hover{
+    background:#9f7749;
+}
+
+.account-section-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:10px;
+}
+
+.account-section-button{
+    padding:12px 8px!important;
+    background:#fffaf3!important;
+    color:#705333!important;
+}
+
+.account-section-button:hover{
+    background:#f1e5d3!important;
+}
+
+#cartCount{
+    font-weight:bold;
+    margin-left:3px;
+}
+
+.hero-slider{
+    position:relative;
+    width:100%;
+    height:calc(100vh - 90px);
+    min-height:520px;
+    max-height:760px;
+    overflow:hidden;
+    background:#eee3d3;
+    touch-action:pan-y;
+}
+
+.hero-slide{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .7s ease;
+    z-index:1;
+}
+
+.hero-slide.active{
+    opacity:1;
+    visibility:visible;
+    z-index:2;
+}
+
+.hero-slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        90deg,
+        rgba(35,25,15,.58),
+        rgba(35,25,15,.25) 45%,
+        rgba(35,25,15,.05)
+    );
+}
+
+.hero-content{
+    position:absolute;
+    left:8%;
+    top:50%;
+    transform:translateY(-50%);
+    max-width:570px;
+    color:#fffaf3;
+    z-index:3;
+}
+
+.hero-content span{
+    display:block;
+    font-size:13px;
+    letter-spacing:6px;
+    margin-bottom:18px;
+}
+
+.hero-content h1{
+    font-size:clamp(38px,5vw,72px);
+    font-weight:normal;
+    line-height:1.08;
+    margin-bottom:20px;
+    text-shadow:0 3px 15px rgba(0,0,0,.18);
+}
+
+.hero-content p{
+    font-size:18px;
+    line-height:1.6;
+    margin-bottom:30px;
+    max-width:460px;
+}
+
+.hero-button{
+    display:inline-block;
+    padding:13px 27px;
+    background:#f7f1e7;
+    color:#5b4630;
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+.hero-button:hover{
+    background:#fff;
+    transform:translateY(-2px);
+}
+
+.hero-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:48px;
+    height:48px;
+    border:1px solid rgba(255,255,255,.6);
+    background:rgba(60,40,20,.18);
+    color:#fff;
+    font-size:38px;
+    font-family:Georgia,serif;
+    cursor:pointer;
+    z-index:10;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-prev{
+    left:25px;
+}
+
+.hero-next{
+    right:25px;
+}
+
+.hero-dots{
+    position:absolute;
+    left:50%;
+    bottom:25px;
+    transform:translateX(-50%);
+    display:flex;
+    gap:9px;
+    z-index:10;
+}
+
+.hero-dot{
+    width:9px;
+    height:9px;
+    padding:0;
+    border:1px solid #fff;
+    border-radius:50%;
+    background:transparent;
+    cursor:pointer;
+}
+
+.hero-dot.active{
+    width:28px;
+    border-radius:10px;
+    background:#fff;
+}
+
+section{
+    padding:80px 6%;
+}
+
+.section-title{
+    text-align:center;
+    font-size:38px;
+    color:#85633d;
+    margin-bottom:45px;
+    letter-spacing:3px;
+}
+
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.category-card{
+    position:relative;
+    height:280px;
+    overflow:hidden;
+    cursor:pointer;
+    border:1px solid #d8c2a4;
+}
+
+.category-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.category-card:hover img{
+    transform:scale(1.06);
+}
+
+.category-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:rgba(55,40,25,.28);
+    color:#fff;
+    font-size:27px;
+    letter-spacing:3px;
+}
+
+#urunler{
+    background:#fbf7f0;
+}
+
+.search-result-info{
+    text-align:center;
+    color:#8b6943;
+    font-size:16px;
+    margin-top:-25px;
+    margin-bottom:35px;
+    min-height:20px;
+}
+
+.category-heading{
+    text-align:center;
+    font-size:34px;
+    color:#8b6943;
+    margin:65px 0 30px;
+    letter-spacing:3px;
+}
+
+.category-heading:first-child{
+    margin-top:0;
+}
+
+.product-grid{
+    max-width:1250px;
+    margin:0 auto 50px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+}
+
+.product-card{
+    position:relative;
+    background:#fffdf9;
+    border:1px solid #dfccb2;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.product-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 25px rgba(90,65,40,.12);
+}
+
+.product-image{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    display:block;
+}
+
+.favorite-button{
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid #d5b993;
+    background:rgba(255,250,243,.95);
+    color:#9b7445;
+    font-size:23px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:5;
+}
+
+.favorite-button.active{
+    color:#a05243;
+    border-color:#c79d91;
+    background:#fffaf7;
+}
+
+.product-info{
+    padding:20px;
+    text-align:center;
+}
+
+.product-name{
+    font-size:21px;
+    color:#5d4631;
+    margin-bottom:8px;
+}
+
+.product-category{
+    color:#a18058;
+    font-size:14px;
+    margin-bottom:14px;
+}
+
+.stock-status{
+    color:#a67c48;
+    font-size:15px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.stock-button,
+.review-button,
+.checkout-submit{
+    width:100%;
+    padding:11px;
+    border:1px solid #b99669;
+    background:#b99669;
+    color:#fff;
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.stock-button:hover,
+.review-button:hover,
+.checkout-submit:hover{
+    background:#9f7749;
+}
+
+.stock-button:disabled,
+.checkout-submit:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.review-box{
+    margin-top:20px;
+    padding-top:15px;
+    border-top:1px solid #eadbc8;
+}
+
+.stars{
+    margin-bottom:10px;
+}
+
+.star{
+    font-size:22px;
+    color:#c9b39a;
+    cursor:pointer;
+    margin:0 2px;
+}
+
+.star.active{
+    color:#b3864e;
+}
+
+.review-input{
+    width:100%;
+    min-height:70px;
+    resize:vertical;
+    padding:10px;
+    border:1px solid #d9c5a9;
+    background:#fffaf4;
+    color:#4c3b2b;
+    font-family:inherit;
+    outline:0;
+}
+
+.review-button{
+    margin-top:8px;
+}
+
+.reviews{
+    margin-top:15px;
+    text-align:left;
+}
+
+.review-item{
+    padding:10px;
+    margin-bottom:8px;
+    background:#f7efe3;
+    border-left:3px solid #b99669;
+    font-size:14px;
+}
+
+.review-stars{
+    color:#b3864e;
+    margin-bottom:5px;
+}
+
+#one-cikanlar{
+    background:#efe3d2;
+}
+
+.featured-grid{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.featured-card{
+    background:#fffaf3;
+    border:1px solid #d9c3a5;
+    overflow:hidden;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.featured-card:hover{
+    transform:translateY(-5px);
+}
+
+.featured-card img{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+}
+
+.featured-info{
+    padding:18px;
+    text-align:center;
+}
+
+.featured-info h3{
+    color:#664d35;
+    margin-bottom:7px;
+}
+
+.featured-info p{
+    color:#a17b50;
+    font-size:14px;
+}
+
+#iletisim{
+    text-align:center;
+    background:#f7f1e7;
+}
+
+.contact-text{
+    max-width:650px;
+    margin:auto;
+    line-height:1.8;
+    color:#6b5640;
+}
+
+footer{
+    background:#4d3b2a;
+    color:#f5e9d8;
+    text-align:center;
+    padding:25px;
+    font-size:14px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(40,28,18,.55);
+    z-index:5000;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:480px;
+    max-height:90vh;
+    overflow:auto;
+    background:#fffaf3;
+    border:1px solid #d6c2a5;
+    padding:30px;
+    box-shadow:0 15px 40px rgba(40,28,18,.25);
+    position:relative;
+}
+
+.modal-box.large{
+    max-width:850px;
+}
+
+.modal-box h2{
+    text-align:center;
+    color:#85633d;
+    margin-bottom:25px;
+    letter-spacing:2px;
+}
+
+.close-modal{
+    position:absolute;
+    top:10px;
+    right:15px;
+    border:0;
+    background:none;
+    color:#80674c;
+    font-size:25px;
+    cursor:pointer;
+    z-index:2;
+}
+
+.cart-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.cart-item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:#f7efe3;
+    border:1px solid #dfccb2;
+    padding:12px;
+}
+
+.cart-item img{
+    width:75px;
+    height:75px;
+    object-fit:cover;
+}
+
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-info h3{
+    font-size:17px;
+    color:#60482f;
+    margin-bottom:5px;
+}
+
+.cart-item-info p{
+    font-size:13px;
+    color:#96724c;
+}
+
+.cart-remove{
+    border:0;
+    background:none;
+    color:#a05243;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+.cart-empty{
+    text-align:center;
+    padding:35px 10px;
+    color:#8a6a48;
+}
+
+.cart-total{
+    margin-top:20px;
+    padding-top:18px;
+    border-top:1px solid #d9c5a9;
+    text-align:right;
+    color:#60482f;
+    font-size:19px;
+}
+
+.cart-actions{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+}
+
+.cart-actions button{
+    flex:1;
+    padding:12px;
+    border:1px solid #b99669;
+    background:#b99669;
+    color:#fff;
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.cart-actions button:hover{
+    background:#9f7749;
+}
+
+.cart-toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#5c4631;
+    color:#fff;
+    padding:13px 18px;
+    z-index:6000;
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+
+.cart-quantity{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:8px;
+}
+
+.cart-quantity button{
+    width:28px;
+    height:28px;
+    border:1px solid #b99669;
+    background:#fffaf3;
+    color:#705333;
+    cursor:pointer;
+}
+
+.cart-quantity span{
+    min-width:20px;
+    text-align:center;
+}
+
+.checkout-panel{
+    display:none;
+    margin-top:20px;
+    padding-top:20px;
+    border-top:1px solid #d9c5a9;
+}
+
+.checkout-panel.active{
+    display:block;
+}
+
+.checkout-form label{
+    display:block;
+    margin:10px 0 6px;
+    color:#6b5640;
+    font-size:14px;
+}
+
+.checkout-form input,
+.checkout-form textarea{
+    width:100%;
+    padding:11px;
+    border:1px solid #d9c5a9;
+    background:#fffdf9;
+    font-family:inherit;
+}
+
+.checkout-form textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.checkout-submit{
+    margin-top:15px;
+}
+
+.checkout-note,
+.login-required-box{
+    background:#f7efe3;
+    padding:15px;
+    margin-bottom:15px;
+    line-height:1.6;
+    font-size:14px;
+}
+
+.login-required-box button{
+    margin-top:12px;
+    padding:10px 15px;
+    border:1px solid #b99669;
+    background:#b99669;
+    color:#fff;
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.checkout-message{
+    margin-top:12px;
+    padding:10px;
+    font-size:14px;
+}
+
+.checkout-success{
+    background:#e6f2e3;
+    color:#507047;
+}
+
+.checkout-error{
+    background:#f7e4df;
+    color:#8a493f;
+}
+
+.auth-tabs{
+    display:flex;
+    border-bottom:1px solid #d9c5a9;
+    margin-bottom:20px;
+}
+
+.auth-tab{
+    flex:1;
+    border:0;
+    background:none;
+    padding:12px;
+    color:#806344;
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.auth-tab.active{
+    color:#9b7445;
+    border-bottom:2px solid #b99669;
+}
+
+.auth-form{
+    display:none;
+}
+
+.auth-form.active{
+    display:block;
+}
+
+.auth-form label{
+    display:block;
+    font-size:14px;
+    color:#6b5640;
+    margin-bottom:6px;
+}
+
+.auth-form input{
+    width:100%;
+    padding:11px;
+    margin-bottom:14px;
+    border:1px solid #d9c5a9;
+    background:#fffdf9;
+    color:#4c3b2b;
+    font-family:inherit;
+    outline:0;
+}
+
+.auth-submit{
+    width:100%;
+    padding:12px;
+    border:1px solid #b99669;
+    background:#b99669;
+    color:#fff;
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.auth-submit:hover{
+    background:#9f7749;
+}
+
+.auth-submit:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.auth-link{
+    border:0;
+    background:none;
+    color:#9b7445;
+    cursor:pointer;
+    font-family:inherit;
+    margin-top:12px;
+}
+
+.auth-message{
+    margin-bottom:14px;
+    padding:10px;
+    display:none;
+    font-size:14px;
+}
+
+.auth-message.success-message{
+    display:block;
+    background:#e6f2e3;
+    color:#507047;
+}
+
+.auth-message.error-message{
+    display:block;
+    background:#f7e4df;
+    color:#8a493f;
+}
+
+.verify-info{
+    font-size:14px;
+    line-height:1.6;
+    color:#6b5640;
+    margin-bottom:15px;
+}
+
+.favorites-empty{
+    text-align:center;
+    padding:50px 20px;
+    color:#85633d;
+}
+
+.favorite-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.favorite-item{
+    display:flex;
+    gap:15px;
+    background:#f7efe3;
+    border:1px solid #dfccb2;
+    padding:12px;
+}
+
+.favorite-item img{
+    width:90px;
+    height:90px;
+    object-fit:cover;
+}
+
+.favorite-item-info{
+    flex:1;
+}
+
+.favorite-item-info h3{
+    font-size:17px;
+    color:#60482f;
+    margin-bottom:5px;
+}
+
+.favorite-item-info p{
+    font-size:13px;
+    color:#96724c;
+    margin-bottom:10px;
+}
+
+.favorite-remove{
+    border:1px solid #c49b83;
+    background:#fffaf3;
+    color:#8a5144;
+    padding:7px 10px;
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.order-list{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.order-card{
+    background:#f7efe3;
+    border:1px solid #dfccb2;
+    padding:18px;
+    margin-bottom:15px;
+}
+
+.order-top{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    align-items:flex-start;
+    margin-bottom:12px;
+}
+
+.order-number{
+    font-weight:bold;
+    color:#60482f;
+    font-size:18px;
+}
+
+.order-date{
+    font-size:13px;
+    color:#806344;
+    margin-top:5px;
+}
+
+.order-status{
+    padding:5px 10px;
+    font-size:12px;
+    border:1px solid #c9ae8c;
+    background:#fffaf3;
+    color:#806344;
+}
+
+.order-items{
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid #dfccb2;
+    line-height:1.8;
+}
+
+.order-total{
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid #dfccb2;
+    text-align:right;
+    font-weight:bold;
+    color:#60482f;
+}
+
+.tracking-box,
+.order-address{
+    margin-top:12px;
+    padding:10px;
+    background:#fffaf3;
+    font-size:14px;
+}
+
+.order-progress{
+    display:flex;
+    justify-content:space-between;
+    gap:5px;
+    margin:18px 0;
+}
+
+.progress-step{
+    flex:1;
+    text-align:center;
+    font-size:11px;
+    color:#b8a38a;
+    position:relative;
+}
+
+.progress-dot{
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    border:2px solid #cdb99c;
+    background:#fffaf3;
+    margin:0 auto 6px;
+}
+
+.progress-step.active{
+    color:#806344;
+}
+
+.progress-step.active .progress-dot{
+    background:#b99669;
+    border-color:#b99669;
+}
 
 @media(max-width:1000px){
-.header-center{gap:12px}nav{gap:12px}.search-box{width:230px}
-.product-grid,.featured-grid{grid-template-columns:repeat(2,1fr)}
-.category-grid{grid-template-columns:repeat(2,1fr)}
+
+    .header-center{
+        gap:12px;
+    }
+
+    nav{
+        gap:12px;
+    }
+
+    .search-box{
+        width:230px;
+    }
+
+    .product-grid,
+    .featured-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .category-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 }
+
 @media(max-width:700px){
-header{padding:12px 4%;flex-wrap:wrap}.logo{font-size:23px;letter-spacing:4px}
-.header-center{order:3;width:100%;justify-content:space-between}
-nav{gap:10px}nav a,.dropbtn{font-size:14px}.search-box{width:170px}
-.menu-button,.account-button,.cart-button{padding:8px 10px;font-size:13px}
-.hero-slider{height:75vh;min-height:500px}
-.hero-overlay{background:linear-gradient(180deg,rgba(35,25,15,.15),rgba(35,25,15,.62))}
-.hero-content{left:25px;right:25px;top:auto;bottom:90px;transform:none}
-.hero-content span{font-size:11px;letter-spacing:4px;margin-bottom:12px}
-.hero-content h1{font-size:38px;margin-bottom:14px}.hero-content p{font-size:15px;margin-bottom:22px}
-.hero-arrow{width:38px;height:38px;font-size:30px}.hero-prev{left:12px}.hero-next{right:12px}
-section{padding:55px 5%}.section-title{font-size:30px}
-.category-grid{grid-template-columns:1fr 1fr;gap:12px}.category-card{height:200px}
-.category-overlay{font-size:20px}.product-grid,.featured-grid{grid-template-columns:1fr}
-.product-image{height:300px}.favorite-list{grid-template-columns:1fr}
-.modal{padding:10px}.modal-box{padding:22px}
+
+    header{
+        padding:12px 4%;
+        flex-wrap:wrap;
+    }
+
+    .logo{
+        font-size:23px;
+        letter-spacing:4px;
+    }
+
+    .header-center{
+        order:3;
+        width:100%;
+        justify-content:space-between;
+    }
+
+    nav{
+        gap:10px;
+    }
+
+    nav a,
+    .dropbtn{
+        font-size:14px;
+    }
+
+    .search-box{
+        width:170px;
+    }
+
+    .menu-button,
+    .account-button,
+    .cart-button{
+        padding:8px 10px;
+        font-size:13px;
+    }
+
+    .hero-slider{
+        height:75vh;
+        min-height:500px;
+    }
+
+    .hero-overlay{
+        background:linear-gradient(
+            180deg,
+            rgba(35,25,15,.15),
+            rgba(35,25,15,.62)
+        );
+    }
+
+    .hero-content{
+        left:25px;
+        right:25px;
+        top:auto;
+        bottom:90px;
+        transform:none;
+    }
+
+    .hero-content span{
+        font-size:11px;
+        letter-spacing:4px;
+        margin-bottom:12px;
+    }
+
+    .hero-content h1{
+        font-size:38px;
+        margin-bottom:14px;
+    }
+
+    .hero-content p{
+        font-size:15px;
+        margin-bottom:22px;
+    }
+
+    .hero-arrow{
+        width:38px;
+        height:38px;
+        font-size:30px;
+    }
+
+    .hero-prev{
+        left:12px;
+    }
+
+    .hero-next{
+        right:12px;
+    }
+
+    section{
+        padding:55px 5%;
+    }
+
+    .section-title{
+        font-size:30px;
+    }
+
+    .category-grid{
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+    }
+
+    .category-card{
+        height:200px;
+    }
+
+    .category-overlay{
+        font-size:20px;
+    }
+
+    .product-grid,
+    .featured-grid{
+        grid-template-columns:1fr;
+    }
+
+    .product-image{
+        height:300px;
+    }
+
+    .favorite-list{
+        grid-template-columns:1fr;
+    }
+
+    .modal{
+        padding:10px;
+    }
+
+    .modal-box{
+        padding:22px;
+        max-height:94vh;
+    }
+
+    .account-menu{
+        right:0;
+        width:260px;
+    }
 }
+
 @media(max-width:450px){
-.category-grid{grid-template-columns:1fr}.category-card{height:230px}
-.product-image{height:320px}.search-box{width:150px}.header-center{gap:7px}
+
+    .category-grid{
+        grid-template-columns:1fr;
+    }
+
+    .category-card{
+        height:230px;
+    }
+
+    .product-image{
+        height:320px;
+    }
+
+    .search-box{
+        width:150px;
+    }
+
+    .header-center{
+        gap:7px;
+    }
+
+    nav a,
+    .dropbtn{
+        font-size:12px;
+    }
 }
 </style>
 </head>
@@ -216,595 +1403,1376 @@ section{padding:55px 5%}.section-title{font-size:30px}
 <body>
 
 <header>
-<a href="#" class="logo">VELORA</a>
+
+<a href="#" class="logo" id="logoLink">VELORA</a>
 
 <div class="header-center">
+
 <div class="menu-wrapper">
-<button class="menu-button" id="menuButton" type="button">☰ Menü</button>
+
+<button class="menu-button" id="menuButton" type="button">
+☰ Menü
+</button>
+
 <div class="menu-panel" id="menuPanel">
-<div class="menu-panel-title">Kategoriler</div>
-<button type="button" onclick="showAllProducts()">Tüm Ürünler</button>
-<button type="button" onclick="filterCategory('Yüzük')">Yüzük</button>
-<button type="button" onclick="filterCategory('Bileklik')">Bileklik</button>
-<button type="button" onclick="filterCategory('Küpe')">Küpe</button>
-<button type="button" onclick="filterCategory('Kolye')">Kolye</button>
-<button type="button" onclick="filterFeatured()">Öne Çıkanlar</button>
+
+<div class="menu-panel-title">
+Kategoriler
+</div>
+
+<button type="button" data-action="all-products">
+Tüm Ürünler
+</button>
+
+<button type="button" data-category="Yüzük">
+Yüzük
+</button>
+
+<button type="button" data-category="Bileklik">
+Bileklik
+</button>
+
+<button type="button" data-category="Küpe">
+Küpe
+</button>
+
+<button type="button" data-category="Kolye">
+Kolye
+</button>
+
+<button type="button" data-action="featured">
+Öne Çıkanlar
+</button>
+
 </div>
 </div>
 
 <nav>
-<a href="#urunler">Koleksiyon</a>
+
+<a href="#urunler">
+Koleksiyon
+</a>
+
 <div class="dropdown">
-<button class="dropbtn" type="button">Kategoriler ▾</button>
+
+<button class="dropbtn" type="button">
+Kategoriler ▾
+</button>
+
 <div class="dropdown-content">
-<a href="#urunler" onclick="filterCategory('Yüzük')">Yüzük</a>
-<a href="#urunler" onclick="filterCategory('Bileklik')">Bileklik</a>
-<a href="#urunler" onclick="filterCategory('Küpe')">Küpe</a>
-<a href="#urunler" onclick="filterCategory('Kolye')">Kolye</a>
+
+<a href="#urunler" data-category="Yüzük">
+Yüzük
+</a>
+
+<a href="#urunler" data-category="Bileklik">
+Bileklik
+</a>
+
+<a href="#urunler" data-category="Küpe">
+Küpe
+</a>
+
+<a href="#urunler" data-category="Kolye">
+Kolye
+</a>
+
 </div>
 </div>
-<a href="#one-cikanlar">Öne Çıkanlar</a>
-<a href="#iletisim">İletişim</a>
+
+<a href="#one-cikanlar">
+Öne Çıkanlar
+</a>
+
+<a href="#iletisim">
+İletişim
+</a>
+
 </nav>
 
 <div class="search-box">
-<input type="text" id="productSearch" placeholder="Ürün ara..." autocomplete="off">
-<button class="search-button" id="searchButton" type="button">⌕</button>
+
+<input
+type="text"
+id="productSearch"
+placeholder="Ürün ara..."
+autocomplete="off"
+>
+
+<button
+class="search-button"
+id="searchButton"
+type="button"
+>
+⌕
+</button>
+
 </div>
+
 </div>
 
 <div class="account-area">
-<button class="cart-button" id="cartButton" type="button">🛒 Sepet <span id="cartCount">0</span></button>
-<button class="account-button" id="accountButton" type="button">👤 Hesap Oluştur</button>
+
+<button
+class="cart-button"
+id="cartButton"
+type="button"
+>
+🛒 Sepet <span id="cartCount">0</span>
+</button>
+
+<button
+class="account-button"
+id="accountButton"
+type="button"
+>
+👤 Hesap Oluştur
+</button>
 
 <div class="account-menu" id="accountMenu">
-<h3 id="accountUsername">Hesabım</h3>
+
+<h3 id="accountUsername">
+Hesabım
+</h3>
+
 <p id="accountEmail"></p>
 
 <div class="account-section-buttons">
-<button class="account-section-button" id="favoritesMenuButton" type="button">♡ Favoriler</button>
-<button class="account-section-button" id="ordersMenuButton" type="button">Siparişler</button>
+
+<button
+class="account-section-button"
+id="favoritesMenuButton"
+type="button"
+>
+♡ Favoriler
+</button>
+
+<button
+class="account-section-button"
+id="ordersMenuButton"
+type="button"
+>
+Siparişler
+</button>
+
 </div>
 
-<button id="changePasswordMenuButton" type="button">Şifre Değiştir</button>
-<button id="logoutButton" type="button">Çıkış Yap</button>
+<button
+id="changePasswordMenuButton"
+type="button"
+>
+Şifre Değiştir
+</button>
+
+<button
+id="logoutButton"
+type="button"
+>
+Çıkış Yap
+</button>
+
 </div>
 </div>
+
 </header>
 
 <section class="hero-slider" id="heroSlider">
 
 <div class="hero-slide active">
-<img src="resimler/resim1.jpg" alt="VELORA Zarif Takılar" onerror="this.style.display='none'">
+
+<img
+src="resimler/resim1.jpg"
+alt="VELORA Zarif Takılar"
+onerror="this.style.display='none'"
+>
+
 <div class="hero-overlay"></div>
+
 <div class="hero-content">
+
 <span>VELORA</span>
+
 <h1>Tarzını Yansıt.</h1>
-<p>Zarafetin en güzel hali, senin stilin.</p>
-<a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
+
+<p>
+Zarafetin en güzel hali, senin stilin.
+</p>
+
+<a href="#urunler" class="hero-button">
+Koleksiyonu Keşfet
+</a>
+
 </div>
 </div>
 
 <div class="hero-slide">
-<img src="resimler/resim2.jpg" alt="VELORA Takı Koleksiyonu" onerror="this.style.display='none'">
+
+<img
+src="resimler/resim2.jpg"
+alt="VELORA Takı Koleksiyonu"
+onerror="this.style.display='none'"
+>
+
 <div class="hero-overlay"></div>
+
 <div class="hero-content">
+
 <span>VELORA</span>
+
 <h1>Zarafet Detaylarda Saklıdır.</h1>
-<p>Her detayda sana ait bir ışıltı.</p>
-<a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
+
+<p>
+Her detayda sana ait bir ışıltı.
+</p>
+
+<a href="#urunler" class="hero-button">
+Koleksiyonu Keşfet
+</a>
+
 </div>
 </div>
 
 <div class="hero-slide">
-<img src="resimler/resim3.jpg" alt="VELORA Özel Koleksiyon" onerror="this.style.display='none'">
+
+<img
+src="resimler/resim3.jpg"
+alt="VELORA Özel Koleksiyon"
+onerror="this.style.display='none'"
+>
+
 <div class="hero-overlay"></div>
+
 <div class="hero-content">
+
 <span>VELORA</span>
+
 <h1>Her Anına Bir Işıltı.</h1>
-<p>Sade, zarif ve sana özel.</p>
-<a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
+
+<p>
+Sade, zarif ve sana özel.
+</p>
+
+<a href="#urunler" class="hero-button">
+Koleksiyonu Keşfet
+</a>
+
 </div>
 </div>
 
 <div class="hero-slide">
-<img src="resimler/urun1.jpg" alt="VELORA Koleksiyonu" onerror="this.style.display='none'">
+
+<img
+src="resimler/urun1.jpg"
+alt="VELORA Koleksiyonu"
+onerror="this.style.display='none'"
+>
+
 <div class="hero-overlay"></div>
+
 <div class="hero-content">
+
 <span>VELORA</span>
+
 <h1>Zarif Bir Dokunuş.</h1>
-<p>Stiline eşlik eden özel parçalar.</p>
-<a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
+
+<p>
+Stiline eşlik eden özel parçalar.
+</p>
+
+<a href="#urunler" class="hero-button">
+Koleksiyonu Keşfet
+</a>
+
 </div>
 </div>
 
-<button class="hero-arrow hero-prev" id="heroPrev" type="button">‹</button>
-<button class="hero-arrow hero-next" id="heroNext" type="button">›</button>
+<button
+class="hero-arrow hero-prev"
+id="heroPrev"
+type="button"
+>
+‹
+</button>
+
+<button
+class="hero-arrow hero-next"
+id="heroNext"
+type="button"
+>
+›
+</button>
 
 <div class="hero-dots">
+
 <button class="hero-dot active" data-slide="0" type="button"></button>
 <button class="hero-dot" data-slide="1" type="button"></button>
 <button class="hero-dot" data-slide="2" type="button"></button>
 <button class="hero-dot" data-slide="3" type="button"></button>
+
 </div>
+
 </section>
 
 <section>
-<h2 class="section-title">Kategoriler</h2>
+
+<h2 class="section-title">
+Kategoriler
+</h2>
+
 <div class="category-grid">
 
-<div class="category-card" onclick="filterCategory('Yüzük')">
-<img src="resimler/yuzuk.jpg" alt="Yüzük"><div class="category-overlay">Yüzük</div>
-</div>
+<div class="category-card" data-category="Yüzük">
 
-<div class="category-card" onclick="filterCategory('Bileklik')">
-<img src="resimler/bileklik.jpg" alt="Bileklik"><div class="category-overlay">Bileklik</div>
-</div>
+<img src="resimler/yuzuk.jpg" alt="Yüzük">
 
-<div class="category-card" onclick="filterCategory('Küpe')">
-<img src="resimler/incikupe.jpg" alt="Küpe"><div class="category-overlay">Küpe</div>
-</div>
-
-<div class="category-card" onclick="filterCategory('Kolye')">
-<img src="resimler/kolye.jpg" alt="Kolye"><div class="category-overlay">Kolye</div>
+<div class="category-overlay">
+Yüzük
 </div>
 
 </div>
+
+<div class="category-card" data-category="Bileklik">
+
+<img src="resimler/bileklik.jpg" alt="Bileklik">
+
+<div class="category-overlay">
+Bileklik
+</div>
+
+</div>
+
+<div class="category-card" data-category="Küpe">
+
+<img src="resimler/incikupe.jpg" alt="Küpe">
+
+<div class="category-overlay">
+Küpe
+</div>
+
+</div>
+
+<div class="category-card" data-category="Kolye">
+
+<img src="resimler/kolye.jpg" alt="Kolye">
+
+<div class="category-overlay">
+Kolye
+</div>
+
+</div>
+
+</div>
+
 </section>
 
 <section id="urunler">
-<h2 class="section-title">Koleksiyon</h2>
-<div id="searchResultInfo" class="search-result-info"></div>
+
+<h2 class="section-title">
+Koleksiyon
+</h2>
+
+<div
+id="searchResultInfo"
+class="search-result-info"
+></div>
+
 <div id="productContainer"></div>
+
 </section>
 
 <section id="one-cikanlar">
-<h2 class="section-title">Öne Çıkanlar</h2>
+
+<h2 class="section-title">
+Öne Çıkanlar
+</h2>
+
 <div class="featured-grid">
 
-<div class="featured-card" onclick="filterCategory('Yüzük')">
+<div class="featured-card" data-category="Yüzük">
+
 <img src="resimler/yuzuk.jpg" alt="Yüzük">
-<div class="featured-info"><h3>Zarif Yüzükler</h3><p>Günlük stiline eşlik eden parçalar</p></div>
+
+<div class="featured-info">
+<h3>Zarif Yüzükler</h3>
+<p>Günlük stiline eşlik eden parçalar</p>
 </div>
 
-<div class="featured-card" onclick="filterCategory('Bileklik')">
+</div>
+
+<div class="featured-card" data-category="Bileklik">
+
 <img src="resimler/bileklik.jpg" alt="Bileklik">
-<div class="featured-info"><h3>Şık Bileklikler</h3><p>Zarif detaylarla tamamlanan stil</p></div>
+
+<div class="featured-info">
+<h3>Şık Bileklikler</h3>
+<p>Zarif detaylarla tamamlanan stil</p>
 </div>
 
-<div class="featured-card" onclick="filterCategory('Küpe')">
+</div>
+
+<div class="featured-card" data-category="Küpe">
+
 <img src="resimler/incikupe.jpg" alt="Küpe">
-<div class="featured-info"><h3>Özel Küpeler</h3><p>Her kombine uyum sağlayan ışıltılar</p></div>
+
+<div class="featured-info">
+<h3>Özel Küpeler</h3>
+<p>Her kombine uyum sağlayan ışıltılar</p>
 </div>
 
-<div class="featured-card" onclick="filterCategory('Kolye')">
+</div>
+
+<div class="featured-card" data-category="Kolye">
+
 <img src="resimler/kolye.jpg" alt="Kolye">
-<div class="featured-info"><h3>Zarif Kolyeler</h3><p>Stiline eşlik eden özel dokunuşlar</p></div>
+
+<div class="featured-info">
+<h3>Zarif Kolyeler</h3>
+<p>Stiline eşlik eden özel dokunuşlar</p>
 </div>
 
 </div>
+
+</div>
+
 </section>
 
 <section id="iletisim">
-<h2 class="section-title">İletişim</h2>
+
+<h2 class="section-title">
+İletişim
+</h2>
+
 <div class="contact-text">
-<p>VELORA hakkında sorularınız, ürünlerimiz veya siparişleriniz için bizimle iletişime geçebilirsiniz.</p>
+
+<p>
+VELORA hakkında sorularınız, ürünlerimiz veya siparişleriniz için bizimle iletişime geçebilirsiniz.
+</p>
+
 </div>
+
 </section>
 
-<footer>© 2026 VELORA — Zarif Takı Koleksiyonu</footer>
+<footer>
+© 2026 VELORA — Zarif Takı Koleksiyonu
+</footer>
 
 <!-- SEPET -->
+
 <div class="modal" id="cartModal">
+
 <div class="modal-box">
-<button class="close-modal" id="closeCartButton" type="button">×</button>
+
+<button
+class="close-modal"
+id="closeCartButton"
+type="button"
+>
+×
+</button>
+
 <h2>Sepetim</h2>
+
 <div class="cart-list" id="cartList"></div>
-<div class="cart-total" id="cartTotal">Toplam: 0 TL</div>
+
+<div class="cart-total" id="cartTotal">
+Toplam: 0 TL
+</div>
 
 <div class="cart-actions">
-<button type="button" onclick="closeCart()">Alışverişe Devam Et</button>
-<button type="button" onclick="openOrderForm()">Siparişi Tamamla</button>
+
+<button
+id="continueShoppingButton"
+type="button"
+>
+Alışverişe Devam Et
+</button>
+
+<button
+id="checkoutButton"
+type="button"
+>
+Siparişi Tamamla
+</button>
+
 </div>
 
-<div id="checkoutPanel" class="checkout-panel">
+<div
+id="checkoutPanel"
+class="checkout-panel"
+>
+
 <div id="checkoutContent"></div>
+
 </div>
+
 </div>
 </div>
 
 <!-- HESAP -->
+
 <div class="modal" id="authModal">
+
 <div class="modal-box">
-<button class="close-modal" id="closeAuthButton" type="button">×</button>
+
+<button
+class="close-modal"
+id="closeAuthButton"
+type="button"
+>
+×
+</button>
+
 <h2>Hesap</h2>
 
 <div class="auth-tabs">
-<button class="auth-tab active" id="loginTab" type="button" onclick="showLogin()">Giriş Yap</button>
-<button class="auth-tab" id="registerTab" type="button" onclick="showRegister()">Kayıt Ol</button>
+
+<button
+class="auth-tab active"
+id="loginTab"
+type="button"
+>
+Giriş Yap
+</button>
+
+<button
+class="auth-tab"
+id="registerTab"
+type="button"
+>
+Kayıt Ol
+</button>
+
 </div>
 
 <div id="loginForm" class="auth-form active">
+
 <div id="loginMessage" class="auth-message"></div>
+
 <form id="loginAuthForm">
+
 <label>E-posta</label>
-<input type="email" id="loginEmail" required>
+
+<input
+type="email"
+id="loginEmail"
+required
+>
+
 <label>Şifre</label>
-<input type="password" id="loginPassword" required>
-<button class="auth-submit" type="submit">Giriş Yap</button>
+
+<input
+type="password"
+id="loginPassword"
+required
+>
+
+<button
+class="auth-submit"
+type="submit"
+>
+Giriş Yap
+</button>
+
 </form>
-<button class="auth-link" type="button" onclick="showForgotPassword()">Şifremi Unuttum</button>
+
+<button
+class="auth-link"
+id="forgotPasswordLink"
+type="button"
+>
+Şifremi Unuttum
+</button>
+
 </div>
 
 <div id="registerForm" class="auth-form">
+
 <div id="registerMessage" class="auth-message"></div>
+
 <form id="registerAuthForm">
+
 <label>Kullanıcı Adı</label>
-<input type="text" id="registerUsername" required>
+
+<input
+type="text"
+id="registerUsername"
+required
+>
+
 <label>E-posta</label>
-<input type="email" id="registerEmail" required>
+
+<input
+type="email"
+id="registerEmail"
+required
+>
+
 <label>Şifre</label>
-<input type="password" id="registerPassword" required>
+
+<input
+type="password"
+id="registerPassword"
+required
+>
+
 <label>Şifre Tekrar</label>
-<input type="password" id="registerPasswordConfirm" required>
-<button class="auth-submit" type="submit">Kayıt Ol</button>
+
+<input
+type="password"
+id="registerPasswordConfirm"
+required
+>
+
+<button
+class="auth-submit"
+type="submit"
+>
+Kayıt Ol
+</button>
+
 </form>
+
 </div>
 
 <div id="verifyForm" class="auth-form">
+
 <div id="verifyMessage" class="auth-message"></div>
-<p class="verify-info">E-posta adresinize gönderilen doğrulama kodunu giriniz.</p>
+
+<p class="verify-info">
+E-posta adresinize gönderilen doğrulama kodunu giriniz.
+</p>
+
 <form id="verifyAuthForm">
+
 <label>E-posta</label>
-<input type="email" id="verifyEmail" required>
+
+<input
+type="email"
+id="verifyEmail"
+required
+>
+
 <label>Doğrulama Kodu</label>
-<input type="text" id="verifyCode" required>
-<button class="auth-submit" type="submit">Hesabı Doğrula</button>
+
+<input
+type="text"
+id="verifyCode"
+required
+>
+
+<button
+class="auth-submit"
+type="submit"
+>
+Hesabı Doğrula
+</button>
+
 </form>
+
 </div>
 
 <div id="forgotForm" class="auth-form">
+
 <div id="forgotMessage" class="auth-message"></div>
+
 <form id="forgotAuthForm">
+
 <label>E-posta</label>
-<input type="email" id="forgotEmail" required>
-<button class="auth-submit" type="submit">Kod Gönder</button>
+
+<input
+type="email"
+id="forgotEmail"
+required
+>
+
+<button
+class="auth-submit"
+type="submit"
+>
+Kod Gönder
+</button>
+
 </form>
+
 </div>
 
 <div id="resetForm" class="auth-form">
+
 <div id="resetMessage" class="auth-message"></div>
+
 <form id="resetAuthForm">
+
 <label>E-posta</label>
-<input type="email" id="resetEmail" required>
+
+<input
+type="email"
+id="resetEmail"
+required
+>
+
 <label>Kod</label>
-<input type="text" id="resetCode" required>
+
+<input
+type="text"
+id="resetCode"
+required
+>
+
 <label>Yeni Şifre</label>
-<input type="password" id="resetPassword" required>
+
+<input
+type="password"
+id="resetPassword"
+required
+>
+
 <label>Yeni Şifre Tekrar</label>
-<input type="password" id="resetPasswordConfirm" required>
-<button class="auth-submit" type="submit">Şifreyi Değiştir</button>
+
+<input
+type="password"
+id="resetPasswordConfirm"
+required
+>
+
+<button
+class="auth-submit"
+type="submit"
+>
+Şifreyi Değiştir
+</button>
+
 </form>
+
 </div>
 
 <div id="changeAuthFormWrapper" class="auth-form">
+
 <div id="changePasswordMessage" class="auth-message"></div>
+
 <form id="changeAuthForm">
+
 <label>Mevcut Şifre</label>
-<input type="password" id="currentPassword" required>
+
+<input
+type="password"
+id="currentPassword"
+required
+>
+
 <label>Yeni Şifre</label>
-<input type="password" id="newPassword" required>
+
+<input
+type="password"
+id="newPassword"
+required
+>
+
 <label>Yeni Şifre Tekrar</label>
-<input type="password" id="newPasswordConfirm" required>
-<button class="auth-submit" type="submit">Şifreyi Değiştir</button>
+
+<input
+type="password"
+id="newPasswordConfirm"
+required
+>
+
+<button
+class="auth-submit"
+type="submit"
+>
+Şifreyi Değiştir
+</button>
+
 </form>
+
 </div>
 
 </div>
 </div>
 
 <!-- FAVORİLER -->
+
 <div class="modal" id="favoritesModal">
+
 <div class="modal-box large">
-<button class="close-modal" id="closeFavoritesButton" type="button">×</button>
+
+<button
+class="close-modal"
+id="closeFavoritesButton"
+type="button"
+>
+×
+</button>
+
 <h2>Favorilerim</h2>
+
 <div id="favoritesContainer"></div>
+
 </div>
 </div>
 
 <!-- SİPARİŞLER -->
+
 <div class="modal" id="ordersModal">
+
 <div class="modal-box large">
-<button class="close-modal" id="closeOrdersButton" type="button">×</button>
+
+<button
+class="close-modal"
+id="closeOrdersButton"
+type="button"
+>
+×
+</button>
+
 <h2>Siparişlerim</h2>
+
 <div id="ordersContainer"></div>
+
 </div>
 </div>
 
 <script>
 "use strict";
 
-const API_BASE="https://velora-backend-1-aft5.onrender.com";
+/* =========================================================
+   VELORA JAVASCRIPT
+   ========================================================= */
 
-const products=[
-{id:1,name:"Zarif Yüzük",category:"Yüzük",subcategory:"Günlük",image:"resimler/yuzuk.jpg"},
-{id:2,name:"Taşlı Yüzük",category:"Yüzük",subcategory:"Özel",image:"resimler/tasli-yuzuk.jpg"},
-{id:3,name:"İnci Yüzük",category:"Yüzük",subcategory:"İnci",image:"resimler/inciyuzuk.jpg"},
-{id:4,name:"Altın Yüzük",category:"Yüzük",subcategory:"Altın",image:"resimler/altinyuzuk.jpg"},
-{id:5,name:"Zarif Bileklik",category:"Bileklik",subcategory:"Günlük",image:"resimler/bileklik.jpg"},
-{id:6,name:"Taşlı Bileklik",category:"Bileklik",subcategory:"Özel",image:"resimler/taslibileklik.jpg"},
-{id:7,name:"İnci Bileklik",category:"Bileklik",subcategory:"İnci",image:"resimler/incibileklik.jpg"},
-{id:8,name:"Altın Bileklik",category:"Bileklik",subcategory:"Altın",image:"resimler/altinbileklik.jpg"},
-{id:9,name:"Zarif Küpe",category:"Küpe",subcategory:"Günlük",image:"resimler/kupe.jpg"},
-{id:10,name:"İnci Küpe",category:"Küpe",subcategory:"İnci",image:"resimler/incikupe.jpg"},
-{id:11,name:"Taşlı Küpe",category:"Küpe",subcategory:"Özel",image:"resimler/taslikupe.jpg"},
-{id:12,name:"Altın Küpe",category:"Küpe",subcategory:"Altın",image:"resimler/altinkupe.jpg"},
-{id:13,name:"Zarif Kolye",category:"Kolye",subcategory:"Günlük",image:"resimler/kolye.jpg"},
-{id:14,name:"İnci Kolye",category:"Kolye",subcategory:"İnci",image:"resimler/incikolye.jpg"},
-{id:15,name:"Taşlı Kolye",category:"Kolye",subcategory:"Özel",image:"resimler/taslikolye.jpg"},
-{id:16,name:"Altın Kolye",category:"Kolye",subcategory:"Altın",image:"resimler/altinkolye.jpg"}
+const API_BASE =
+    "https://velora-backend-1-aft5.onrender.com";
+
+const products = [
+    {id:1,name:"Zarif Yüzük",category:"Yüzük",subcategory:"Günlük",image:"resimler/yuzuk.jpg"},
+    {id:2,name:"Taşlı Yüzük",category:"Yüzük",subcategory:"Özel",image:"resimler/tasli-yuzuk.jpg"},
+    {id:3,name:"İnci Yüzük",category:"Yüzük",subcategory:"İnci",image:"resimler/inciyuzuk.jpg"},
+    {id:4,name:"Altın Yüzük",category:"Yüzük",subcategory:"Altın",image:"resimler/altinyuzuk.jpg"},
+
+    {id:5,name:"Zarif Bileklik",category:"Bileklik",subcategory:"Günlük",image:"resimler/bileklik.jpg"},
+    {id:6,name:"Taşlı Bileklik",category:"Bileklik",subcategory:"Özel",image:"resimler/taslibileklik.jpg"},
+    {id:7,name:"İnci Bileklik",category:"Bileklik",subcategory:"İnci",image:"resimler/incibileklik.jpg"},
+    {id:8,name:"Altın Bileklik",category:"Bileklik",subcategory:"Altın",image:"resimler/altinbileklik.jpg"},
+
+    {id:9,name:"Zarif Küpe",category:"Küpe",subcategory:"Günlük",image:"resimler/kupe.jpg"},
+    {id:10,name:"İnci Küpe",category:"Küpe",subcategory:"İnci",image:"resimler/incikupe.jpg"},
+    {id:11,name:"Taşlı Küpe",category:"Küpe",subcategory:"Özel",image:"resimler/taslikupe.jpg"},
+    {id:12,name:"Altın Küpe",category:"Küpe",subcategory:"Altın",image:"resimler/altinkupe.jpg"},
+
+    {id:13,name:"Zarif Kolye",category:"Kolye",subcategory:"Günlük",image:"resimler/kolye.jpg"},
+    {id:14,name:"İnci Kolye",category:"Kolye",subcategory:"İnci",image:"resimler/incikolye.jpg"},
+    {id:15,name:"Taşlı Kolye",category:"Kolye",subcategory:"Özel",image:"resimler/taslikolye.jpg"},
+    {id:16,name:"Altın Kolye",category:"Kolye",subcategory:"Altın",image:"resimler/altinkolye.jpg"}
 ];
 
-let cart=[];
-let favoriteProductIds=[];
-let selectedStars={};
-let ordersRefreshTimer=null;
+let cart = [];
+let favoriteProductIds = [];
+let selectedStars = {};
+let ordersRefreshTimer = null;
+
+let heroCurrent = 0;
+let heroTimer = null;
+
+
+/* =========================================================
+   YARDIMCI FONKSİYONLAR
+   ========================================================= */
+
+function $(id){
+    return document.getElementById(id);
+}
+
+function safeJsonParse(value,fallback){
+    try{
+        return JSON.parse(value);
+    }catch{
+        return fallback;
+    }
+}
+
+function escapeHtml(text){
+    const div=document.createElement("div");
+    div.textContent=String(text ?? "");
+    return div.innerHTML;
+}
 
 async function apiRequest(path,options={}){
     let response;
+
     try{
         response=await fetch(API_BASE+path,options);
     }catch(error){
-        throw new Error("Sunucuya bağlanılamadı. İnternet bağlantınızı kontrol edin.");
+        throw new Error(
+            "Sunucuya bağlanılamadı. İnternet bağlantınızı kontrol edin."
+        );
     }
 
     let data={};
-    try{data=await response.json()}catch{}
+
+    try{
+        data=await response.json();
+    }catch{
+        data={};
+    }
 
     if(!response.ok){
-        throw new Error(data.message||data.error||"Bir hata oluştu.");
+        throw new Error(
+            data.message ||
+            data.error ||
+            "Bir hata oluştu."
+        );
     }
 
     return data;
 }
 
-function escapeHtml(text){
-    const div=document.createElement("div");
-    div.textContent=String(text??"");
-    return div.innerHTML;
-}
 
-/* ================= AUTH UI ================= */
+/* =========================================================
+   AUTH FORM EKRANLARI
+   ========================================================= */
 
 function hideAuthForms(){
-    ["loginForm","registerForm","verifyForm","forgotForm","resetForm","changeAuthFormWrapper"]
-    .forEach(id=>document.getElementById(id)?.classList.remove("active"));
+
+    [
+        "loginForm",
+        "registerForm",
+        "verifyForm",
+        "forgotForm",
+        "resetForm",
+        "changeAuthFormWrapper"
+    ].forEach(id=>{
+        const element=$(id);
+
+        if(element){
+            element.classList.remove("active");
+        }
+    });
 }
 
 function showLogin(){
+
     hideAuthForms();
-    document.getElementById("loginForm").classList.add("active");
-    document.getElementById("loginTab").classList.add("active");
-    document.getElementById("registerTab").classList.remove("active");
+
+    $("loginForm")?.classList.add("active");
+
+    $("loginTab")?.classList.add("active");
+    $("registerTab")?.classList.remove("active");
 }
 
 function showRegister(){
+
     hideAuthForms();
-    document.getElementById("registerForm").classList.add("active");
-    document.getElementById("loginTab").classList.remove("active");
-    document.getElementById("registerTab").classList.add("active");
+
+    $("registerForm")?.classList.add("active");
+
+    $("loginTab")?.classList.remove("active");
+    $("registerTab")?.classList.add("active");
 }
 
 function showVerify(){
+
     hideAuthForms();
-    document.getElementById("verifyForm").classList.add("active");
-    document.getElementById("loginTab").classList.remove("active");
-    document.getElementById("registerTab").classList.remove("active");
+
+    $("verifyForm")?.classList.add("active");
+
+    $("loginTab")?.classList.remove("active");
+    $("registerTab")?.classList.remove("active");
 }
 
 function showForgotPassword(){
+
     hideAuthForms();
-    document.getElementById("forgotForm").classList.add("active");
+
+    $("forgotForm")?.classList.add("active");
+
+    $("loginTab")?.classList.remove("active");
+    $("registerTab")?.classList.remove("active");
 }
 
 function showResetPassword(){
+
     hideAuthForms();
-    document.getElementById("resetForm").classList.add("active");
+
+    $("resetForm")?.classList.add("active");
+
+    $("loginTab")?.classList.remove("active");
+    $("registerTab")?.classList.remove("active");
 }
 
 function showChangePassword(){
+
     closeAccountMenu();
-    document.getElementById("authModal").classList.add("active");
+
+    $("authModal")?.classList.add("active");
+
     hideAuthForms();
-    document.getElementById("changeAuthFormWrapper").classList.add("active");
+
+    $("changeAuthFormWrapper")?.classList.add("active");
+
+    $("loginTab")?.classList.remove("active");
+    $("registerTab")?.classList.remove("active");
 }
 
 function openAuth(){
-    document.getElementById("authModal").classList.add("active");
+
+    closeAllModalsExcept("authModal");
+
+    $("authModal")?.classList.add("active");
+
     showLogin();
 }
 
 function closeAuth(){
-    document.getElementById("authModal").classList.remove("active");
+
+    $("authModal")?.classList.remove("active");
 }
 
-/* ================= REGISTER ================= */
+function closeAllModalsExcept(exceptId){
+
+    [
+        "cartModal",
+        "authModal",
+        "favoritesModal",
+        "ordersModal"
+    ].forEach(id=>{
+        if(id!==exceptId){
+            $(id)?.classList.remove("active");
+        }
+    });
+}
+
+
+/* =========================================================
+   REGISTER
+   ========================================================= */
 
 async function register(event){
+
     event.preventDefault();
 
-    const username=document.getElementById("registerUsername").value.trim();
-    const email=document.getElementById("registerEmail").value.trim();
-    const password=document.getElementById("registerPassword").value;
-    const passwordConfirm=document.getElementById("registerPasswordConfirm").value;
-    const message=document.getElementById("registerMessage");
+    const username=$("registerUsername")?.value.trim() || "";
+    const email=$("registerEmail")?.value.trim() || "";
+    const password=$("registerPassword")?.value || "";
+    const passwordConfirm=$("registerPasswordConfirm")?.value || "";
+    const message=$("registerMessage");
 
     if(password!==passwordConfirm){
-        message.className="auth-message error-message";
-        message.textContent="Şifreler aynı olmalı.";
+
+        if(message){
+            message.className="auth-message error-message";
+            message.textContent="Şifreler aynı olmalı.";
+        }
+
         return;
     }
 
-    message.className="auth-message success-message";
-    message.textContent="Kayıt oluşturuluyor...";
+    if(message){
+        message.className="auth-message success-message";
+        message.textContent="Kayıt oluşturuluyor...";
+    }
 
     try{
-        const data=await apiRequest("/api/auth/register",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({username,email,password,passwordConfirm})
-        });
 
-        message.className="auth-message success-message";
-        message.textContent=data.message||"Kayıt başarılı. E-posta adresinizi doğrulayın.";
+        const data=await apiRequest(
+            "/api/auth/register",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    username,
+                    email,
+                    password,
+                    passwordConfirm
+                })
+            }
+        );
 
-        document.getElementById("verifyEmail").value=email;
+        if(message){
+            message.className="auth-message success-message";
+            message.textContent=
+                data.message ||
+                "Kayıt başarılı. E-posta adresinizi doğrulayın.";
+        }
+
+        if($("verifyEmail")){
+            $("verifyEmail").value=email;
+        }
 
         setTimeout(showVerify,800);
+
     }catch(error){
-        message.className="auth-message error-message";
-        message.textContent=error.message;
+
+        if(message){
+            message.className="auth-message error-message";
+            message.textContent=error.message;
+        }
     }
 }
 
-/* ================= LOGIN ================= */
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
 
 async function login(event){
+
     event.preventDefault();
 
-    const email=document.getElementById("loginEmail").value.trim();
-    const password=document.getElementById("loginPassword").value;
-    const message=document.getElementById("loginMessage");
+    const email=$("loginEmail")?.value.trim() || "";
+    const password=$("loginPassword")?.value || "";
+    const message=$("loginMessage");
+    const button=document.querySelector(
+        "#loginAuthForm .auth-submit"
+    );
 
-    message.className="auth-message success-message";
-    message.textContent="Giriş yapılıyor...";
+    if(message){
+        message.className="auth-message success-message";
+        message.textContent="Giriş yapılıyor...";
+    }
+
+    if(button){
+        button.disabled=true;
+        button.textContent="Giriş yapılıyor...";
+    }
 
     try{
-        const data=await apiRequest("/api/auth/login",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({email,password})
-        });
+
+        const data=await apiRequest(
+            "/api/auth/login",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    email,
+                    password
+                })
+            }
+        );
 
         if(!data.token){
-            throw new Error("Sunucu giriş yaptı ancak oturum anahtarı göndermedi.");
+            throw new Error(
+                "Sunucu giriş yaptı ancak oturum anahtarı göndermedi."
+            );
         }
 
-        localStorage.setItem("veloraToken",data.token);
+        localStorage.setItem(
+            "veloraToken",
+            data.token
+        );
 
         if(data.user){
-            localStorage.setItem("veloraUser",JSON.stringify(data.user));
+
+            localStorage.setItem(
+                "veloraUser",
+                JSON.stringify(data.user)
+            );
         }
 
         await loadFavorites();
+
         updateAccountUI();
+
         closeAuth();
 
+        renderProducts(products);
+
         alert("Giriş başarılı.");
+
     }catch(error){
-        message.className="auth-message error-message";
-        message.textContent=error.message;
+
+        if(message){
+            message.className="auth-message error-message";
+            message.textContent=error.message;
+        }
+
+    }finally{
+
+        if(button){
+            button.disabled=false;
+            button.textContent="Giriş Yap";
+        }
     }
 }
 
-/* ================= VERIFY ================= */
+
+/* =========================================================
+   VERIFY
+   ========================================================= */
 
 async function verifyEmail(event){
+
     event.preventDefault();
 
-    const email=document.getElementById("verifyEmail").value.trim();
-    const code=document.getElementById("verifyCode").value.trim();
-    const message=document.getElementById("verifyMessage");
+    const email=$("verifyEmail")?.value.trim() || "";
+    const code=$("verifyCode")?.value.trim() || "";
+    const message=$("verifyMessage");
 
-    message.className="auth-message success-message";
-    message.textContent="Doğrulanıyor...";
+    if(message){
+        message.className="auth-message success-message";
+        message.textContent="Doğrulanıyor...";
+    }
 
     try{
-        const data=await apiRequest("/api/auth/verify-email",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({email,code})
-        });
 
-        message.textContent=data.message||"E-posta başarıyla doğrulandı.";
+        const data=await apiRequest(
+            "/api/auth/verify-email",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    email,
+                    code
+                })
+            }
+        );
+
+        if(message){
+            message.className="auth-message success-message";
+            message.textContent=
+                data.message ||
+                "E-posta başarıyla doğrulandı.";
+        }
+
         setTimeout(showLogin,900);
+
     }catch(error){
-        message.className="auth-message error-message";
-        message.textContent=error.message;
+
+        if(message){
+            message.className="auth-message error-message";
+            message.textContent=error.message;
+        }
     }
 }
 
-/* ================= FORGOT ================= */
+
+/* =========================================================
+   FORGOT PASSWORD
+   ========================================================= */
 
 async function forgotPassword(event){
+
     event.preventDefault();
 
-    const email=document.getElementById("forgotEmail").value.trim();
-    const message=document.getElementById("forgotMessage");
+    const email=$("forgotEmail")?.value.trim() || "";
+    const message=$("forgotMessage");
 
-    message.className="auth-message success-message";
-    message.textContent="Kod gönderiliyor...";
+    if(message){
+        message.className="auth-message success-message";
+        message.textContent="Kod gönderiliyor...";
+    }
 
     try{
-        const data=await apiRequest("/api/auth/forgot-password",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({email})
-        });
 
-        message.textContent=data.message||"Şifre sıfırlama kodu gönderildi.";
-        document.getElementById("resetEmail").value=email;
+        const data=await apiRequest(
+            "/api/auth/forgot-password",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({email})
+            }
+        );
+
+        if(message){
+            message.className="auth-message success-message";
+            message.textContent=
+                data.message ||
+                "Şifre sıfırlama kodu gönderildi.";
+        }
+
+        if($("resetEmail")){
+            $("resetEmail").value=email;
+        }
 
         setTimeout(showResetPassword,800);
+
     }catch(error){
-        message.className="auth-message error-message";
-        message.textContent=error.message;
+
+        if(message){
+            message.className="auth-message error-message";
+            message.textContent=error.message;
+        }
     }
 }
 
-/* ================= RESET ================= */
+
+/* =========================================================
+   RESET PASSWORD
+   ========================================================= */
 
 async function resetPassword(event){
+
     event.preventDefault();
 
-    const email=document.getElementById("resetEmail").value.trim();
-    const code=document.getElementById("resetCode").value.trim();
-    const password=document.getElementById("resetPassword").value;
-    const confirm=document.getElementById("resetPasswordConfirm").value;
-    const message=document.getElementById("resetMessage");
+    const email=$("resetEmail")?.value.trim() || "";
+    const code=$("resetCode")?.value.trim() || "";
+    const password=$("resetPassword")?.value || "";
+    const confirm=$("resetPasswordConfirm")?.value || "";
+    const message=$("resetMessage");
 
     if(password!==confirm){
-        message.className="auth-message error-message";
-        message.textContent="Şifreler aynı olmalı.";
+
+        if(message){
+            message.className="auth-message error-message";
+            message.textContent="Şifreler aynı olmalı.";
+        }
+
         return;
     }
 
-    message.className="auth-message success-message";
-    message.textContent="Şifre sıfırlanıyor...";
+    if(message){
+        message.className="auth-message success-message";
+        message.textContent="Şifre sıfırlanıyor...";
+    }
 
     try{
-        const data=await apiRequest("/api/auth/reset-password",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({
-                email,
-                code,
-                password,
-                passwordConfirm:confirm
-            })
-        });
 
-        message.textContent=data.message||"Şifren başarıyla değiştirildi.";
+        const data=await apiRequest(
+            "/api/auth/reset-password",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    email,
+                    code,
+                    password,
+                    passwordConfirm:confirm
+                })
+            }
+        );
+
+        if(message){
+            message.className="auth-message success-message";
+            message.textContent=
+                data.message ||
+                "Şifren başarıyla değiştirildi.";
+        }
+
         setTimeout(showLogin,900);
+
     }catch(error){
-        message.className="auth-message error-message";
-        message.textContent=error.message;
+
+        if(message){
+            message.className="auth-message error-message";
+            message.textContent=error.message;
+        }
     }
 }
 
-/* ================= CHANGE PASSWORD ================= */
+
+/* =========================================================
+   CHANGE PASSWORD
+   ========================================================= */
 
 async function changePassword(event){
+
     event.preventDefault();
 
     const token=localStorage.getItem("veloraToken");
@@ -814,107 +2782,137 @@ async function changePassword(event){
         return;
     }
 
-    const currentPassword=document.getElementById("currentPassword").value;
-    const newPassword=document.getElementById("newPassword").value;
-    const newPasswordConfirm=document.getElementById("newPasswordConfirm").value;
-    const message=document.getElementById("changePasswordMessage");
+    const currentPassword=$("currentPassword")?.value || "";
+    const newPassword=$("newPassword")?.value || "";
+    const newPasswordConfirm=
+        $("newPasswordConfirm")?.value || "";
+
+    const message=$("changePasswordMessage");
 
     if(newPassword!==newPasswordConfirm){
-        message.className="auth-message error-message";
-        message.textContent="Yeni şifreler aynı olmalı.";
-        return;
-    }
 
-    message.className="auth-message success-message";
-    message.textContent="Şifre değiştiriliyor...";
-
-    try{
-        const data=await apiRequest("/api/auth/change-password",{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json",
-                "Authorization":"Bearer "+token
-            },
-            body:JSON.stringify({
-                currentPassword,
-                newPassword,
-                newPasswordConfirm
-            })
-        });
-
-        message.textContent=data.message||"Şifren başarıyla değiştirildi.";
-        document.getElementById("changeAuthForm").reset();
-        setTimeout(closeAuth,900);
-    }catch(error){
-        message.className="auth-message error-message";
-        message.textContent=error.message;
-    }
-}
-
-/* ================= USER ================= */
-
-async function loadCurrentUser(){
-    const token=localStorage.getItem("veloraToken");
-
-    if(!token){
-        updateAccountUI();
-        return;
-    }
-
-    try{
-        const data=await apiRequest("/api/auth/me",{
-            headers:{Authorization:"Bearer "+token}
-        });
-
-        if(data.user){
-            localStorage.setItem("veloraUser",JSON.stringify(data.user));
+        if(message){
+            message.className="auth-message error-message";
+            message.textContent=
+                "Yeni şifreler aynı olmalı.";
         }
 
-        await loadFavorites();
-        updateAccountUI();
-        renderProducts(products);
+        return;
+    }
+
+    if(message){
+        message.className="auth-message success-message";
+        message.textContent="Şifre değiştiriliyor...";
+    }
+
+    try{
+
+        const data=await apiRequest(
+            "/api/auth/change-password",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":"Bearer "+token
+                },
+                body:JSON.stringify({
+                    currentPassword,
+                    newPassword,
+                    newPasswordConfirm
+                })
+            }
+        );
+
+        if(message){
+            message.className="auth-message success-message";
+            message.textContent=
+                data.message ||
+                "Şifren başarıyla değiştirildi.";
+        }
+
+        $("changeAuthForm")?.reset();
+
+        setTimeout(closeAuth,900);
+
     }catch(error){
-        localStorage.removeItem("veloraToken");
-        localStorage.removeItem("veloraUser");
-        favoriteProductIds=[];
-        updateAccountUI();
+
+        if(message){
+            message.className="auth-message error-message";
+            message.textContent=error.message;
+        }
     }
 }
 
+
+/* =========================================================
+   ACCOUNT
+   ========================================================= */
+
 function toggleAccountMenu(){
-    document.getElementById("accountMenu").classList.toggle("active");
+
+    const menu=$("accountMenu");
+
+    if(menu){
+        menu.classList.toggle("active");
+    }
 }
 
 function closeAccountMenu(){
-    document.getElementById("accountMenu").classList.remove("active");
+
+    $("accountMenu")?.classList.remove("active");
 }
 
 function updateAccountUI(){
+
     const token=localStorage.getItem("veloraToken");
     const userText=localStorage.getItem("veloraUser");
 
-    const button=document.getElementById("accountButton");
-    const username=document.getElementById("accountUsername");
-    const email=document.getElementById("accountEmail");
+    const button=$("accountButton");
+    const username=$("accountUsername");
+    const email=$("accountEmail");
 
-    if(token&&userText){
-        try{
-            const user=JSON.parse(userText);
-            const displayName=user.username||user.email||"Hesabım";
+    if(token && userText){
 
-            button.textContent="👤 "+displayName;
-            username.textContent=displayName;
-            email.textContent=user.email||"";
+        const user=safeJsonParse(userText,null);
+
+        if(user){
+
+            const displayName=
+                user.username ||
+                user.email ||
+                "Hesabım";
+
+            if(button){
+                button.textContent="👤 "+displayName;
+            }
+
+            if(username){
+                username.textContent=displayName;
+            }
+
+            if(email){
+                email.textContent=user.email || "";
+            }
+
             return;
-        }catch{}
+        }
     }
 
-    button.textContent="👤 Hesap Oluştur";
-    username.textContent="Hesabım";
-    email.textContent="";
+    if(button){
+        button.textContent="👤 Hesap Oluştur";
+    }
+
+    if(username){
+        username.textContent="Hesabım";
+    }
+
+    if(email){
+        email.textContent="";
+    }
 }
 
 function logout(){
+
     if(ordersRefreshTimer){
         clearInterval(ordersRefreshTimer);
         ordersRefreshTimer=null;
@@ -922,283 +2920,560 @@ function logout(){
 
     localStorage.removeItem("veloraToken");
     localStorage.removeItem("veloraUser");
+
     favoriteProductIds=[];
 
     closeAccountMenu();
     closeOrders();
+
     updateAccountUI();
     renderProducts(products);
 
     alert("Hesabınızdan çıkış yapıldı.");
 }
 
-/* ================= CART ================= */
+async function loadCurrentUser(){
+
+    const token=localStorage.getItem("veloraToken");
+
+    if(!token){
+
+        updateAccountUI();
+
+        return;
+    }
+
+    try{
+
+        const data=await apiRequest(
+            "/api/auth/me",
+            {
+                headers:{
+                    "Authorization":"Bearer "+token
+                }
+            }
+        );
+
+        if(data.user){
+
+            localStorage.setItem(
+                "veloraUser",
+                JSON.stringify(data.user)
+            );
+        }
+
+        await loadFavorites();
+
+        updateAccountUI();
+
+        renderProducts(products);
+
+    }catch(error){
+
+        console.warn(
+            "Oturum doğrulanamadı:",
+            error.message
+        );
+
+        localStorage.removeItem("veloraToken");
+        localStorage.removeItem("veloraUser");
+
+        favoriteProductIds=[];
+
+        updateAccountUI();
+        renderProducts(products);
+    }
+}
+
+
+/* =========================================================
+   CART
+   ========================================================= */
 
 function loadCart(){
-    try{
-        const saved=JSON.parse(localStorage.getItem("veloraCart")||"[]");
 
-        cart=Array.isArray(saved)
-            ?saved.map(item=>({
-                productId:Number(item.productId),
-                quantity:Number(item.quantity)
-            })).filter(item=>
-                Number.isInteger(item.productId)&&
-                products.some(p=>Number(p.id)===item.productId)&&
-                Number.isInteger(item.quantity)&&
-                item.quantity>0
-            )
-            :[];
-    }catch{
+    const saved=safeJsonParse(
+        localStorage.getItem("veloraCart") || "[]",
+        []
+    );
+
+    if(!Array.isArray(saved)){
+
         cart=[];
+
+        updateCartCount();
+
+        return;
     }
+
+    cart=saved
+        .map(item=>({
+            productId:Number(item.productId),
+            quantity:Number(item.quantity)
+        }))
+        .filter(item=>
+            Number.isInteger(item.productId) &&
+            products.some(
+                p=>Number(p.id)===item.productId
+            ) &&
+            Number.isInteger(item.quantity) &&
+            item.quantity>0
+        );
 
     updateCartCount();
 }
 
 function saveCart(){
-    localStorage.setItem("veloraCart",JSON.stringify(cart));
+
+    localStorage.setItem(
+        "veloraCart",
+        JSON.stringify(cart)
+    );
+
     updateCartCount();
 }
 
 function getCartCount(){
-    return cart.reduce((total,item)=>total+Number(item.quantity||0),0);
+
+    return cart.reduce(
+        (total,item)=>
+            total+Number(item.quantity || 0),
+        0
+    );
 }
 
 function updateCartCount(){
-    const el=document.getElementById("cartCount");
-    if(el)el.textContent=getCartCount();
+
+    const element=$("cartCount");
+
+    if(element){
+        element.textContent=getCartCount();
+    }
 }
 
 function addToCart(productId){
+
     const id=Number(productId);
-    const product=products.find(p=>Number(p.id)===id);
 
-    if(!product)return;
+    const product=products.find(
+        p=>Number(p.id)===id
+    );
 
-    const existing=cart.find(item=>Number(item.productId)===id);
+    if(!product){
+        return;
+    }
+
+    const existing=cart.find(
+        item=>Number(item.productId)===id
+    );
 
     if(existing){
         existing.quantity++;
     }else{
-        cart.push({productId:id,quantity:1});
+        cart.push({
+            productId:id,
+            quantity:1
+        });
     }
 
     saveCart();
-    showCartToast(product.name+" sepete eklendi.");
+
+    showCartToast(
+        product.name+" sepete eklendi."
+    );
 }
 
 function changeCartQuantity(productId,change){
-    const id=Number(productId);
-    const item=cart.find(i=>Number(i.productId)===id);
 
-    if(!item)return;
+    const id=Number(productId);
+
+    const item=cart.find(
+        i=>Number(i.productId)===id
+    );
+
+    if(!item){
+        return;
+    }
 
     item.quantity+=Number(change);
 
     if(item.quantity<=0){
-        cart=cart.filter(i=>Number(i.productId)!==id);
+
+        cart=cart.filter(
+            i=>Number(i.productId)!==id
+        );
     }
 
     saveCart();
+
     renderCart();
 }
 
 function removeFromCart(productId){
+
     const id=Number(productId);
 
-    cart=cart.filter(item=>Number(item.productId)!==id);
+    cart=cart.filter(
+        item=>Number(item.productId)!==id
+    );
 
     saveCart();
+
     renderCart();
 }
 
 function renderCart(){
-    const list=document.getElementById("cartList");
-    const total=document.getElementById("cartTotal");
 
-    if(!list)return;
+    const list=$("cartList");
+    const total=$("cartTotal");
+
+    if(!list){
+        return;
+    }
 
     if(!cart.length){
+
         list.innerHTML=`
             <div class="cart-empty">
                 🛒
                 <br><br>
                 <strong>Sepetin şu anda boş.</strong>
-                <p>Beğendiğin ürünleri sepete ekleyebilirsin.</p>
+                <p>
+                    Beğendiğin ürünleri sepete ekleyebilirsin.
+                </p>
             </div>
         `;
 
-        if(total)total.textContent="Toplam: 0 TL";
+        if(total){
+            total.textContent="Toplam: 0 TL";
+        }
+
         return;
     }
 
     list.innerHTML=cart.map(item=>{
-        const product=products.find(p=>Number(p.id)===Number(item.productId));
 
-        if(!product)return"";
+        const product=products.find(
+            p=>Number(p.id)===Number(item.productId)
+        );
+
+        if(!product){
+            return "";
+        }
 
         return`
             <div class="cart-item">
-                <img src="${escapeHtml(product.image)}"
-                     alt="${escapeHtml(product.name)}"
-                     onerror="this.src='resimler/urun1.jpg'">
+
+                <img
+                    src="${escapeHtml(product.image)}"
+                    alt="${escapeHtml(product.name)}"
+                    onerror="this.src='resimler/urun1.jpg'"
+                >
 
                 <div class="cart-item-info">
-                    <h3>${escapeHtml(product.name)}</h3>
-                    <p>${escapeHtml(product.category)} · ${escapeHtml(product.subcategory)}</p>
+
+                    <h3>
+                        ${escapeHtml(product.name)}
+                    </h3>
+
+                    <p>
+                        ${escapeHtml(product.category)}
+                        ·
+                        ${escapeHtml(product.subcategory)}
+                    </p>
 
                     <div class="cart-quantity">
-                        <button type="button" onclick="changeCartQuantity(${product.id},-1)">−</button>
-                        <span>${Number(item.quantity)}</span>
-                        <button type="button" onclick="changeCartQuantity(${product.id},1)">+</button>
+
+                        <button
+                            type="button"
+                            data-cart-minus="${product.id}"
+                        >
+                            −
+                        </button>
+
+                        <span>
+                            ${Number(item.quantity)}
+                        </span>
+
+                        <button
+                            type="button"
+                            data-cart-plus="${product.id}"
+                        >
+                            +
+                        </button>
+
                     </div>
+
                 </div>
 
-                <button class="cart-remove"
-                        type="button"
-                        onclick="removeFromCart(${product.id})">
+                <button
+                    class="cart-remove"
+                    type="button"
+                    data-cart-remove="${product.id}"
+                >
                     🗑
                 </button>
+
             </div>
         `;
+
     }).join("");
 
     if(total){
+
         total.textContent=
             "Toplam: "+getCartCount()+" adet ürün";
     }
 }
 
 function openCart(){
+
     closeAccountMenu();
-    document.getElementById("cartModal").classList.add("active");
+
+    closeAllModalsExcept("cartModal");
+
+    $("cartModal")?.classList.add("active");
+
+    $("checkoutPanel")?.classList.remove("active");
+
     renderCart();
 }
 
 function closeCart(){
-    document.getElementById("cartModal").classList.remove("active");
+
+    $("cartModal")?.classList.remove("active");
 }
 
 function showCartToast(message){
-    document.querySelector(".cart-toast")?.remove();
 
-    const toast=document.createElement("div");
+    document.querySelector(
+        ".cart-toast"
+    )?.remove();
+
+    const toast=
+        document.createElement("div");
+
     toast.className="cart-toast";
     toast.textContent=message;
 
     document.body.appendChild(toast);
 
-    setTimeout(()=>toast.remove(),2000);
+    setTimeout(()=>{
+        toast.remove();
+    },2000);
 }
 
-/* ================= CHECKOUT ================= */
+
+/* =========================================================
+   CHECKOUT
+   ========================================================= */
 
 function openCheckout(){
-    const panel=document.getElementById("checkoutPanel");
-    const content=document.getElementById("checkoutContent");
 
-    if(!panel||!content)return;
+    const panel=$("checkoutPanel");
+    const content=$("checkoutContent");
+
+    if(!panel || !content){
+        return;
+    }
+
+    if(!cart.length){
+
+        content.innerHTML=`
+            <div class="login-required-box">
+                Sepetiniz boş.
+            </div>
+        `;
+
+        panel.classList.add("active");
+
+        return;
+    }
 
     panel.classList.add("active");
 
     const token=localStorage.getItem("veloraToken");
 
     if(!token){
+
         content.innerHTML=`
             <div class="login-required-box">
-                <strong>Siparişi tamamlamak için giriş yapmalısınız.</strong>
+
+                <strong>
+                    Siparişi tamamlamak için giriş yapmalısınız.
+                </strong>
+
                 <br><br>
+
                 Hesabınız varsa giriş yapabilir,
                 hesabınız yoksa ücretsiz hesap oluşturabilirsiniz.
+
                 <br>
-                <button type="button" onclick="closeCart();openAuth();">
+
+                <button
+                    type="button"
+                    id="checkoutLoginButton"
+                >
                     Giriş Yap / Hesap Oluştur
                 </button>
+
             </div>
         `;
+
+        $("checkoutLoginButton")?.addEventListener(
+            "click",
+            ()=>{
+                closeCart();
+                openAuth();
+            }
+        );
+
         return;
     }
 
-    let user={};
-
-    try{
-        user=JSON.parse(localStorage.getItem("veloraUser")||"{}");
-    }catch{}
+    const user=
+        safeJsonParse(
+            localStorage.getItem("veloraUser") || "{}",
+            {}
+        );
 
     content.innerHTML=`
+
         <h3>Sipariş Bilgileri</h3>
 
         <div class="checkout-note">
-            Sipariş bilgilerinizi eksiksiz giriniz.<br>
+
+            Sipariş bilgilerinizi eksiksiz giriniz.
+            <br>
+
             VELORA'nın resmi ödeme sistemi henüz aktif değildir.
             Bu aşamada herhangi bir ödeme alınmaz.
+
         </div>
 
-        <form class="checkout-form" id="checkoutForm">
+        <form
+            class="checkout-form"
+            id="checkoutForm"
+        >
 
             <label>Ad Soyad</label>
-            <input type="text" id="checkoutName"
-                   value="${escapeHtml(user.username||"")}"
-                   required>
+
+            <input
+                type="text"
+                id="checkoutName"
+                value="${escapeHtml(user.username || "")}"
+                required
+            >
 
             <label>E-posta</label>
-            <input type="email" id="checkoutEmail"
-                   value="${escapeHtml(user.email||"")}"
-                   readonly required>
+
+            <input
+                type="email"
+                id="checkoutEmail"
+                value="${escapeHtml(user.email || "")}"
+                readonly
+                required
+            >
 
             <label>Telefon</label>
-            <input type="tel" id="checkoutPhone"
-                   placeholder="05xx xxx xx xx"
-                   required>
+
+            <input
+                type="tel"
+                id="checkoutPhone"
+                placeholder="05xx xxx xx xx"
+                required
+            >
 
             <label>Teslimat Adresi</label>
-            <textarea id="checkoutAddress"
-                      placeholder="Teslimat adresinizi yazınız..."
-                      required></textarea>
 
-            <div id="checkoutMessage" class="checkout-message"></div>
+            <textarea
+                id="checkoutAddress"
+                placeholder="Teslimat adresinizi yazınız..."
+                required
+            ></textarea>
 
-            <button class="checkout-submit" type="submit">
+            <div
+                id="checkoutMessage"
+                class="checkout-message"
+            ></div>
+
+            <button
+                class="checkout-submit"
+                type="submit"
+            >
                 Sipariş Talebini Gönder
             </button>
+
         </form>
     `;
 
-    document.getElementById("checkoutForm")
-        .addEventListener("submit",submitOrder);
+    $("checkoutForm")?.addEventListener(
+        "submit",
+        submitOrder
+    );
 }
 
 async function submitOrder(event){
+
     event.preventDefault();
 
-    const token=localStorage.getItem("veloraToken");
+    const token=
+        localStorage.getItem("veloraToken");
 
     if(!token){
-        alert("Sipariş vermek için giriş yapmalısınız.");
+
+        alert(
+            "Sipariş vermek için giriş yapmalısınız."
+        );
+
         return;
     }
 
     if(!cart.length){
+
         alert("Sepetiniz boş.");
+
         return;
     }
 
-    const name=document.getElementById("checkoutName").value.trim();
-    const email=document.getElementById("checkoutEmail").value.trim();
-    const phone=document.getElementById("checkoutPhone").value.trim();
-    const address=document.getElementById("checkoutAddress").value.trim();
-    const message=document.getElementById("checkoutMessage");
-    const button=document.querySelector(".checkout-submit");
+    const name=
+        $("checkoutName")?.value.trim() || "";
 
-    if(!name||!email||!phone||!address){
-        message.className="checkout-message checkout-error";
-        message.textContent="Lütfen tüm sipariş bilgilerini doldurun.";
+    const email=
+        $("checkoutEmail")?.value.trim() || "";
+
+    const phone=
+        $("checkoutPhone")?.value.trim() || "";
+
+    const address=
+        $("checkoutAddress")?.value.trim() || "";
+
+    const message=$("checkoutMessage");
+
+    const button=
+        document.querySelector(
+            ".checkout-submit"
+        );
+
+    if(!name || !email || !phone || !address){
+
+        if(message){
+
+            message.className=
+                "checkout-message checkout-error";
+
+            message.textContent=
+                "Lütfen tüm sipariş bilgilerini doldurun.";
+        }
+
         return;
     }
 
     const items=cart.map(item=>{
-        const product=products.find(p=>Number(p.id)===Number(item.productId));
+
+        const product=products.find(
+            p=>Number(p.id)===Number(item.productId)
+        );
 
         return{
             productId:Number(product.id),
@@ -1210,67 +3485,107 @@ async function submitOrder(event){
         };
     });
 
-    message.className="checkout-message";
-    message.textContent="Sipariş gönderiliyor...";
+    if(message){
+
+        message.className="checkout-message";
+        message.textContent="Sipariş gönderiliyor...";
+    }
 
     if(button){
+
         button.disabled=true;
         button.textContent="Gönderiliyor...";
     }
 
     try{
-        const data=await apiRequest("/api/orders",{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json",
-                "Authorization":"Bearer "+token
-            },
-            body:JSON.stringify({
-                userId:null,
-                customerName:name,
-                customerEmail:email,
-                customerPhone:phone,
-                address,
-                items,
-                total:0
-            })
-        });
 
-        message.className="checkout-message checkout-success";
-        message.textContent=data.message||"Sipariş talebiniz başarıyla alındı.";
+        const data=await apiRequest(
+            "/api/orders",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":"Bearer "+token
+                },
+                body:JSON.stringify({
+                    userId:null,
+                    customerName:name,
+                    customerEmail:email,
+                    customerPhone:phone,
+                    address,
+                    items,
+                    total:0
+                })
+            }
+        );
+
+        if(message){
+
+            message.className=
+                "checkout-message checkout-success";
+
+            message.textContent=
+                data.message ||
+                "Sipariş talebiniz başarıyla alındı.";
+        }
 
         cart=[];
+
         saveCart();
 
         setTimeout(()=>{
+
             closeCart();
-            alert("Sipariş talebiniz başarıyla alındı.");
+
+            alert(
+                "Sipariş talebiniz başarıyla alındı."
+            );
+
         },1000);
 
     }catch(error){
-        message.className="checkout-message checkout-error";
-        message.textContent=error.message;
+
+        if(message){
+
+            message.className=
+                "checkout-message checkout-error";
+
+            message.textContent=
+                error.message;
+        }
 
         if(button){
+
             button.disabled=false;
-            button.textContent="Sipariş Talebini Gönder";
+            button.textContent=
+                "Sipariş Talebini Gönder";
         }
     }
 }
 
-function openOrderForm(){
-    openCheckout();
-}
 
-/* ================= PRODUCTS ================= */
+/* =========================================================
+   PRODUCTS
+   ========================================================= */
 
 function createStars(productId){
+
     let html="";
 
     for(let i=1;i<=5;i++){
+
         html+=`
-            <span class="star ${selectedStars[productId]>=i?"active":""}"
-                  onclick="selectStar(${productId},${i})">★</span>
+            <span
+                class="star ${
+                    selectedStars[productId]>=i
+                    ?"active"
+                    :""
+                }"
+                data-star-product="${productId}"
+                data-star-rating="${i}"
+            >
+                ★
+            </span>
         `;
     }
 
@@ -1278,60 +3593,99 @@ function createStars(productId){
 }
 
 function selectStar(productId,rating){
+
     selectedStars[productId]=rating;
 
-    const stars=document.getElementById("stars-"+productId);
+    const stars=
+        $("stars-"+productId);
 
     if(stars){
-        stars.innerHTML=createStars(productId);
+
+        stars.innerHTML=
+            createStars(productId);
     }
 }
 
 function renderProducts(list=products){
-    const container=document.getElementById("productContainer");
 
-    if(!container)return;
+    const container=$("productContainer");
+
+    if(!container){
+        return;
+    }
 
     container.innerHTML="";
 
     if(!list.length){
+
         container.innerHTML=`
             <div class="favorites-empty">
                 Aradığınız kriterlere uygun ürün bulunamadı.
             </div>
         `;
+
         return;
     }
 
-    ["Yüzük","Bileklik","Küpe","Kolye"].forEach(category=>{
-        const categoryProducts=list.filter(p=>p.category===category);
+    [
+        "Yüzük",
+        "Bileklik",
+        "Küpe",
+        "Kolye"
+    ].forEach(category=>{
 
-        if(!categoryProducts.length)return;
+        const categoryProducts=
+            list.filter(
+                p=>p.category===category
+            );
 
-        const heading=document.createElement("h2");
-        heading.className="category-heading";
+        if(!categoryProducts.length){
+            return;
+        }
+
+        const heading=
+            document.createElement("h2");
+
+        heading.className=
+            "category-heading";
+
         heading.textContent=category;
 
-        const grid=document.createElement("div");
+        const grid=
+            document.createElement("div");
+
         grid.className="product-grid";
 
         categoryProducts.forEach(product=>{
-            const favorite=favoriteProductIds.includes(Number(product.id));
 
-            const card=document.createElement("div");
+            const favorite=
+                favoriteProductIds.includes(
+                    Number(product.id)
+                );
+
+            const card=
+                document.createElement("div");
+
             card.className="product-card";
 
             card.innerHTML=`
-                <button class="favorite-button ${favorite?"active":""}"
-                        onclick="toggleFavorite(${product.id})"
-                        type="button">
-                    ${favorite?"♥":"♡"}
+
+                <button
+                    class="favorite-button ${
+                        favorite ? "active" : ""
+                    }"
+                    data-favorite="${product.id}"
+                    type="button"
+                >
+                    ${favorite ? "♥" : "♡"}
                 </button>
 
-                <img class="product-image"
-                     src="${escapeHtml(product.image)}"
-                     alt="${escapeHtml(product.name)}"
-                     onerror="this.src='resimler/urun1.jpg'">
+                <img
+                    class="product-image"
+                    src="${escapeHtml(product.image)}"
+                    alt="${escapeHtml(product.name)}"
+                    onerror="this.src='resimler/urun1.jpg'"
+                >
 
                 <div class="product-info">
 
@@ -1347,30 +3701,44 @@ function renderProducts(list=products){
                         Çok Yakında Stoklarda
                     </div>
 
-                    <button class="stock-button"
-                            onclick="addToCart(${product.id})"
-                            type="button">
+                    <button
+                        class="stock-button"
+                        data-add-cart="${product.id}"
+                        type="button"
+                    >
                         🛒 Sepete Ekle
                     </button>
 
                     <div class="review-box">
 
-                        <div class="stars" id="stars-${product.id}">
+                        <div
+                            class="stars"
+                            id="stars-${product.id}"
+                        >
                             ${createStars(product.id)}
                         </div>
 
-                        <textarea id="review-${product.id}"
-                                  class="review-input"
-                                  placeholder="Ürün hakkındaki düşüncenizi yazın..."></textarea>
+                        <textarea
+                            id="review-${product.id}"
+                            class="review-input"
+                            placeholder="Ürün hakkındaki düşüncenizi yazın..."
+                        ></textarea>
 
-                        <button class="review-button"
-                                onclick="addReview(${product.id})"
-                                type="button">
+                        <button
+                            class="review-button"
+                            data-add-review="${product.id}"
+                            type="button"
+                        >
                             Yorumu Gönder
                         </button>
 
-                        <div class="reviews" id="reviews-${product.id}"></div>
+                        <div
+                            class="reviews"
+                            id="reviews-${product.id}"
+                        ></div>
+
                     </div>
+
                 </div>
             `;
 
@@ -1380,88 +3748,173 @@ function renderProducts(list=products){
         container.appendChild(heading);
         container.appendChild(grid);
 
-        categoryProducts.forEach(product=>loadReviews(product.id));
+        categoryProducts.forEach(
+            product=>loadReviews(product.id)
+        );
     });
 }
 
 function filterCategory(category){
-    document.getElementById("productSearch").value="";
 
-    const filtered=products.filter(p=>p.category===category);
+    if($("productSearch")){
+        $("productSearch").value="";
+    }
 
-    document.getElementById("searchResultInfo").textContent=
-        category+" ürünleri";
+    const filtered=
+        products.filter(
+            p=>p.category===category
+        );
+
+    if($("searchResultInfo")){
+
+        $("searchResultInfo").textContent=
+            category+" ürünleri";
+    }
 
     renderProducts(filtered);
+
+    closeMenu();
+
     scrollToProducts();
 }
 
 function showAllProducts(){
-    document.getElementById("productSearch").value="";
-    document.getElementById("searchResultInfo").textContent="Tüm Ürünler";
+
+    if($("productSearch")){
+        $("productSearch").value="";
+    }
+
+    if($("searchResultInfo")){
+        $("searchResultInfo").textContent=
+            "Tüm Ürünler";
+    }
+
     renderProducts(products);
+
+    closeMenu();
+
     scrollToProducts();
 }
 
 function filterFeatured(){
-    document.getElementById("one-cikanlar")
-        .scrollIntoView({behavior:"smooth"});
+
+    closeMenu();
+
+    $("one-cikanlar")?.scrollIntoView({
+        behavior:"smooth"
+    });
 }
 
 function searchProducts(){
-    const query=document.getElementById("productSearch")
-        .value.trim().toLocaleLowerCase("tr-TR");
 
-    if(!query){
-        document.getElementById("searchResultInfo").textContent="";
-        renderProducts(products);
+    const input=$("productSearch");
+
+    if(!input){
         return;
     }
 
-    const filtered=products.filter(product=>
-        product.name.toLocaleLowerCase("tr-TR").includes(query)||
-        product.category.toLocaleLowerCase("tr-TR").includes(query)||
-        product.subcategory.toLocaleLowerCase("tr-TR").includes(query)
-    );
+    const query=
+        input.value
+            .trim()
+            .toLocaleLowerCase("tr-TR");
 
-    document.getElementById("searchResultInfo").textContent=
-        `${filtered.length} ürün bulundu: "${query}"`;
+    if(!query){
+
+        if($("searchResultInfo")){
+            $("searchResultInfo").textContent="";
+        }
+
+        renderProducts(products);
+
+        return;
+    }
+
+    const filtered=
+        products.filter(product=>
+            product.name
+                .toLocaleLowerCase("tr-TR")
+                .includes(query) ||
+
+            product.category
+                .toLocaleLowerCase("tr-TR")
+                .includes(query) ||
+
+            product.subcategory
+                .toLocaleLowerCase("tr-TR")
+                .includes(query)
+        );
+
+    if($("searchResultInfo")){
+
+        $("searchResultInfo").textContent=
+            `${filtered.length} ürün bulundu: "${query}"`;
+    }
 
     renderProducts(filtered);
+
     scrollToProducts();
 }
 
 function scrollToProducts(){
+
     setTimeout(()=>{
-        document.getElementById("urunler")
-            ?.scrollIntoView({behavior:"smooth"});
+
+        $("urunler")?.scrollIntoView({
+            behavior:"smooth"
+        });
+
     },50);
 }
 
-/* ================= REVIEWS ================= */
+
+/* =========================================================
+   REVIEWS
+   ========================================================= */
 
 function addReview(productId){
-    const input=document.getElementById("review-"+productId);
+
+    const input=
+        $("review-"+productId);
+
+    if(!input){
+        return;
+    }
+
     const text=input.value.trim();
-    const rating=selectedStars[productId];
+
+    const rating=
+        selectedStars[productId];
 
     if(!rating){
-        alert("Lütfen yıldız puanı seçin.");
+
+        alert(
+            "Lütfen yıldız puanı seçin."
+        );
+
         return;
     }
 
     if(!text){
-        alert("Lütfen yorumunuzu yazın.");
+
+        alert(
+            "Lütfen yorumunuzu yazın."
+        );
+
         return;
     }
 
-    const key="velora-reviews-"+productId;
+    const key=
+        "velora-reviews-"+productId;
 
-    let reviews=[];
+    let reviews=
+        safeJsonParse(
+            localStorage.getItem(key) || "[]",
+            []
+        );
 
-    try{
-        reviews=JSON.parse(localStorage.getItem(key)||"[]");
-    }catch{}
+    if(!Array.isArray(reviews)){
+        reviews=[];
+    }
 
     reviews.push({
         rating,
@@ -1469,116 +3922,203 @@ function addReview(productId){
         date:new Date().toLocaleDateString("tr-TR")
     });
 
-    localStorage.setItem(key,JSON.stringify(reviews));
+    localStorage.setItem(
+        key,
+        JSON.stringify(reviews)
+    );
 
     input.value="";
+
     selectedStars[productId]=0;
 
-    document.getElementById("stars-"+productId).innerHTML=
-        createStars(productId);
+    const stars=
+        $("stars-"+productId);
+
+    if(stars){
+        stars.innerHTML=
+            createStars(productId);
+    }
 
     loadReviews(productId);
 }
 
 function loadReviews(productId){
-    const container=document.getElementById("reviews-"+productId);
 
-    if(!container)return;
+    const container=
+        $("reviews-"+productId);
 
-    let reviews=[];
+    if(!container){
+        return;
+    }
 
-    try{
-        reviews=JSON.parse(
-            localStorage.getItem("velora-reviews-"+productId)||"[]"
+    const reviews=
+        safeJsonParse(
+            localStorage.getItem(
+                "velora-reviews-"+productId
+            ) || "[]",
+            []
         );
-    }catch{}
 
     container.innerHTML="";
 
+    if(!Array.isArray(reviews)){
+        return;
+    }
+
     reviews.forEach(review=>{
+
         let stars="";
 
         for(let i=1;i<=5;i++){
-            stars+=i<=Number(review.rating)?"★":"☆";
+
+            stars+=
+                i<=Number(review.rating)
+                ?"★"
+                :"☆";
         }
 
-        const item=document.createElement("div");
+        const item=
+            document.createElement("div");
+
         item.className="review-item";
 
         item.innerHTML=`
-            <div class="review-stars">${stars}</div>
-            <div>${escapeHtml(review.text)}</div>
-            <small>${escapeHtml(review.date)}</small>
+
+            <div class="review-stars">
+                ${stars}
+            </div>
+
+            <div>
+                ${escapeHtml(review.text)}
+            </div>
+
+            <small>
+                ${escapeHtml(review.date)}
+            </small>
+
         `;
 
         container.appendChild(item);
     });
 }
 
-/* ================= FAVORITES ================= */
+
+/* =========================================================
+   FAVORITES
+   ========================================================= */
 
 async function loadFavorites(){
-    const token=localStorage.getItem("veloraToken");
+
+    const token=
+        localStorage.getItem("veloraToken");
 
     if(!token){
+
         favoriteProductIds=[];
+
         return;
     }
 
     try{
-        const data=await apiRequest("/api/favorites",{
-            headers:{Authorization:"Bearer "+token}
-        });
 
-        favoriteProductIds=(data.favorites||[])
-            .map(item=>Number(
-                item.product_id||
-                item.productId||
-                item.id
-            ))
-            .filter(Number.isFinite);
+        const data=
+            await apiRequest(
+                "/api/favorites",
+                {
+                    headers:{
+                        "Authorization":
+                            "Bearer "+token
+                    }
+                }
+            );
+
+        favoriteProductIds=
+            (data.favorites || [])
+                .map(item=>
+                    Number(
+                        item.product_id ||
+                        item.productId ||
+                        item.id
+                    )
+                )
+                .filter(Number.isFinite);
 
     }catch(error){
-        console.error("Favoriler yüklenemedi:",error);
+
+        console.warn(
+            "Favoriler yüklenemedi:",
+            error.message
+        );
+
         favoriteProductIds=[];
     }
 }
 
 async function toggleFavorite(productId){
-    const token=localStorage.getItem("veloraToken");
+
+    const token=
+        localStorage.getItem("veloraToken");
 
     if(!token){
-        alert("Favorilere eklemek için önce giriş yapmalısınız.");
+
+        alert(
+            "Favorilere eklemek için önce giriş yapmalısınız."
+        );
+
         openAuth();
+
         return;
     }
 
     const id=Number(productId);
-    const isFavorite=favoriteProductIds.includes(id);
+
+    const isFavorite=
+        favoriteProductIds.includes(id);
 
     try{
+
         if(isFavorite){
-            await apiRequest("/api/favorites/"+id,{
-                method:"DELETE",
-                headers:{Authorization:"Bearer "+token}
-            });
+
+            await apiRequest(
+                "/api/favorites/"+id,
+                {
+                    method:"DELETE",
+                    headers:{
+                        "Authorization":
+                            "Bearer "+token
+                    }
+                }
+            );
 
             favoriteProductIds=
-                favoriteProductIds.filter(x=>x!==id);
+                favoriteProductIds.filter(
+                    x=>x!==id
+                );
+
         }else{
-            await apiRequest("/api/favorites",{
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json",
-                    "Authorization":"Bearer "+token
-                },
-                body:JSON.stringify({productId:id})
-            });
+
+            await apiRequest(
+                "/api/favorites",
+                {
+                    method:"POST",
+                    headers:{
+                        "Content-Type":
+                            "application/json",
+
+                        "Authorization":
+                            "Bearer "+token
+                    },
+                    body:JSON.stringify({
+                        productId:id
+                    })
+                }
+            );
 
             favoriteProductIds.push(id);
         }
 
-        const query=document.getElementById("productSearch").value.trim();
+        const query=
+            $("productSearch")?.value.trim() || "";
 
         if(query){
             searchProducts();
@@ -1587,24 +4127,35 @@ async function toggleFavorite(productId){
         }
 
     }catch(error){
+
         alert(error.message);
     }
 }
 
 async function openFavorites(){
-    const token=localStorage.getItem("veloraToken");
+
+    const token=
+        localStorage.getItem("veloraToken");
 
     if(!token){
+
         openAuth();
+
         return;
     }
 
     closeAccountMenu();
 
-    document.getElementById("favoritesModal")
-        .classList.add("active");
+    closeAllModalsExcept("favoritesModal");
 
-    const container=document.getElementById("favoritesContainer");
+    $("favoritesModal")?.classList.add("active");
+
+    const container=
+        $("favoritesContainer");
+
+    if(!container){
+        return;
+    }
 
     container.innerHTML=`
         <div class="favorites-empty">
@@ -1615,40 +4166,73 @@ async function openFavorites(){
     await loadFavorites();
 
     if(!favoriteProductIds.length){
+
         container.innerHTML=`
             <div class="favorites-empty">
-                <strong>Henüz favorin yok.</strong>
-                <p>Beğendiğin ürünlerin üzerindeki ♡ butonuna basarak onları favorilerine ekleyebilirsin.</p>
+
+                <strong>
+                    Henüz favorin yok.
+                </strong>
+
+                <p>
+                    Beğendiğin ürünlerin üzerindeki
+                    ♡ butonuna basarak onları
+                    favorilerine ekleyebilirsin.
+                </p>
+
             </div>
         `;
+
         return;
     }
 
-    const favoriteProducts=products.filter(product=>
-        favoriteProductIds.includes(Number(product.id))
-    );
+    const favoriteProducts=
+        products.filter(product=>
+            favoriteProductIds.includes(
+                Number(product.id)
+            )
+        );
 
-    const grid=document.createElement("div");
+    const grid=
+        document.createElement("div");
+
     grid.className="favorite-list";
 
     favoriteProducts.forEach(product=>{
-        const item=document.createElement("div");
+
+        const item=
+            document.createElement("div");
+
         item.className="favorite-item";
 
         item.innerHTML=`
-            <img src="${escapeHtml(product.image)}"
-                 alt="${escapeHtml(product.name)}"
-                 onerror="this.src='resimler/urun1.jpg'">
+
+            <img
+                src="${escapeHtml(product.image)}"
+                alt="${escapeHtml(product.name)}"
+                onerror="this.src='resimler/urun1.jpg'"
+            >
 
             <div class="favorite-item-info">
-                <h3>${escapeHtml(product.name)}</h3>
-                <p>${escapeHtml(product.category)} · ${escapeHtml(product.subcategory)}</p>
 
-                <button class="favorite-remove"
-                        onclick="removeFavoriteFromList(${product.id})"
-                        type="button">
+                <h3>
+                    ${escapeHtml(product.name)}
+                </h3>
+
+                <p>
+                    ${escapeHtml(product.category)}
+                    ·
+                    ${escapeHtml(product.subcategory)}
+                </p>
+
+                <button
+                    class="favorite-remove"
+                    type="button"
+                    data-remove-favorite="${product.id}"
+                >
                     ♥ Favorilerden Çıkar
                 </button>
+
             </div>
         `;
 
@@ -1656,95 +4240,153 @@ async function openFavorites(){
     });
 
     container.innerHTML="";
+
     container.appendChild(grid);
 }
 
 async function removeFavoriteFromList(productId){
-    const token=localStorage.getItem("veloraToken");
+
+    const token=
+        localStorage.getItem("veloraToken");
+
+    if(!token){
+        return;
+    }
 
     try{
-        await apiRequest("/api/favorites/"+Number(productId),{
-            method:"DELETE",
-            headers:{Authorization:"Bearer "+token}
-        });
+
+        await apiRequest(
+            "/api/favorites/"+Number(productId),
+            {
+                method:"DELETE",
+                headers:{
+                    "Authorization":
+                        "Bearer "+token
+                }
+            }
+        );
 
         favoriteProductIds=
-            favoriteProductIds.filter(id=>id!==Number(productId));
+            favoriteProductIds.filter(
+                id=>id!==Number(productId)
+            );
 
         await openFavorites();
+
         renderProducts(products);
 
     }catch(error){
+
         alert(error.message);
     }
 }
 
 function closeFavorites(){
-    document.getElementById("favoritesModal")
-        .classList.remove("active");
+
+    $("favoritesModal")?.classList.remove(
+        "active"
+    );
 }
 
-/* ================= ORDERS ================= */
+
+/* =========================================================
+   ORDERS
+   ========================================================= */
 
 async function openOrders(){
-    const token=localStorage.getItem("veloraToken");
+
+    const token=
+        localStorage.getItem("veloraToken");
 
     if(!token){
+
         openAuth();
+
         return;
     }
 
     closeAccountMenu();
 
-    const modal=document.getElementById("ordersModal");
-    const container=document.getElementById("ordersContainer");
+    closeAllModalsExcept("ordersModal");
+
+    const modal=$("ordersModal");
+    const container=$("ordersContainer");
+
+    if(!modal || !container){
+        return;
+    }
 
     modal.classList.add("active");
 
     container.innerHTML=`
-        <div class="order-empty">
+        <div class="favorites-empty">
             Siparişler yükleniyor...
         </div>
     `;
 
     try{
-        const data=await apiRequest("/api/orders/my",{
-            headers:{Authorization:"Bearer "+token}
-        });
 
-        renderOrders(data.orders||[]);
+        const data=
+            await apiRequest(
+                "/api/orders/my",
+                {
+                    headers:{
+                        "Authorization":
+                            "Bearer "+token
+                    }
+                }
+            );
+
+        renderOrders(
+            data.orders || []
+        );
+
     }catch(error){
+
         container.innerHTML=`
-            <div class="order-empty">
-                <strong>Siparişler alınamadı</strong>
-                <p>${escapeHtml(error.message)}</p>
+            <div class="favorites-empty">
+
+                <strong>
+                    Siparişler alınamadı
+                </strong>
+
+                <p>
+                    ${escapeHtml(error.message)}
+                </p>
+
             </div>
         `;
     }
 }
 
-/* BU FONKSİYON EKSİKTİ — EKLENDİ */
 function closeOrders(){
-    const modal=document.getElementById("ordersModal");
 
-    if(modal){
-        modal.classList.remove("active");
-    }
+    $("ordersModal")?.classList.remove(
+        "active"
+    );
 
     if(ordersRefreshTimer){
-        clearInterval(ordersRefreshTimer);
+
+        clearInterval(
+            ordersRefreshTimer
+        );
+
         ordersRefreshTimer=null;
     }
 }
 
 function parseOrderItems(order){
+
     try{
+
         if(Array.isArray(order.items)){
             return order.items;
         }
 
         if(order.items_json){
-            const parsed=typeof order.items_json==="string"
+
+            const parsed=
+                typeof order.items_json==="string"
                 ?JSON.parse(order.items_json)
                 :order.items_json;
 
@@ -1752,170 +4394,322 @@ function parseOrderItems(order){
                 return parsed;
             }
         }
+
     }catch{}
 
     return [];
 }
 
 function formatOrderDate(value){
-    if(!value)return "-";
 
-    const date=new Date(value);
-
-    if(Number.isNaN(date.getTime())){
-        return escapeHtml(String(value));
+    if(!value){
+        return "-";
     }
 
-    return date.toLocaleString("tr-TR");
+    const date=
+        new Date(value);
+
+    if(Number.isNaN(date.getTime())){
+
+        return escapeHtml(
+            String(value)
+        );
+    }
+
+    return date.toLocaleString(
+        "tr-TR"
+    );
 }
 
 function getOrderStatus(order){
-    return order.status||
-           order.order_status||
-           "Yeni";
+
+    return (
+        order.status ||
+        order.order_status ||
+        "Yeni"
+    );
 }
 
 function getTrackingNumber(order){
-    return order.tracking_number||
-           order.trackingNumber||
-           order.cargo_tracking||
-           order.cargoTracking||
-           "";
+
+    return (
+        order.tracking_number ||
+        order.trackingNumber ||
+        order.cargo_tracking ||
+        order.cargoTracking ||
+        ""
+    );
 }
 
 function renderOrderProgress(status){
-    const statuses=["Yeni","Hazırlanıyor","Kargoda","Teslim Edildi"];
+
+    const statuses=[
+        "Yeni",
+        "Hazırlanıyor",
+        "Kargoda",
+        "Teslim Edildi"
+    ];
 
     if(status==="İptal"){
+
         return`
             <div class="order-progress">
+
                 <div class="progress-step active">
+
                     <div class="progress-dot"></div>
+
                     İptal
+
                 </div>
+
             </div>
         `;
     }
 
-    let currentIndex=statuses.indexOf(status);
+    let currentIndex=
+        statuses.indexOf(status);
 
-    if(currentIndex<0)currentIndex=0;
+    if(currentIndex<0){
+        currentIndex=0;
+    }
 
     return`
         <div class="order-progress">
-            ${statuses.map((item,index)=>`
-                <div class="progress-step ${index<=currentIndex?"active":""}">
+
+            ${statuses.map(
+                (item,index)=>`
+
+                <div class="
+                    progress-step
+                    ${
+                        index<=currentIndex
+                        ?"active"
+                        :""
+                    }
+                ">
+
                     <div class="progress-dot"></div>
+
                     ${item}
+
                 </div>
+
             `).join("")}
+
         </div>
     `;
 }
 
 function renderOrders(orders){
-    const container=document.getElementById("ordersContainer");
+
+    const container=
+        $("ordersContainer");
+
+    if(!container){
+        return;
+    }
 
     if(!orders.length){
+
         container.innerHTML=`
-            <div class="order-empty">
-                <strong>Henüz siparişin yok.</strong>
-                <p>Verdiğin siparişler burada görünecek.</p>
+            <div class="favorites-empty">
+
+                <strong>
+                    Henüz siparişin yok.
+                </strong>
+
+                <p>
+                    Verdiğin siparişler burada görünecek.
+                </p>
+
             </div>
         `;
+
         return;
     }
 
     container.innerHTML="";
 
     orders.forEach(order=>{
-        const items=parseOrderItems(order);
-        const status=getOrderStatus(order);
-        const tracking=getTrackingNumber(order);
 
-        const itemsHtml=items.length
+        const items=
+            parseOrderItems(order);
+
+        const status=
+            getOrderStatus(order);
+
+        const tracking=
+            getTrackingNumber(order);
+
+        const itemsHtml=
+            items.length
             ?items.map(item=>`
                 <div>
-                    ${escapeHtml(item.name||item.productName||"Ürün")}
-                    × ${escapeHtml(item.quantity||1)}
+                    ${escapeHtml(
+                        item.name ||
+                        item.productName ||
+                        "Ürün"
+                    )}
+                    ×
+                    ${escapeHtml(
+                        item.quantity || 1
+                    )}
                 </div>
             `).join("")
             :"Ürün bilgisi bulunamadı.";
 
-        const card=document.createElement("div");
+        const card=
+            document.createElement("div");
+
         card.className="order-card";
 
         card.innerHTML=`
+
             <div class="order-top">
+
                 <div>
+
                     <div class="order-number">
-                        Sipariş #${escapeHtml(order.id)}
+
+                        Sipariş #
+                        ${escapeHtml(order.id)}
+
                     </div>
+
                     <div class="order-date">
-                        ${formatOrderDate(order.created_at)}
+
+                        ${formatOrderDate(
+                            order.created_at
+                        )}
+
                     </div>
+
                 </div>
 
                 <div class="order-status">
+
                     ${escapeHtml(status)}
+
                 </div>
+
             </div>
 
             ${renderOrderProgress(status)}
 
             <div class="order-items">
+
                 <strong>Ürünler</strong>
-                <div>${itemsHtml}</div>
+
+                <div>
+                    ${itemsHtml}
+                </div>
+
             </div>
 
             <div class="order-total">
+
                 Toplam:
-                ${Number(order.total||0).toLocaleString("tr-TR",{
-                    minimumFractionDigits:2,
-                    maximumFractionDigits:2
-                })}
+
+                ${Number(
+                    order.total || 0
+                ).toLocaleString(
+                    "tr-TR",
+                    {
+                        minimumFractionDigits:2,
+                        maximumFractionDigits:2
+                    }
+                )}
+
                 TL
+
             </div>
 
-            ${tracking?`
-                <div class="tracking-box">
-                    <strong>🚚 Kargo Takip No:</strong>
-                    ${escapeHtml(tracking)}
-                </div>
-            `:""}
+            ${
+                tracking
+                ?`
+                    <div class="tracking-box">
 
-            ${order.customer_address?`
-                <div class="order-address">
-                    <strong>Teslimat Adresi</strong><br>
-                    ${escapeHtml(order.customer_address)}
-                </div>
-            `:""}
+                        <strong>
+                            🚚 Kargo Takip No:
+                        </strong>
+
+                        ${escapeHtml(tracking)}
+
+                    </div>
+                `
+                :""
+            }
+
+            ${
+                order.customer_address
+                ?`
+                    <div class="order-address">
+
+                        <strong>
+                            Teslimat Adresi
+                        </strong>
+
+                        <br>
+
+                        ${escapeHtml(
+                            order.customer_address
+                        )}
+
+                    </div>
+                `
+                :""
+            }
+
         `;
 
         container.appendChild(card);
     });
 }
 
-/* ================= HERO ================= */
 
-let heroCurrent=0;
-let heroTimer=null;
+/* =========================================================
+   HERO SLIDER
+   ========================================================= */
 
 function initHero(){
-    const slides=document.querySelectorAll(".hero-slide");
-    const dots=document.querySelectorAll(".hero-dot");
 
-    if(!slides.length)return;
-
-    function show(index){
-        heroCurrent=(index+slides.length)%slides.length;
-
-        slides.forEach((slide,i)=>
-            slide.classList.toggle("active",i===heroCurrent)
+    const slides=
+        document.querySelectorAll(
+            ".hero-slide"
         );
 
-        dots.forEach((dot,i)=>
-            dot.classList.toggle("active",i===heroCurrent)
+    const dots=
+        document.querySelectorAll(
+            ".hero-dot"
+        );
+
+    if(!slides.length){
+        return;
+    }
+
+    function show(index){
+
+        heroCurrent=
+            (index+slides.length)
+            %slides.length;
+
+        slides.forEach(
+            (slide,i)=>{
+                slide.classList.toggle(
+                    "active",
+                    i===heroCurrent
+                );
+            }
+        );
+
+        dots.forEach(
+            (dot,i)=>{
+                dot.classList.toggle(
+                    "active",
+                    i===heroCurrent
+                );
+            }
         );
     }
 
@@ -1928,163 +4722,594 @@ function initHero(){
     }
 
     function start(){
+
         clearInterval(heroTimer);
-        heroTimer=setInterval(next,5000);
+
+        heroTimer=
+            setInterval(next,5000);
     }
 
-    document.getElementById("heroNext").onclick=()=>{
-        next();
-        start();
-    };
+    $("heroNext")?.addEventListener(
+        "click",
+        ()=>{
+            next();
+            start();
+        }
+    );
 
-    document.getElementById("heroPrev").onclick=()=>{
-        prev();
-        start();
-    };
+    $("heroPrev")?.addEventListener(
+        "click",
+        ()=>{
+            prev();
+            start();
+        }
+    );
 
     dots.forEach(dot=>{
-        dot.onclick=()=>{
-            show(Number(dot.dataset.slide));
-            start();
-        };
+
+        dot.addEventListener(
+            "click",
+            ()=>{
+                show(
+                    Number(
+                        dot.dataset.slide
+                    )
+                );
+
+                start();
+            }
+        );
     });
 
     let startX=0;
 
-    const slider=document.getElementById("heroSlider");
+    const slider=$("heroSlider");
 
-    slider.addEventListener("touchstart",e=>{
-        startX=e.changedTouches[0].screenX;
-    },{passive:true});
+    if(slider){
 
-    slider.addEventListener("touchend",e=>{
-        const endX=e.changedTouches[0].screenX;
-        const diff=startX-endX;
+        slider.addEventListener(
+            "touchstart",
+            event=>{
+                startX=
+                    event.changedTouches[0]
+                    .screenX;
+            },
+            {passive:true}
+        );
 
-        if(Math.abs(diff)<50)return;
+        slider.addEventListener(
+            "touchend",
+            event=>{
 
-        diff>0?next():prev();
-        start();
-    },{passive:true});
+                const endX=
+                    event.changedTouches[0]
+                    .screenX;
+
+                const diff=
+                    startX-endX;
+
+                if(Math.abs(diff)<50){
+                    return;
+                }
+
+                diff>0
+                    ?next()
+                    :prev();
+
+                start();
+
+            },
+            {passive:true}
+        );
+    }
 
     show(0);
+
     start();
 }
 
-/* ================= START ================= */
 
-document.addEventListener("DOMContentLoaded",()=>{
+/* =========================================================
+   MENU
+   ========================================================= */
 
-    loadCart();
-    initHero();
-    renderProducts(products);
-    loadCurrentUser();
+function closeMenu(){
 
-    const menuButton=document.getElementById("menuButton");
-    const menuPanel=document.getElementById("menuPanel");
+    $("menuPanel")?.classList.remove(
+        "active"
+    );
+}
 
-    menuButton.addEventListener("click",e=>{
-        e.stopPropagation();
-        menuPanel.classList.toggle("active");
+function toggleMenu(){
+
+    $("menuPanel")?.classList.toggle(
+        "active"
+    );
+}
+
+
+/* =========================================================
+   EVENTLER
+   ========================================================= */
+
+function initEvents(){
+
+    /* Menü */
+
+    $("menuButton")?.addEventListener(
+        "click",
+        event=>{
+            event.stopPropagation();
+            toggleMenu();
+        }
+    );
+
+    /* Menü kategori butonları */
+
+    document.querySelectorAll(
+        "[data-category]"
+    ).forEach(element=>{
+
+        element.addEventListener(
+            "click",
+            event=>{
+
+                event.preventDefault();
+
+                const category=
+                    element.dataset.category;
+
+                if(category){
+                    filterCategory(category);
+                }
+            }
+        );
     });
 
-    document.getElementById("cartButton")
-        .addEventListener("click",openCart);
+    /* Menü özel */
 
-    document.getElementById("closeCartButton")
-        .addEventListener("click",closeCart);
+    document.querySelectorAll(
+        "[data-action]"
+    ).forEach(element=>{
 
-    document.getElementById("accountButton")
-        .addEventListener("click",e=>{
-            e.stopPropagation();
+        element.addEventListener(
+            "click",
+            event=>{
 
-            if(localStorage.getItem("veloraToken")){
+                event.preventDefault();
+
+                const action=
+                    element.dataset.action;
+
+                if(action==="all-products"){
+                    showAllProducts();
+                }
+
+                if(action==="featured"){
+                    filterFeatured();
+                }
+            }
+        );
+    });
+
+    /* Sepet */
+
+    $("cartButton")?.addEventListener(
+        "click",
+        openCart
+    );
+
+    $("closeCartButton")?.addEventListener(
+        "click",
+        closeCart
+    );
+
+    $("continueShoppingButton")?.addEventListener(
+        "click",
+        closeCart
+    );
+
+    $("checkoutButton")?.addEventListener(
+        "click",
+        openCheckout
+    );
+
+    /* Hesap */
+
+    $("accountButton")?.addEventListener(
+        "click",
+        event=>{
+
+            event.stopPropagation();
+
+            const token=
+                localStorage.getItem(
+                    "veloraToken"
+                );
+
+            if(token){
                 toggleAccountMenu();
             }else{
                 openAuth();
             }
-        });
-
-    document.getElementById("favoritesMenuButton")
-        .addEventListener("click",openFavorites);
-
-    document.getElementById("ordersMenuButton")
-        .addEventListener("click",openOrders);
-
-    document.getElementById("changePasswordMenuButton")
-        .addEventListener("click",showChangePassword);
-
-    document.getElementById("logoutButton")
-        .addEventListener("click",logout);
-
-    document.getElementById("closeAuthButton")
-        .addEventListener("click",closeAuth);
-
-    document.getElementById("closeFavoritesButton")
-        .addEventListener("click",closeFavorites);
-
-    document.getElementById("closeOrdersButton")
-        .addEventListener("click",closeOrders);
-
-    document.getElementById("loginAuthForm")
-        .addEventListener("submit",login);
-
-    document.getElementById("registerAuthForm")
-        .addEventListener("submit",register);
-
-    document.getElementById("verifyAuthForm")
-        .addEventListener("submit",verifyEmail);
-
-    document.getElementById("forgotAuthForm")
-        .addEventListener("submit",forgotPassword);
-
-    document.getElementById("resetAuthForm")
-        .addEventListener("submit",resetPassword);
-
-    document.getElementById("changeAuthForm")
-        .addEventListener("submit",changePassword);
-
-    document.getElementById("productSearch")
-        .addEventListener("input",searchProducts);
-
-    document.getElementById("searchButton")
-        .addEventListener("click",searchProducts);
-
-    document.getElementById("cartModal")
-        .addEventListener("click",e=>{
-            if(e.target===e.currentTarget)closeCart();
-        });
-
-    document.getElementById("authModal")
-        .addEventListener("click",e=>{
-            if(e.target===e.currentTarget)closeAuth();
-        });
-
-    document.getElementById("favoritesModal")
-        .addEventListener("click",e=>{
-            if(e.target===e.currentTarget)closeFavorites();
-        });
-
-    document.getElementById("ordersModal")
-        .addEventListener("click",e=>{
-            if(e.target===e.currentTarget)closeOrders();
-        });
-
-    document.addEventListener("click",e=>{
-
-        const accountArea=document.querySelector(".account-area");
-
-        if(accountArea&&!accountArea.contains(e.target)){
-            closeAccountMenu();
         }
+    );
 
-        const menuWrapper=document.querySelector(".menu-wrapper");
+    $("favoritesMenuButton")?.addEventListener(
+        "click",
+        openFavorites
+    );
 
-        if(menuWrapper&&!menuWrapper.contains(e.target)){
-            menuPanel.classList.remove("active");
+    $("ordersMenuButton")?.addEventListener(
+        "click",
+        openOrders
+    );
+
+    $("changePasswordMenuButton")?.addEventListener(
+        "click",
+        showChangePassword
+    );
+
+    $("logoutButton")?.addEventListener(
+        "click",
+        logout
+    );
+
+    /* Auth */
+
+    $("closeAuthButton")?.addEventListener(
+        "click",
+        closeAuth
+    );
+
+    $("loginTab")?.addEventListener(
+        "click",
+        showLogin
+    );
+
+    $("registerTab")?.addEventListener(
+        "click",
+        showRegister
+    );
+
+    $("forgotPasswordLink")?.addEventListener(
+        "click",
+        showForgotPassword
+    );
+
+    $("loginAuthForm")?.addEventListener(
+        "submit",
+        login
+    );
+
+    $("registerAuthForm")?.addEventListener(
+        "submit",
+        register
+    );
+
+    $("verifyAuthForm")?.addEventListener(
+        "submit",
+        verifyEmail
+    );
+
+    $("forgotAuthForm")?.addEventListener(
+        "submit",
+        forgotPassword
+    );
+
+    $("resetAuthForm")?.addEventListener(
+        "submit",
+        resetPassword
+    );
+
+    $("changeAuthForm")?.addEventListener(
+        "submit",
+        changePassword
+    );
+
+    /* Favoriler */
+
+    $("closeFavoritesButton")?.addEventListener(
+        "click",
+        closeFavorites
+    );
+
+    /* Siparişler */
+
+    $("closeOrdersButton")?.addEventListener(
+        "click",
+        closeOrders
+    );
+
+    /* Arama */
+
+    $("productSearch")?.addEventListener(
+        "input",
+        searchProducts
+    );
+
+    $("searchButton")?.addEventListener(
+        "click",
+        searchProducts
+    );
+
+    /* Modal dışına tıklama */
+
+    $("cartModal")?.addEventListener(
+        "click",
+        event=>{
+            if(
+                event.target===
+                event.currentTarget
+            ){
+                closeCart();
+            }
         }
-    });
-});
+    );
+
+    $("authModal")?.addEventListener(
+        "click",
+        event=>{
+            if(
+                event.target===
+                event.currentTarget
+            ){
+                closeAuth();
+            }
+        }
+    );
+
+    $("favoritesModal")?.addEventListener(
+        "click",
+        event=>{
+            if(
+                event.target===
+                event.currentTarget
+            ){
+                closeFavorites();
+            }
+        }
+    );
+
+    $("ordersModal")?.addEventListener(
+        "click",
+        event=>{
+            if(
+                event.target===
+                event.currentTarget
+            ){
+                closeOrders();
+            }
+        }
+    );
+
+    /* Sayfa genel tıklamaları */
+
+    document.addEventListener(
+        "click",
+        event=>{
+
+            const accountArea=
+                document.querySelector(
+                    ".account-area"
+                );
+
+            if(
+                accountArea &&
+                !accountArea.contains(
+                    event.target
+                )
+            ){
+                closeAccountMenu();
+            }
+
+            const menuWrapper=
+                document.querySelector(
+                    ".menu-wrapper"
+                );
+
+            if(
+                menuWrapper &&
+                !menuWrapper.contains(
+                    event.target
+                )
+            ){
+                closeMenu();
+            }
+        }
+    );
+
+    /* Dinamik ürün butonları */
+
+    $("productContainer")?.addEventListener(
+        "click",
+        async event=>{
+
+            const favorite=
+                event.target.closest(
+                    "[data-favorite]"
+                );
+
+            if(favorite){
+
+                await toggleFavorite(
+                    favorite.dataset.favorite
+                );
+
+                return;
+            }
+
+            const addCart=
+                event.target.closest(
+                    "[data-add-cart]"
+                );
+
+            if(addCart){
+
+                addToCart(
+                    addCart.dataset.addCart
+                );
+
+                return;
+            }
+
+            const review=
+                event.target.closest(
+                    "[data-add-review]"
+                );
+
+            if(review){
+
+                addReview(
+                    review.dataset.addReview
+                );
+
+                return;
+            }
+
+            const star=
+                event.target.closest(
+                    "[data-star-product]"
+                );
+
+            if(star){
+
+                selectStar(
+                    Number(
+                        star.dataset.starProduct
+                    ),
+                    Number(
+                        star.dataset.starRating
+                    )
+                );
+            }
+        }
+    );
+
+    /* Dinamik sepet butonları */
+
+    $("cartList")?.addEventListener(
+        "click",
+        event=>{
+
+            const minus=
+                event.target.closest(
+                    "[data-cart-minus]"
+                );
+
+            if(minus){
+
+                changeCartQuantity(
+                    minus.dataset.cartMinus,
+                    -1
+                );
+
+                return;
+            }
+
+            const plus=
+                event.target.closest(
+                    "[data-cart-plus]"
+                );
+
+            if(plus){
+
+                changeCartQuantity(
+                    plus.dataset.cartPlus,
+                    1
+                );
+
+                return;
+            }
+
+            const remove=
+                event.target.closest(
+                    "[data-cart-remove]"
+                );
+
+            if(remove){
+
+                removeFromCart(
+                    remove.dataset.cartRemove
+                );
+            }
+        }
+    );
+
+    /* Dinamik favori silme */
+
+    $("favoritesContainer")?.addEventListener(
+        "click",
+        async event=>{
+
+            const button=
+                event.target.closest(
+                    "[data-remove-favorite]"
+                );
+
+            if(!button){
+                return;
+            }
+
+            await removeFavoriteFromList(
+                button.dataset.removeFavorite
+            );
+        }
+    );
+
+    /* Logo */
+
+    $("logoLink")?.addEventListener(
+        "click",
+        event=>{
+
+            event.preventDefault();
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+        }
+    );
+}
+
+
+/* =========================================================
+   BAŞLAT
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    ()=>{
+        try{
+
+            loadCart();
+
+            updateAccountUI();
+
+            renderProducts(products);
+
+            initHero();
+
+            initEvents();
+
+            loadCurrentUser();
+
+        }catch(error){
+
+            console.error(
+                "VELORA başlatma hatası:",
+                error
+            );
+
+            /*
+             * Sayfanın tamamının kilitlenmemesi için
+             * başlangıç hatasını konsola yazıyoruz.
+             */
+        }
+    }
+);
+
 </script>
 
 </body>
