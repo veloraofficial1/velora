@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <title>VELORA | Zarif Takılar</title>
 
 <style>
@@ -1211,12 +1215,13 @@ Yeni ürünler, özel koleksiyonlar ve güncellemeler için bizi takip etmeye de
 
 <form class="auth-form" id="loginAuthForm">
 
+<!-- DÜZELTİLDİ: Artık kullanıcı adı kabul edilmiyor -->
 <input
-type="text"
-id="loginUsername"
-name="login"
-placeholder="Kullanıcı adı veya e-posta"
-autocomplete="username"
+type="email"
+id="loginEmail"
+name="email"
+placeholder="E-posta"
+autocomplete="email"
 required
 >
 
@@ -2325,12 +2330,6 @@ el.className="auth-message";
 
 }
 
-
-/* DÜZELTİLDİ:
-   Hesap butonuna basıldığında artık kayıt yerine
-   doğrudan giriş ekranı açılıyor.
-*/
-
 function openAuth(){
 
 const token=localStorage.getItem("veloraToken");
@@ -2360,6 +2359,17 @@ hideAllAuthForms();
 clearAuthMessages();
 
 document.getElementById("loginForm").style.display="block";
+
+/* DÜZELTİLDİ: E-posta kutusuna otomatik odaklan */
+setTimeout(()=>{
+
+const input=document.getElementById("loginEmail");
+
+if(input){
+input.focus();
+}
+
+},50);
 
 }
 
@@ -2575,7 +2585,9 @@ message.textContent=error.message;
 
 
 /* =====================================================
-   GÜNCELLENMİŞ GİRİŞ SİSTEMİ
+   DÜZELTİLMİŞ GİRİŞ SİSTEMİ
+   Artık kullanıcı adı kontrolü yok.
+   Backend'e doğrudan email + password gönderiliyor.
    ===================================================== */
 
 async function login(event){
@@ -2584,18 +2596,17 @@ event.preventDefault();
 
 const form=event.currentTarget;
 
-const loginInput=form.querySelector("#loginUsername");
+const emailInput=form.querySelector("#loginEmail");
 const passwordInput=form.querySelector("#loginPassword");
 const message=document.getElementById("loginMessage");
 
-const loginValue=(loginInput?.value||"").trim();
+const email=(emailInput?.value||"").trim().toLowerCase();
 const password=passwordInput?.value||"";
 
-if(!loginValue){
+if(!email){
 
 message.className="auth-message error-message";
-message.textContent=
-"Lütfen e-posta adresinizi veya kullanıcı adınızı girin.";
+message.textContent="Lütfen e-posta adresinizi girin.";
 
 return;
 
@@ -2604,8 +2615,7 @@ return;
 if(!password){
 
 message.className="auth-message error-message";
-message.textContent=
-"Lütfen şifrenizi girin.";
+message.textContent="Lütfen şifrenizi girin.";
 
 return;
 
@@ -2616,23 +2626,6 @@ message.textContent="Giriş yapılıyor...";
 
 try{
 
-const isEmail=
-/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginValue);
-
-const loginData={
-password:password
-};
-
-if(isEmail){
-
-loginData.email=loginValue;
-
-}else{
-
-loginData.username=loginValue;
-
-}
-
 const data=await apiRequest(
 "/api/auth/login",
 {
@@ -2640,7 +2633,10 @@ method:"POST",
 headers:{
 "Content-Type":"application/json"
 },
-body:JSON.stringify(loginData)
+body:JSON.stringify({
+email:email,
+password:password
+})
 }
 );
 
@@ -2668,11 +2664,8 @@ JSON.stringify(data.user)
 
 await loadFavorites();
 
-message.className=
-"auth-message success-message";
-
-message.textContent=
-"Giriş başarılı!";
+message.className="auth-message success-message";
+message.textContent="Giriş başarılı!";
 
 updateAccountUI();
 
@@ -2682,9 +2675,7 @@ setTimeout(closeAuth,600);
 
 console.error("LOGIN ERROR:",error);
 
-message.className=
-"auth-message error-message";
-
+message.className="auth-message error-message";
 message.textContent=
 error.message||"Giriş yapılamadı.";
 
