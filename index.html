@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -211,7 +210,6 @@ footer{background:#4d3b2a;color:#f5e9d8;text-align:center;padding:25px;font-size
 .order-address{font-size:13px;color:#80674c;margin-top:12px;line-height:1.6}
 .order-empty{text-align:center;padding:45px 20px;color:#80674c}.order-empty strong{display:block;font-size:20px;color:#85633d;margin-bottom:10px}
 
-/* YENİ 5 AŞAMALI SİPARİŞ TAKİBİ */
 .order-progress{
 display:flex;align-items:flex-start;justify-content:space-between;
 margin:25px 0 18px;position:relative;width:100%
@@ -467,7 +465,6 @@ bizi takip etmeye devam edin.
 
 <footer>© 2026 VELORA — Zarafetin modern hali.</footer>
 
-<!-- AUTH -->
 <div id="authModal" class="modal">
 <div class="modal-box">
 <button class="close-modal" id="closeAuthButton" type="button">×</button>
@@ -585,7 +582,6 @@ sorunsuz ilerlemesi için önemlidir.
 </div>
 </div>
 
-<!-- FAVORİLER -->
 <div id="favoritesModal" class="modal">
 <div class="modal-box large">
 <button class="close-modal" id="closeFavoritesButton" type="button">×</button>
@@ -594,7 +590,6 @@ sorunsuz ilerlemesi için önemlidir.
 </div>
 </div>
 
-<!-- SİPARİŞLER -->
 <div id="ordersModal" class="modal">
 <div class="modal-box large">
 <button class="close-modal" id="closeOrdersButton" type="button">×</button>
@@ -603,7 +598,6 @@ sorunsuz ilerlemesi için önemlidir.
 </div>
 </div>
 
-<!-- SEPET -->
 <div id="cartModal" class="modal">
 <div class="modal-box large">
 <button class="close-modal" id="closeCartButton" type="button">×</button>
@@ -638,6 +632,57 @@ const products=[
 let selectedStars=Array(products.length+1).fill(0);
 let favoriteProductIds=[];
 let cart=[];
+let ordersRefreshTimer=null;
+let ordersRequestRunning=false;
+
+const ORDER_STATUS_LABELS={
+pending:"Sipariş Alındı",
+preparing:"Hazırlanıyor",
+shipped:"Kargoya Verildi",
+out_for_delivery:"Dağıtımda",
+delivered:"Teslim Edildi",
+cancelled:"İptal Edildi"
+};
+
+const LEGACY_STATUS_MAP={
+"Yeni":"pending",
+"Sipariş Alındı":"pending",
+"Hazırlanıyor":"preparing",
+"Kargoda":"shipped",
+"Kargoya Verildi":"shipped",
+"Dağıtımda":"out_for_delivery",
+"Teslim Edildi":"delivered",
+"İptal":"cancelled",
+"İptal Edildi":"cancelled"
+};
+
+function escapeHtml(text){
+const div=document.createElement("div");
+div.textContent=String(text??"");
+return div.innerHTML;
+}
+
+async function apiRequest(path,options={}){
+const response=await fetch(`${API_URL}${path}`,{
+...options,
+cache:"no-store"
+});
+
+let data={};
+const text=await response.text();
+
+try{
+data=text?JSON.parse(text):{};
+}catch{
+data={message:text||"Sunucudan geçersiz yanıt geldi."};
+}
+
+if(!response.ok){
+throw new Error(data.message||"İşlem başarısız.");
+}
+
+return data;
+}
 
 /* =========================
    SEPET
@@ -646,6 +691,7 @@ let cart=[];
 function loadCart(){
 try{
 const saved=JSON.parse(localStorage.getItem("veloraCart")||"[]");
+
 if(Array.isArray(saved)){
 cart=saved.map(item=>({
 productId:Number(item.productId),
@@ -655,11 +701,15 @@ Number.isInteger(item.productId)&&
 products.some(product=>Number(product.id)===item.productId)&&
 Number.isInteger(item.quantity)&&item.quantity>0
 );
-}else cart=[];
+}else{
+cart=[];
+}
+
 }catch(error){
 console.error("Sepet yüklenemedi:",error);
 cart=[];
 }
+
 updateCartCount();
 }
 
@@ -680,12 +730,16 @@ if(element)element.textContent=getCartCount();
 function addToCart(productId){
 const id=Number(productId);
 const product=products.find(item=>Number(item.id)===id);
+
 if(!product)return;
 
 const existing=cart.find(item=>Number(item.productId)===id);
 
-if(existing)existing.quantity=Number(existing.quantity||0)+1;
-else cart.push({productId:id,quantity:1});
+if(existing){
+existing.quantity=Number(existing.quantity||0)+1;
+}else{
+cart.push({productId:id,quantity:1});
+}
 
 saveCart();
 showCartToast(`${product.name} sepete eklendi.`);
@@ -694,6 +748,7 @@ showCartToast(`${product.name} sepete eklendi.`);
 function changeCartQuantity(productId,change){
 const id=Number(productId);
 const item=cart.find(item=>Number(item.productId)===id);
+
 if(!item)return;
 
 item.quantity=Number(item.quantity)+Number(change);
@@ -708,69 +763,111 @@ renderCart();
 
 function removeFromCart(productId){
 const id=Number(productId);
+
 cart=cart.filter(item=>Number(item.productId)!==id);
+
 saveCart();
 renderCart();
 }
 
 function renderCart(){
+
 const container=document.getElementById("cartContainer");
+
 if(!container)return;
 
-cart=cart.filter(item=>products.some(product=>Number(product.id)===Number(item.productId)));
+cart=cart.filter(item=>
+products.some(product=>Number(product.id)===Number(item.productId))
+);
+
 saveCart();
 
 if(!cart.length){
+
 container.innerHTML=`
 <div class="cart-empty">
 <div class="cart-empty-icon">🛒</div>
 <strong>Sepetin şu anda boş.</strong>
 <p>Beğendiğin ürünleri sepete ekleyebilirsin.</p>
 </div>`;
+
 return;
 }
 
 container.innerHTML=`
 <div class="cart-list">
 ${cart.map(item=>{
-const product=products.find(p=>Number(p.id)===Number(item.productId));
+
+const product=products.find(
+p=>Number(p.id)===Number(item.productId)
+);
+
 if(!product)return"";
+
 const quantity=Number(item.quantity)||1;
 
 return`
 <div class="cart-item">
-<img class="cart-item-image" src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" onerror="this.src='resimler/urun1.jpg'">
+
+<img
+class="cart-item-image"
+src="${escapeHtml(product.image)}"
+alt="${escapeHtml(product.name)}"
+onerror="this.src='resimler/urun1.jpg'">
 
 <div class="cart-item-info">
-<div class="cart-item-name">${escapeHtml(product.name)}</div>
-<div class="cart-item-category">${escapeHtml(product.category)} · ${escapeHtml(product.subcategory)}</div>
+
+<div class="cart-item-name">
+${escapeHtml(product.name)}
+</div>
+
+<div class="cart-item-category">
+${escapeHtml(product.category)} · ${escapeHtml(product.subcategory)}
+</div>
 
 <div class="cart-quantity">
 <button type="button" onclick="changeCartQuantity(${product.id},-1)">−</button>
 <span>${quantity}</span>
 <button type="button" onclick="changeCartQuantity(${product.id},1)">+</button>
 </div>
+
 </div>
 
-<button class="cart-remove" type="button" onclick="removeFromCart(${product.id})" title="Sepetten çıkar">🗑</button>
+<button
+class="cart-remove"
+type="button"
+onclick="removeFromCart(${product.id})"
+title="Sepetten çıkar">
+🗑
+</button>
+
 </div>`;
+
 }).join("")}
 </div>
 
 <div class="cart-info">
+
 Sepetinizde <strong>${getCartCount()}</strong> adet ürün bulunuyor.
 
-<button class="cart-continue-button" type="button" onclick="closeCart()">
+<button
+class="cart-continue-button"
+type="button"
+onclick="closeCart()">
 Alışverişe Devam Et
 </button>
 
-<button class="checkout-button" type="button" onclick="openCheckout()">
+<button
+class="checkout-button"
+type="button"
+onclick="openCheckout()">
 Siparişi Tamamla
 </button>
 
 <div id="checkoutPanel" class="checkout-panel">
 <div id="checkoutContent"></div>
 </div>
+
 </div>`;
 }
 
@@ -779,8 +876,10 @@ Siparişi Tamamla
 ========================= */
 
 function openCheckout(){
+
 const panel=document.getElementById("checkoutPanel");
 const content=document.getElementById("checkoutContent");
+
 if(!panel||!content)return;
 
 panel.classList.add("active");
@@ -788,20 +887,32 @@ panel.classList.add("active");
 const token=localStorage.getItem("veloraToken");
 
 if(!token){
+
 content.innerHTML=`
 <div class="login-required-box">
-<strong>Siparişi tamamlamak için giriş yapmalısınız.</strong>
+
+<strong>
+Siparişi tamamlamak için giriş yapmalısınız.
+</strong>
+
 <br>
-Hesabınız varsa giriş yapabilir, hesabınız yoksa ücretsiz hesap oluşturabilirsiniz.
+
+Hesabınız varsa giriş yapabilir,
+hesabınız yoksa ücretsiz hesap oluşturabilirsiniz.
+
 <br>
+
 <button type="button" onclick="closeCart();openAuth();">
 Giriş Yap / Hesap Oluştur
 </button>
+
 </div>`;
+
 return;
 }
 
 let user={};
+
 try{
 user=JSON.parse(localStorage.getItem("veloraUser")||"{}");
 }catch{
@@ -816,22 +927,45 @@ Sipariş bilgilerinizi eksiksiz giriniz.
 VELORA'nın resmi ödeme sistemi henüz aktif değildir.
 Bu nedenle bu aşamada herhangi bir ödeme alınmaz.
 <br><br>
-Sipariş talebiniz sisteme iletilecek ve hesabınızdaki siparişler bölümünde görünecektir.
+Sipariş talebiniz sisteme iletilecek ve hesabınızdaki
+siparişler bölümünde görünecektir.
 </div>
 
 <form class="checkout-form" id="checkoutForm">
 
 <label>Ad Soyad</label>
-<input type="text" id="checkoutName" placeholder="Ad Soyad" value="${escapeHtml(user.username||"")}" required>
+
+<input
+type="text"
+id="checkoutName"
+placeholder="Ad Soyad"
+value="${escapeHtml(user.username||"")}"
+required>
 
 <label>E-posta</label>
-<input type="email" id="checkoutEmail" placeholder="E-posta" value="${escapeHtml(user.email||"")}" required readonly>
+
+<input
+type="email"
+id="checkoutEmail"
+placeholder="E-posta"
+value="${escapeHtml(user.email||"")}"
+required
+readonly>
 
 <label>Telefon</label>
-<input type="tel" id="checkoutPhone" placeholder="05xx xxx xx xx" required>
+
+<input
+type="tel"
+id="checkoutPhone"
+placeholder="05xx xxx xx xx"
+required>
 
 <label>Teslimat Adresi</label>
-<textarea id="checkoutAddress" placeholder="Teslimat adresinizi yazınız..." required></textarea>
+
+<textarea
+id="checkoutAddress"
+placeholder="Teslimat adresinizi yazınız..."
+required></textarea>
 
 <div id="checkoutMessage" class="checkout-message"></div>
 
@@ -841,10 +975,13 @@ Sipariş Talebini Gönder
 
 </form>`;
 
-document.getElementById("checkoutForm").addEventListener("submit",submitOrder);
+document
+.getElementById("checkoutForm")
+.addEventListener("submit",submitOrder);
 }
 
 async function submitOrder(event){
+
 event.preventDefault();
 
 const token=localStorage.getItem("veloraToken");
@@ -866,13 +1003,18 @@ const address=document.getElementById("checkoutAddress").value.trim();
 const message=document.getElementById("checkoutMessage");
 
 if(!name||!email||!phone||!address){
+
 message.className="checkout-message checkout-error";
 message.textContent="Lütfen tüm sipariş bilgilerini doldurun.";
+
 return;
 }
 
 const items=cart.map(item=>{
-const product=products.find(p=>Number(p.id)===Number(item.productId));
+
+const product=products.find(
+p=>Number(p.id)===Number(item.productId)
+);
 
 return{
 productId:Number(product.id),
@@ -882,6 +1024,7 @@ subcategory:product.subcategory,
 image:product.image,
 quantity:Number(item.quantity)
 };
+
 });
 
 message.className="checkout-message";
@@ -913,15 +1056,21 @@ total:0
 });
 
 message.className="checkout-message checkout-success";
-message.textContent=data.message||"Sipariş talebiniz başarıyla alındı.";
+
+message.textContent=
+data.message||"Sipariş talebiniz başarıyla alındı.";
 
 cart=[];
 saveCart();
 
 setTimeout(()=>{
+
 closeCart();
+
 alert("Sipariş talebiniz başarıyla alındı.");
+
 openOrders();
+
 },1200);
 
 }catch(error){
@@ -929,12 +1078,14 @@ openOrders();
 console.error("ORDER ERROR:",error);
 
 message.className="checkout-message checkout-error";
-message.textContent=error.message||"Sipariş gönderilemedi.";
+message.textContent=
+error.message||"Sipariş gönderilemedi.";
 
 if(submitButton){
 submitButton.disabled=false;
 submitButton.textContent="Sipariş Talebini Gönder";
 }
+
 }
 }
 
@@ -943,25 +1094,38 @@ submitButton.textContent="Sipariş Talebini Gönder";
 ========================= */
 
 function openCart(){
+
 closeAccountMenu();
+
 const modal=document.getElementById("cartModal");
+
 if(!modal)return;
+
 renderCart();
 modal.classList.add("active");
 }
 
 function closeCart(){
+
 const modal=document.getElementById("cartModal");
-if(modal)modal.classList.remove("active");
+
+if(modal){
+modal.classList.remove("active");
+}
+
 }
 
 function showCartToast(message){
+
 const oldToast=document.querySelector(".cart-toast");
+
 if(oldToast)oldToast.remove();
 
 const toast=document.createElement("div");
+
 toast.className="cart-toast";
 toast.textContent=message;
+
 document.body.appendChild(toast);
 
 setTimeout(()=>{
@@ -970,57 +1134,37 @@ if(toast.parentNode)toast.remove();
 }
 
 /* =========================
-   GENEL
-========================= */
-
-function escapeHtml(text){
-const div=document.createElement("div");
-div.textContent=String(text??"");
-return div.innerHTML;
-}
-
-async function apiRequest(path,options={}){
-const response=await fetch(`${API_URL}${path}`,{
-...options,
-cache:"no-store"
-});
-
-let data={};
-const text=await response.text();
-
-try{
-data=text?JSON.parse(text):{};
-}catch{
-data={message:text||"Sunucudan geçersiz yanıt geldi."};
-}
-
-if(!response.ok){
-throw new Error(data.message||"İşlem başarısız.");
-}
-
-return data;
-}
-
-/* =========================
    YILDIZ
 ========================= */
 
 function createStars(productId){
+
 let html="";
 
 for(let i=1;i<=5;i++){
+
 html+=`
-<span class="star ${selectedStars[productId]>=i?"active":""}"
-onclick="selectStar(${productId},${i})">★</span>`;
+<span
+class="star ${selectedStars[productId]>=i?"active":""}"
+onclick="selectStar(${productId},${i})">
+★
+</span>`;
+
 }
 
 return html;
 }
 
 function selectStar(productId,rating){
+
 selectedStars[productId]=rating;
+
 const stars=document.getElementById(`stars-${productId}`);
-if(stars)stars.innerHTML=createStars(productId);
+
+if(stars){
+stars.innerHTML=createStars(productId);
+}
+
 }
 
 /* =========================
@@ -1028,57 +1172,84 @@ if(stars)stars.innerHTML=createStars(productId);
 ========================= */
 
 function renderProducts(list=products){
+
 const container=document.getElementById("productContainer");
+
 if(!container)return;
 
 container.innerHTML="";
 
 if(!list.length){
-container.innerHTML=`<div class="favorites-empty">Aradığınız kriterlere uygun ürün bulunamadı.</div>`;
+
+container.innerHTML=
+`<div class="favorites-empty">
+Aradığınız kriterlere uygun ürün bulunamadı.
+</div>`;
+
 return;
 }
 
 ["Yüzük","Bileklik","Küpe","Kolye"].forEach(category=>{
 
-const categoryProducts=list.filter(product=>product.category===category);
+const categoryProducts=list.filter(
+product=>product.category===category
+);
+
 if(!categoryProducts.length)return;
 
 const heading=document.createElement("h2");
+
 heading.className="category-heading";
 heading.textContent=category;
+
 container.appendChild(heading);
 
 const grid=document.createElement("div");
+
 grid.className="product-grid";
 
 categoryProducts.forEach(product=>{
 
 const card=document.createElement("div");
+
 card.className="product-card";
 
-const isFavorite=favoriteProductIds.includes(Number(product.id));
+const isFavorite=
+favoriteProductIds.includes(Number(product.id));
 
 card.innerHTML=`
-<button class="favorite-button ${isFavorite?"active":""}"
+
+<button
+class="favorite-button ${isFavorite?"active":""}"
 onclick="toggleFavorite(${product.id})"
 title="${isFavorite?"Favorilerden çıkar":"Favorilere ekle"}">
 ${isFavorite?"♥":"♡"}
 </button>
 
-<img class="product-image"
+<img
+class="product-image"
 src="${escapeHtml(product.image)}"
 alt="${escapeHtml(product.name)}"
 onerror="this.src='resimler/urun1.jpg'">
 
 <div class="product-info">
 
-<h3 class="product-name">${escapeHtml(product.name)}</h3>
+<h3 class="product-name">
+${escapeHtml(product.name)}
+</h3>
 
-<div class="product-category">${escapeHtml(product.subcategory)}</div>
+<div class="product-category">
+${escapeHtml(product.subcategory)}
+</div>
 
-<div class="stock-status">Çok Yakında Stoklarda</div>
+<div class="stock-status">
+Çok Yakında Stoklarda
+</div>
 
-<button class="stock-button" onclick="addToCart(${product.id})" type="button">
+<button
+class="stock-button"
+onclick="addToCart(${product.id})"
+type="button">
 🛒 Sepete Ekle
 </button>
 
@@ -1088,24 +1259,36 @@ onerror="this.src='resimler/urun1.jpg'">
 ${createStars(product.id)}
 </div>
 
-<textarea id="review-${product.id}" class="review-input"
-placeholder="Ürün hakkındaki düşüncelerinizi yazın..."></textarea>
+<textarea
+id="review-${product.id}"
+class="review-input"
+placeholder="Ürün hakkındaki düşüncelerinizi yazın...">
+</textarea>
 
-<button class="review-button" onclick="addReview(${product.id})">
+<button
+class="review-button"
+onclick="addReview(${product.id})">
 Yorumu Gönder
 </button>
 
-<div class="reviews" id="reviews-${product.id}"></div>
+<div
+class="reviews"
+id="reviews-${product.id}">
+</div>
 
 </div>
 </div>`;
 
 grid.appendChild(card);
+
 });
 
 container.appendChild(grid);
 
-categoryProducts.forEach(product=>loadReviews(product.id));
+categoryProducts.forEach(
+product=>loadReviews(product.id)
+);
+
 });
 }
 
@@ -1116,35 +1299,55 @@ categoryProducts.forEach(product=>loadReviews(product.id));
 function filterCategory(category,subcategory=null){
 
 const filtered=subcategory
-?products.filter(p=>p.category===category&&p.subcategory===subcategory)
-:products.filter(p=>p.category===category);
+?products.filter(
+p=>p.category===category&&p.subcategory===subcategory
+)
+:products.filter(
+p=>p.category===category
+);
 
 document.getElementById("productSearch").value="";
+
 document.getElementById("searchResultInfo").textContent=
-subcategory?`${category} › ${subcategory}`:`${category} ürünleri`;
+subcategory
+?`${category} › ${subcategory}`
+:`${category} ürünleri`;
 
 renderProducts(filtered);
 scrollToProducts();
 }
 
 function showAllProducts(){
+
 document.getElementById("productSearch").value="";
 document.getElementById("searchResultInfo").textContent="Tüm Ürünler";
+
 renderProducts(products);
 scrollToProducts();
 }
 
 function filterFeatured(){
-document.getElementById("one-cikanlar").scrollIntoView({behavior:"smooth"});
+
+document
+.getElementById("one-cikanlar")
+.scrollIntoView({behavior:"smooth"});
+
 }
 
 function searchProducts(){
 
-const query=document.getElementById("productSearch").value.trim().toLocaleLowerCase("tr-TR");
+const query=document
+.getElementById("productSearch")
+.value
+.trim()
+.toLocaleLowerCase("tr-TR");
 
 if(!query){
+
 document.getElementById("searchResultInfo").textContent="";
+
 renderProducts(products);
+
 return;
 }
 
@@ -1162,14 +1365,27 @@ scrollToProducts();
 }
 
 function scrollToProducts(){
+
 setTimeout(()=>{
+
 const section=document.getElementById("urunler");
-if(section)section.scrollIntoView({behavior:"smooth"});
+
+if(section){
+section.scrollIntoView({behavior:"smooth"});
+}
+
 },50);
+
 }
 
 function closeMenu(){
-document.getElementById("menuPanel").classList.remove("active");
+
+const menu=document.getElementById("menuPanel");
+
+if(menu){
+menu.classList.remove("active");
+}
+
 }
 
 /* =========================
@@ -1179,6 +1395,7 @@ document.getElementById("menuPanel").classList.remove("active");
 function addReview(productId){
 
 const input=document.getElementById(`review-${productId}`);
+
 const text=input.value.trim();
 const rating=selectedStars[productId];
 
@@ -1193,7 +1410,9 @@ return;
 }
 
 const key=`velora-reviews-${productId}`;
-const reviews=JSON.parse(localStorage.getItem(key)||"[]");
+
+const reviews=
+JSON.parse(localStorage.getItem(key)||"[]");
 
 reviews.push({
 rating,
@@ -1207,7 +1426,10 @@ input.value="";
 selectedStars[productId]=0;
 
 const stars=document.getElementById(`stars-${productId}`);
-if(stars)stars.innerHTML=createStars(productId);
+
+if(stars){
+stars.innerHTML=createStars(productId);
+}
 
 loadReviews(productId);
 }
@@ -1215,21 +1437,29 @@ loadReviews(productId);
 function loadReviews(productId){
 
 const container=document.getElementById(`reviews-${productId}`);
+
 if(!container)return;
 
-const reviews=JSON.parse(localStorage.getItem(`velora-reviews-${productId}`)||"[]");
+const reviews=
+JSON.parse(
+localStorage.getItem(`velora-reviews-${productId}`)||"[]"
+);
 
 container.innerHTML="";
 
 reviews.forEach(review=>{
 
 const item=document.createElement("div");
+
 item.className="review-item";
 
 let stars="";
 
 for(let i=1;i<=5;i++){
-stars+=i<=Number(review.rating)?"★":"☆";
+stars+=
+i<=Number(review.rating)
+?"★"
+:"☆";
 }
 
 item.innerHTML=`
@@ -1238,7 +1468,9 @@ item.innerHTML=`
 <small>${escapeHtml(review.date)}</small>`;
 
 container.appendChild(item);
+
 });
+
 }
 
 /* =========================
@@ -1250,6 +1482,7 @@ async function loadFavorites(){
 const token=localStorage.getItem("veloraToken");
 
 if(!token){
+
 favoriteProductIds=[];
 return;
 }
@@ -1257,18 +1490,30 @@ return;
 try{
 
 const data=await apiRequest("/api/favorites",{
-headers:{Authorization:`Bearer ${token}`}
+headers:{
+Authorization:`Bearer ${token}`
+}
 });
 
 favoriteProductIds=(data.favorites||[]).map(
-item=>Number(item.product_id||item.productId||item.id)
+item=>Number(
+item.product_id||
+item.productId||
+item.id
+)
 );
 
 }catch(error){
 
-console.error("Favoriler yüklenemedi:",error);
+console.error(
+"Favoriler yüklenemedi:",
+error
+);
+
 favoriteProductIds=[];
+
 }
+
 }
 
 async function toggleFavorite(productId){
@@ -1276,23 +1521,36 @@ async function toggleFavorite(productId){
 const token=localStorage.getItem("veloraToken");
 
 if(!token){
-alert("Favorilere eklemek için önce giriş yapmalısınız.");
+
+alert(
+"Favorilere eklemek için önce giriş yapmalısınız."
+);
+
 openAuth();
+
 return;
 }
 
-const isFavorite=favoriteProductIds.includes(Number(productId));
+const id=Number(productId);
+
+const isFavorite=
+favoriteProductIds.includes(id);
 
 try{
 
 if(isFavorite){
 
-await apiRequest(`/api/favorites/${productId}`,{
+await apiRequest(`/api/favorites/${id}`,{
 method:"DELETE",
-headers:{Authorization:`Bearer ${token}`}
+headers:{
+Authorization:`Bearer ${token}`
+}
 });
 
-favoriteProductIds=favoriteProductIds.filter(id=>id!==Number(productId));
+favoriteProductIds=
+favoriteProductIds.filter(
+favoriteId=>favoriteId!==id
+);
 
 }else{
 
@@ -1302,20 +1560,33 @@ headers:{
 "Content-Type":"application/json",
 "Authorization":`Bearer ${token}`
 },
-body:JSON.stringify({productId:Number(productId)})
+body:JSON.stringify({
+productId:id
+})
 });
 
-favoriteProductIds.push(Number(productId));
+if(!favoriteProductIds.includes(id)){
+favoriteProductIds.push(id);
 }
 
-const query=document.getElementById("productSearch").value.trim();
+}
 
-if(query)searchProducts();
-else renderProducts(products);
+const query=
+document.getElementById("productSearch")
+.value.trim();
+
+if(query){
+searchProducts();
+}else{
+renderProducts(products);
+}
 
 }catch(error){
+
 alert(error.message);
+
 }
+
 }
 
 async function openFavorites(){
@@ -1323,18 +1594,26 @@ async function openFavorites(){
 const token=localStorage.getItem("veloraToken");
 
 if(!token){
+
 openAuth();
+
 return;
 }
 
 closeAccountMenu();
 
-const modal=document.getElementById("favoritesModal");
+const modal=
+document.getElementById("favoritesModal");
+
 modal.classList.add("active");
 
-const container=document.getElementById("favoritesContainer");
+const container=
+document.getElementById("favoritesContainer");
 
-container.innerHTML=`<div class="favorites-empty">Favoriler yükleniyor...</div>`;
+container.innerHTML=
+`<div class="favorites-empty">
+Favoriler yükleniyor...
+</div>`;
 
 await loadFavorites();
 
@@ -1342,110 +1621,133 @@ if(!favoriteProductIds.length){
 
 container.innerHTML=`
 <div class="favorites-empty">
+
 <strong>Henüz favorin yok.</strong>
-<p>Beğendiğin ürünlerin üzerindeki ♡ butonuna basarak onları favorilerine ekleyebilirsin.</p>
+
+<p>
+Beğendiğin ürünlerin üzerindeki ♡ butonuna
+basarak onları favorilerine ekleyebilirsin.
+</p>
+
 </div>`;
 
 return;
 }
 
-const favoriteProducts=products.filter(product=>
-favoriteProductIds.includes(Number(product.id))
+const favoriteProducts=
+products.filter(product=>
+favoriteProductIds.includes(
+Number(product.id)
+)
 );
 
 container.innerHTML="";
 
 const grid=document.createElement("div");
+
 grid.className="favorite-list";
 
 favoriteProducts.forEach(product=>{
 
 const item=document.createElement("div");
+
 item.className="favorite-item";
 
 item.innerHTML=`
-<img src="${escapeHtml(product.image)}"
+
+<img
+src="${escapeHtml(product.image)}"
 alt="${escapeHtml(product.name)}"
 onerror="this.src='resimler/urun1.jpg'">
 
 <div class="favorite-item-info">
-<h3>${escapeHtml(product.name)}</h3>
-<p>${escapeHtml(product.category)} · ${escapeHtml(product.subcategory)}</p>
 
-<button class="favorite-remove"
+<h3>
+${escapeHtml(product.name)}
+</h3>
+
+<p>
+${escapeHtml(product.category)}
+·
+${escapeHtml(product.subcategory)}
+</p>
+
+<button
+class="favorite-remove"
 onclick="removeFavoriteFromList(${product.id})">
 ♥ Favorilerden Çıkar
 </button>
+
 </div>`;
 
 grid.appendChild(item);
+
 });
 
 container.appendChild(grid);
+
 }
 
 async function removeFavoriteFromList(productId){
 
 const token=localStorage.getItem("veloraToken");
 
+if(!token){
+
+openAuth();
+
+return;
+}
+
 try{
 
 await apiRequest(`/api/favorites/${productId}`,{
 method:"DELETE",
-headers:{Authorization:`Bearer ${token}`}
+headers:{
+Authorization:`Bearer ${token}`
+}
 });
 
-favoriteProductIds=favoriteProductIds.filter(id=>id!==Number(productId));
+favoriteProductIds=
+favoriteProductIds.filter(
+id=>id!==Number(productId)
+);
 
 await openFavorites();
+
 renderProducts(products);
 
 }catch(error){
+
 alert(error.message);
-}
+
 }
 
-/* =========================================================
+}
+
+/* =========================
    SİPARİŞLER
-   YENİ SİSTEM:
-   - Hesaba bağlı
-   - 5 aşamalı takip
-   - 5 saniyede otomatik yenileme
-========================================================= */
-
-let ordersRefreshTimer=null;
-let ordersRequestRunning=false;
-
-const ORDER_STATUS_LABELS={
-pending:"Sipariş Alındı",
-preparing:"Hazırlanıyor",
-shipped:"Kargoya Verildi",
-out_for_delivery:"Dağıtımda",
-delivered:"Teslim Edildi",
-cancelled:"İptal Edildi"
-};
-
-const LEGACY_STATUS_MAP={
-"Yeni":"pending",
-"Sipariş Alındı":"pending",
-"Hazırlanıyor":"preparing",
-"Kargoda":"shipped",
-"Kargoya Verildi":"shipped",
-"Dağıtımda":"out_for_delivery",
-"Teslim Edildi":"delivered",
-"İptal":"cancelled",
-"İptal Edildi":"cancelled"
-};
+========================= */
 
 function normalizeOrderStatus(status){
 
 const clean=String(status||"").trim();
 
-if(ORDER_STATUS_LABELS[clean]){
+if(
+Object.prototype.hasOwnProperty.call(
+ORDER_STATUS_LABELS,
+clean
+)
+){
 return clean;
 }
 
-if(LEGACY_STATUS_MAP[clean]){
+if(
+Object.prototype.hasOwnProperty.call(
+LEGACY_STATUS_MAP,
+clean
+)
+){
 return LEGACY_STATUS_MAP[clean];
 }
 
@@ -1453,11 +1755,13 @@ return "pending";
 }
 
 function getOrderStatus(order){
+
 return normalizeOrderStatus(
 order.status||
 order.order_status||
 "pending"
 );
+
 }
 
 async function fetchMyOrders(){
@@ -1465,7 +1769,11 @@ async function fetchMyOrders(){
 const token=localStorage.getItem("veloraToken");
 
 if(!token){
-throw new Error("Oturumunuz bulunamadı. Lütfen tekrar giriş yapın.");
+
+throw new Error(
+"Oturumunuz bulunamadı. Lütfen tekrar giriş yapın."
+);
+
 }
 
 return await apiRequest("/api/orders/my",{
@@ -1473,45 +1781,64 @@ headers:{
 "Authorization":`Bearer ${token}`
 }
 });
+
 }
 
 async function refreshOrders(showLoading=false){
 
-const container=document.getElementById("ordersContainer");
+const container=
+document.getElementById("ordersContainer");
 
 if(!container)return;
 
 if(ordersRequestRunning)return;
 
-const token=localStorage.getItem("veloraToken");
+const token=
+localStorage.getItem("veloraToken");
 
 if(!token)return;
 
 ordersRequestRunning=true;
 
 if(showLoading){
+
 container.innerHTML=`
 <div class="order-empty">
 Siparişler yükleniyor...
 </div>`;
+
 }
 
 try{
 
 const data=await fetchMyOrders();
 
-renderOrders(data.orders||[]);
+renderOrders(
+Array.isArray(data.orders)
+?data.orders
+:[]
+);
 
 }catch(error){
 
-console.error("ORDERS REFRESH ERROR:",error);
+console.error(
+"ORDERS REFRESH ERROR:",
+error
+);
 
 if(showLoading){
 
 container.innerHTML=`
 <div class="order-empty">
-<strong>Siparişler alınamadı</strong>
-<p>${escapeHtml(error.message)}</p>
+
+<strong>
+Siparişler alınamadı
+</strong>
+
+<p>
+${escapeHtml(error.message)}
+</p>
+
 </div>`;
 
 }
@@ -1521,46 +1848,70 @@ container.innerHTML=`
 ordersRequestRunning=false;
 
 }
+
 }
 
 async function openOrders(){
 
-const token=localStorage.getItem("veloraToken");
+const token=
+localStorage.getItem("veloraToken");
 
 if(!token){
+
 openAuth();
+
 return;
 }
 
 closeAccountMenu();
 
-document.getElementById("ordersModal").classList.add("active");
+const modal=
+document.getElementById("ordersModal");
+
+modal.classList.add("active");
 
 await refreshOrders(true);
 
-/* Önceki timer varsa temizle */
 if(ordersRefreshTimer){
+
 clearInterval(ordersRefreshTimer);
 ordersRefreshTimer=null;
+
 }
 
 /*
-   Sipariş modalı açıkken her 5 saniyede bir
-   Supabase üzerinden güncel sipariş durumu çekilir.
+Sipariş modalı açıkken 5 saniyede bir
+sunucudan güncel sipariş durumu alınır.
 */
+
 ordersRefreshTimer=setInterval(async()=>{
 
-const modal=document.getElementById("ordersModal");
+const currentModal=
+document.getElementById("ordersModal");
 
-if(!modal||!modal.classList.contains("active")){
+if(
+!currentModal||
+!currentModal.classList.contains("active")
+){
+
 clearInterval(ordersRefreshTimer);
 ordersRefreshTimer=null;
+
+return;
+}
+
+if(!localStorage.getItem("veloraToken")){
+
+clearInterval(ordersRefreshTimer);
+ordersRefreshTimer=null;
+
 return;
 }
 
 await refreshOrders(false);
 
 },5000);
+
 }
 
 function parseOrderItems(order){
@@ -1573,7 +1924,8 @@ return order.items;
 
 if(order.items_json){
 
-const parsed=typeof order.items_json==="string"
+const parsed=
+typeof order.items_json==="string"
 ?JSON.parse(order.items_json)
 :order.items_json;
 
@@ -1585,11 +1937,15 @@ return parsed;
 
 }catch(error){
 
-console.error("ORDER ITEMS PARSE ERROR:",error);
+console.error(
+"ORDER ITEMS PARSE ERROR:",
+error
+);
 
 }
 
 return [];
+
 }
 
 function formatOrderDate(value){
@@ -1599,10 +1955,15 @@ if(!value)return "-";
 const date=new Date(value);
 
 if(Number.isNaN(date.getTime())){
-return escapeHtml(String(value));
+
+return escapeHtml(
+String(value)
+);
+
 }
 
 return date.toLocaleString("tr-TR");
+
 }
 
 function getTrackingNumber(order){
@@ -1614,20 +1975,27 @@ order.cargo_tracking||
 order.cargoTracking||
 ""
 );
+
 }
 
 function renderOrderProgress(status){
 
-const normalized=normalizeOrderStatus(status);
+const normalized=
+normalizeOrderStatus(status);
 
 if(normalized==="cancelled"){
 
 return`
 <div class="order-progress">
+
 <div class="progress-step cancelled current">
+
 <div class="progress-dot"></div>
+
 İptal Edildi
+
 </div>
+
 </div>`;
 
 }
@@ -1640,18 +2008,17 @@ const statuses=[
 "delivered"
 ];
 
-const currentIndex=statuses.indexOf(normalized);
+const currentIndex=
+statuses.indexOf(normalized);
 
 return`
 <div class="order-progress">
 
 ${statuses.map((item,index)=>`
 
-<div class="progress-step ${
-index<=currentIndex?"active":""
-} ${
-index===currentIndex?"current":""
-}">
+<div class="progress-step
+${index<=currentIndex?"active":""}
+${index===currentIndex?"current":""}">
 
 <div class="progress-dot"></div>
 
@@ -1662,18 +2029,29 @@ ${ORDER_STATUS_LABELS[item]}
 `).join("")}
 
 </div>`;
+
 }
 
 function renderOrders(orders){
 
-const container=document.getElementById("ordersContainer");
+const container=
+document.getElementById("ordersContainer");
+
+if(!container)return;
 
 if(!orders.length){
 
 container.innerHTML=`
 <div class="order-empty">
-<strong>Henüz siparişin yok.</strong>
-<p>Verdiğin siparişler burada görünecek.</p>
+
+<strong>
+Henüz siparişin yok.
+</strong>
+
+<p>
+Verdiğin siparişler burada görünecek.
+</p>
+
 </div>`;
 
 return;
@@ -1683,29 +2061,49 @@ container.innerHTML="";
 
 orders.forEach(order=>{
 
-const items=parseOrderItems(order);
-const status=getOrderStatus(order);
-const statusLabel=ORDER_STATUS_LABELS[status]||"Sipariş Alındı";
-const tracking=getTrackingNumber(order);
+const items=
+parseOrderItems(order);
 
-let itemsHtml="Ürün bilgisi bulunamadı.";
+const status=
+getOrderStatus(order);
+
+const statusLabel=
+ORDER_STATUS_LABELS[status]||
+"Sipariş Alındı";
+
+const tracking=
+getTrackingNumber(order);
+
+let itemsHtml=
+"Ürün bilgisi bulunamadı.";
 
 if(items.length){
 
-itemsHtml=items.map(item=>{
+itemsHtml=
+items.map(item=>{
 
-const name=item.name||item.productName||"Ürün";
-const quantity=item.quantity||1;
+const name=
+item.name||
+item.productName||
+"Ürün";
+
+const quantity=
+Number(item.quantity)||1;
 
 return`
 <div>
-${escapeHtml(name)} × ${escapeHtml(quantity)}
+${escapeHtml(name)}
+×
+${escapeHtml(quantity)}
 </div>`;
 
 }).join("");
+
 }
 
-const orderCard=document.createElement("div");
+const orderCard=
+document.createElement("div");
+
 orderCard.className="order-card";
 
 const address=
@@ -1769,8 +2167,13 @@ tracking
 ?
 `
 <div class="tracking-box">
-<strong>🚚 Kargo Takip No:</strong>
+
+<strong>
+🚚 Kargo Takip No:
+</strong>
+
 ${escapeHtml(tracking)}
+
 </div>
 `
 :""
@@ -1781,9 +2184,15 @@ address
 ?
 `
 <div class="order-address">
-<strong>Teslimat Adresi</strong>
+
+<strong>
+Teslimat Adresi
+</strong>
+
 <br>
+
 ${escapeHtml(address)}
+
 </div>
 `
 :""
@@ -1794,20 +2203,25 @@ ${escapeHtml(address)}
 container.appendChild(orderCard);
 
 });
+
 }
 
 function closeOrders(){
 
 if(ordersRefreshTimer){
+
 clearInterval(ordersRefreshTimer);
 ordersRefreshTimer=null;
+
 }
 
-const modal=document.getElementById("ordersModal");
+const modal=
+document.getElementById("ordersModal");
 
 if(modal){
 modal.classList.remove("active");
 }
+
 }
 
 /* =========================
@@ -1824,9 +2238,15 @@ function hideAllAuthForms(){
 "resetPasswordForm",
 "changePasswordForm"
 ].forEach(id=>{
+
 const el=document.getElementById(id);
-if(el)el.style.display="none";
+
+if(el){
+el.style.display="none";
+}
+
 });
+
 }
 
 function clearAuthMessages(){
@@ -1843,28 +2263,46 @@ function clearAuthMessages(){
 const el=document.getElementById(id);
 
 if(el){
+
 el.textContent="";
 el.className="auth-message";
+
 }
 
 });
+
 }
 
 function openAuth(){
 
-const token=localStorage.getItem("veloraToken");
+const token=
+localStorage.getItem("veloraToken");
 
 if(token){
+
 toggleAccountMenu();
+
 return;
 }
 
-document.getElementById("authModal").classList.add("active");
+const modal=
+document.getElementById("authModal");
+
+modal.classList.add("active");
+
 showLogin();
+
 }
 
 function closeAuth(){
-document.getElementById("authModal").classList.remove("active");
+
+const modal=
+document.getElementById("authModal");
+
+if(modal){
+modal.classList.remove("active");
+}
+
 }
 
 function showLogin(){
@@ -1875,15 +2313,25 @@ clearAuthMessages();
 document.getElementById("loginForm").style.display="block";
 
 setTimeout(()=>{
-const input=document.getElementById("loginEmail");
-if(input)input.focus();
+
+const input=
+document.getElementById("loginEmail");
+
+if(input){
+input.focus();
+}
+
 },50);
+
 }
 
 function showRegister(){
+
 hideAllAuthForms();
 clearAuthMessages();
+
 document.getElementById("registerForm").style.display="block";
+
 }
 
 function showVerifyEmail(email=""){
@@ -1894,14 +2342,24 @@ clearAuthMessages();
 document.getElementById("verifyEmailForm").style.display="block";
 
 if(email){
-document.getElementById("verificationEmail").value=email;
+
+document.getElementById(
+"verificationEmail"
+).value=email;
+
 }
+
 }
 
 function showForgotPassword(){
+
 hideAllAuthForms();
 clearAuthMessages();
-document.getElementById("forgotPasswordForm").style.display="block";
+
+document.getElementById(
+"forgotPasswordForm"
+).style.display="block";
+
 }
 
 function showResetPassword(email=""){
@@ -1909,25 +2367,40 @@ function showResetPassword(email=""){
 hideAllAuthForms();
 clearAuthMessages();
 
-document.getElementById("resetPasswordForm").style.display="block";
+document.getElementById(
+"resetPasswordForm"
+).style.display="block";
 
 if(email){
-document.getElementById("resetEmail").value=email;
+
+document.getElementById(
+"resetEmail"
+).value=email;
+
 }
+
 }
 
 function showChangePassword(){
 
 if(!localStorage.getItem("veloraToken")){
+
 openAuth();
+
 return;
 }
 
 hideAllAuthForms();
 clearAuthMessages();
 
-document.getElementById("authModal").classList.add("active");
-document.getElementById("changePasswordForm").style.display="block";
+document
+.getElementById("authModal")
+.classList.add("active");
+
+document.getElementById(
+"changePasswordForm"
+).style.display="block";
+
 }
 
 /* =========================
@@ -1938,69 +2411,127 @@ async function register(event){
 
 event.preventDefault();
 
-const username=document.getElementById("registerUsername").value.trim();
-const email=document.getElementById("registerEmail").value.trim();
-const password=document.getElementById("registerPassword").value;
-const confirm=document.getElementById("registerPasswordConfirm").value;
-const message=document.getElementById("registerMessage");
+const username=
+document.getElementById(
+"registerUsername"
+).value.trim();
+
+const email=
+document.getElementById(
+"registerEmail"
+).value.trim();
+
+const password=
+document.getElementById(
+"registerPassword"
+).value;
+
+const confirm=
+document.getElementById(
+"registerPasswordConfirm"
+).value;
+
+const message=
+document.getElementById(
+"registerMessage"
+);
 
 if(!username||!email||!password||!confirm){
-message.className="auth-message error-message";
-message.textContent="Lütfen tüm bilgileri eksiksiz doldurun.";
+
+message.className=
+"auth-message error-message";
+
+message.textContent=
+"Lütfen tüm bilgileri eksiksiz doldurun.";
+
 return;
 }
 
 if(username.length<3){
-message.className="auth-message error-message";
-message.textContent="Kullanıcı adı en az 3 karakter olmalıdır.";
+
+message.className=
+"auth-message error-message";
+
+message.textContent=
+"Kullanıcı adı en az 3 karakter olmalıdır.";
+
 return;
 }
 
 if(password.length<6){
-message.className="auth-message error-message";
-message.textContent="Şifre en az 6 karakter olmalıdır.";
+
+message.className=
+"auth-message error-message";
+
+message.textContent=
+"Şifre en az 6 karakter olmalıdır.";
+
 return;
 }
 
 if(password!==confirm){
-message.className="auth-message error-message";
-message.textContent="Şifreler aynı olmalı.";
+
+message.className=
+"auth-message error-message";
+
+message.textContent=
+"Şifreler aynı olmalı.";
+
 return;
 }
 
 message.className="auth-message";
-message.textContent="Hesap oluşturuluyor...";
+message.textContent=
+"Hesap oluşturuluyor...";
 
 try{
 
-const data=await apiRequest("/api/auth/register",{
+const data=
+await apiRequest(
+"/api/auth/register",
+{
 method:"POST",
-headers:{"Content-Type":"application/json"},
+headers:{
+"Content-Type":"application/json"
+},
 body:JSON.stringify({
 username,
 email,
 password,
 passwordConfirm:confirm
 })
-});
+}
+);
 
-message.className="auth-message success-message";
-message.textContent=data.message||"Hesap oluşturuldu. E-postanı doğrula.";
+message.className=
+"auth-message success-message";
+
+message.textContent=
+data.message||
+"Hesap oluşturuldu. E-postanı doğrula.";
 
 showVerifyEmail(email);
 
-document.getElementById("verifyMessage").className=
+document.getElementById(
+"verifyMessage"
+).className=
 "auth-message success-message";
 
-document.getElementById("verifyMessage").textContent=
+document.getElementById(
+"verifyMessage"
+).textContent=
 "6 haneli doğrulama kodu e-posta adresine gönderildi.";
 
 }catch(error){
 
-message.className="auth-message error-message";
-message.textContent=error.message;
+message.className=
+"auth-message error-message";
+
+message.textContent=
+error.message;
 
 }
+
 }
 
 /* =========================
@@ -2011,42 +2542,82 @@ async function verifyEmail(event){
 
 event.preventDefault();
 
-const email=document.getElementById("verificationEmail").value.trim();
-const code=document.getElementById("verificationCode").value.trim();
-const message=document.getElementById("verifyMessage");
+const email=
+document.getElementById(
+"verificationEmail"
+).value.trim();
+
+const code=
+document.getElementById(
+"verificationCode"
+).value.trim();
+
+const message=
+document.getElementById(
+"verifyMessage"
+);
 
 message.className="auth-message";
 message.textContent="Doğrulanıyor...";
 
 try{
 
-const data=await apiRequest("/api/auth/verify-email",{
+const data=
+await apiRequest(
+"/api/auth/verify-email",
+{
 method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({email,code})
-});
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+email,
+code
+})
+}
+);
 
-message.className="auth-message success-message";
-message.textContent=data.message||"E-posta doğrulandı.";
+message.className=
+"auth-message success-message";
+
+message.textContent=
+data.message||
+"E-posta doğrulandı.";
 
 setTimeout(showLogin,900);
 
 }catch(error){
 
-message.className="auth-message error-message";
-message.textContent=error.message;
+message.className=
+"auth-message error-message";
+
+message.textContent=
+error.message;
 
 }
+
 }
 
 async function resendVerificationCode(){
 
-const email=document.getElementById("verificationEmail").value.trim();
-const message=document.getElementById("verifyMessage");
+const email=
+document.getElementById(
+"verificationEmail"
+).value.trim();
+
+const message=
+document.getElementById(
+"verifyMessage"
+);
 
 if(!email){
-message.className="auth-message error-message";
-message.textContent="Önce e-posta adresini yaz.";
+
+message.className=
+"auth-message error-message";
+
+message.textContent=
+"Önce e-posta adresini yaz.";
+
 return;
 }
 
@@ -2055,21 +2626,35 @@ message.textContent="Kod gönderiliyor...";
 
 try{
 
-const data=await apiRequest("/api/auth/resend-verification",{
+const data=
+await apiRequest(
+"/api/auth/resend-verification",
+{
 method:"POST",
-headers:{"Content-Type":"application/json"},
+headers:{
+"Content-Type":"application/json"
+},
 body:JSON.stringify({email})
-});
+}
+);
 
-message.className="auth-message success-message";
-message.textContent=data.message||"Yeni kod gönderildi.";
+message.className=
+"auth-message success-message";
+
+message.textContent=
+data.message||
+"Yeni kod gönderildi.";
 
 }catch(error){
 
-message.className="auth-message error-message";
-message.textContent=error.message;
+message.className=
+"auth-message error-message";
+
+message.textContent=
+error.message;
 
 }
+
 }
 
 /* =========================
@@ -2081,22 +2666,45 @@ async function login(event){
 event.preventDefault();
 
 const form=event.currentTarget;
-const emailInput=form.querySelector("#loginEmail");
-const passwordInput=form.querySelector("#loginPassword");
-const message=document.getElementById("loginMessage");
 
-const email=(emailInput?.value||"").trim().toLowerCase();
-const password=passwordInput?.value||"";
+const emailInput=
+form.querySelector("#loginEmail");
+
+const passwordInput=
+form.querySelector("#loginPassword");
+
+const message=
+document.getElementById(
+"loginMessage"
+);
+
+const email=
+(emailInput?.value||"")
+.trim()
+.toLowerCase();
+
+const password=
+passwordInput?.value||"";
 
 if(!email){
-message.className="auth-message error-message";
-message.textContent="Lütfen e-posta adresinizi girin.";
+
+message.className=
+"auth-message error-message";
+
+message.textContent=
+"Lütfen e-posta adresinizi girin.";
+
 return;
 }
 
 if(!password){
-message.className="auth-message error-message";
-message.textContent="Lütfen şifrenizi girin.";
+
+message.className=
+"auth-message error-message";
+
+message.textContent=
+"Lütfen şifrenizi girin.";
+
 return;
 }
 
@@ -2105,7 +2713,10 @@ message.textContent="Giriş yapılıyor...";
 
 try{
 
-const data=await apiRequest("/api/auth/login",{
+const data=
+await apiRequest(
+"/api/auth/login",
+{
 method:"POST",
 headers:{
 "Content-Type":"application/json",
@@ -2115,22 +2726,39 @@ body:JSON.stringify({
 email,
 password
 })
-});
+}
+);
 
 if(!data.token){
-throw new Error(data.message||"Giriş yapılamadı.");
+
+throw new Error(
+data.message||
+"Giriş yapılamadı."
+);
+
 }
 
-localStorage.setItem("veloraToken",data.token);
+localStorage.setItem(
+"veloraToken",
+data.token
+);
 
 if(data.user){
-localStorage.setItem("veloraUser",JSON.stringify(data.user));
+
+localStorage.setItem(
+"veloraUser",
+JSON.stringify(data.user)
+);
+
 }
 
 await loadFavorites();
 
-message.className="auth-message success-message";
-message.textContent="Giriş başarılı!";
+message.className=
+"auth-message success-message";
+
+message.textContent=
+"Giriş başarılı!";
 
 updateAccountUI();
 
@@ -2138,12 +2766,20 @@ setTimeout(closeAuth,600);
 
 }catch(error){
 
-console.error("LOGIN ERROR:",error);
+console.error(
+"LOGIN ERROR:",
+error
+);
 
-message.className="auth-message error-message";
-message.textContent=error.message||"Giriş yapılamadı.";
+message.className=
+"auth-message error-message";
+
+message.textContent=
+error.message||
+"Giriş yapılamadı.";
 
 }
+
 }
 
 /* =========================
@@ -2154,33 +2790,59 @@ async function forgotPassword(event){
 
 event.preventDefault();
 
-const email=document.getElementById("forgotEmail").value.trim();
-const message=document.getElementById("forgotMessage");
+const email=
+document.getElementById(
+"forgotEmail"
+).value.trim();
+
+const message=
+document.getElementById(
+"forgotMessage"
+);
 
 message.className="auth-message";
 message.textContent="Kod gönderiliyor...";
 
 try{
 
-const data=await apiRequest("/api/auth/forgot-password",{
+const data=
+await apiRequest(
+"/api/auth/forgot-password",
+{
 method:"POST",
-headers:{"Content-Type":"application/json"},
+headers:{
+"Content-Type":"application/json"
+},
 body:JSON.stringify({email})
-});
+}
+);
 
-message.className="auth-message success-message";
-message.textContent=data.message||"Sıfırlama kodu gönderildi.";
+message.className=
+"auth-message success-message";
 
-document.getElementById("resetEmail").value=email;
+message.textContent=
+data.message||
+"Sıfırlama kodu gönderildi.";
 
-setTimeout(()=>showResetPassword(email),700);
+document.getElementById(
+"resetEmail"
+).value=email;
+
+setTimeout(
+()=>showResetPassword(email),
+700
+);
 
 }catch(error){
 
-message.className="auth-message error-message";
-message.textContent=error.message;
+message.className=
+"auth-message error-message";
+
+message.textContent=
+error.message;
 
 }
+
 }
 
 /* =========================
@@ -2191,45 +2853,84 @@ async function resetPassword(event){
 
 event.preventDefault();
 
-const email=document.getElementById("resetEmail").value.trim();
-const code=document.getElementById("resetCode").value.trim();
-const password=document.getElementById("resetPassword").value;
-const confirm=document.getElementById("resetPasswordConfirm").value;
-const message=document.getElementById("resetMessage");
+const email=
+document.getElementById(
+"resetEmail"
+).value.trim();
+
+const code=
+document.getElementById(
+"resetCode"
+).value.trim();
+
+const password=
+document.getElementById(
+"resetPassword"
+).value;
+
+const confirm=
+document.getElementById(
+"resetPasswordConfirm"
+).value;
+
+const message=
+document.getElementById(
+"resetMessage"
+);
 
 if(password!==confirm){
-message.className="auth-message error-message";
-message.textContent="Şifreler aynı olmalı.";
+
+message.className=
+"auth-message error-message";
+
+message.textContent=
+"Şifreler aynı olmalı.";
+
 return;
 }
 
 message.className="auth-message";
-message.textContent="Şifre sıfırlanıyor...";
+message.textContent=
+"Şifre sıfırlanıyor...";
 
 try{
 
-const data=await apiRequest("/api/auth/reset-password",{
+const data=
+await apiRequest(
+"/api/auth/reset-password",
+{
 method:"POST",
-headers:{"Content-Type":"application/json"},
+headers:{
+"Content-Type":"application/json"
+},
 body:JSON.stringify({
 email,
 code,
 password,
 passwordConfirm:confirm
 })
-});
+}
+);
 
-message.className="auth-message success-message";
-message.textContent=data.message||"Şifren başarıyla değiştirildi.";
+message.className=
+"auth-message success-message";
+
+message.textContent=
+data.message||
+"Şifren başarıyla değiştirildi.";
 
 setTimeout(showLogin,900);
 
 }catch(error){
 
-message.className="auth-message error-message";
-message.textContent=error.message;
+message.className=
+"auth-message error-message";
+
+message.textContent=
+error.message;
 
 }
+
 }
 
 /* =========================
@@ -2240,30 +2941,57 @@ async function changePassword(event){
 
 event.preventDefault();
 
-const token=localStorage.getItem("veloraToken");
+const token=
+localStorage.getItem("veloraToken");
 
 if(!token){
+
 showLogin();
+
 return;
 }
 
-const currentPassword=document.getElementById("currentPassword").value;
-const newPassword=document.getElementById("newPassword").value;
-const newPasswordConfirm=document.getElementById("newPasswordConfirm").value;
-const message=document.getElementById("changePasswordMessage");
+const currentPassword=
+document.getElementById(
+"currentPassword"
+).value;
+
+const newPassword=
+document.getElementById(
+"newPassword"
+).value;
+
+const newPasswordConfirm=
+document.getElementById(
+"newPasswordConfirm"
+).value;
+
+const message=
+document.getElementById(
+"changePasswordMessage"
+);
 
 if(newPassword!==newPasswordConfirm){
-message.className="auth-message error-message";
-message.textContent="Yeni şifreler aynı olmalı.";
+
+message.className=
+"auth-message error-message";
+
+message.textContent=
+"Yeni şifreler aynı olmalı.";
+
 return;
 }
 
 message.className="auth-message";
-message.textContent="Şifre değiştiriliyor...";
+message.textContent=
+"Şifre değiştiriliyor...";
 
 try{
 
-const data=await apiRequest("/api/auth/change-password",{
+const data=
+await apiRequest(
+"/api/auth/change-password",
+{
 method:"POST",
 headers:{
 "Content-Type":"application/json",
@@ -2274,21 +3002,32 @@ currentPassword,
 newPassword,
 newPasswordConfirm
 })
-});
+}
+);
 
-message.className="auth-message success-message";
-message.textContent=data.message||"Şifren başarıyla değiştirildi.";
+message.className=
+"auth-message success-message";
 
-document.getElementById("changeAuthForm").reset();
+message.textContent=
+data.message||
+"Şifren başarıyla değiştirildi.";
+
+document
+.getElementById("changeAuthForm")
+.reset();
 
 setTimeout(closeAuth,900);
 
 }catch(error){
 
-message.className="auth-message error-message";
-message.textContent=error.message;
+message.className=
+"auth-message error-message";
+
+message.textContent=
+error.message;
 
 }
+
 }
 
 /* =========================
@@ -2297,64 +3036,124 @@ message.textContent=error.message;
 
 async function loadCurrentUser(){
 
-const token=localStorage.getItem("veloraToken");
+const token=
+localStorage.getItem("veloraToken");
 
 if(!token){
+
 updateAccountUI();
+
 return;
 }
 
 try{
 
-const data=await apiRequest("/api/auth/me",{
-headers:{Authorization:`Bearer ${token}`}
-});
+const data=
+await apiRequest(
+"/api/auth/me",
+{
+headers:{
+Authorization:`Bearer ${token}`
+}
+}
+);
 
 if(data.user){
-localStorage.setItem("veloraUser",JSON.stringify(data.user));
+
+localStorage.setItem(
+"veloraUser",
+JSON.stringify(data.user)
+);
+
 }
 
 await loadFavorites();
+
 updateAccountUI();
 
 }catch(error){
 
-localStorage.removeItem("veloraToken");
-localStorage.removeItem("veloraUser");
+localStorage.removeItem(
+"veloraToken"
+);
+
+localStorage.removeItem(
+"veloraUser"
+);
+
 favoriteProductIds=[];
+
 updateAccountUI();
 
 }
+
 }
 
 function toggleAccountMenu(){
-document.getElementById("accountMenu").classList.toggle("active");
+
+const menu=
+document.getElementById(
+"accountMenu"
+);
+
+menu.classList.toggle("active");
+
 }
 
 function closeAccountMenu(){
-document.getElementById("accountMenu").classList.remove("active");
+
+const menu=
+document.getElementById(
+"accountMenu"
+);
+
+menu.classList.remove("active");
+
 }
 
 function updateAccountUI(){
 
-const token=localStorage.getItem("veloraToken");
-const userText=localStorage.getItem("veloraUser");
+const token=
+localStorage.getItem("veloraToken");
 
-const button=document.getElementById("accountButton");
-const username=document.getElementById("accountUsername");
-const email=document.getElementById("accountEmail");
+const userText=
+localStorage.getItem("veloraUser");
+
+const button=
+document.getElementById(
+"accountButton"
+);
+
+const username=
+document.getElementById(
+"accountUsername"
+);
+
+const email=
+document.getElementById(
+"accountEmail"
+);
 
 if(token&&userText){
 
 try{
 
-const user=JSON.parse(userText);
+const user=
+JSON.parse(userText);
 
-const displayName=user.username||user.email||"Hesabım";
+const displayName=
+user.username||
+user.email||
+"Hesabım";
 
-button.textContent=`👤 ${displayName}`;
-username.textContent=displayName;
-email.textContent=user.email||"";
+button.textContent=
+`👤 ${displayName}`;
+
+username.textContent=
+displayName;
+
+email.textContent=
+user.email||"";
 
 return;
 
@@ -2362,20 +3161,35 @@ return;
 
 }
 
-button.textContent="👤 Hesap Oluştur";
-username.textContent="Hesabım";
+button.textContent=
+"👤 Hesap Oluştur";
+
+username.textContent=
+"Hesabım";
+
 email.textContent="";
+
 }
 
 function logout(){
 
 if(ordersRefreshTimer){
-clearInterval(ordersRefreshTimer);
+
+clearInterval(
+ordersRefreshTimer
+);
+
 ordersRefreshTimer=null;
+
 }
 
-localStorage.removeItem("veloraToken");
-localStorage.removeItem("veloraUser");
+localStorage.removeItem(
+"veloraToken"
+);
+
+localStorage.removeItem(
+"veloraUser"
+);
 
 favoriteProductIds=[];
 
@@ -2383,21 +3197,93 @@ closeAccountMenu();
 closeOrders();
 updateAccountUI();
 
-alert("Hesabınızdan çıkış yapıldı.");
+alert(
+"Hesabınızdan çıkış yapıldı."
+);
+
 }
 
 function closeFavorites(){
-document.getElementById("favoritesModal").classList.remove("active");
+
+const modal=
+document.getElementById(
+"favoritesModal"
+);
+
+if(modal){
+modal.classList.remove("active");
+}
+
+}
+
+/* =========================
+   YANLIŞ KOD YAZISINI TEMİZLE
+========================= */
+
+function removeAccidentalCodeText(){
+
+const badTexts=[
+"//html",
+"```html",
+"```"
+];
+
+const walker=
+document.createTreeWalker(
+document.body,
+NodeFilter.SHOW_TEXT
+);
+
+const nodes=[];
+
+let node;
+
+while(
+node=walker.nextNode()
+){
+nodes.push(node);
+}
+
+nodes.forEach(textNode=>{
+
+const value=
+textNode.nodeValue.trim();
+
+if(badTexts.includes(value)){
+
+textNode.parentNode.removeChild(
+textNode
+);
+
+}
+
+});
+
 }
 
 /* =========================
    HERO SLIDER
 ========================= */
 
-const heroSlides=document.querySelectorAll(".hero-slide");
-const heroDots=document.querySelectorAll(".hero-dot");
-const heroPrev=document.querySelector(".hero-prev");
-const heroNext=document.querySelector(".hero-next");
+const heroSlides=
+document.querySelectorAll(
+".hero-slide"
+);
+
+const heroDots=
+document.querySelectorAll(
+".hero-dot"
+);
+
+const heroPrev=
+document.querySelector(
+".hero-prev"
+);
+
+const heroNext=
+document.querySelector(
+".hero-next"
+);
 
 let heroCurrent=0;
 let heroTimer;
@@ -2406,171 +3292,432 @@ function showHeroSlide(index){
 
 if(!heroSlides.length)return;
 
-heroCurrent=(index+heroSlides.length)%heroSlides.length;
+heroCurrent=
+(index+heroSlides.length)%
+heroSlides.length;
 
 heroSlides.forEach((slide,i)=>{
-slide.classList.toggle("active",i===heroCurrent);
+
+slide.classList.toggle(
+"active",
+i===heroCurrent
+);
+
 });
 
 heroDots.forEach((dot,i)=>{
-dot.classList.toggle("active",i===heroCurrent);
+
+dot.classList.toggle(
+"active",
+i===heroCurrent
+);
+
 });
+
 }
 
 function nextHeroSlide(){
-showHeroSlide(heroCurrent+1);
+
+showHeroSlide(
+heroCurrent+1
+);
+
 }
 
 function previousHeroSlide(){
-showHeroSlide(heroCurrent-1);
+
+showHeroSlide(
+heroCurrent-1
+);
+
 }
 
 function startHeroSlider(){
 
 clearInterval(heroTimer);
 
-heroTimer=setInterval(nextHeroSlide,5000);
+heroTimer=
+setInterval(
+nextHeroSlide,
+5000
+);
+
 }
 
 if(heroSlides.length){
 
-heroNext?.addEventListener("click",()=>{
+heroNext?.addEventListener(
+"click",
+()=>{
 nextHeroSlide();
 startHeroSlider();
-});
+}
+);
 
-heroPrev?.addEventListener("click",()=>{
+heroPrev?.addEventListener(
+"click",
+()=>{
 previousHeroSlide();
 startHeroSlider();
-});
+}
+);
 
 heroDots.forEach(dot=>{
 
-dot.addEventListener("click",()=>{
-showHeroSlide(Number(dot.dataset.slide));
+dot.addEventListener(
+"click",
+()=>{
+showHeroSlide(
+Number(dot.dataset.slide)
+);
 startHeroSlider();
-});
+}
+);
 
 });
 
 let touchStartX=0;
 let touchEndX=0;
 
-const heroSlider=document.getElementById("heroSlider");
+const heroSlider=
+document.getElementById(
+"heroSlider"
+);
 
-heroSlider?.addEventListener("touchstart",event=>{
-touchStartX=event.changedTouches[0].screenX;
-},{passive:true});
+heroSlider?.addEventListener(
+"touchstart",
+event=>{
+touchStartX=
+event.changedTouches[0].screenX;
+},
+{passive:true}
+);
 
-heroSlider?.addEventListener("touchend",event=>{
+heroSlider?.addEventListener(
+"touchend",
+event=>{
 
-touchEndX=event.changedTouches[0].screenX;
+touchEndX=
+event.changedTouches[0].screenX;
 
-const difference=touchStartX-touchEndX;
+const difference=
+touchStartX-touchEndX;
 
 if(Math.abs(difference)<50)return;
 
-if(difference>0)nextHeroSlide();
-else previousHeroSlide();
+if(difference>0){
+nextHeroSlide();
+}else{
+previousHeroSlide();
+}
 
 startHeroSlider();
 
-},{passive:true});
+},
+{passive:true}
+);
 
 showHeroSlide(0);
 startHeroSlider();
+
 }
 
 /* =========================
    SAYFA BAŞLANGICI
 ========================= */
 
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
 
 loadCart();
 
-document.getElementById("cartButton").addEventListener("click",openCart);
-document.getElementById("closeCartButton").addEventListener("click",closeCart);
+removeAccidentalCodeText();
 
-document.getElementById("cartModal").addEventListener("click",event=>{
-if(event.target===event.currentTarget)closeCart();
-});
+document
+.getElementById("cartButton")
+.addEventListener(
+"click",
+openCart
+);
 
-document.getElementById("menuButton").addEventListener("click",event=>{
+document
+.getElementById("closeCartButton")
+.addEventListener(
+"click",
+closeCart
+);
+
+document
+.getElementById("cartModal")
+.addEventListener(
+"click",
+event=>{
+
+if(
+event.target===
+event.currentTarget
+){
+closeCart();
+}
+
+}
+);
+
+document
+.getElementById("menuButton")
+.addEventListener(
+"click",
+event=>{
 
 event.stopPropagation();
 
-document.getElementById("menuPanel").classList.toggle("active");
+document
+.getElementById("menuPanel")
+.classList.toggle(
+"active"
+);
 
-});
+}
+);
 
-document.getElementById("productSearch").addEventListener("input",searchProducts);
-document.getElementById("searchButton").addEventListener("click",searchProducts);
+document
+.getElementById("productSearch")
+.addEventListener(
+"input",
+searchProducts
+);
 
-document.getElementById("accountButton").addEventListener("click",event=>{
+document
+.getElementById("searchButton")
+.addEventListener(
+"click",
+searchProducts
+);
+
+document
+.getElementById("accountButton")
+.addEventListener(
+"click",
+event=>{
 
 event.stopPropagation();
 
-if(localStorage.getItem("veloraToken")){
+if(
+localStorage.getItem(
+"veloraToken"
+)
+){
 toggleAccountMenu();
 }else{
 openAuth();
 }
 
-});
+}
+);
 
-document.getElementById("favoritesMenuButton").addEventListener("click",openFavorites);
-document.getElementById("ordersMenuButton").addEventListener("click",openOrders);
-document.getElementById("logoutButton").addEventListener("click",logout);
-document.getElementById("changePasswordMenuButton").addEventListener("click",showChangePassword);
+document
+.getElementById("favoritesMenuButton")
+.addEventListener(
+"click",
+openFavorites
+);
 
-document.getElementById("closeAuthButton").addEventListener("click",closeAuth);
-document.getElementById("closeFavoritesButton").addEventListener("click",closeFavorites);
-document.getElementById("closeOrdersButton").addEventListener("click",closeOrders);
+document
+.getElementById("ordersMenuButton")
+.addEventListener(
+"click",
+openOrders
+);
 
-document.getElementById("loginAuthForm").addEventListener("submit",login);
-document.getElementById("registerAuthForm").addEventListener("submit",register);
-document.getElementById("verifyAuthForm").addEventListener("submit",verifyEmail);
-document.getElementById("forgotAuthForm").addEventListener("submit",forgotPassword);
-document.getElementById("resetAuthForm").addEventListener("submit",resetPassword);
-document.getElementById("changeAuthForm").addEventListener("submit",changePassword);
+document
+.getElementById("logoutButton")
+.addEventListener(
+"click",
+logout
+);
 
-document.getElementById("authModal").addEventListener("click",event=>{
-if(event.target===event.currentTarget)closeAuth();
-});
+document
+.getElementById("changePasswordMenuButton")
+.addEventListener(
+"click",
+showChangePassword
+);
 
-document.getElementById("favoritesModal").addEventListener("click",event=>{
-if(event.target===event.currentTarget)closeFavorites();
-});
+document
+.getElementById("closeAuthButton")
+.addEventListener(
+"click",
+closeAuth
+);
 
-document.getElementById("ordersModal").addEventListener("click",event=>{
-if(event.target===event.currentTarget)closeOrders();
-});
+document
+.getElementById("closeFavoritesButton")
+.addEventListener(
+"click",
+closeFavorites
+);
 
-document.addEventListener("click",event=>{
+document
+.getElementById("closeOrdersButton")
+.addEventListener(
+"click",
+closeOrders
+);
 
-const accountArea=document.querySelector(".account-area");
-const accountMenu=document.getElementById("accountMenu");
+document
+.getElementById("loginAuthForm")
+.addEventListener(
+"submit",
+login
+);
 
-if(accountArea&&!accountArea.contains(event.target)){
-accountMenu.classList.remove("active");
+document
+.getElementById("registerAuthForm")
+.addEventListener(
+"submit",
+register
+);
+
+document
+.getElementById("verifyAuthForm")
+.addEventListener(
+"submit",
+verifyEmail
+);
+
+document
+.getElementById("forgotAuthForm")
+.addEventListener(
+"submit",
+forgotPassword
+);
+
+document
+.getElementById("resetAuthForm")
+.addEventListener(
+"submit",
+resetPassword
+);
+
+document
+.getElementById("changeAuthForm")
+.addEventListener(
+"submit",
+changePassword
+);
+
+document
+.getElementById("authModal")
+.addEventListener(
+"click",
+event=>{
+
+if(
+event.target===
+event.currentTarget
+){
+closeAuth();
 }
 
-const menuWrapper=document.querySelector(".menu-wrapper");
-const menuPanel=document.getElementById("menuPanel");
+}
+);
 
-if(menuWrapper&&!menuWrapper.contains(event.target)){
-menuPanel.classList.remove("active");
+document
+.getElementById("favoritesModal")
+.addEventListener(
+"click",
+event=>{
+
+if(
+event.target===
+event.currentTarget
+){
+closeFavorites();
 }
 
-});
+}
+);
+
+document
+.getElementById("ordersModal")
+.addEventListener(
+"click",
+event=>{
+
+if(
+event.target===
+event.currentTarget
+){
+closeOrders();
+}
+
+}
+);
+
+document.addEventListener(
+"click",
+event=>{
+
+const accountArea=
+document.querySelector(
+".account-area"
+);
+
+const accountMenu=
+document.getElementById(
+"accountMenu"
+);
+
+if(
+accountArea&&
+!accountArea.contains(
+event.target
+)
+){
+
+accountMenu.classList.remove(
+"active"
+);
+
+}
+
+const menuWrapper=
+document.querySelector(
+".menu-wrapper"
+);
+
+const menuPanel=
+document.getElementById(
+"menuPanel"
+);
+
+if(
+menuWrapper&&
+!menuWrapper.contains(
+event.target
+)
+){
+
+menuPanel.classList.remove(
+"active"
+);
+
+}
+
+}
+);
 
 renderProducts(products);
+
 loadCurrentUser();
 
-});
+removeAccidentalCodeText();
+
+}
+);
+
 </script>
 
 </body>
 </html>
-```
