@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -11,14 +13,26 @@
 <title>VELORA | Zarif Takılar</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box
+}
+
+html{
+scroll-behavior:smooth
+}
 
 body{
 font-family:Georgia,"Times New Roman",serif;
 background:#f7f1e7;
 color:#4c3b2b
 }
+
+/* =========================
+   HEADER
+========================= */
 
 header{
 position:sticky;
@@ -56,7 +70,8 @@ align-items:center;
 gap:20px
 }
 
-nav a,.dropbtn{
+nav a,
+.dropbtn{
 text-decoration:none;
 color:#5a4632;
 font-size:16px;
@@ -66,9 +81,14 @@ border:none;
 font-family:inherit
 }
 
-nav a:hover,.dropbtn:hover{
+nav a:hover,
+.dropbtn:hover{
 color:#a67c48
 }
+
+/* =========================
+   SOL MENÜ
+========================= */
 
 .menu-wrapper{
 position:relative
@@ -133,6 +153,10 @@ background:#f1e5d3;
 color:#9b7445
 }
 
+/* =========================
+   ARAMA
+========================= */
+
 .search-box{
 display:flex;
 align-items:center;
@@ -184,7 +208,6 @@ padding:8px 0;
 z-index:2500
 }
 
-/* SADECE MOUSE ÜZERİNE GELİNCE AÇILIR */
 .dropdown:hover .dropdown-content{
 display:block
 }
@@ -202,6 +225,10 @@ white-space:nowrap
 background:#f1e5d3;
 color:#9b7445
 }
+
+/* =========================
+   HESAP
+========================= */
 
 .account-area{
 position:relative;
@@ -224,31 +251,6 @@ white-space:nowrap
 .account-button:hover{
 background:#b99669;
 color:white
-}
-
-/* =========================
-   SEPET BUTONU
-========================= */
-
-.cart-button{
-border:1px solid #b99669;
-background:#fffaf3;
-color:#705333;
-padding:9px 15px;
-font-family:inherit;
-cursor:pointer;
-transition:.3s;
-white-space:nowrap
-}
-
-.cart-button:hover{
-background:#b99669;
-color:white
-}
-
-#cartCount{
-font-weight:bold;
-margin-left:3px
 }
 
 .account-menu{
@@ -312,49 +314,189 @@ color:#705333!important
 background:#f1e5d3!important
 }
 
-.hero{
-min-height:580px;
-background:
-linear-gradient(rgba(65,48,32,.32),rgba(65,48,32,.32)),
-url("resimler/urun1.jpg") center/cover no-repeat;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:40px 20px
+/* =========================
+   SEPET BUTONU
+========================= */
+
+.cart-button{
+border:1px solid #b99669;
+background:#fffaf3;
+color:#705333;
+padding:9px 15px;
+font-family:inherit;
+cursor:pointer;
+transition:.3s;
+white-space:nowrap
+}
+
+.cart-button:hover{
+background:#b99669;
+color:white
+}
+
+#cartCount{
+font-weight:bold;
+margin-left:3px
+}
+
+/* =========================
+   VELORA HERO SLIDER
+========================= */
+
+.hero-slider{
+position:relative;
+width:100%;
+height:calc(100vh - 90px);
+min-height:520px;
+max-height:760px;
+overflow:hidden;
+background:#eee3d3;
+touch-action:pan-y
+}
+
+.hero-slide{
+position:absolute;
+inset:0;
+opacity:0;
+visibility:hidden;
+transition:opacity .7s ease;
+z-index:1
+}
+
+.hero-slide.active{
+opacity:1;
+visibility:visible;
+z-index:2
+}
+
+.hero-slide img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block
+}
+
+.hero-overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(
+90deg,
+rgba(35,25,15,.58) 0%,
+rgba(35,25,15,.25) 45%,
+rgba(35,25,15,.05) 100%
+)
 }
 
 .hero-content{
-color:white;
-max-width:800px
+position:absolute;
+left:8%;
+top:50%;
+transform:translateY(-50%);
+max-width:570px;
+color:#fffaf3;
+z-index:3
 }
 
-.hero h1{
-font-size:62px;
-letter-spacing:8px;
-margin-bottom:20px
+.hero-content span{
+display:block;
+font-size:13px;
+letter-spacing:6px;
+margin-bottom:18px
 }
 
-.hero p{
-font-size:23px;
-letter-spacing:2px
+.hero-content h1{
+font-size:clamp(38px,5vw,72px);
+font-weight:normal;
+line-height:1.08;
+margin-bottom:20px;
+text-shadow:0 3px 15px rgba(0,0,0,.18)
+}
+
+.hero-content p{
+font-size:18px;
+line-height:1.6;
+margin-bottom:30px;
+max-width:460px
 }
 
 .hero-button{
 display:inline-block;
-margin-top:30px;
-padding:13px 30px;
-background:#f8eee0;
-color:#705333;
+padding:13px 27px;
+background:#f7f1e7;
+color:#5b4630;
 text-decoration:none;
-border:1px solid #c7aa82;
+font-size:14px;
+letter-spacing:.5px;
 transition:.3s
 }
 
 .hero-button:hover{
-background:#d9bd94;
-color:white
+background:#fff;
+transform:translateY(-2px)
 }
+
+.hero-arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width:48px;
+height:48px;
+border:1px solid rgba(255,255,255,.6);
+background:rgba(60,40,20,.18);
+color:#fff;
+font-size:38px;
+line-height:38px;
+font-family:Georgia,serif;
+cursor:pointer;
+z-index:10;
+transition:.3s;
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+.hero-arrow:hover{
+background:rgba(60,40,20,.45)
+}
+
+.hero-prev{
+left:25px
+}
+
+.hero-next{
+right:25px
+}
+
+.hero-dots{
+position:absolute;
+left:50%;
+bottom:25px;
+transform:translateX(-50%);
+display:flex;
+gap:9px;
+z-index:10
+}
+
+.hero-dot{
+width:9px;
+height:9px;
+padding:0;
+border:1px solid #fff;
+border-radius:50%;
+background:transparent;
+cursor:pointer;
+transition:.3s
+}
+
+.hero-dot.active{
+width:28px;
+border-radius:10px;
+background:#fff
+}
+
+/* =========================
+   SECTIONS
+========================= */
 
 section{
 padding:80px 6%
@@ -367,6 +509,10 @@ color:#85633d;
 margin-bottom:45px;
 letter-spacing:3px
 }
+
+/* =========================
+   KATEGORİLER
+========================= */
 
 .category-grid{
 display:grid;
@@ -406,6 +552,10 @@ color:white;
 font-size:27px;
 letter-spacing:3px
 }
+
+/* =========================
+   ÜRÜNLER
+========================= */
 
 #urunler{
 background:#fbf7f0
@@ -514,10 +664,6 @@ font-weight:bold;
 margin-bottom:12px
 }
 
-/* =========================
-   SEPETE EKLE
-========================= */
-
 .stock-button{
 width:100%;
 padding:11px;
@@ -532,6 +678,10 @@ transition:.3s
 .stock-button:hover{
 background:#9f7749
 }
+
+/* =========================
+   YORUMLAR
+========================= */
 
 .review-box{
 margin-top:20px;
@@ -603,6 +753,10 @@ color:#b3864e;
 margin-bottom:5px
 }
 
+/* =========================
+   ÖNE ÇIKANLAR
+========================= */
+
 #one-cikanlar{
 background:#efe3d2
 }
@@ -647,6 +801,10 @@ margin-bottom:7px
 color:#a17b50;
 font-size:14px
 }
+
+/* =========================
+   İLETİŞİM
+========================= */
 
 #iletisim{
 text-align:center;
@@ -842,10 +1000,11 @@ font-size:14px;
 color:#80674c
 }
 
-.cart-continue-button{
+.cart-continue-button,
+.checkout-button{
 margin-top:15px;
 width:100%;
-padding:11px;
+padding:12px;
 border:1px solid #b99669;
 background:#b99669;
 color:white;
@@ -853,8 +1012,125 @@ font-family:inherit;
 cursor:pointer
 }
 
-.cart-continue-button:hover{
+.cart-continue-button:hover,
+.checkout-button:hover{
 background:#9f7749
+}
+
+.checkout-button{
+margin-top:10px
+}
+
+/* =========================
+   SİPARİŞ FORMU
+========================= */
+
+.checkout-panel{
+display:none;
+margin-top:25px;
+padding-top:25px;
+border-top:1px solid #ddc9ad
+}
+
+.checkout-panel.active{
+display:block
+}
+
+.checkout-panel h3{
+text-align:center;
+font-size:22px;
+font-weight:normal;
+color:#85633d;
+margin-bottom:10px
+}
+
+.checkout-note{
+background:#f7f1e7;
+border:1px solid #d8c5a9;
+padding:14px;
+margin-bottom:18px;
+font-size:13px;
+line-height:1.6;
+color:#6b5640
+}
+
+.checkout-form{
+display:flex;
+flex-direction:column;
+gap:12px
+}
+
+.checkout-form label{
+font-size:14px;
+color:#705333;
+margin-bottom:-5px
+}
+
+.checkout-form input,
+.checkout-form textarea{
+width:100%;
+padding:12px;
+border:1px solid #d9c5a9;
+background:#fffdf9;
+color:#4c3b2b;
+font-family:inherit;
+outline:none
+}
+
+.checkout-form textarea{
+min-height:100px;
+resize:vertical
+}
+
+.checkout-form input:focus,
+.checkout-form textarea:focus{
+border-color:#b58c5b
+}
+
+.checkout-submit{
+padding:13px;
+border:1px solid #a67c48;
+background:#a67c48;
+color:white;
+font-family:inherit;
+cursor:pointer
+}
+
+.checkout-submit:hover{
+background:#8d673d
+}
+
+.checkout-message{
+min-height:20px;
+text-align:center;
+font-size:14px
+}
+
+.checkout-success{
+color:#58704d
+}
+
+.checkout-error{
+color:#a05243
+}
+
+.login-required-box{
+text-align:center;
+padding:20px;
+background:#f7f1e7;
+border:1px solid #d8c5a9;
+color:#6b5640;
+line-height:1.7
+}
+
+.login-required-box button{
+margin-top:12px;
+padding:10px 18px;
+border:1px solid #b99669;
+background:#b99669;
+color:white;
+font-family:inherit;
+cursor:pointer
 }
 
 .cart-toast{
@@ -882,7 +1158,7 @@ transform:translateY(0)
 }
 
 /* =========================
-   KAYIT BİLGİLENDİRME
+   KAYIT
 ========================= */
 
 .register-notice{
@@ -972,6 +1248,10 @@ color:#58704d
 color:#a05243
 }
 
+/* =========================
+   FAVORİLER
+========================= */
+
 .favorites-empty{
 text-align:center;
 padding:35px 15px;
@@ -1026,6 +1306,10 @@ color:white;
 font-family:inherit;
 cursor:pointer
 }
+
+/* =========================
+   SİPARİŞLER
+========================= */
 
 .orders-container{
 margin-top:10px
@@ -1157,6 +1441,10 @@ background:#b99669;
 border-color:#9b7445
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media(max-width:1200px){
 
 .header-center{
@@ -1233,7 +1521,8 @@ width:100%;
 gap:10px
 }
 
-nav a,.dropbtn{
+nav a,
+.dropbtn{
 font-size:14px
 }
 
@@ -1242,18 +1531,68 @@ left:50%;
 transform:translateX(-50%)
 }
 
-.hero{
-min-height:470px
+/* MOBİL SLIDER */
+
+.hero-slider{
+height:75vh;
+min-height:500px
 }
 
-.hero h1{
-font-size:40px;
-letter-spacing:5px
+.hero-overlay{
+background:linear-gradient(
+180deg,
+rgba(35,25,15,.15),
+rgba(35,25,15,.62)
+)
 }
 
-.hero p{
-font-size:18px
+.hero-content{
+left:25px;
+right:25px;
+top:auto;
+bottom:90px;
+transform:none
 }
+
+.hero-content span{
+font-size:11px;
+letter-spacing:4px;
+margin-bottom:12px
+}
+
+.hero-content h1{
+font-size:38px;
+margin-bottom:14px
+}
+
+.hero-content p{
+font-size:15px;
+margin-bottom:22px
+}
+
+.hero-button{
+padding:12px 21px
+}
+
+.hero-arrow{
+width:38px;
+height:38px;
+font-size:30px
+}
+
+.hero-prev{
+left:12px
+}
+
+.hero-next{
+right:12px
+}
+
+.hero-dots{
+bottom:22px
+}
+
+/* DİĞER */
 
 .category-grid,
 .product-grid,
@@ -1263,6 +1602,7 @@ grid-template-columns:1fr
 }
 
 /* MOBİLDE DE HOVER */
+
 .dropdown-content{
 position:absolute;
 top:calc(100% - 1px);
@@ -1321,10 +1661,16 @@ font-size:18px
 }
 
 }
+
 </style>
+
 </head>
 
 <body>
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
@@ -1344,14 +1690,32 @@ font-size:18px
 Kategoriler
 </div>
 
-<button onclick="filterCategory('Yüzük');closeMenu()">Yüzük</button>
-<button onclick="filterCategory('Bileklik');closeMenu()">Bileklik</button>
-<button onclick="filterCategory('Küpe');closeMenu()">Küpe</button>
-<button onclick="filterCategory('Kolye');closeMenu()">Kolye</button>
-<button onclick="showAllProducts();closeMenu()">Tüm Ürünler</button>
-<button onclick="filterFeatured();closeMenu()">Öne Çıkanlar</button>
+<button onclick="filterCategory('Yüzük');closeMenu()">
+Yüzük
+</button>
+
+<button onclick="filterCategory('Bileklik');closeMenu()">
+Bileklik
+</button>
+
+<button onclick="filterCategory('Küpe');closeMenu()">
+Küpe
+</button>
+
+<button onclick="filterCategory('Kolye');closeMenu()">
+Kolye
+</button>
+
+<button onclick="showAllProducts();closeMenu()">
+Tüm Ürünler
+</button>
+
+<button onclick="filterFeatured();closeMenu()">
+Öne Çıkanlar
+</button>
 
 </div>
+
 </div>
 
 <div class="search-box">
@@ -1400,7 +1764,9 @@ Minimal
 </a>
 
 </div>
+
 </div>
+
 
 <div class="dropdown">
 
@@ -1427,7 +1793,9 @@ Zincir
 </a>
 
 </div>
+
 </div>
+
 
 <div class="dropdown">
 
@@ -1454,7 +1822,9 @@ Minimal
 </a>
 
 </div>
+
 </div>
+
 
 <div class="dropdown">
 
@@ -1481,6 +1851,7 @@ Taşlı
 </a>
 
 </div>
+
 </div>
 
 <a href="#one-cikanlar">
@@ -1495,6 +1866,7 @@ Taşlı
 
 </div>
 
+
 <button
 id="cartButton"
 class="cart-button"
@@ -1502,6 +1874,7 @@ type="button"
 >
 🛒 Sepet (<span id="cartCount">0</span>)
 </button>
+
 
 <div class="account-area">
 
@@ -1561,14 +1934,33 @@ type="button"
 
 </header>
 
-<section class="hero">
+
+<!-- =========================
+     HERO SLIDER
+========================= -->
+
+<section class="hero-slider" id="heroSlider">
+
+<div class="hero-slide active">
+
+<img
+src="resimler/urun1.jpg"
+alt="VELORA Zarif Takılar"
+onerror="this.style.display='none'"
+>
+
+<div class="hero-overlay"></div>
 
 <div class="hero-content">
 
-<h1>VELORA</h1>
+<span>VELORA</span>
+
+<h1>
+Tarzını Yansıt.
+</h1>
 
 <p>
-Zarafetin modern hali.
+Zarafetin en güzel hali, senin stilin.
 </p>
 
 <a href="#urunler" class="hero-button">
@@ -1577,7 +1969,157 @@ Koleksiyonu Keşfet
 
 </div>
 
+</div>
+
+
+<div class="hero-slide">
+
+<img
+src="resimler/slider2.jpg"
+alt="VELORA Takı Koleksiyonu"
+onerror="this.style.display='none'"
+>
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+<span>VELORA</span>
+
+<h1>
+Zarafet Detaylarda Saklıdır.
+</h1>
+
+<p>
+Her detayda sana ait bir ışıltı.
+</p>
+
+<a href="#urunler" class="hero-button">
+Koleksiyonu Keşfet
+</a>
+
+</div>
+
+</div>
+
+
+<div class="hero-slide">
+
+<img
+src="resimler/slider3.jpg"
+alt="VELORA Zarif Takılar"
+onerror="this.style.display='none'"
+>
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+<span>VELORA</span>
+
+<h1>
+Her Anına Bir Işıltı.
+</h1>
+
+<p>
+Sade, zarif ve sana özel.
+</p>
+
+<a href="#urunler" class="hero-button">
+Koleksiyonu Keşfet
+</a>
+
+</div>
+
+</div>
+
+
+<div class="hero-slide">
+
+<img
+src="resimler/slider4.jpg"
+alt="VELORA Özel Koleksiyon"
+onerror="this.style.display='none'"
+>
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+<span>VELORA</span>
+
+<h1>
+Senin Stilın. Senin VELORA'n.
+</h1>
+
+<p>
+Zarafeti kendi tarzınla tamamla.
+</p>
+
+<a href="#urunler" class="hero-button">
+Koleksiyonu Keşfet
+</a>
+
+</div>
+
+</div>
+
+
+<button
+class="hero-arrow hero-prev"
+type="button"
+aria-label="Önceki görsel"
+>
+‹
+</button>
+
+<button
+class="hero-arrow hero-next"
+type="button"
+aria-label="Sonraki görsel"
+>
+›
+</button>
+
+
+<div class="hero-dots">
+
+<button
+class="hero-dot active"
+type="button"
+data-slide="0"
+aria-label="1. slayt"
+></button>
+
+<button
+class="hero-dot"
+type="button"
+data-slide="1"
+aria-label="2. slayt"
+></button>
+
+<button
+class="hero-dot"
+type="button"
+data-slide="2"
+aria-label="3. slayt"
+></button>
+
+<button
+class="hero-dot"
+type="button"
+data-slide="3"
+aria-label="4. slayt"
+></button>
+
+</div>
+
 </section>
+
+
+<!-- =========================
+     KATEGORİLER
+========================= -->
 
 <section>
 
@@ -1603,6 +2145,7 @@ Yüzük
 
 </div>
 
+
 <div
 class="category-card"
 onclick="filterCategory('Bileklik')"
@@ -1619,6 +2162,7 @@ Bileklik
 
 </div>
 
+
 <div
 class="category-card"
 onclick="filterCategory('Küpe')"
@@ -1634,6 +2178,7 @@ Küpe
 </div>
 
 </div>
+
 
 <div
 class="category-card"
@@ -1655,6 +2200,11 @@ Kolye
 
 </section>
 
+
+<!-- =========================
+     ÜRÜNLER
+========================= -->
+
 <section id="urunler">
 
 <h2 class="section-title">
@@ -1669,6 +2219,11 @@ class="search-result-info"
 <div id="productContainer"></div>
 
 </section>
+
+
+<!-- =========================
+     ÖNE ÇIKANLAR
+========================= -->
 
 <section id="one-cikanlar">
 
@@ -1702,6 +2257,7 @@ Su Yolu Bileklik
 
 </div>
 
+
 <div
 class="featured-card"
 onclick="filterCategory('Yüzük','Günlük')"
@@ -1726,6 +2282,7 @@ Zarif Yüzük
 
 </div>
 
+
 <div
 class="featured-card"
 onclick="filterCategory('Kolye','İnci')"
@@ -1749,6 +2306,7 @@ alt="İnci Kolye"
 </div>
 
 </div>
+
 
 <div
 class="featured-card"
@@ -1778,6 +2336,11 @@ alt="İnci Küpe"
 
 </section>
 
+
+<!-- =========================
+     İLETİŞİM
+========================= -->
+
 <section id="iletisim">
 
 <h2 class="section-title">
@@ -1787,17 +2350,20 @@ alt="İnci Küpe"
 <p class="contact-text">
 
 VELORA koleksiyonumuz çok yakında stoklarda olacak.
-Yeni ürünler, özel koleksiyonlar ve güncellemeler için bizi takip etmeye devam edin.
+Yeni ürünler, özel koleksiyonlar ve güncellemeler için
+bizi takip etmeye devam edin.
 
 </p>
 
 </section>
+
 
 <footer>
 
 © 2026 VELORA — Zarafetin modern hali.
 
 </footer>
+
 
 <!-- =========================
      GİRİŞ / KAYIT MODALI
@@ -1814,6 +2380,7 @@ type="button"
 >
 ×
 </button>
+
 
 <div id="loginForm">
 
@@ -1886,6 +2453,7 @@ onclick="showForgotPassword()"
 
 </div>
 
+
 <div
 id="registerForm"
 style="display:none;"
@@ -1904,9 +2472,7 @@ Hesap Oluştur
 <div>
 
 Lütfen hesap oluştururken tüm bilgilerinizi
-<strong>eksiksiz ve doğru</strong>
-şekilde giriniz.
-
+<strong>eksiksiz ve doğru</strong> şekilde giriniz.
 Bilgilerinizin doğruluğu, sipariş ve hesap işlemlerinizin
 sorunsuz ilerlemesi için önemlidir.
 
@@ -1979,6 +2545,7 @@ Giriş Yap
 
 </div>
 
+
 <div
 id="verifyEmailForm"
 style="display:none;"
@@ -2047,6 +2614,7 @@ Giriş Yap
 
 </div>
 
+
 <div
 id="forgotPasswordForm"
 style="display:none;"
@@ -2107,6 +2675,7 @@ Giriş Yap
 </div>
 
 </div>
+
 
 <div
 id="resetPasswordForm"
@@ -2181,6 +2750,7 @@ Giriş Yap
 
 </div>
 
+
 <div
 id="changePasswordForm"
 style="display:none;"
@@ -2249,7 +2819,10 @@ Kapat
 
 </div>
 
-<!-- FAVORİLER -->
+
+<!-- =========================
+     FAVORİLER
+========================= -->
 
 <div
 id="favoritesModal"
@@ -2276,7 +2849,10 @@ type="button"
 
 </div>
 
-<!-- SİPARİŞLER -->
+
+<!-- =========================
+     SİPARİŞLER
+========================= -->
 
 <div
 id="ordersModal"
@@ -2306,7 +2882,10 @@ class="orders-container"
 
 </div>
 
-<!-- SEPET -->
+
+<!-- =========================
+     SEPET
+========================= -->
 
 <div
 id="cartModal"
@@ -2333,34 +2912,159 @@ type="button"
 
 </div>
 
+
 <script>
 
-const API_URL="https://velora-backend-1-aft5.onrender.com";
+/* =========================
+   API
+========================= */
+
+const API_URL =
+"https://velora-backend-1-aft5.onrender.com";
+
+
+/* =========================
+   ÜRÜNLER
+========================= */
 
 const products=[
-{id:1,name:"Zarif Yüzük",category:"Yüzük",subcategory:"Günlük",image:"resimler/yuzuk.jpg"},
-{id:2,name:"Taşlı Yüzük",category:"Yüzük",subcategory:"Taşlı",image:"resimler/tasli-yuzuk.jpg"},
-{id:3,name:"Kalp Detaylı Yüzük",category:"Yüzük",subcategory:"Kalpli",image:"resimler/kalp-yuzuk.jpg"},
-{id:4,name:"Minimal Yüzük",category:"Yüzük",subcategory:"Minimal",image:"resimler/minimal-yuzuk.jpg"},
 
-{id:5,name:"Minimal Bileklik",category:"Bileklik",subcategory:"Minimal",image:"resimler/bileklik.jpg"},
-{id:6,name:"Taşlı Bileklik",category:"Bileklik",subcategory:"Taşlı",image:"resimler/tasli-bileklik.jpg"},
-{id:7,name:"Su Yolu Bileklik",category:"Bileklik",subcategory:"Su Yolu",image:"resimler/su-yolu-bileklik.jpg"},
-{id:8,name:"Zincir Bileklik",category:"Bileklik",subcategory:"Zincir",image:"resimler/zincir-bileklik.jpg"},
+{
+id:1,
+name:"Zarif Yüzük",
+category:"Yüzük",
+subcategory:"Günlük",
+image:"resimler/yuzuk.jpg"
+},
 
-{id:9,name:"İnci Küpe",category:"Küpe",subcategory:"İnci",image:"resimler/incikupe.jpg"},
-{id:10,name:"Halka Küpe",category:"Küpe",subcategory:"Halka",image:"resimler/halka-kupe.jpg"},
-{id:11,name:"Taşlı Küpe",category:"Küpe",subcategory:"Taşlı",image:"resimler/tasli-kupe.jpg"},
-{id:12,name:"Minimal Küpe",category:"Küpe",subcategory:"Minimal",image:"resimler/minimal-kupe.jpg"},
+{
+id:2,
+name:"Taşlı Yüzük",
+category:"Yüzük",
+subcategory:"Taşlı",
+image:"resimler/tasli-yuzuk.jpg"
+},
 
-{id:13,name:"İnci Kolye",category:"Kolye",subcategory:"İnci",image:"resimler/kolye.jpg"},
-{id:14,name:"İnce Zincir Kolye",category:"Kolye",subcategory:"Zincir",image:"resimler/zincir-kolye.jpg"},
-{id:15,name:"Minimal Kolye",category:"Kolye",subcategory:"Minimal",image:"resimler/minimal-kolye.jpg"},
-{id:16,name:"Taşlı Kolye",category:"Kolye",subcategory:"Taşlı",image:"resimler/tasli-kolye.jpg"}
+{
+id:3,
+name:"Kalp Detaylı Yüzük",
+category:"Yüzük",
+subcategory:"Kalpli",
+image:"resimler/kalp-yuzuk.jpg"
+},
+
+{
+id:4,
+name:"Minimal Yüzük",
+category:"Yüzük",
+subcategory:"Minimal",
+image:"resimler/minimal-yuzuk.jpg"
+},
+
+{
+id:5,
+name:"Minimal Bileklik",
+category:"Bileklik",
+subcategory:"Minimal",
+image:"resimler/bileklik.jpg"
+},
+
+{
+id:6,
+name:"Taşlı Bileklik",
+category:"Bileklik",
+subcategory:"Taşlı",
+image:"resimler/tasli-bileklik.jpg"
+},
+
+{
+id:7,
+name:"Su Yolu Bileklik",
+category:"Bileklik",
+subcategory:"Su Yolu",
+image:"resimler/su-yolu-bileklik.jpg"
+},
+
+{
+id:8,
+name:"Zincir Bileklik",
+category:"Bileklik",
+subcategory:"Zincir",
+image:"resimler/zincir-bileklik.jpg"
+},
+
+{
+id:9,
+name:"İnci Küpe",
+category:"Küpe",
+subcategory:"İnci",
+image:"resimler/incikupe.jpg"
+},
+
+{
+id:10,
+name:"Halka Küpe",
+category:"Küpe",
+subcategory:"Halka",
+image:"resimler/halka-kupe.jpg"
+},
+
+{
+id:11,
+name:"Taşlı Küpe",
+category:"Küpe",
+subcategory:"Taşlı",
+image:"resimler/tasli-kupe.jpg"
+},
+
+{
+id:12,
+name:"Minimal Küpe",
+category:"Küpe",
+subcategory:"Minimal",
+image:"resimler/minimal-kupe.jpg"
+},
+
+{
+id:13,
+name:"İnci Kolye",
+category:"Kolye",
+subcategory:"İnci",
+image:"resimler/kolye.jpg"
+},
+
+{
+id:14,
+name:"İnce Zincir Kolye",
+category:"Kolye",
+subcategory:"Zincir",
+image:"resimler/zincir-kolye.jpg"
+},
+
+{
+id:15,
+name:"Minimal Kolye",
+category:"Kolye",
+subcategory:"Minimal",
+image:"resimler/minimal-kolye.jpg"
+},
+
+{
+id:16,
+name:"Taşlı Kolye",
+category:"Kolye",
+subcategory:"Taşlı",
+image:"resimler/tasli-kolye.jpg"
+}
+
 ];
 
-let selectedStars=Array(products.length+1).fill(0);
+
+let selectedStars=
+Array(products.length+1).fill(0);
+
 let favoriteProductIds=[];
+
 let cart=[];
 
 
@@ -2372,7 +3076,8 @@ function loadCart(){
 
 try{
 
-const saved=JSON.parse(
+const saved=
+JSON.parse(
 localStorage.getItem("veloraCart")||"[]"
 );
 
@@ -2380,16 +3085,25 @@ if(Array.isArray(saved)){
 
 cart=saved
 .map(item=>({
+
 productId:Number(item.productId),
+
 quantity:Number(item.quantity)
+
 }))
 .filter(item=>
+
 Number.isInteger(item.productId)&&
+
 products.some(
-product=>Number(product.id)===item.productId
+product=>
+Number(product.id)===item.productId
 )&&
+
 Number.isInteger(item.quantity)&&
+
 item.quantity>0
+
 );
 
 }else{
@@ -2400,7 +3114,11 @@ cart=[];
 
 }catch(error){
 
-console.error("Sepet yüklenemedi:",error);
+console.error(
+"Sepet yüklenemedi:",
+error
+);
+
 cart=[];
 
 }
@@ -2408,6 +3126,7 @@ cart=[];
 updateCartCount();
 
 }
+
 
 function saveCart(){
 
@@ -2420,6 +3139,7 @@ updateCartCount();
 
 }
 
+
 function getCartCount(){
 
 return cart.reduce(
@@ -2430,6 +3150,7 @@ total+Number(item.quantity||0),
 
 }
 
+
 function updateCartCount(){
 
 const element=
@@ -2437,11 +3158,13 @@ document.getElementById("cartCount");
 
 if(element){
 
-element.textContent=getCartCount();
+element.textContent=
+getCartCount();
 
 }
 
 }
+
 
 function addToCart(productId){
 
@@ -2481,7 +3204,11 @@ showCartToast(
 
 }
 
-function changeCartQuantity(productId,change){
+
+function changeCartQuantity(
+productId,
+change
+){
 
 const id=Number(productId);
 
@@ -2505,9 +3232,11 @@ item=>Number(item.productId)!==id
 }
 
 saveCart();
+
 renderCart();
 
 }
+
 
 function removeFromCart(productId){
 
@@ -2519,9 +3248,15 @@ item=>Number(item.productId)!==id
 );
 
 saveCart();
+
 renderCart();
 
 }
+
+
+/* =========================
+   SEPET RENDER
+========================= */
 
 function renderCart(){
 
@@ -2530,14 +3265,18 @@ document.getElementById("cartContainer");
 
 if(!container)return;
 
-cart=cart.filter(item=>
+cart=
+cart.filter(
+item=>
 products.some(
 product=>
-Number(product.id)===Number(item.productId)
+Number(product.id)===
+Number(item.productId)
 )
 );
 
 saveCart();
+
 
 if(!cart.length){
 
@@ -2565,6 +3304,7 @@ return;
 
 }
 
+
 container.innerHTML=`
 
 <div class="cart-list">
@@ -2573,7 +3313,9 @@ ${cart.map(item=>{
 
 const product=
 products.find(
-p=>Number(p.id)===Number(item.productId)
+p=>
+Number(p.id)===
+Number(item.productId)
 );
 
 if(!product)return"";
@@ -2600,7 +3342,7 @@ ${escapeHtml(product.name)}
 
 <div class="cart-item-category">
 ${escapeHtml(product.category)}
- ·
+·
 ${escapeHtml(product.subcategory)}
 </div>
 
@@ -2645,11 +3387,15 @@ title="Sepetten çıkar"
 
 </div>
 
+
 <div class="cart-info">
 
 Sepetinizde
-<strong>${getCartCount()}</strong>
+<strong>
+${getCartCount()}
+</strong>
 adet ürün bulunuyor.
+
 
 <button
 class="cart-continue-button"
@@ -2659,11 +3405,430 @@ onclick="closeCart()"
 Alışverişe Devam Et
 </button>
 
+
+<button
+class="checkout-button"
+type="button"
+onclick="openCheckout()"
+>
+Siparişi Tamamla
+</button>
+
+
+<div
+id="checkoutPanel"
+class="checkout-panel"
+>
+
+<div id="checkoutContent"></div>
+
+</div>
+
 </div>
 
 `;
 
 }
+
+
+/* =========================
+   CHECKOUT
+========================= */
+
+function openCheckout(){
+
+const panel=
+document.getElementById("checkoutPanel");
+
+const content=
+document.getElementById("checkoutContent");
+
+if(!panel||!content)return;
+
+panel.classList.add("active");
+
+const token=
+localStorage.getItem("veloraToken");
+
+if(!token){
+
+content.innerHTML=`
+
+<div class="login-required-box">
+
+<strong>
+Siparişi tamamlamak için giriş yapmalısınız.
+</strong>
+
+<br>
+
+Hesabınız varsa giriş yapabilir,
+hesabınız yoksa ücretsiz hesap oluşturabilirsiniz.
+
+<br>
+
+<button
+type="button"
+onclick="closeCart();openAuth();"
+>
+Giriş Yap / Hesap Oluştur
+</button>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+let user={};
+
+try{
+
+user=
+JSON.parse(
+localStorage.getItem("veloraUser")||"{}"
+);
+
+}catch{
+
+user={};
+
+}
+
+
+content.innerHTML=`
+
+<h3>
+Sipariş Bilgileri
+</h3>
+
+<div class="checkout-note">
+
+Sipariş bilgilerinizi eksiksiz giriniz.
+VELORA'nın resmi ödeme sistemi henüz aktif değildir.
+Bu nedenle bu aşamada herhangi bir ödeme alınmaz.
+
+Sipariş talebiniz sisteme iletilecek ve
+hesabınızdaki siparişler bölümünde görünecektir.
+
+</div>
+
+
+<form
+class="checkout-form"
+id="checkoutForm"
+>
+
+<label>
+Ad Soyad
+</label>
+
+<input
+type="text"
+id="checkoutName"
+placeholder="Ad Soyad"
+value="${escapeHtml(
+user.username||""
+)}"
+required
+>
+
+
+<label>
+E-posta
+</label>
+
+<input
+type="email"
+id="checkoutEmail"
+placeholder="E-posta"
+value="${escapeHtml(
+user.email||""
+)}"
+required
+readonly
+>
+
+
+<label>
+Telefon
+</label>
+
+<input
+type="tel"
+id="checkoutPhone"
+placeholder="05xx xxx xx xx"
+required
+>
+
+
+<label>
+Teslimat Adresi
+</label>
+
+<textarea
+id="checkoutAddress"
+placeholder="Teslimat adresinizi yazınız..."
+required
+></textarea>
+
+
+<div
+id="checkoutMessage"
+class="checkout-message"
+></div>
+
+
+<button
+type="submit"
+class="checkout-submit"
+>
+Sipariş Talebini Gönder
+</button>
+
+</form>
+
+`;
+
+document
+.getElementById("checkoutForm")
+.addEventListener(
+"submit",
+submitOrder
+);
+
+}
+
+
+async function submitOrder(event){
+
+event.preventDefault();
+
+const token=
+localStorage.getItem("veloraToken");
+
+if(!token){
+
+alert(
+"Sipariş vermek için giriş yapmalısınız."
+);
+
+return;
+
+}
+
+if(!cart.length){
+
+alert(
+"Sepetiniz boş."
+);
+
+return;
+
+}
+
+
+const name=
+document
+.getElementById("checkoutName")
+.value
+.trim();
+
+const email=
+document
+.getElementById("checkoutEmail")
+.value
+.trim();
+
+const phone=
+document
+.getElementById("checkoutPhone")
+.value
+.trim();
+
+const address=
+document
+.getElementById("checkoutAddress")
+.value
+.trim();
+
+const message=
+document.getElementById(
+"checkoutMessage"
+);
+
+
+if(!name||!email||!phone||!address){
+
+message.className=
+"checkout-message checkout-error";
+
+message.textContent=
+"Lütfen tüm sipariş bilgilerini doldurun.";
+
+return;
+
+}
+
+
+const items=
+cart.map(item=>{
+
+const product=
+products.find(
+p=>
+Number(p.id)===
+Number(item.productId)
+);
+
+return{
+
+productId:Number(product.id),
+
+name:product.name,
+
+category:product.category,
+
+subcategory:product.subcategory,
+
+image:product.image,
+
+quantity:Number(item.quantity)
+
+};
+
+});
+
+
+message.className=
+"checkout-message";
+
+message.textContent=
+"Sipariş gönderiliyor...";
+
+
+const submitButton=
+document.querySelector(
+".checkout-submit"
+);
+
+if(submitButton){
+
+submitButton.disabled=true;
+
+submitButton.textContent=
+"Gönderiliyor...";
+
+}
+
+
+try{
+
+const data=
+await apiRequest(
+"/api/orders",
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"application/json",
+
+"Authorization":
+`Bearer ${token}`
+
+},
+
+body:JSON.stringify({
+
+userId:null,
+
+customerName:name,
+
+customerEmail:email,
+
+customerPhone:phone,
+
+address:address,
+
+items:items,
+
+/*
+Fiyat sistemi henüz kurulmadığı
+için geçici olarak 0 gönderiliyor.
+Resmi ödeme sistemi kurulduğunda
+bu alan gerçek toplam fiyat ile
+değiştirilecek.
+*/
+
+total:0
+
+})
+
+}
+);
+
+
+message.className=
+"checkout-message checkout-success";
+
+message.textContent=
+data.message||
+"Sipariş talebiniz başarıyla alındı.";
+
+
+cart=[];
+
+saveCart();
+
+
+setTimeout(()=>{
+
+closeCart();
+
+alert(
+"Sipariş talebiniz başarıyla alındı."
+);
+
+},1200);
+
+
+}catch(error){
+
+console.error(
+"ORDER ERROR:",
+error
+);
+
+message.className=
+"checkout-message checkout-error";
+
+message.textContent=
+error.message||
+"Sipariş gönderilemedi.";
+
+if(submitButton){
+
+submitButton.disabled=false;
+
+submitButton.textContent=
+"Sipariş Talebini Gönder";
+
+}
+
+}
+
+}
+
+
+/* =========================
+   CART MODAL
+========================= */
 
 function openCart(){
 
@@ -2680,6 +3845,7 @@ modal.classList.add("active");
 
 }
 
+
 function closeCart(){
 
 const modal=
@@ -2691,19 +3857,24 @@ modal.classList.remove("active");
 
 }
 
+
 function showCartToast(message){
 
 const oldToast=
 document.querySelector(".cart-toast");
 
 if(oldToast){
+
 oldToast.remove();
+
 }
 
 const toast=
 document.createElement("div");
 
-toast.className="cart-toast";
+toast.className=
+"cart-toast";
+
 toast.textContent=message;
 
 document.body.appendChild(toast);
@@ -2711,7 +3882,9 @@ document.body.appendChild(toast);
 setTimeout(()=>{
 
 if(toast.parentNode){
+
 toast.remove();
+
 }
 
 },2000);
@@ -2728,20 +3901,28 @@ function escapeHtml(text){
 const div=
 document.createElement("div");
 
-div.textContent=String(text??"");
+div.textContent=
+String(text??"");
 
 return div.innerHTML;
 
 }
 
-async function apiRequest(path,options={}){
+
+async function apiRequest(
+path,
+options={}
+){
 
 const response=
 await fetch(
 `${API_URL}${path}`,
 {
+
 ...options,
+
 cache:"no-store"
+
 }
 );
 
@@ -2752,7 +3933,10 @@ await response.text();
 
 try{
 
-data=text?JSON.parse(text):{};
+data=
+text?
+JSON.parse(text):
+{};
 
 }catch{
 
@@ -2763,6 +3947,7 @@ text||
 };
 
 }
+
 
 if(!response.ok){
 
@@ -2777,6 +3962,11 @@ return data;
 
 }
 
+
+/* =========================
+   YILDIZ
+========================= */
+
 function createStars(productId){
 
 let html="";
@@ -2786,7 +3976,11 @@ for(let i=1;i<=5;i++){
 html+=`
 
 <span
-class="star ${selectedStars[productId]>=i?"active":""}"
+class="star ${
+selectedStars[productId]>=i
+?"active"
+:""
+}"
 onclick="selectStar(${productId},${i})"
 >
 ★
@@ -2800,7 +3994,11 @@ return html;
 
 }
 
-function selectStar(productId,rating){
+
+function selectStar(
+productId,
+rating
+){
 
 selectedStars[productId]=rating;
 
@@ -2823,7 +4021,9 @@ createStars(productId);
    ÜRÜNLER
 ========================= */
 
-function renderProducts(list=products){
+function renderProducts(
+list=products
+){
 
 const container=
 document.getElementById(
@@ -2834,12 +4034,15 @@ if(!container)return;
 
 container.innerHTML="";
 
+
 if(!list.length){
 
 container.innerHTML=`
 
 <div class="favorites-empty">
+
 Aradığınız kriterlere uygun ürün bulunamadı.
+
 </div>
 
 `;
@@ -2847,6 +4050,7 @@ Aradığınız kriterlere uygun ürün bulunamadı.
 return;
 
 }
+
 
 [
 "Yüzük",
@@ -2857,10 +4061,12 @@ return;
 
 const categoryProducts=
 list.filter(
-product=>product.category===category
+product=>
+product.category===category
 );
 
 if(!categoryProducts.length)return;
+
 
 const heading=
 document.createElement("h2");
@@ -2868,36 +4074,50 @@ document.createElement("h2");
 heading.className=
 "category-heading";
 
-heading.textContent=category;
+heading.textContent=
+category;
 
 container.appendChild(heading);
+
 
 const grid=
 document.createElement("div");
 
-grid.className="product-grid";
+grid.className=
+"product-grid";
+
 
 categoryProducts.forEach(product=>{
 
 const card=
 document.createElement("div");
 
-card.className="product-card";
+card.className=
+"product-card";
+
 
 const isFavorite=
 favoriteProductIds.includes(
 Number(product.id)
 );
 
+
 card.innerHTML=`
 
 <button
-class="favorite-button ${isFavorite?"active":""}"
+class="favorite-button ${
+isFavorite?"active":""
+}"
 onclick="toggleFavorite(${product.id})"
-title="${isFavorite?"Favorilerden çıkar":"Favorilere ekle"}"
+title="${
+isFavorite
+?"Favorilerden çıkar"
+:"Favorilere ekle"
+}"
 >
 ${isFavorite?"♥":"♡"}
 </button>
+
 
 <img
 class="product-image"
@@ -2905,6 +4125,7 @@ src="${escapeHtml(product.image)}"
 alt="${escapeHtml(product.name)}"
 onerror="this.src='resimler/urun1.jpg'"
 >
+
 
 <div class="product-info">
 
@@ -2928,6 +4149,7 @@ type="button"
 🛒 Sepete Ekle
 </button>
 
+
 <div class="review-box">
 
 <div
@@ -2937,11 +4159,13 @@ id="stars-${product.id}"
 ${createStars(product.id)}
 </div>
 
+
 <textarea
 id="review-${product.id}"
 class="review-input"
 placeholder="Ürün hakkındaki düşüncenizi yazın..."
 ></textarea>
+
 
 <button
 class="review-button"
@@ -2949,6 +4173,7 @@ onclick="addReview(${product.id})"
 >
 Yorumu Gönder
 </button>
+
 
 <div
 class="reviews"
@@ -2958,6 +4183,7 @@ id="reviews-${product.id}"
 </div>
 
 </div>
+
 `;
 
 grid.appendChild(card);
@@ -2966,43 +4192,64 @@ grid.appendChild(card);
 
 container.appendChild(grid);
 
+
 categoryProducts.forEach(
-product=>loadReviews(product.id)
+product=>
+loadReviews(product.id)
 );
 
 });
 
 }
 
-function filterCategory(category,subcategory=null){
+
+/* =========================
+   KATEGORİ FİLTRE
+========================= */
+
+function filterCategory(
+category,
+subcategory=null
+){
 
 const filtered=
 subcategory
-?products.filter(
+
+?
+products.filter(
 p=>
 p.category===category&&
 p.subcategory===subcategory
 )
-:products.filter(
-p=>p.category===category
+
+:
+products.filter(
+p=>
+p.category===category
 );
+
 
 document.getElementById(
 "productSearch"
 ).value="";
 
+
 document.getElementById(
 "searchResultInfo"
 ).textContent=
 subcategory
-?`${category} › ${subcategory}`
-:`${category} ürünleri`;
+?
+`${category} › ${subcategory}`
+:
+`${category} ürünleri`;
+
 
 renderProducts(filtered);
 
 scrollToProducts();
 
 }
+
 
 function showAllProducts(){
 
@@ -3012,13 +4259,15 @@ document.getElementById(
 
 document.getElementById(
 "searchResultInfo"
-).textContent="Tüm Ürünler";
+).textContent=
+"Tüm Ürünler";
 
 renderProducts(products);
 
 scrollToProducts();
 
 }
+
 
 function filterFeatured(){
 
@@ -3030,14 +4279,16 @@ behavior:"smooth"
 
 }
 
+
 function searchProducts(){
 
 const query=
-document.getElementById(
-"productSearch"
-).value
+document
+.getElementById("productSearch")
+.value
 .trim()
 .toLocaleLowerCase("tr-TR");
+
 
 if(!query){
 
@@ -3051,19 +4302,28 @@ return;
 
 }
 
+
 const filtered=
-products.filter(
-product=>
+products.filter(product=>
+
 product.name
 .toLocaleLowerCase("tr-TR")
-.includes(query)||
+.includes(query)
+
+||
+
 product.category
 .toLocaleLowerCase("tr-TR")
-.includes(query)||
+.includes(query)
+
+||
+
 product.subcategory
 .toLocaleLowerCase("tr-TR")
 .includes(query)
+
 );
+
 
 document.getElementById(
 "searchResultInfo"
@@ -3076,12 +4336,15 @@ scrollToProducts();
 
 }
 
+
 function scrollToProducts(){
 
 setTimeout(()=>{
 
 const section=
-document.getElementById("urunler");
+document.getElementById(
+"urunler"
+);
 
 if(section){
 
@@ -3095,11 +4358,12 @@ behavior:"smooth"
 
 }
 
+
 function closeMenu(){
 
-document.getElementById(
-"menuPanel"
-).classList.remove("active");
+document
+.getElementById("menuPanel")
+.classList.remove("active");
 
 }
 
@@ -3115,26 +4379,34 @@ document.getElementById(
 `review-${productId}`
 );
 
-const text=input.value.trim();
+const text=
+input.value.trim();
 
 const rating=
 selectedStars[productId];
 
+
 if(!rating){
 
-alert("Lütfen yıldız puanı seçin.");
+alert(
+"Lütfen yıldız puanı seçin."
+);
 
 return;
 
 }
+
 
 if(!text){
 
-alert("Lütfen yorumunuzu yazın.");
+alert(
+"Lütfen yorumunuzu yazın."
+);
 
 return;
 
 }
+
 
 const key=
 `velora-reviews-${productId}`;
@@ -3144,19 +4416,30 @@ JSON.parse(
 localStorage.getItem(key)||"[]"
 );
 
+
 reviews.push({
+
 rating,
+
 text,
-date:new Date().toLocaleDateString("tr-TR")
+
+date:
+new Date()
+.toLocaleDateString("tr-TR")
+
 });
+
 
 localStorage.setItem(
 key,
 JSON.stringify(reviews)
 );
 
+
 input.value="";
+
 selectedStars[productId]=0;
+
 
 const stars=
 document.getElementById(
@@ -3170,9 +4453,11 @@ createStars(productId);
 
 }
 
+
 loadReviews(productId);
 
 }
+
 
 function loadReviews(productId){
 
@@ -3183,6 +4468,7 @@ document.getElementById(
 
 if(!container)return;
 
+
 const reviews=
 JSON.parse(
 localStorage.getItem(
@@ -3190,25 +4476,33 @@ localStorage.getItem(
 )||"[]"
 );
 
+
 container.innerHTML="";
+
 
 reviews.forEach(review=>{
 
 const item=
 document.createElement("div");
 
-item.className="review-item";
+item.className=
+"review-item";
+
 
 let stars="";
+
 
 for(let i=1;i<=5;i++){
 
 stars+=
 i<=Number(review.rating)
-?"★"
-:"☆";
+?
+"★"
+:
+"☆";
 
 }
+
 
 item.innerHTML=`
 
@@ -3225,6 +4519,7 @@ ${escapeHtml(review.date)}
 </small>
 
 `;
+
 
 container.appendChild(item);
 
@@ -3245,9 +4540,11 @@ localStorage.getItem("veloraToken");
 if(!token){
 
 favoriteProductIds=[];
+
 return;
 
 }
+
 
 try{
 
@@ -3255,11 +4552,15 @@ const data=
 await apiRequest(
 "/api/favorites",
 {
+
 headers:{
-"Authorization":`Bearer ${token}`
+"Authorization":
+`Bearer ${token}`
 }
+
 }
 );
+
 
 favoriteProductIds=
 (data.favorites||[])
@@ -3271,6 +4572,7 @@ item.productId||
 item.id
 )
 );
+
 
 }catch(error){
 
@@ -3284,6 +4586,7 @@ favoriteProductIds=[];
 }
 
 }
+
 
 async function toggleFavorite(productId){
 
@@ -3302,10 +4605,12 @@ return;
 
 }
 
+
 const isFavorite=
 favoriteProductIds.includes(
 Number(productId)
 );
+
 
 try{
 
@@ -3314,33 +4619,52 @@ if(isFavorite){
 await apiRequest(
 `/api/favorites/${productId}`,
 {
+
 method:"DELETE",
+
 headers:{
-"Authorization":`Bearer ${token}`
+"Authorization":
+`Bearer ${token}`
 }
+
 }
 );
+
 
 favoriteProductIds=
 favoriteProductIds.filter(
 id=>id!==Number(productId)
 );
 
+
 }else{
 
 await apiRequest(
 "/api/favorites",
 {
+
 method:"POST",
+
 headers:{
-"Content-Type":"application/json",
-"Authorization":`Bearer ${token}`
+
+"Content-Type":
+"application/json",
+
+"Authorization":
+`Bearer ${token}`
+
 },
+
 body:JSON.stringify({
-productId:Number(productId)
+
+productId:
+Number(productId)
+
 })
+
 }
 );
+
 
 favoriteProductIds.push(
 Number(productId)
@@ -3348,10 +4672,13 @@ Number(productId)
 
 }
 
+
 const query=
-document.getElementById(
-"productSearch"
-).value.trim();
+document
+.getElementById("productSearch")
+.value
+.trim();
+
 
 if(query){
 
@@ -3363,6 +4690,7 @@ renderProducts(products);
 
 }
 
+
 }catch(error){
 
 alert(error.message);
@@ -3370,6 +4698,7 @@ alert(error.message);
 }
 
 }
+
 
 async function openFavorites(){
 
@@ -3379,11 +4708,14 @@ localStorage.getItem("veloraToken");
 if(!token){
 
 openAuth();
+
 return;
 
 }
 
+
 closeAccountMenu();
+
 
 const modal=
 document.getElementById(
@@ -3392,10 +4724,12 @@ document.getElementById(
 
 modal.classList.add("active");
 
+
 const container=
 document.getElementById(
 "favoritesContainer"
 );
+
 
 container.innerHTML=`
 
@@ -3405,7 +4739,9 @@ Favoriler yükleniyor...
 
 `;
 
+
 await loadFavorites();
+
 
 if(!favoriteProductIds.length){
 
@@ -3418,7 +4754,8 @@ Henüz favorin yok.
 </strong>
 
 <p>
-Beğendiğin ürünlerin üzerindeki ♡ butonuna basarak onları favorilerine ekleyebilirsin.
+Beğendiğin ürünlerin üzerindeki ♡ butonuna
+basarak onları favorilerine ekleyebilirsin.
 </p>
 
 </div>
@@ -3429,6 +4766,7 @@ return;
 
 }
 
+
 const favoriteProducts=
 products.filter(
 product=>
@@ -3437,19 +4775,25 @@ Number(product.id)
 )
 );
 
+
 container.innerHTML="";
+
 
 const grid=
 document.createElement("div");
 
-grid.className="favorite-list";
+grid.className=
+"favorite-list";
+
 
 favoriteProducts.forEach(product=>{
 
 const item=
 document.createElement("div");
 
-item.className="favorite-item";
+item.className=
+"favorite-item";
+
 
 item.innerHTML=`
 
@@ -3482,39 +4826,52 @@ onclick="removeFavoriteFromList(${product.id})"
 
 `;
 
+
 grid.appendChild(item);
 
 });
+
 
 container.appendChild(grid);
 
 }
 
-async function removeFavoriteFromList(productId){
+
+async function removeFavoriteFromList(
+productId
+){
 
 const token=
 localStorage.getItem("veloraToken");
+
 
 try{
 
 await apiRequest(
 `/api/favorites/${productId}`,
 {
+
 method:"DELETE",
+
 headers:{
-"Authorization":`Bearer ${token}`
+"Authorization":
+`Bearer ${token}`
 }
+
 }
 );
+
 
 favoriteProductIds=
 favoriteProductIds.filter(
 id=>id!==Number(productId)
 );
 
+
 await openFavorites();
 
 renderProducts(products);
+
 
 }catch(error){
 
@@ -3537,16 +4894,20 @@ localStorage.getItem("veloraToken");
 if(!token){
 
 openAuth();
+
 return;
 
 }
 
+
 closeAccountMenu();
+
 
 const container=
 document.getElementById(
 "ordersContainer"
 );
+
 
 container.innerHTML=`
 
@@ -3556,9 +4917,11 @@ Siparişler yükleniyor...
 
 `;
 
-document.getElementById(
-"ordersModal"
-).classList.add("active");
+
+document
+.getElementById("ordersModal")
+.classList.add("active");
+
 
 try{
 
@@ -3566,13 +4929,20 @@ const data=
 await apiRequest(
 "/api/orders/my",
 {
+
 headers:{
-"Authorization":`Bearer ${token}`
+"Authorization":
+`Bearer ${token}`
 }
+
 }
 );
 
-renderOrders(data.orders||[]);
+
+renderOrders(
+data.orders||[]
+);
+
 
 }catch(error){
 
@@ -3596,23 +4966,32 @@ ${escapeHtml(error.message)}
 
 }
 
+
 function parseOrderItems(order){
 
 try{
 
 if(Array.isArray(order.items)){
+
 return order.items;
+
 }
+
 
 if(order.items_json){
 
 const parsed=
 typeof order.items_json==="string"
-?JSON.parse(order.items_json)
-:order.items_json;
+?
+JSON.parse(order.items_json)
+:
+order.items_json;
+
 
 if(Array.isArray(parsed)){
+
 return parsed;
+
 }
 
 }
@@ -3630,21 +5009,28 @@ return [];
 
 }
 
+
 function formatOrderDate(value){
 
 if(!value)return "-";
 
-const date=new Date(value);
+const date=
+new Date(value);
 
 if(Number.isNaN(date.getTime())){
 
-return escapeHtml(String(value));
+return escapeHtml(
+String(value)
+);
 
 }
 
-return date.toLocaleString("tr-TR");
+return date.toLocaleString(
+"tr-TR"
+);
 
 }
+
 
 function getOrderStatus(order){
 
@@ -3655,6 +5041,7 @@ order.order_status||
 );
 
 }
+
 
 function getTrackingNumber(order){
 
@@ -3668,6 +5055,7 @@ order.cargoTracking||
 
 }
 
+
 function renderOrderProgress(status){
 
 const statuses=[
@@ -3676,6 +5064,7 @@ const statuses=[
 "Kargoda",
 "Teslim Edildi"
 ];
+
 
 if(status==="İptal"){
 
@@ -3697,12 +5086,17 @@ return`
 
 }
 
+
 let currentIndex=
 statuses.indexOf(status);
 
+
 if(currentIndex<0){
+
 currentIndex=0;
+
 }
+
 
 return`
 
@@ -3734,12 +5128,14 @@ ${item}
 
 }
 
+
 function renderOrders(orders){
 
 const container=
 document.getElementById(
 "ordersContainer"
 );
+
 
 if(!orders.length){
 
@@ -3763,7 +5159,9 @@ return;
 
 }
 
+
 container.innerHTML="";
+
 
 orders.forEach(order=>{
 
@@ -3776,8 +5174,10 @@ getOrderStatus(order);
 const tracking=
 getTrackingNumber(order);
 
+
 let itemsHtml=
 "Ürün bilgisi bulunamadı.";
+
 
 if(items.length){
 
@@ -3790,7 +5190,8 @@ item.productName||
 "Ürün";
 
 const quantity=
-item.quantity||1;
+item.quantity||
+1;
 
 return`
 
@@ -3806,10 +5207,13 @@ ${escapeHtml(quantity)}
 
 }
 
+
 const orderCard=
 document.createElement("div");
 
-orderCard.className="order-card";
+orderCard.className=
+"order-card";
+
 
 orderCard.innerHTML=`
 
@@ -3818,22 +5222,30 @@ orderCard.innerHTML=`
 <div>
 
 <div class="order-number">
+
 Sipariş #${escapeHtml(order.id)}
+
 </div>
 
 <div class="order-date">
+
 ${formatOrderDate(order.created_at)}
+
 </div>
 
 </div>
 
 <div class="order-status">
+
 ${escapeHtml(status)}
+
 </div>
 
 </div>
+
 
 ${renderOrderProgress(status)}
+
 
 <div class="order-items">
 
@@ -3846,6 +5258,7 @@ ${itemsHtml}
 </div>
 
 </div>
+
 
 <div class="order-total">
 
@@ -3863,6 +5276,7 @@ TL
 
 </div>
 
+
 ${
 tracking
 ?
@@ -3879,8 +5293,10 @@ ${escapeHtml(tracking)}
 </div>
 
 `
-:""
+:
+""
 }
+
 
 ${
 order.customer_address
@@ -3895,15 +5311,19 @@ Teslimat Adresi
 
 <br>
 
-${escapeHtml(order.customer_address)}
+${escapeHtml(
+order.customer_address
+)}
 
 </div>
 
 `
-:""
+:
+""
 }
 
 `;
+
 
 container.appendChild(orderCard);
 
@@ -3931,12 +5351,15 @@ const el=
 document.getElementById(id);
 
 if(el){
+
 el.style.display="none";
+
 }
 
 });
 
 }
+
 
 function clearAuthMessages(){
 
@@ -3955,7 +5378,9 @@ document.getElementById(id);
 if(el){
 
 el.textContent="";
-el.className="auth-message";
+
+el.className=
+"auth-message";
 
 }
 
@@ -3963,75 +5388,93 @@ el.className="auth-message";
 
 }
 
+
 function openAuth(){
 
 const token=
 localStorage.getItem("veloraToken");
 
+
 if(token){
 
 toggleAccountMenu();
+
 return;
 
 }
 
-document.getElementById(
-"authModal"
-).classList.add("active");
+
+document
+.getElementById("authModal")
+.classList.add("active");
+
 
 showLogin();
 
 }
 
+
 function closeAuth(){
 
-document.getElementById(
-"authModal"
-).classList.remove("active");
+document
+.getElementById("authModal")
+.classList.remove("active");
 
 }
+
 
 function showLogin(){
 
 hideAllAuthForms();
+
 clearAuthMessages();
 
-document.getElementById(
-"loginForm"
-).style.display="block";
+document
+.getElementById("loginForm")
+.style.display="block";
+
 
 setTimeout(()=>{
 
 const input=
-document.getElementById("loginEmail");
+document.getElementById(
+"loginEmail"
+);
 
 if(input){
+
 input.focus();
+
 }
 
 },50);
 
 }
 
+
 function showRegister(){
 
 hideAllAuthForms();
+
 clearAuthMessages();
 
-document.getElementById(
-"registerForm"
-).style.display="block";
+document
+.getElementById("registerForm")
+.style.display="block";
 
 }
+
 
 function showVerifyEmail(email=""){
 
 hideAllAuthForms();
+
 clearAuthMessages();
 
-document.getElementById(
-"verifyEmailForm"
-).style.display="block";
+document
+.getElementById("verifyEmailForm")
+.style.display="block";
+
 
 if(email){
 
@@ -4043,25 +5486,30 @@ document.getElementById(
 
 }
 
+
 function showForgotPassword(){
 
 hideAllAuthForms();
+
 clearAuthMessages();
 
-document.getElementById(
-"forgotPasswordForm"
-).style.display="block";
+document
+.getElementById("forgotPasswordForm")
+.style.display="block";
 
 }
+
 
 function showResetPassword(email=""){
 
 hideAllAuthForms();
+
 clearAuthMessages();
 
-document.getElementById(
-"resetPasswordForm"
-).style.display="block";
+document
+.getElementById("resetPasswordForm")
+.style.display="block";
+
 
 if(email){
 
@@ -4073,58 +5521,83 @@ document.getElementById(
 
 }
 
+
 function showChangePassword(){
 
-if(!localStorage.getItem("veloraToken")){
+if(!localStorage.getItem(
+"veloraToken"
+)){
 
 openAuth();
+
 return;
 
 }
 
+
 hideAllAuthForms();
+
 clearAuthMessages();
 
-document.getElementById(
-"authModal"
-).classList.add("active");
+document
+.getElementById("authModal")
+.classList.add("active");
 
-document.getElementById(
-"changePasswordForm"
-).style.display="block";
+
+document
+.getElementById("changePasswordForm")
+.style.display="block";
 
 }
+
+
+/* =========================
+   KAYIT
+========================= */
 
 async function register(event){
 
 event.preventDefault();
 
+
 const username=
-document.getElementById(
-"registerUsername"
-).value.trim();
+document
+.getElementById("registerUsername")
+.value
+.trim();
+
 
 const email=
-document.getElementById(
-"registerEmail"
-).value.trim();
+document
+.getElementById("registerEmail")
+.value
+.trim();
+
 
 const password=
-document.getElementById(
-"registerPassword"
-).value;
+document
+.getElementById("registerPassword")
+.value;
+
 
 const confirm=
-document.getElementById(
-"registerPasswordConfirm"
-).value;
+document
+.getElementById("registerPasswordConfirm")
+.value;
+
 
 const message=
 document.getElementById(
 "registerMessage"
 );
 
-if(!username||!email||!password||!confirm){
+
+if(
+!username||
+!email||
+!password||
+!confirm
+){
 
 message.className=
 "auth-message error-message";
@@ -4135,6 +5608,7 @@ message.textContent=
 return;
 
 }
+
 
 if(username.length<3){
 
@@ -4148,6 +5622,7 @@ return;
 
 }
 
+
 if(password.length<6){
 
 message.className=
@@ -4159,6 +5634,7 @@ message.textContent=
 return;
 
 }
+
 
 if(password!==confirm){
 
@@ -4172,11 +5648,13 @@ return;
 
 }
 
+
 message.className=
 "auth-message";
 
 message.textContent=
 "Hesap oluşturuluyor...";
+
 
 try{
 
@@ -4184,18 +5662,30 @@ const data=
 await apiRequest(
 "/api/auth/register",
 {
+
 method:"POST",
+
 headers:{
-"Content-Type":"application/json"
+"Content-Type":
+"application/json"
 },
+
 body:JSON.stringify({
+
 username,
+
 email,
+
 password,
-passwordConfirm:confirm
+
+passwordConfirm:
+confirm
+
 })
+
 }
 );
+
 
 message.className=
 "auth-message success-message";
@@ -4204,17 +5694,21 @@ message.textContent=
 data.message||
 "Hesap oluşturuldu. E-postanı doğrula.";
 
+
 showVerifyEmail(email);
+
 
 document.getElementById(
 "verifyMessage"
 ).className=
 "auth-message success-message";
 
+
 document.getElementById(
 "verifyMessage"
 ).textContent=
 "6 haneli doğrulama kodu e-posta adresine gönderildi.";
+
 
 }catch(error){
 
@@ -4228,24 +5722,35 @@ error.message;
 
 }
 
+
+/* =========================
+   E-POSTA DOĞRULAMA
+========================= */
+
 async function verifyEmail(event){
 
 event.preventDefault();
 
+
 const email=
-document.getElementById(
-"verificationEmail"
-).value.trim();
+document
+.getElementById("verificationEmail")
+.value
+.trim();
+
 
 const code=
-document.getElementById(
-"verificationCode"
-).value.trim();
+document
+.getElementById("verificationCode")
+.value
+.trim();
+
 
 const message=
 document.getElementById(
 "verifyMessage"
 );
+
 
 message.className=
 "auth-message";
@@ -4253,22 +5758,29 @@ message.className=
 message.textContent=
 "Doğrulanıyor...";
 
+
 try{
 
 const data=
 await apiRequest(
 "/api/auth/verify-email",
 {
+
 method:"POST",
+
 headers:{
-"Content-Type":"application/json"
+"Content-Type":
+"application/json"
 },
+
 body:JSON.stringify({
 email,
 code
 })
+
 }
 );
+
 
 message.className=
 "auth-message success-message";
@@ -4277,10 +5789,12 @@ message.textContent=
 data.message||
 "E-posta doğrulandı.";
 
+
 setTimeout(
 showLogin,
 900
 );
+
 
 }catch(error){
 
@@ -4294,17 +5808,23 @@ error.message;
 
 }
 
+
 async function resendVerificationCode(){
 
 const email=
-document.getElementById(
+document
+.getElementById(
 "verificationEmail"
-).value.trim();
+)
+.value
+.trim();
+
 
 const message=
 document.getElementById(
 "verifyMessage"
 );
+
 
 if(!email){
 
@@ -4318,11 +5838,13 @@ return;
 
 }
 
+
 message.className=
 "auth-message";
 
 message.textContent=
 "Kod gönderiliyor...";
+
 
 try{
 
@@ -4330,13 +5852,21 @@ const data=
 await apiRequest(
 "/api/auth/resend-verification",
 {
+
 method:"POST",
+
 headers:{
-"Content-Type":"application/json"
+"Content-Type":
+"application/json"
 },
-body:JSON.stringify({email})
+
+body:JSON.stringify({
+email
+})
+
 }
 );
+
 
 message.className=
 "auth-message success-message";
@@ -4344,6 +5874,7 @@ message.className=
 message.textContent=
 data.message||
 "Yeni kod gönderildi.";
+
 
 }catch(error){
 
@@ -4366,24 +5897,38 @@ async function login(event){
 
 event.preventDefault();
 
-const form=event.currentTarget;
+
+const form=
+event.currentTarget;
+
 
 const emailInput=
-form.querySelector("#loginEmail");
+form.querySelector(
+"#loginEmail"
+);
+
 
 const passwordInput=
-form.querySelector("#loginPassword");
+form.querySelector(
+"#loginPassword"
+);
+
 
 const message=
-document.getElementById("loginMessage");
+document.getElementById(
+"loginMessage"
+);
+
 
 const email=
 (emailInput?.value||"")
 .trim()
 .toLowerCase();
 
+
 const password=
 passwordInput?.value||"";
+
 
 if(!email){
 
@@ -4397,6 +5942,7 @@ return;
 
 }
 
+
 if(!password){
 
 message.className=
@@ -4409,8 +5955,13 @@ return;
 
 }
 
-message.className="auth-message";
-message.textContent="Giriş yapılıyor...";
+
+message.className=
+"auth-message";
+
+message.textContent=
+"Giriş yapılıyor...";
+
 
 try{
 
@@ -4418,17 +5969,30 @@ const data=
 await apiRequest(
 "/api/auth/login",
 {
+
 method:"POST",
+
 headers:{
-"Content-Type":"application/json",
-"Accept":"application/json"
+
+"Content-Type":
+"application/json",
+
+"Accept":
+"application/json"
+
 },
+
 body:JSON.stringify({
+
 email:email,
+
 password:password
+
 })
+
 }
 );
+
 
 if(!data.token){
 
@@ -4439,10 +6003,12 @@ data.message||
 
 }
 
+
 localStorage.setItem(
 "veloraToken",
 data.token
 );
+
 
 if(data.user){
 
@@ -4453,7 +6019,9 @@ JSON.stringify(data.user)
 
 }
 
+
 await loadFavorites();
+
 
 message.className=
 "auth-message success-message";
@@ -4461,12 +6029,15 @@ message.className=
 message.textContent=
 "Giriş başarılı!";
 
+
 updateAccountUI();
+
 
 setTimeout(
 closeAuth,
 600
 );
+
 
 }catch(error){
 
@@ -4488,25 +6059,33 @@ error.message||
 
 
 /* =========================
-   ŞİFRE
+   ŞİFRE UNUTMA
 ========================= */
 
 async function forgotPassword(event){
 
 event.preventDefault();
 
+
 const email=
-document.getElementById(
-"forgotEmail"
-).value.trim();
+document
+.getElementById("forgotEmail")
+.value
+.trim();
+
 
 const message=
 document.getElementById(
 "forgotMessage"
 );
 
-message.className="auth-message";
-message.textContent="Kod gönderiliyor...";
+
+message.className=
+"auth-message";
+
+message.textContent=
+"Kod gönderiliyor...";
+
 
 try{
 
@@ -4514,13 +6093,21 @@ const data=
 await apiRequest(
 "/api/auth/forgot-password",
 {
+
 method:"POST",
+
 headers:{
-"Content-Type":"application/json"
+"Content-Type":
+"application/json"
 },
-body:JSON.stringify({email})
+
+body:JSON.stringify({
+email
+})
+
 }
 );
+
 
 message.className=
 "auth-message success-message";
@@ -4529,14 +6116,17 @@ message.textContent=
 data.message||
 "Sıfırlama kodu gönderildi.";
 
+
 document.getElementById(
 "resetEmail"
 ).value=email;
+
 
 setTimeout(
 ()=>showResetPassword(email),
 700
 );
+
 
 }catch(error){
 
@@ -4550,34 +6140,47 @@ error.message;
 
 }
 
+
+/* =========================
+   ŞİFRE SIFIRLAMA
+========================= */
+
 async function resetPassword(event){
 
 event.preventDefault();
 
+
 const email=
-document.getElementById(
-"resetEmail"
-).value.trim();
+document
+.getElementById("resetEmail")
+.value
+.trim();
+
 
 const code=
-document.getElementById(
-"resetCode"
-).value.trim();
+document
+.getElementById("resetCode")
+.value
+.trim();
+
 
 const password=
-document.getElementById(
-"resetPassword"
-).value;
+document
+.getElementById("resetPassword")
+.value;
+
 
 const confirm=
-document.getElementById(
-"resetPasswordConfirm"
-).value;
+document
+.getElementById("resetPasswordConfirm")
+.value;
+
 
 const message=
 document.getElementById(
 "resetMessage"
 );
+
 
 if(password!==confirm){
 
@@ -4591,8 +6194,13 @@ return;
 
 }
 
-message.className="auth-message";
-message.textContent="Şifre sıfırlanıyor...";
+
+message.className=
+"auth-message";
+
+message.textContent=
+"Şifre sıfırlanıyor...";
+
 
 try{
 
@@ -4600,18 +6208,30 @@ const data=
 await apiRequest(
 "/api/auth/reset-password",
 {
+
 method:"POST",
+
 headers:{
-"Content-Type":"application/json"
+"Content-Type":
+"application/json"
 },
+
 body:JSON.stringify({
+
 email,
+
 code,
+
 password,
-passwordConfirm:confirm
+
+passwordConfirm:
+confirm
+
 })
+
 }
 );
+
 
 message.className=
 "auth-message success-message";
@@ -4620,10 +6240,12 @@ message.textContent=
 data.message||
 "Şifren başarıyla değiştirildi.";
 
+
 setTimeout(
 showLogin,
 900
 );
+
 
 }catch(error){
 
@@ -4637,39 +6259,56 @@ error.message;
 
 }
 
+
+/* =========================
+   ŞİFRE DEĞİŞTİR
+========================= */
+
 async function changePassword(event){
 
 event.preventDefault();
 
+
 const token=
-localStorage.getItem("veloraToken");
+localStorage.getItem(
+"veloraToken"
+);
+
 
 if(!token){
 
 showLogin();
+
 return;
 
 }
 
+
 const currentPassword=
-document.getElementById(
-"currentPassword"
-).value;
+document
+.getElementById("currentPassword")
+.value;
+
 
 const newPassword=
-document.getElementById(
-"newPassword"
-).value;
+document
+.getElementById("newPassword")
+.value;
+
 
 const newPasswordConfirm=
-document.getElementById(
+document
+.getElementById(
 "newPasswordConfirm"
-).value;
+)
+.value;
+
 
 const message=
 document.getElementById(
 "changePasswordMessage"
 );
+
 
 if(newPassword!==newPasswordConfirm){
 
@@ -4683,8 +6322,13 @@ return;
 
 }
 
-message.className="auth-message";
-message.textContent="Şifre değiştiriliyor...";
+
+message.className=
+"auth-message";
+
+message.textContent=
+"Şifre değiştiriliyor...";
+
 
 try{
 
@@ -4692,18 +6336,32 @@ const data=
 await apiRequest(
 "/api/auth/change-password",
 {
+
 method:"POST",
+
 headers:{
-"Content-Type":"application/json",
-"Authorization":`Bearer ${token}`
+
+"Content-Type":
+"application/json",
+
+"Authorization":
+`Bearer ${token}`
+
 },
+
 body:JSON.stringify({
+
 currentPassword,
+
 newPassword,
+
 newPasswordConfirm
+
 })
+
 }
 );
+
 
 message.className=
 "auth-message success-message";
@@ -4712,14 +6370,19 @@ message.textContent=
 data.message||
 "Şifren başarıyla değiştirildi.";
 
-document.getElementById(
+
+document
+.getElementById(
 "changeAuthForm"
-).reset();
+)
+.reset();
+
 
 setTimeout(
 closeAuth,
 900
 );
+
 
 }catch(error){
 
@@ -4741,14 +6404,19 @@ error.message;
 async function loadCurrentUser(){
 
 const token=
-localStorage.getItem("veloraToken");
+localStorage.getItem(
+"veloraToken"
+);
+
 
 if(!token){
 
 updateAccountUI();
+
 return;
 
 }
+
 
 try{
 
@@ -4756,11 +6424,15 @@ const data=
 await apiRequest(
 "/api/auth/me",
 {
+
 headers:{
-"Authorization":`Bearer ${token}`
+"Authorization":
+`Bearer ${token}`
 }
+
 }
 );
+
 
 if(data.user){
 
@@ -4771,9 +6443,11 @@ JSON.stringify(data.user)
 
 }
 
+
 await loadFavorites();
 
 updateAccountUI();
+
 
 }catch(error){
 
@@ -4793,38 +6467,56 @@ updateAccountUI();
 
 }
 
+
 function toggleAccountMenu(){
 
-document.getElementById(
-"accountMenu"
-).classList.toggle("active");
+document
+.getElementById("accountMenu")
+.classList.toggle("active");
 
 }
+
 
 function closeAccountMenu(){
 
-document.getElementById(
-"accountMenu"
-).classList.remove("active");
+document
+.getElementById("accountMenu")
+.classList.remove("active");
 
 }
+
 
 function updateAccountUI(){
 
 const token=
-localStorage.getItem("veloraToken");
+localStorage.getItem(
+"veloraToken"
+);
+
 
 const userText=
-localStorage.getItem("veloraUser");
+localStorage.getItem(
+"veloraUser"
+);
+
 
 const button=
-document.getElementById("accountButton");
+document.getElementById(
+"accountButton"
+);
+
 
 const username=
-document.getElementById("accountUsername");
+document.getElementById(
+"accountUsername"
+);
+
 
 const email=
-document.getElementById("accountEmail");
+document.getElementById(
+"accountEmail"
+);
+
 
 if(token&&userText){
 
@@ -4833,25 +6525,31 @@ try{
 const user=
 JSON.parse(userText);
 
+
 const displayName=
 user.username||
 user.email||
 "Hesabım";
 
+
 button.textContent=
 `👤 ${displayName}`;
+
 
 username.textContent=
 displayName;
 
+
 email.textContent=
 user.email||"";
+
 
 return;
 
 }catch{}
 
 }
+
 
 button.textContent=
 "👤 Hesap Oluştur";
@@ -4862,6 +6560,7 @@ username.textContent=
 email.textContent="";
 
 }
+
 
 function logout(){
 
@@ -4885,19 +6584,247 @@ alert(
 
 }
 
+
 function closeFavorites(){
 
-document.getElementById(
+document
+.getElementById(
 "favoritesModal"
-).classList.remove("active");
+)
+.classList.remove("active");
 
 }
 
+
 function closeOrders(){
 
-document.getElementById(
+document
+.getElementById(
 "ordersModal"
-).classList.remove("active");
+)
+.classList.remove("active");
+
+}
+
+
+/* =========================
+   HERO SLIDER
+========================= */
+
+const heroSlides=
+document.querySelectorAll(
+".hero-slide"
+);
+
+const heroDots=
+document.querySelectorAll(
+".hero-dot"
+);
+
+const heroPrev=
+document.querySelector(
+".hero-prev"
+);
+
+const heroNext=
+document.querySelector(
+".hero-next"
+);
+
+
+let heroCurrent=0;
+
+let heroTimer;
+
+
+function showHeroSlide(index){
+
+if(!heroSlides.length)return;
+
+
+heroCurrent=
+(index+heroSlides.length)
+%
+heroSlides.length;
+
+
+heroSlides.forEach(
+(slide,i)=>{
+
+slide.classList.toggle(
+"active",
+i===heroCurrent
+);
+
+}
+);
+
+
+heroDots.forEach(
+(dot,i)=>{
+
+dot.classList.toggle(
+"active",
+i===heroCurrent
+);
+
+}
+);
+
+}
+
+
+function nextHeroSlide(){
+
+showHeroSlide(
+heroCurrent+1
+);
+
+}
+
+
+function previousHeroSlide(){
+
+showHeroSlide(
+heroCurrent-1
+);
+
+}
+
+
+function startHeroSlider(){
+
+clearInterval(heroTimer);
+
+
+heroTimer=
+setInterval(
+nextHeroSlide,
+5000
+);
+
+}
+
+
+if(heroSlides.length){
+
+heroNext?.addEventListener(
+"click",
+()=>{
+
+nextHeroSlide();
+
+startHeroSlider();
+
+}
+);
+
+
+heroPrev?.addEventListener(
+"click",
+()=>{
+
+previousHeroSlide();
+
+startHeroSlider();
+
+}
+);
+
+
+heroDots.forEach(
+dot=>{
+
+dot.addEventListener(
+"click",
+()=>{
+
+showHeroSlide(
+Number(
+dot.dataset.slide
+)
+);
+
+startHeroSlider();
+
+}
+);
+
+}
+);
+
+
+/* TELEFONDA PARMAKLA KAYDIRMA */
+
+let touchStartX=0;
+
+let touchEndX=0;
+
+
+const heroSlider=
+document.getElementById(
+"heroSlider"
+);
+
+
+heroSlider?.addEventListener(
+"touchstart",
+event=>{
+
+touchStartX=
+event.changedTouches[0]
+.screenX;
+
+},
+{
+passive:true
+}
+);
+
+
+heroSlider?.addEventListener(
+"touchend",
+event=>{
+
+touchEndX=
+event.changedTouches[0]
+.screenX;
+
+
+const difference=
+touchStartX-touchEndX;
+
+
+if(Math.abs(difference)<50){
+
+return;
+
+}
+
+
+if(difference>0){
+
+nextHeroSlide();
+
+}else{
+
+previousHeroSlide();
+
+}
+
+
+startHeroSlider();
+
+},
+{
+passive:true
+}
+);
+
+
+showHeroSlide(0);
+
+startHeroSlider();
 
 }
 
@@ -4914,28 +6841,36 @@ document.addEventListener(
 
 loadCart();
 
-document.getElementById(
-"cartButton"
-).addEventListener(
+
+document
+.getElementById("cartButton")
+.addEventListener(
 "click",
 openCart
 );
 
-document.getElementById(
-"closeCartButton"
-).addEventListener(
+
+document
+.getElementById("closeCartButton")
+.addEventListener(
 "click",
 closeCart
 );
 
-document.getElementById(
-"cartModal"
-).addEventListener(
+
+document
+.getElementById("cartModal")
+.addEventListener(
 "click",
 event=>{
 
-if(event.target===event.currentTarget){
+if(
+event.target===
+event.currentTarget
+){
+
 closeCart();
+
 }
 
 }
@@ -4944,17 +6879,17 @@ closeCart();
 
 /* MENÜ */
 
-document.getElementById(
-"menuButton"
-).addEventListener(
+document
+.getElementById("menuButton")
+.addEventListener(
 "click",
 event=>{
 
 event.stopPropagation();
 
-document.getElementById(
-"menuPanel"
-).classList.toggle("active");
+document
+.getElementById("menuPanel")
+.classList.toggle("active");
 
 }
 );
@@ -4962,16 +6897,17 @@ document.getElementById(
 
 /* ARAMA */
 
-document.getElementById(
-"productSearch"
-).addEventListener(
+document
+.getElementById("productSearch")
+.addEventListener(
 "input",
 searchProducts
 );
 
-document.getElementById(
-"searchButton"
-).addEventListener(
+
+document
+.getElementById("searchButton")
+.addEventListener(
 "click",
 searchProducts
 );
@@ -4979,16 +6915,19 @@ searchProducts
 
 /* HESAP */
 
-document.getElementById(
-"accountButton"
-).addEventListener(
+document
+.getElementById("accountButton")
+.addEventListener(
 "click",
 event=>{
 
 event.stopPropagation();
 
+
 if(
-localStorage.getItem("veloraToken")
+localStorage.getItem(
+"veloraToken"
+)
 ){
 
 toggleAccountMenu();
@@ -5005,9 +6944,11 @@ openAuth();
 
 /* FAVORİLER */
 
-document.getElementById(
+document
+.getElementById(
 "favoritesMenuButton"
-).addEventListener(
+)
+.addEventListener(
 "click",
 openFavorites
 );
@@ -5015,9 +6956,11 @@ openFavorites
 
 /* SİPARİŞLER */
 
-document.getElementById(
+document
+.getElementById(
 "ordersMenuButton"
-).addEventListener(
+)
+.addEventListener(
 "click",
 openOrders
 );
@@ -5025,19 +6968,23 @@ openOrders
 
 /* ÇIKIŞ */
 
-document.getElementById(
+document
+.getElementById(
 "logoutButton"
-).addEventListener(
+)
+.addEventListener(
 "click",
 logout
 );
 
 
-/* ŞİFRE DEĞİŞTİR */
+/* ŞİFRE */
 
-document.getElementById(
+document
+.getElementById(
 "changePasswordMenuButton"
-).addEventListener(
+)
+.addEventListener(
 "click",
 showChangePassword
 );
@@ -5045,23 +6992,31 @@ showChangePassword
 
 /* MODALLAR */
 
-document.getElementById(
+document
+.getElementById(
 "closeAuthButton"
-).addEventListener(
+)
+.addEventListener(
 "click",
 closeAuth
 );
 
-document.getElementById(
+
+document
+.getElementById(
 "closeFavoritesButton"
-).addEventListener(
+)
+.addEventListener(
 "click",
 closeFavorites
 );
 
-document.getElementById(
+
+document
+.getElementById(
 "closeOrdersButton"
-).addEventListener(
+)
+.addEventListener(
 "click",
 closeOrders
 );
@@ -5069,44 +7024,61 @@ closeOrders
 
 /* AUTH FORMLARI */
 
-document.getElementById(
+document
+.getElementById(
 "loginAuthForm"
-).addEventListener(
+)
+.addEventListener(
 "submit",
 login
 );
 
-document.getElementById(
+
+document
+.getElementById(
 "registerAuthForm"
-).addEventListener(
+)
+.addEventListener(
 "submit",
 register
 );
 
-document.getElementById(
+
+document
+.getElementById(
 "verifyAuthForm"
-).addEventListener(
+)
+.addEventListener(
 "submit",
 verifyEmail
 );
 
-document.getElementById(
+
+document
+.getElementById(
 "forgotAuthForm"
-).addEventListener(
+)
+.addEventListener(
 "submit",
 forgotPassword
 );
 
-document.getElementById(
+
+document
+.getElementById(
 "resetAuthForm"
-).addEventListener(
+)
+.addEventListener(
 "submit",
 resetPassword
 );
 
-document.getElementById(
+
+document
+.getElementById(
 "changeAuthForm"
-).addEventListener(
+)
+.addEventListener(
 "submit",
 changePassword
 );
@@ -5114,14 +7086,21 @@ changePassword
 
 /* AUTH DIŞINA TIKLAMA */
 
-document.getElementById(
+document
+.getElementById(
 "authModal"
-).addEventListener(
+)
+.addEventListener(
 "click",
 event=>{
 
-if(event.target===event.currentTarget){
+if(
+event.target===
+event.currentTarget
+){
+
 closeAuth();
+
 }
 
 }
@@ -5130,14 +7109,21 @@ closeAuth();
 
 /* FAVORİ DIŞINA TIKLAMA */
 
-document.getElementById(
+document
+.getElementById(
 "favoritesModal"
-).addEventListener(
+)
+.addEventListener(
 "click",
 event=>{
 
-if(event.target===event.currentTarget){
+if(
+event.target===
+event.currentTarget
+){
+
 closeFavorites();
+
 }
 
 }
@@ -5146,14 +7132,21 @@ closeFavorites();
 
 /* SİPARİŞ DIŞINA TIKLAMA */
 
-document.getElementById(
+document
+.getElementById(
 "ordersModal"
-).addEventListener(
+)
+.addEventListener(
 "click",
 event=>{
 
-if(event.target===event.currentTarget){
+if(
+event.target===
+event.currentTarget
+){
+
 closeOrders();
+
 }
 
 }
@@ -5168,20 +7161,30 @@ document.addEventListener(
 "click",
 event=>{
 
-/* HESAP MENÜSÜ */
+
+/* HESAP */
 
 const accountArea=
-document.querySelector(".account-area");
+document.querySelector(
+".account-area"
+);
 
 const accountMenu=
-document.getElementById("accountMenu");
+document.getElementById(
+"accountMenu"
+);
+
 
 if(
 accountArea&&
-!accountArea.contains(event.target)
+!accountArea.contains(
+event.target
+)
 ){
 
-accountMenu.classList.remove("active");
+accountMenu.classList.remove(
+"active"
+);
 
 }
 
@@ -5189,25 +7192,34 @@ accountMenu.classList.remove("active");
 /* SOL MENÜ */
 
 const menuWrapper=
-document.querySelector(".menu-wrapper");
+document.querySelector(
+".menu-wrapper"
+);
 
 const menuPanel=
-document.getElementById("menuPanel");
+document.getElementById(
+"menuPanel"
+);
+
 
 if(
 menuWrapper&&
-!menuWrapper.contains(event.target)
+!menuWrapper.contains(
+event.target
+)
 ){
 
-menuPanel.classList.remove("active");
+menuPanel.classList.remove(
+"active"
+);
 
 }
 
+
 /*
-   KATEGORİ DROPDOWNLARI İÇİN
-   TIKLAMA KODU YOK.
-   
-   Dropdown'lar CSS :hover ile çalışıyor.
+KATEGORİ DROPDOWNLARI
+SADECE CSS :hover
+İLE ÇALIŞIYOR.
 */
 
 }
@@ -5223,8 +7235,7 @@ renderProducts(products);
 
 loadCurrentUser();
 
-}
-);
+});
 
 </script>
 
