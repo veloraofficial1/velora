@@ -66,9 +66,13 @@ border:none;
 font-family:inherit
 }
 
-nav a:hover,.dropbtn:hover{color:#a67c48}
+nav a:hover,.dropbtn:hover{
+color:#a67c48
+}
 
-.menu-wrapper{position:relative}
+.menu-wrapper{
+position:relative
+}
 
 .menu-button{
 border:1px solid #b99669;
@@ -99,7 +103,9 @@ padding:10px;
 z-index:2000
 }
 
-.menu-panel.active{display:block}
+.menu-panel.active{
+display:block
+}
 
 .menu-panel-title{
 font-size:18px;
@@ -161,13 +167,14 @@ cursor:pointer
 ========================= */
 
 .dropdown{
-position:relative
+position:relative;
+display:inline-block
 }
 
 .dropdown-content{
 display:none;
 position:absolute;
-top:30px;
+top:calc(100% - 1px);
 left:0;
 min-width:180px;
 background:#fffaf3;
@@ -177,10 +184,8 @@ padding:8px 0;
 z-index:2500
 }
 
-/* Tıklanınca açık kalır */
-.dropdown:hover .dropdown-content,
-.dropdown:focus-within .dropdown-content,
-.dropdown.active .dropdown-content{
+/* SADECE MOUSE ÜZERİNE GELİNCE AÇILIR */
+.dropdown:hover .dropdown-content{
 display:block
 }
 
@@ -188,11 +193,14 @@ display:block
 display:block;
 padding:10px 16px;
 font-size:14px;
-color:#5a4632
+color:#5a4632;
+text-decoration:none;
+white-space:nowrap
 }
 
 .dropdown-content a:hover{
-background:#f1e5d3
+background:#f1e5d3;
+color:#9b7445
 }
 
 .account-area{
@@ -256,7 +264,9 @@ padding:18px;
 z-index:3000
 }
 
-.account-menu.active{display:block}
+.account-menu.active{
+display:block
+}
 
 .account-menu h3{
 color:#85633d;
@@ -281,7 +291,9 @@ cursor:pointer;
 margin-top:7px
 }
 
-.account-menu button:hover{background:#9f7749}
+.account-menu button:hover{
+background:#9f7749
+}
 
 .account-section-buttons{
 display:grid;
@@ -344,7 +356,9 @@ background:#d9bd94;
 color:white
 }
 
-section{padding:80px 6%}
+section{
+padding:80px 6%
+}
 
 .section-title{
 text-align:center;
@@ -377,7 +391,9 @@ object-fit:cover;
 transition:.5s
 }
 
-.category-card:hover img{transform:scale(1.06)}
+.category-card:hover img{
+transform:scale(1.06)
+}
 
 .category-overlay{
 position:absolute;
@@ -391,7 +407,9 @@ font-size:27px;
 letter-spacing:3px
 }
 
-#urunler{background:#fbf7f0}
+#urunler{
+background:#fbf7f0
+}
 
 .search-result-info{
 text-align:center;
@@ -410,7 +428,9 @@ margin:65px 0 30px;
 letter-spacing:3px
 }
 
-.category-heading:first-child{margin-top:0}
+.category-heading:first-child{
+margin-top:0
+}
 
 .product-grid{
 max-width:1250px;
@@ -519,7 +539,9 @@ padding-top:15px;
 border-top:1px solid #eadbc8
 }
 
-.stars{margin-bottom:10px}
+.stars{
+margin-bottom:10px
+}
 
 .star{
 font-size:22px;
@@ -528,7 +550,9 @@ cursor:pointer;
 margin:0 2px
 }
 
-.star.active{color:#b3864e}
+.star.active{
+color:#b3864e
+}
 
 .review-input{
 width:100%;
@@ -542,7 +566,9 @@ font-family:inherit;
 outline:none
 }
 
-.review-input:focus{border-color:#b58c5b}
+.review-input:focus{
+border-color:#b58c5b
+}
 
 .review-button{
 width:100%;
@@ -555,7 +581,9 @@ cursor:pointer;
 font-family:inherit
 }
 
-.review-button:hover{background:#9f7749}
+.review-button:hover{
+background:#9f7749
+}
 
 .reviews{
 margin-top:15px;
@@ -575,7 +603,9 @@ color:#b3864e;
 margin-bottom:5px
 }
 
-#one-cikanlar{background:#efe3d2}
+#one-cikanlar{
+background:#efe3d2
+}
 
 .featured-grid{
 max-width:1100px;
@@ -593,7 +623,9 @@ cursor:pointer;
 transition:.3s
 }
 
-.featured-card:hover{transform:translateY(-5px)}
+.featured-card:hover{
+transform:translateY(-5px)
+}
 
 .featured-card img{
 width:100%;
@@ -651,7 +683,9 @@ align-items:center;
 padding:20px
 }
 
-.modal.active{display:flex}
+.modal.active{
+display:flex
+}
 
 .modal-box{
 width:100%;
@@ -665,7 +699,9 @@ box-shadow:0 15px 40px rgba(40,28,18,.25);
 position:relative
 }
 
-.modal-box.large{max-width:850px}
+.modal-box.large{
+max-width:850px
+}
 
 .modal-box h2{
 text-align:center;
@@ -928,8 +964,13 @@ font-size:14px;
 min-height:20px
 }
 
-.success-message{color:#58704d}
-.error-message{color:#a05243}
+.success-message{
+color:#58704d
+}
+
+.error-message{
+color:#a05243
+}
 
 .favorites-empty{
 text-align:center;
@@ -1221,8 +1262,10 @@ font-size:18px
 grid-template-columns:1fr
 }
 
+/* MOBİLDE DE HOVER */
 .dropdown-content{
 position:absolute;
+top:calc(100% - 1px);
 left:50%;
 transform:translateX(-50%)
 }
@@ -4917,47 +4960,6 @@ document.getElementById(
 );
 
 
-/* =========================
-   KATEGORİ DROPDOWN MENÜLERİ
-========================= */
-
-document.querySelectorAll(".dropdown").forEach(
-dropdown=>{
-
-const button=
-dropdown.querySelector(".dropbtn");
-
-button.addEventListener(
-"click",
-event=>{
-
-event.preventDefault();
-event.stopPropagation();
-
-/* Diğer açık kategorileri kapat */
-
-document.querySelectorAll(
-".dropdown.active"
-).forEach(other=>{
-
-if(other!==dropdown){
-
-other.classList.remove("active");
-
-}
-
-});
-
-/* Tıklanan kategoriyi aç/kapat */
-
-dropdown.classList.toggle("active");
-
-});
-
-}
-);
-
-
 /* ARAMA */
 
 document.getElementById(
@@ -5201,20 +5203,12 @@ menuPanel.classList.remove("active");
 
 }
 
-
-/* KATEGORİ DROPDOWNLARI */
-
-if(!event.target.closest(".dropdown")){
-
-document.querySelectorAll(
-".dropdown.active"
-).forEach(dropdown=>{
-
-dropdown.classList.remove("active");
-
-});
-
-}
+/*
+   KATEGORİ DROPDOWNLARI İÇİN
+   TIKLAMA KODU YOK.
+   
+   Dropdown'lar CSS :hover ile çalışıyor.
+*/
 
 }
 );
