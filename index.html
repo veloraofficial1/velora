@@ -480,7 +480,7 @@ margin-bottom:12px
 }
 
 /* =========================
-   SEPETE EKLE BUTONU
+   SEPETE EKLE
 ========================= */
 
 .stock-button{
@@ -621,6 +621,10 @@ padding:25px;
 font-size:14px
 }
 
+/* =========================
+   MODAL
+========================= */
+
 .modal{
 display:none;
 position:fixed;
@@ -667,7 +671,7 @@ cursor:pointer
 }
 
 /* =========================
-   SEPET MODALI
+   SEPET
 ========================= */
 
 .cart-list{
@@ -833,18 +837,19 @@ transform:translateY(0)
 .register-notice{
 background:#f7f1e7;
 border:1px solid #d8c5a9;
-padding:14px 16px;
+padding:15px 17px;
 margin-bottom:18px;
 color:#6b5640;
 font-size:13px;
-line-height:1.6
+line-height:1.65;
+border-radius:3px
 }
 
 .register-notice-title{
 color:#85633d;
 font-size:15px;
 font-weight:bold;
-margin-bottom:5px
+margin-bottom:6px
 }
 
 .register-notice strong{
@@ -867,7 +872,9 @@ font-family:inherit;
 outline:none
 }
 
-.auth-form input:focus{border-color:#b58c5b}
+.auth-form input:focus{
+border-color:#b58c5b
+}
 
 .auth-submit{
 padding:12px;
@@ -879,7 +886,9 @@ cursor:pointer;
 margin-top:5px
 }
 
-.auth-submit:hover{background:#8d673d}
+.auth-submit:hover{
+background:#8d673d
+}
 
 .auth-switch{
 text-align:center;
@@ -962,7 +971,9 @@ font-family:inherit;
 cursor:pointer
 }
 
-.orders-container{margin-top:10px}
+.orders-container{
+margin-top:10px
+}
 
 .order-card{
 border:1px solid #ddc9ad;
@@ -1091,14 +1102,30 @@ border-color:#9b7445
 }
 
 @media(max-width:1200px){
-.header-center{gap:12px}
-.search-box{width:240px}
-nav{gap:12px}
-.product-grid{grid-template-columns:repeat(3,1fr)}
+
+.header-center{
+gap:12px
+}
+
+.search-box{
+width:240px
+}
+
+nav{
+gap:12px
+}
+
+.product-grid{
+grid-template-columns:repeat(3,1fr)
+}
+
 }
 
 @media(max-width:1000px){
-header{flex-wrap:wrap}
+
+header{
+flex-wrap:wrap
+}
 
 .header-center{
 order:3;
@@ -1111,9 +1138,18 @@ flex-wrap:wrap;
 justify-content:center
 }
 
-.category-grid{grid-template-columns:repeat(2,1fr)}
-.featured-grid{grid-template-columns:repeat(2,1fr)}
-.favorite-list{grid-template-columns:repeat(2,1fr)}
+.category-grid{
+grid-template-columns:repeat(2,1fr)
+}
+
+.featured-grid{
+grid-template-columns:repeat(2,1fr)
+}
+
+.favorite-list{
+grid-template-columns:repeat(2,1fr)
+}
+
 }
 
 @media(max-width:700px){
@@ -1123,35 +1159,45 @@ padding:14px 4%;
 justify-content:center
 }
 
-.logo{font-size:25px}
+.logo{
+font-size:25px
+}
 
 .header-center{
 flex-direction:column;
 width:100%
 }
 
-.search-box{width:100%}
+.search-box{
+width:100%
+}
 
 nav{
 width:100%;
 gap:10px
 }
 
-nav a,.dropbtn{font-size:14px}
+nav a,.dropbtn{
+font-size:14px
+}
 
 .menu-panel{
 left:50%;
 transform:translateX(-50%)
 }
 
-.hero{min-height:470px}
+.hero{
+min-height:470px
+}
 
 .hero h1{
 font-size:40px;
 letter-spacing:5px
 }
 
-.hero p{font-size:18px}
+.hero p{
+font-size:18px
+}
 
 .category-grid,
 .product-grid,
@@ -1174,15 +1220,25 @@ left:20px;
 width:auto
 }
 
-.modal-box{padding:25px 18px}
+.modal-box{
+padding:25px 18px
+}
 
-.order-top{flex-direction:column}
+.order-top{
+flex-direction:column
+}
 
-.order-status{align-self:flex-start}
+.order-status{
+align-self:flex-start
+}
 
-.order-progress{overflow-x:auto}
+.order-progress{
+overflow-x:auto
+}
 
-.progress-step{min-width:75px}
+.progress-step{
+min-width:75px
+}
 
 .account-area{
 flex-wrap:wrap;
@@ -1249,7 +1305,11 @@ placeholder="Ürün ara..."
 autocomplete="off"
 >
 
-<button class="search-button" id="searchButton" type="button">
+<button
+class="search-button"
+id="searchButton"
+type="button"
+>
 🔍
 </button>
 
@@ -1258,90 +1318,187 @@ autocomplete="off"
 <nav>
 
 <div class="dropdown">
-<button class="dropbtn">Yüzük ▾</button>
+
+<button class="dropbtn">
+Yüzük ▾
+</button>
+
 <div class="dropdown-content">
-<a href="#urunler" onclick="filterCategory('Yüzük','Günlük')">Günlük</a>
-<a href="#urunler" onclick="filterCategory('Yüzük','Taşlı')">Taşlı</a>
-<a href="#urunler" onclick="filterCategory('Yüzük','Kalpli')">Kalpli</a>
-<a href="#urunler" onclick="filterCategory('Yüzük','Minimal')">Minimal</a>
+
+<a href="#urunler" onclick="filterCategory('Yüzük','Günlük')">
+Günlük
+</a>
+
+<a href="#urunler" onclick="filterCategory('Yüzük','Taşlı')">
+Taşlı
+</a>
+
+<a href="#urunler" onclick="filterCategory('Yüzük','Kalpli')">
+Kalpli
+</a>
+
+<a href="#urunler" onclick="filterCategory('Yüzük','Minimal')">
+Minimal
+</a>
+
 </div>
 </div>
 
 <div class="dropdown">
-<button class="dropbtn">Bileklik ▾</button>
+
+<button class="dropbtn">
+Bileklik ▾
+</button>
+
 <div class="dropdown-content">
-<a href="#urunler" onclick="filterCategory('Bileklik','Minimal')">Minimal</a>
-<a href="#urunler" onclick="filterCategory('Bileklik','Taşlı')">Taşlı</a>
-<a href="#urunler" onclick="filterCategory('Bileklik','Su Yolu')">Su Yolu</a>
-<a href="#urunler" onclick="filterCategory('Bileklik','Zincir')">Zincir</a>
+
+<a href="#urunler" onclick="filterCategory('Bileklik','Minimal')">
+Minimal
+</a>
+
+<a href="#urunler" onclick="filterCategory('Bileklik','Taşlı')">
+Taşlı
+</a>
+
+<a href="#urunler" onclick="filterCategory('Bileklik','Su Yolu')">
+Su Yolu
+</a>
+
+<a href="#urunler" onclick="filterCategory('Bileklik','Zincir')">
+Zincir
+</a>
+
 </div>
 </div>
 
 <div class="dropdown">
-<button class="dropbtn">Küpe ▾</button>
+
+<button class="dropbtn">
+Küpe ▾
+</button>
+
 <div class="dropdown-content">
-<a href="#urunler" onclick="filterCategory('Küpe','İnci')">İnci</a>
-<a href="#urunler" onclick="filterCategory('Küpe','Halka')">Halka</a>
-<a href="#urunler" onclick="filterCategory('Küpe','Taşlı')">Taşlı</a>
-<a href="#urunler" onclick="filterCategory('Küpe','Minimal')">Minimal</a>
+
+<a href="#urunler" onclick="filterCategory('Küpe','İnci')">
+İnci
+</a>
+
+<a href="#urunler" onclick="filterCategory('Küpe','Halka')">
+Halka
+</a>
+
+<a href="#urunler" onclick="filterCategory('Küpe','Taşlı')">
+Taşlı
+</a>
+
+<a href="#urunler" onclick="filterCategory('Küpe','Minimal')">
+Minimal
+</a>
+
 </div>
 </div>
 
 <div class="dropdown">
-<button class="dropbtn">Kolye ▾</button>
+
+<button class="dropbtn">
+Kolye ▾
+</button>
+
 <div class="dropdown-content">
-<a href="#urunler" onclick="filterCategory('Kolye','İnci')">İnci</a>
-<a href="#urunler" onclick="filterCategory('Kolye','Zincir')">Zincir</a>
-<a href="#urunler" onclick="filterCategory('Kolye','Minimal')">Minimal</a>
-<a href="#urunler" onclick="filterCategory('Kolye','Taşlı')">Taşlı</a>
+
+<a href="#urunler" onclick="filterCategory('Kolye','İnci')">
+İnci
+</a>
+
+<a href="#urunler" onclick="filterCategory('Kolye','Zincir')">
+Zincir
+</a>
+
+<a href="#urunler" onclick="filterCategory('Kolye','Minimal')">
+Minimal
+</a>
+
+<a href="#urunler" onclick="filterCategory('Kolye','Taşlı')">
+Taşlı
+</a>
+
 </div>
 </div>
 
-<a href="#one-cikanlar">Öne Çıkanlar</a>
-<a href="#iletisim">İletişim</a>
+<a href="#one-cikanlar">
+Öne Çıkanlar
+</a>
+
+<a href="#iletisim">
+İletişim
+</a>
 
 </nav>
 
 </div>
 
-<!-- SEPET -->
-
-<button id="cartButton" class="cart-button" type="button">
+<button
+id="cartButton"
+class="cart-button"
+type="button"
+>
 🛒 Sepet (<span id="cartCount">0</span>)
 </button>
 
 <div class="account-area">
 
-<button id="accountButton" class="account-button" type="button">
+<button
+id="accountButton"
+class="account-button"
+type="button"
+>
 👤 Hesap Oluştur
 </button>
 
 <div id="accountMenu" class="account-menu">
 
-<h3 id="accountUsername">Hesabım</h3>
+<h3 id="accountUsername">
+Hesabım
+</h3>
+
 <p id="accountEmail"></p>
 
 <div class="account-section-buttons">
 
-<button class="account-section-button" id="favoritesMenuButton" type="button">
+<button
+class="account-section-button"
+id="favoritesMenuButton"
+type="button"
+>
 ❤️ Favorilerim
 </button>
 
-<button class="account-section-button" id="ordersMenuButton" type="button">
+<button
+class="account-section-button"
+id="ordersMenuButton"
+type="button"
+>
 📦 Siparişlerim
 </button>
 
 </div>
 
-<button id="changePasswordMenuButton" type="button">
+<button
+id="changePasswordMenuButton"
+type="button"
+>
 🔑 Şifre Değiştir
 </button>
 
-<button id="logoutButton" type="button">
+<button
+id="logoutButton"
+type="button"
+>
 🚪 Çıkış Yap
 </button>
 
 </div>
+
 </div>
 
 </header>
@@ -1352,7 +1509,9 @@ autocomplete="off"
 
 <h1>VELORA</h1>
 
-<p>Zarafetin modern hali.</p>
+<p>
+Zarafetin modern hali.
+</p>
 
 <a href="#urunler" class="hero-button">
 Koleksiyonu Keşfet
@@ -1364,28 +1523,74 @@ Koleksiyonu Keşfet
 
 <section>
 
-<h2 class="section-title">Kategoriler</h2>
+<h2 class="section-title">
+Kategoriler
+</h2>
 
 <div class="category-grid">
 
-<div class="category-card" onclick="filterCategory('Yüzük')">
-<img src="resimler/yuzuk.jpg" alt="Yüzük">
-<div class="category-overlay">Yüzük</div>
+<div
+class="category-card"
+onclick="filterCategory('Yüzük')"
+>
+
+<img
+src="resimler/yuzuk.jpg"
+alt="Yüzük"
+>
+
+<div class="category-overlay">
+Yüzük
 </div>
 
-<div class="category-card" onclick="filterCategory('Bileklik')">
-<img src="resimler/bileklik.jpg" alt="Bileklik">
-<div class="category-overlay">Bileklik</div>
 </div>
 
-<div class="category-card" onclick="filterCategory('Küpe')">
-<img src="resimler/incikupe.jpg" alt="Küpe">
-<div class="category-overlay">Küpe</div>
+<div
+class="category-card"
+onclick="filterCategory('Bileklik')"
+>
+
+<img
+src="resimler/bileklik.jpg"
+alt="Bileklik"
+>
+
+<div class="category-overlay">
+Bileklik
 </div>
 
-<div class="category-card" onclick="filterCategory('Kolye')">
-<img src="resimler/kolye.jpg" alt="Kolye">
-<div class="category-overlay">Kolye</div>
+</div>
+
+<div
+class="category-card"
+onclick="filterCategory('Küpe')"
+>
+
+<img
+src="resimler/incikupe.jpg"
+alt="Küpe"
+>
+
+<div class="category-overlay">
+Küpe
+</div>
+
+</div>
+
+<div
+class="category-card"
+onclick="filterCategory('Kolye')"
+>
+
+<img
+src="resimler/kolye.jpg"
+alt="Kolye"
+>
+
+<div class="category-overlay">
+Kolye
+</div>
+
 </div>
 
 </div>
@@ -1394,9 +1599,14 @@ Koleksiyonu Keşfet
 
 <section id="urunler">
 
-<h2 class="section-title">Koleksiyon</h2>
+<h2 class="section-title">
+Koleksiyon
+</h2>
 
-<div id="searchResultInfo" class="search-result-info"></div>
+<div
+id="searchResultInfo"
+class="search-result-info"
+></div>
 
 <div id="productContainer"></div>
 
@@ -1404,40 +1614,106 @@ Koleksiyonu Keşfet
 
 <section id="one-cikanlar">
 
-<h2 class="section-title">Öne Çıkanlar</h2>
+<h2 class="section-title">
+Öne Çıkanlar
+</h2>
 
 <div class="featured-grid">
 
-<div class="featured-card" onclick="filterCategory('Bileklik','Su Yolu')">
-<img src="resimler/su-yolu-bileklik.jpg" alt="Su Yolu Bileklik">
+<div
+class="featured-card"
+onclick="filterCategory('Bileklik','Su Yolu')"
+>
+
+<img
+src="resimler/su-yolu-bileklik.jpg"
+alt="Su Yolu Bileklik"
+>
+
 <div class="featured-info">
-<h3>Su Yolu Bileklik</h3>
-<p>Çok Yakında Stoklarda</p>
-</div>
+
+<h3>
+Su Yolu Bileklik
+</h3>
+
+<p>
+Çok Yakında Stoklarda
+</p>
+
 </div>
 
-<div class="featured-card" onclick="filterCategory('Yüzük','Günlük')">
-<img src="resimler/yuzuk.jpg" alt="Zarif Yüzük">
-<div class="featured-info">
-<h3>Zarif Yüzük</h3>
-<p>Çok Yakında Stoklarda</p>
-</div>
 </div>
 
-<div class="featured-card" onclick="filterCategory('Kolye','İnci')">
-<img src="resimler/kolye.jpg" alt="İnci Kolye">
+<div
+class="featured-card"
+onclick="filterCategory('Yüzük','Günlük')"
+>
+
+<img
+src="resimler/yuzuk.jpg"
+alt="Zarif Yüzük"
+>
+
 <div class="featured-info">
-<h3>İnci Kolye</h3>
-<p>Çok Yakında Stoklarda</p>
-</div>
+
+<h3>
+Zarif Yüzük
+</h3>
+
+<p>
+Çok Yakında Stoklarda
+</p>
+
 </div>
 
-<div class="featured-card" onclick="filterCategory('Küpe','İnci')">
-<img src="resimler/incikupe.jpg" alt="İnci Küpe">
-<div class="featured-info">
-<h3>İnci Küpe</h3>
-<p>Çok Yakında Stoklarda</p>
 </div>
+
+<div
+class="featured-card"
+onclick="filterCategory('Kolye','İnci')"
+>
+
+<img
+src="resimler/kolye.jpg"
+alt="İnci Kolye"
+>
+
+<div class="featured-info">
+
+<h3>
+İnci Kolye
+</h3>
+
+<p>
+Çok Yakında Stoklarda
+</p>
+
+</div>
+
+</div>
+
+<div
+class="featured-card"
+onclick="filterCategory('Küpe','İnci')"
+>
+
+<img
+src="resimler/incikupe.jpg"
+alt="İnci Küpe"
+>
+
+<div class="featured-info">
+
+<h3>
+İnci Küpe
+</h3>
+
+<p>
+Çok Yakında Stoklarda
+</p>
+
+</div>
+
 </div>
 
 </div>
@@ -1446,17 +1722,23 @@ Koleksiyonu Keşfet
 
 <section id="iletisim">
 
-<h2 class="section-title">İletişim</h2>
+<h2 class="section-title">
+İletişim
+</h2>
 
 <p class="contact-text">
+
 VELORA koleksiyonumuz çok yakında stoklarda olacak.
 Yeni ürünler, özel koleksiyonlar ve güncellemeler için bizi takip etmeye devam edin.
+
 </p>
 
 </section>
 
 <footer>
+
 © 2026 VELORA — Zarafetin modern hali.
+
 </footer>
 
 <!-- =========================
@@ -1467,15 +1749,26 @@ Yeni ürünler, özel koleksiyonlar ve güncellemeler için bizi takip etmeye de
 
 <div class="modal-box">
 
-<button class="close-modal" id="closeAuthButton" type="button">
+<button
+class="close-modal"
+id="closeAuthButton"
+type="button"
+>
 ×
 </button>
 
+<!-- GİRİŞ -->
+
 <div id="loginForm">
 
-<h2>Giriş Yap</h2>
+<h2>
+Giriş Yap
+</h2>
 
-<form class="auth-form" id="loginAuthForm">
+<form
+class="auth-form"
+id="loginAuthForm"
+>
 
 <input
 type="email"
@@ -1495,33 +1788,58 @@ autocomplete="current-password"
 required
 >
 
-<button type="submit" class="auth-submit">
+<button
+type="submit"
+class="auth-submit"
+>
 Giriş Yap
 </button>
 
 </form>
 
-<div id="loginMessage" class="auth-message"></div>
+<div
+id="loginMessage"
+class="auth-message"
+></div>
 
 <div class="auth-switch">
+
 Hesabın yok mu?
-<button type="button" onclick="showRegister()">
+
+<button
+type="button"
+onclick="showRegister()"
+>
 Hesap Oluştur
 </button>
+
 </div>
 
 <div class="auth-switch">
+
 Şifreni mi unuttun?
-<button type="button" onclick="showForgotPassword()">
+
+<button
+type="button"
+onclick="showForgotPassword()"
+>
 Şifremi Unuttum
 </button>
-</div>
 
 </div>
 
-<div id="registerForm" style="display:none;">
+</div>
 
-<h2>Hesap Oluştur</h2>
+<!-- KAYIT -->
+
+<div
+id="registerForm"
+style="display:none;"
+>
+
+<h2>
+Hesap Oluştur
+</h2>
 
 <div class="register-notice">
 
@@ -1530,15 +1848,22 @@ Hesap Oluştur
 </div>
 
 <div>
+
 Lütfen hesap oluştururken tüm bilgilerinizi
-<strong>eksiksiz ve doğru</strong> şekilde giriniz.
+<strong>eksiksiz ve doğru</strong>
+şekilde giriniz.
+
 Bilgilerinizin doğruluğu, sipariş ve hesap işlemlerinizin
 sorunsuz ilerlemesi için önemlidir.
-</div>
 
 </div>
 
-<form class="auth-form" id="registerAuthForm">
+</div>
+
+<form
+class="auth-form"
+id="registerAuthForm"
+>
 
 <input
 type="text"
@@ -1571,28 +1896,50 @@ minlength="6"
 required
 >
 
-<button type="submit" class="auth-submit">
+<button
+type="submit"
+class="auth-submit"
+>
 Hesap Oluştur
 </button>
 
 </form>
 
-<div id="registerMessage" class="auth-message"></div>
+<div
+id="registerMessage"
+class="auth-message"
+></div>
 
 <div class="auth-switch">
+
 Zaten hesabın var mı?
-<button type="button" onclick="showLogin()">
+
+<button
+type="button"
+onclick="showLogin()"
+>
 Giriş Yap
 </button>
-</div>
 
 </div>
 
-<div id="verifyEmailForm" style="display:none;">
+</div>
 
-<h2>E-posta Doğrulama</h2>
+<!-- E-POSTA DOĞRULAMA -->
 
-<form class="auth-form" id="verifyAuthForm">
+<div
+id="verifyEmailForm"
+style="display:none;"
+>
+
+<h2>
+E-posta Doğrulama
+</h2>
+
+<form
+class="auth-form"
+id="verifyAuthForm"
+>
 
 <input
 type="email"
@@ -1610,33 +1957,59 @@ maxlength="6"
 required
 >
 
-<button type="submit" class="auth-submit">
+<button
+type="submit"
+class="auth-submit"
+>
 E-postayı Doğrula
 </button>
 
 </form>
 
-<div id="verifyMessage" class="auth-message"></div>
+<div
+id="verifyMessage"
+class="auth-message"
+></div>
 
 <div class="auth-switch">
-<button type="button" onclick="resendVerificationCode()">
+
+<button
+type="button"
+onclick="resendVerificationCode()"
+>
 Kodu Tekrar Gönder
 </button>
+
 </div>
 
 <div class="auth-switch">
-<button type="button" onclick="showLogin()">
+
+<button
+type="button"
+onclick="showLogin()"
+>
 Giriş Yap
 </button>
-</div>
 
 </div>
 
-<div id="forgotPasswordForm" style="display:none;">
+</div>
 
-<h2>Şifremi Unuttum</h2>
+<!-- ŞİFREMİ UNUTTUM -->
 
-<form class="auth-form" id="forgotAuthForm">
+<div
+id="forgotPasswordForm"
+style="display:none;"
+>
+
+<h2>
+Şifremi Unuttum
+</h2>
+
+<form
+class="auth-form"
+id="forgotAuthForm"
+>
 
 <input
 type="email"
@@ -1645,34 +2018,61 @@ placeholder="E-posta"
 required
 >
 
-<button type="submit" class="auth-submit">
+<button
+type="submit"
+class="auth-submit"
+>
 Kod Gönder
 </button>
 
 </form>
 
-<div id="forgotMessage" class="auth-message"></div>
+<div
+id="forgotMessage"
+class="auth-message"
+></div>
 
 <div class="auth-switch">
+
 Kodu aldın mı?
-<button type="button" onclick="showResetPassword()">
+
+<button
+type="button"
+onclick="showResetPassword()"
+>
 Şifreyi Sıfırla
 </button>
+
 </div>
 
 <div class="auth-switch">
-<button type="button" onclick="showLogin()">
+
+<button
+type="button"
+onclick="showLogin()"
+>
 Giriş Yap
 </button>
-</div>
 
 </div>
 
-<div id="resetPasswordForm" style="display:none;">
+</div>
 
-<h2>Şifreyi Sıfırla</h2>
+<!-- ŞİFRE SIFIRLAMA -->
 
-<form class="auth-form" id="resetAuthForm">
+<div
+id="resetPasswordForm"
+style="display:none;"
+>
+
+<h2>
+Şifreyi Sıfırla
+</h2>
+
+<form
+class="auth-form"
+id="resetAuthForm"
+>
 
 <input
 type="email"
@@ -1706,27 +2106,48 @@ minlength="6"
 required
 >
 
-<button type="submit" class="auth-submit">
+<button
+type="submit"
+class="auth-submit"
+>
 Şifreyi Sıfırla
 </button>
 
 </form>
 
-<div id="resetMessage" class="auth-message"></div>
+<div
+id="resetMessage"
+class="auth-message"
+></div>
 
 <div class="auth-switch">
-<button type="button" onclick="showLogin()">
+
+<button
+type="button"
+onclick="showLogin()"
+>
 Giriş Yap
 </button>
-</div>
 
 </div>
 
-<div id="changePasswordForm" style="display:none;">
+</div>
 
-<h2>Şifre Değiştir</h2>
+<!-- ŞİFRE DEĞİŞTİR -->
 
-<form class="auth-form" id="changeAuthForm">
+<div
+id="changePasswordForm"
+style="display:none;"
+>
+
+<h2>
+Şifre Değiştir
+</h2>
+
+<form
+class="auth-form"
+id="changeAuthForm"
+>
 
 <input
 type="password"
@@ -1751,28 +2172,43 @@ minlength="6"
 required
 >
 
-<button type="submit" class="auth-submit">
+<button
+type="submit"
+class="auth-submit"
+>
 Şifreyi Değiştir
 </button>
 
 </form>
 
-<div id="changePasswordMessage" class="auth-message"></div>
+<div
+id="changePasswordMessage"
+class="auth-message"
+></div>
 
 <div class="auth-switch">
-<button type="button" onclick="closeAuth()">
+
+<button
+type="button"
+onclick="closeAuth()"
+>
 Kapat
 </button>
-</div>
 
 </div>
 
 </div>
+
+</div>
+
 </div>
 
 <!-- FAVORİLER -->
 
-<div id="favoritesModal" class="modal">
+<div
+id="favoritesModal"
+class="modal"
+>
 
 <div class="modal-box large">
 
@@ -1784,16 +2220,22 @@ type="button"
 ×
 </button>
 
-<h2>❤️ Favorilerim</h2>
+<h2>
+❤️ Favorilerim
+</h2>
 
 <div id="favoritesContainer"></div>
 
 </div>
+
 </div>
 
 <!-- SİPARİŞLER -->
 
-<div id="ordersModal" class="modal">
+<div
+id="ordersModal"
+class="modal"
+>
 
 <div class="modal-box large">
 
@@ -1805,18 +2247,25 @@ type="button"
 ×
 </button>
 
-<h2>📦 Siparişlerim</h2>
+<h2>
+📦 Siparişlerim
+</h2>
 
-<div id="ordersContainer" class="orders-container"></div>
+<div
+id="ordersContainer"
+class="orders-container"
+></div>
 
 </div>
+
 </div>
 
-<!-- =========================
-     SEPET MODALI
-========================= -->
+<!-- SEPET -->
 
-<div id="cartModal" class="modal">
+<div
+id="cartModal"
+class="modal"
+>
 
 <div class="modal-box large">
 
@@ -1828,11 +2277,14 @@ type="button"
 ×
 </button>
 
-<h2>🛒 Sepetim</h2>
+<h2>
+🛒 Sepetim
+</h2>
 
 <div id="cartContainer"></div>
 
 </div>
+
 </div>
 
 <script>
@@ -1844,14 +2296,17 @@ const products=[
 {id:2,name:"Taşlı Yüzük",category:"Yüzük",subcategory:"Taşlı",image:"resimler/tasli-yuzuk.jpg"},
 {id:3,name:"Kalp Detaylı Yüzük",category:"Yüzük",subcategory:"Kalpli",image:"resimler/kalp-yuzuk.jpg"},
 {id:4,name:"Minimal Yüzük",category:"Yüzük",subcategory:"Minimal",image:"resimler/minimal-yuzuk.jpg"},
+
 {id:5,name:"Minimal Bileklik",category:"Bileklik",subcategory:"Minimal",image:"resimler/bileklik.jpg"},
 {id:6,name:"Taşlı Bileklik",category:"Bileklik",subcategory:"Taşlı",image:"resimler/tasli-bileklik.jpg"},
 {id:7,name:"Su Yolu Bileklik",category:"Bileklik",subcategory:"Su Yolu",image:"resimler/su-yolu-bileklik.jpg"},
 {id:8,name:"Zincir Bileklik",category:"Bileklik",subcategory:"Zincir",image:"resimler/zincir-bileklik.jpg"},
+
 {id:9,name:"İnci Küpe",category:"Küpe",subcategory:"İnci",image:"resimler/incikupe.jpg"},
 {id:10,name:"Halka Küpe",category:"Küpe",subcategory:"Halka",image:"resimler/halka-kupe.jpg"},
 {id:11,name:"Taşlı Küpe",category:"Küpe",subcategory:"Taşlı",image:"resimler/tasli-kupe.jpg"},
 {id:12,name:"Minimal Küpe",category:"Küpe",subcategory:"Minimal",image:"resimler/minimal-kupe.jpg"},
+
 {id:13,name:"İnci Kolye",category:"Kolye",subcategory:"İnci",image:"resimler/kolye.jpg"},
 {id:14,name:"İnce Zincir Kolye",category:"Kolye",subcategory:"Zincir",image:"resimler/zincir-kolye.jpg"},
 {id:15,name:"Minimal Kolye",category:"Kolye",subcategory:"Minimal",image:"resimler/minimal-kolye.jpg"},
@@ -1860,20 +2315,18 @@ const products=[
 
 let selectedStars=Array(products.length+1).fill(0);
 let favoriteProductIds=[];
+let cart=[];
 
 
 /* =========================
-   SEPET VERİSİ
+   SEPET
 ========================= */
-
-let cart=[];
 
 function loadCart(){
 
 try{
 
-const saved=
-JSON.parse(
+const saved=JSON.parse(
 localStorage.getItem("veloraCart")||"[]"
 );
 
@@ -1901,11 +2354,7 @@ cart=[];
 
 }catch(error){
 
-console.error(
-"Sepet yüklenemedi:",
-error
-);
-
+console.error("Sepet yüklenemedi:",error);
 cart=[];
 
 }
@@ -1942,8 +2391,7 @@ document.getElementById("cartCount");
 
 if(element){
 
-element.textContent=
-getCartCount();
+element.textContent=getCartCount();
 
 }
 
@@ -2011,7 +2459,6 @@ item=>Number(item.productId)!==id
 }
 
 saveCart();
-
 renderCart();
 
 }
@@ -2026,7 +2473,6 @@ item=>Number(item.productId)!==id
 );
 
 saveCart();
-
 renderCart();
 
 }
@@ -2034,18 +2480,14 @@ renderCart();
 function renderCart(){
 
 const container=
-document.getElementById(
-"cartContainer"
-);
+document.getElementById("cartContainer");
 
 if(!container)return;
 
-cart=
-cart.filter(item=>
+cart=cart.filter(item=>
 products.some(
 product=>
-Number(product.id)===
-Number(item.productId)
+Number(product.id)===Number(item.productId)
 )
 );
 
@@ -2085,9 +2527,7 @@ ${cart.map(item=>{
 
 const product=
 products.find(
-p=>
-Number(p.id)===
-Number(item.productId)
+p=>Number(p.id)===Number(item.productId)
 );
 
 if(!product)return"";
@@ -2184,9 +2624,7 @@ function openCart(){
 closeAccountMenu();
 
 const modal=
-document.getElementById(
-"cartModal"
-);
+document.getElementById("cartModal");
 
 if(!modal)return;
 
@@ -2199,9 +2637,7 @@ modal.classList.add("active");
 function closeCart(){
 
 const modal=
-document.getElementById(
-"cartModal"
-);
+document.getElementById("cartModal");
 
 if(!modal)return;
 
@@ -2212,21 +2648,16 @@ modal.classList.remove("active");
 function showCartToast(message){
 
 const oldToast=
-document.querySelector(
-".cart-toast"
-);
+document.querySelector(".cart-toast");
 
 if(oldToast){
-
 oldToast.remove();
-
 }
 
 const toast=
 document.createElement("div");
 
 toast.className="cart-toast";
-
 toast.textContent=message;
 
 document.body.appendChild(toast);
@@ -2234,9 +2665,7 @@ document.body.appendChild(toast);
 setTimeout(()=>{
 
 if(toast.parentNode){
-
 toast.remove();
-
 }
 
 },2000);
@@ -2253,8 +2682,7 @@ function escapeHtml(text){
 const div=
 document.createElement("div");
 
-div.textContent=
-String(text??"");
+div.textContent=String(text??"");
 
 return div.innerHTML;
 
@@ -2262,7 +2690,8 @@ return div.innerHTML;
 
 async function apiRequest(path,options={}){
 
-const response=await fetch(
+const response=
+await fetch(
 `${API_URL}${path}`,
 {
 ...options,
@@ -2272,7 +2701,8 @@ cache:"no-store"
 
 let data={};
 
-const text=await response.text();
+const text=
+await response.text();
 
 try{
 
@@ -2281,7 +2711,8 @@ data=text?JSON.parse(text):{};
 }catch{
 
 data={
-message:text||
+message:
+text||
 "Sunucudan geçersiz yanıt geldi."
 };
 
@@ -2327,7 +2758,8 @@ function selectStar(productId,rating){
 
 selectedStars[productId]=rating;
 
-const stars=document.getElementById(
+const stars=
+document.getElementById(
 `stars-${productId}`
 );
 
@@ -2390,8 +2822,7 @@ document.createElement("h2");
 heading.className=
 "category-heading";
 
-heading.textContent=
-category;
+heading.textContent=category;
 
 container.appendChild(heading);
 
@@ -2405,8 +2836,7 @@ categoryProducts.forEach(product=>{
 const card=
 document.createElement("div");
 
-card.className=
-"product-card";
+card.className="product-card";
 
 const isFavorite=
 favoriteProductIds.includes(
@@ -2536,8 +2966,7 @@ document.getElementById(
 
 document.getElementById(
 "searchResultInfo"
-).textContent=
-"Tüm Ürünler";
+).textContent="Tüm Ürünler";
 
 renderProducts(products);
 
@@ -2606,9 +3035,7 @@ function scrollToProducts(){
 setTimeout(()=>{
 
 const section=
-document.getElementById(
-"urunler"
-);
+document.getElementById("urunler");
 
 if(section){
 
@@ -2642,17 +3069,14 @@ document.getElementById(
 `review-${productId}`
 );
 
-const text=
-input.value.trim();
+const text=input.value.trim();
 
 const rating=
 selectedStars[productId];
 
 if(!rating){
 
-alert(
-"Lütfen yıldız puanı seçin."
-);
+alert("Lütfen yıldız puanı seçin.");
 
 return;
 
@@ -2660,9 +3084,7 @@ return;
 
 if(!text){
 
-alert(
-"Lütfen yorumunuzu yazın."
-);
+alert("Lütfen yorumunuzu yazın.");
 
 return;
 
@@ -2679,9 +3101,7 @@ localStorage.getItem(key)||"[]"
 reviews.push({
 rating,
 text,
-date:new Date().toLocaleDateString(
-"tr-TR"
-)
+date:new Date().toLocaleDateString("tr-TR")
 });
 
 localStorage.setItem(
@@ -2690,7 +3110,6 @@ JSON.stringify(reviews)
 );
 
 input.value="";
-
 selectedStars[productId]=0;
 
 const stars=
@@ -2732,8 +3151,7 @@ reviews.forEach(review=>{
 const item=
 document.createElement("div");
 
-item.className=
-"review-item";
+item.className="review-item";
 
 let stars="";
 
@@ -2776,14 +3194,11 @@ container.appendChild(item);
 async function loadFavorites(){
 
 const token=
-localStorage.getItem(
-"veloraToken"
-);
+localStorage.getItem("veloraToken");
 
 if(!token){
 
 favoriteProductIds=[];
-
 return;
 
 }
@@ -2827,9 +3242,7 @@ favoriteProductIds=[];
 async function toggleFavorite(productId){
 
 const token=
-localStorage.getItem(
-"veloraToken"
-);
+localStorage.getItem("veloraToken");
 
 if(!token){
 
@@ -2915,14 +3328,11 @@ alert(error.message);
 async function openFavorites(){
 
 const token=
-localStorage.getItem(
-"veloraToken"
-);
+localStorage.getItem("veloraToken");
 
 if(!token){
 
 openAuth();
-
 return;
 
 }
@@ -2986,16 +3396,14 @@ container.innerHTML="";
 const grid=
 document.createElement("div");
 
-grid.className=
-"favorite-list";
+grid.className="favorite-list";
 
 favoriteProducts.forEach(product=>{
 
 const item=
 document.createElement("div");
 
-item.className=
-"favorite-item";
+item.className="favorite-item";
 
 item.innerHTML=`
 
@@ -3039,9 +3447,7 @@ container.appendChild(grid);
 async function removeFavoriteFromList(productId){
 
 const token=
-localStorage.getItem(
-"veloraToken"
-);
+localStorage.getItem("veloraToken");
 
 try{
 
@@ -3080,14 +3486,11 @@ alert(error.message);
 async function openOrders(){
 
 const token=
-localStorage.getItem(
-"veloraToken"
-);
+localStorage.getItem("veloraToken");
 
 if(!token){
 
 openAuth();
-
 return;
 
 }
@@ -3123,9 +3526,7 @@ headers:{
 }
 );
 
-renderOrders(
-data.orders||[]
-);
+renderOrders(data.orders||[]);
 
 }catch(error){
 
@@ -3154,9 +3555,7 @@ function parseOrderItems(order){
 try{
 
 if(Array.isArray(order.items)){
-
 return order.items;
-
 }
 
 if(order.items_json){
@@ -3167,9 +3566,7 @@ typeof order.items_json==="string"
 :order.items_json;
 
 if(Array.isArray(parsed)){
-
 return parsed;
-
 }
 
 }
@@ -3191,20 +3588,15 @@ function formatOrderDate(value){
 
 if(!value)return "-";
 
-const date=
-new Date(value);
+const date=new Date(value);
 
 if(Number.isNaN(date.getTime())){
 
-return escapeHtml(
-String(value)
-);
+return escapeHtml(String(value));
 
 }
 
-return date.toLocaleString(
-"tr-TR"
-);
+return date.toLocaleString("tr-TR");
 
 }
 
@@ -3263,9 +3655,7 @@ let currentIndex=
 statuses.indexOf(status);
 
 if(currentIndex<0){
-
 currentIndex=0;
-
 }
 
 return`
@@ -3373,8 +3763,7 @@ ${escapeHtml(quantity)}
 const orderCard=
 document.createElement("div");
 
-orderCard.className=
-"order-card";
+orderCard.className="order-card";
 
 orderCard.innerHTML=`
 
@@ -3402,7 +3791,9 @@ ${renderOrderProgress(status)}
 
 <div class="order-items">
 
-<strong>Ürünler</strong>
+<strong>
+Ürünler
+</strong>
 
 <div>
 ${itemsHtml}
@@ -3414,9 +3805,7 @@ ${itemsHtml}
 
 Toplam:
 
-${Number(
-order.total||0
-).toLocaleString(
+${Number(order.total||0).toLocaleString(
 "tr-TR",
 {
 minimumFractionDigits:2,
@@ -3460,9 +3849,7 @@ Teslimat Adresi
 
 <br>
 
-${escapeHtml(
-order.customer_address
-)}
+${escapeHtml(order.customer_address)}
 
 </div>
 
@@ -3498,9 +3885,7 @@ const el=
 document.getElementById(id);
 
 if(el){
-
 el.style.display="none";
-
 }
 
 });
@@ -3524,9 +3909,7 @@ document.getElementById(id);
 if(el){
 
 el.textContent="";
-
-el.className=
-"auth-message";
+el.className="auth-message";
 
 }
 
@@ -3537,14 +3920,11 @@ el.className=
 function openAuth(){
 
 const token=
-localStorage.getItem(
-"veloraToken"
-);
+localStorage.getItem("veloraToken");
 
 if(token){
 
 toggleAccountMenu();
-
 return;
 
 }
@@ -3568,7 +3948,6 @@ document.getElementById(
 function showLogin(){
 
 hideAllAuthForms();
-
 clearAuthMessages();
 
 document.getElementById(
@@ -3578,14 +3957,10 @@ document.getElementById(
 setTimeout(()=>{
 
 const input=
-document.getElementById(
-"loginEmail"
-);
+document.getElementById("loginEmail");
 
 if(input){
-
 input.focus();
-
 }
 
 },50);
@@ -3595,7 +3970,6 @@ input.focus();
 function showRegister(){
 
 hideAllAuthForms();
-
 clearAuthMessages();
 
 document.getElementById(
@@ -3607,7 +3981,6 @@ document.getElementById(
 function showVerifyEmail(email=""){
 
 hideAllAuthForms();
-
 clearAuthMessages();
 
 document.getElementById(
@@ -3627,7 +4000,6 @@ document.getElementById(
 function showForgotPassword(){
 
 hideAllAuthForms();
-
 clearAuthMessages();
 
 document.getElementById(
@@ -3639,7 +4011,6 @@ document.getElementById(
 function showResetPassword(email=""){
 
 hideAllAuthForms();
-
 clearAuthMessages();
 
 document.getElementById(
@@ -3658,18 +4029,14 @@ document.getElementById(
 
 function showChangePassword(){
 
-if(!localStorage.getItem(
-"veloraToken"
-)){
+if(!localStorage.getItem("veloraToken")){
 
 openAuth();
-
 return;
 
 }
 
 hideAllAuthForms();
-
 clearAuthMessages();
 
 document.getElementById(
@@ -3710,6 +4077,44 @@ const message=
 document.getElementById(
 "registerMessage"
 );
+
+/* KONTROLLER */
+
+if(!username||!email||!password||!confirm){
+
+message.className=
+"auth-message error-message";
+
+message.textContent=
+"Lütfen tüm bilgileri eksiksiz doldurun.";
+
+return;
+
+}
+
+if(username.length<3){
+
+message.className=
+"auth-message error-message";
+
+message.textContent=
+"Kullanıcı adı en az 3 karakter olmalıdır.";
+
+return;
+
+}
+
+if(password.length<6){
+
+message.className=
+"auth-message error-message";
+
+message.textContent=
+"Şifre en az 6 karakter olmalıdır.";
+
+return;
+
+}
 
 if(password!==confirm){
 
@@ -3909,9 +4314,9 @@ error.message;
 }
 
 
-/* ==========================================
-   GİRİŞ SİSTEMİ
-========================================== */
+/* =========================
+   GİRİŞ
+========================= */
 
 async function login(event){
 
@@ -3926,9 +4331,7 @@ const passwordInput=
 form.querySelector("#loginPassword");
 
 const message=
-document.getElementById(
-"loginMessage"
-);
+document.getElementById("loginMessage");
 
 const email=
 (emailInput?.value||"")
@@ -3962,11 +4365,8 @@ return;
 
 }
 
-message.className=
-"auth-message";
-
-message.textContent=
-"Giriş yapılıyor...";
+message.className="auth-message";
+message.textContent="Giriş yapılıyor...";
 
 try{
 
@@ -3975,12 +4375,10 @@ await apiRequest(
 "/api/auth/login",
 {
 method:"POST",
-
 headers:{
 "Content-Type":"application/json",
 "Accept":"application/json"
 },
-
 body:JSON.stringify({
 email:email,
 password:password
@@ -4045,9 +4443,9 @@ error.message||
 }
 
 
-/* ==========================================
-   ŞİFRE İŞLEMLERİ
-========================================== */
+/* =========================
+   ŞİFRE
+========================= */
 
 async function forgotPassword(event){
 
@@ -4063,11 +4461,8 @@ document.getElementById(
 "forgotMessage"
 );
 
-message.className=
-"auth-message";
-
-message.textContent=
-"Kod gönderiliyor...";
+message.className="auth-message";
+message.textContent="Kod gönderiliyor...";
 
 try{
 
@@ -4152,11 +4547,8 @@ return;
 
 }
 
-message.className=
-"auth-message";
-
-message.textContent=
-"Şifre sıfırlanıyor...";
+message.className="auth-message";
+message.textContent="Şifre sıfırlanıyor...";
 
 try{
 
@@ -4206,14 +4598,11 @@ async function changePassword(event){
 event.preventDefault();
 
 const token=
-localStorage.getItem(
-"veloraToken"
-);
+localStorage.getItem("veloraToken");
 
 if(!token){
 
 showLogin();
-
 return;
 
 }
@@ -4250,11 +4639,8 @@ return;
 
 }
 
-message.className=
-"auth-message";
-
-message.textContent=
-"Şifre değiştiriliyor...";
+message.className="auth-message";
+message.textContent="Şifre değiştiriliyor...";
 
 try{
 
@@ -4303,17 +4689,19 @@ error.message;
 
 }
 
+
+/* =========================
+   KULLANICI
+========================= */
+
 async function loadCurrentUser(){
 
 const token=
-localStorage.getItem(
-"veloraToken"
-);
+localStorage.getItem("veloraToken");
 
 if(!token){
 
 updateAccountUI();
-
 return;
 
 }
@@ -4365,9 +4753,7 @@ function toggleAccountMenu(){
 
 document.getElementById(
 "accountMenu"
-).classList.toggle(
-"active"
-);
+).classList.toggle("active");
 
 }
 
@@ -4375,38 +4761,26 @@ function closeAccountMenu(){
 
 document.getElementById(
 "accountMenu"
-).classList.remove(
-"active"
-);
+).classList.remove("active");
 
 }
 
 function updateAccountUI(){
 
 const token=
-localStorage.getItem(
-"veloraToken"
-);
+localStorage.getItem("veloraToken");
 
 const userText=
-localStorage.getItem(
-"veloraUser"
-);
+localStorage.getItem("veloraUser");
 
 const button=
-document.getElementById(
-"accountButton"
-);
+document.getElementById("accountButton");
 
 const username=
-document.getElementById(
-"accountUsername"
-);
+document.getElementById("accountUsername");
 
 const email=
-document.getElementById(
-"accountEmail"
-);
+document.getElementById("accountEmail");
 
 if(token&&userText){
 
@@ -4471,9 +4845,7 @@ function closeFavorites(){
 
 document.getElementById(
 "favoritesModal"
-).classList.remove(
-"active"
-);
+).classList.remove("active");
 
 }
 
@@ -4481,16 +4853,14 @@ function closeOrders(){
 
 document.getElementById(
 "ordersModal"
-).classList.remove(
-"active"
-);
+).classList.remove("active");
 
 }
 
 
-/* ==========================================
+/* =========================
    SAYFA BAŞLANGICI
-========================================== */
+========================= */
 
 document.addEventListener(
 "DOMContentLoaded",
@@ -4520,13 +4890,8 @@ document.getElementById(
 "click",
 event=>{
 
-if(
-event.target===
-event.currentTarget
-){
-
+if(event.target===event.currentTarget){
 closeCart();
-
 }
 
 }
@@ -4545,9 +4910,7 @@ event.stopPropagation();
 
 document.getElementById(
 "menuPanel"
-).classList.toggle(
-"active"
-);
+).classList.toggle("active");
 
 }
 );
@@ -4581,9 +4944,7 @@ event=>{
 event.stopPropagation();
 
 if(
-localStorage.getItem(
-"veloraToken"
-)
+localStorage.getItem("veloraToken")
 ){
 
 toggleAccountMenu();
@@ -4638,7 +4999,7 @@ showChangePassword
 );
 
 
-/* MODAL KAPATMA */
+/* MODALLAR */
 
 document.getElementById(
 "closeAuthButton"
@@ -4707,7 +5068,7 @@ changePassword
 );
 
 
-/* AUTH MODAL DIŞINA TIKLAMA */
+/* AUTH DIŞINA TIKLAMA */
 
 document.getElementById(
 "authModal"
@@ -4715,20 +5076,15 @@ document.getElementById(
 "click",
 event=>{
 
-if(
-event.target===
-event.currentTarget
-){
-
+if(event.target===event.currentTarget){
 closeAuth();
-
 }
 
 }
 );
 
 
-/* FAVORİLER MODAL DIŞINA TIKLAMA */
+/* FAVORİ DIŞINA TIKLAMA */
 
 document.getElementById(
 "favoritesModal"
@@ -4736,20 +5092,15 @@ document.getElementById(
 "click",
 event=>{
 
-if(
-event.target===
-event.currentTarget
-){
-
+if(event.target===event.currentTarget){
 closeFavorites();
-
 }
 
 }
 );
 
 
-/* SİPARİŞLER MODAL DIŞINA TIKLAMA */
+/* SİPARİŞ DIŞINA TIKLAMA */
 
 document.getElementById(
 "ordersModal"
@@ -4757,13 +5108,8 @@ document.getElementById(
 "click",
 event=>{
 
-if(
-event.target===
-event.currentTarget
-){
-
+if(event.target===event.currentTarget){
 closeOrders();
-
 }
 
 }
@@ -4777,48 +5123,32 @@ document.addEventListener(
 event=>{
 
 const accountArea=
-document.querySelector(
-".account-area"
-);
+document.querySelector(".account-area");
 
 const accountMenu=
-document.getElementById(
-"accountMenu"
-);
+document.getElementById("accountMenu");
 
 if(
 accountArea&&
-!accountArea.contains(
-event.target
-)
+!accountArea.contains(event.target)
 ){
 
-accountMenu.classList.remove(
-"active"
-);
+accountMenu.classList.remove("active");
 
 }
 
 const menuWrapper=
-document.querySelector(
-".menu-wrapper"
-);
+document.querySelector(".menu-wrapper");
 
 const menuPanel=
-document.getElementById(
-"menuPanel"
-);
+document.getElementById("menuPanel");
 
 if(
 menuWrapper&&
-!menuWrapper.contains(
-event.target
-)
+!menuWrapper.contains(event.target)
 ){
 
-menuPanel.classList.remove(
-"active"
-);
+menuPanel.classList.remove("active");
 
 }
 
