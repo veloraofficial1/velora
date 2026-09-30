@@ -214,11 +214,11 @@ nav a,.dropbtn{font-size:14px}
 .search-box{width:170px}
 .menu-button,.account-button,.cart-button{padding:8px 10px;font-size:13px}
 
-/* MOBİLDE HESAP BUTONU DOKUNMA DÜZELTMESİ */
-header{position:sticky;z-index:10000}
-.account-area{position:relative;z-index:10001;pointer-events:auto}
-.account-button{position:relative;z-index:10002;pointer-events:auto !important;touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
-
+/* Mobil hesap butonu - yalnızca dokunma katmanını düzeltir */
+@media(max-width:700px){
+.account-area{position:relative;z-index:4000;pointer-events:auto}
+.account-button{position:relative;z-index:4001;pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+}
 
 .hero-slider{height:75vh;min-height:500px}
 .hero-overlay{background:linear-gradient(180deg,rgba(35,25,15,.15),rgba(35,25,15,.62))}
@@ -2658,54 +2658,26 @@ document
 searchProducts
 );
 
-const accountButton =
-document.getElementById("accountButton");
-
-let accountButtonHandledAt=0;
-
-function handleAccountButton(event){
-
-if(event){
-	event.preventDefault();
-	event.stopPropagation();
-}
-
-const now=Date.now();
-
-if(now-accountButtonHandledAt<500){
-	return;
-}
-
-accountButtonHandledAt=now;
-
-if(localStorage.getItem("veloraToken")){
-	toggleAccountMenu();
-}else{
-	openAuth();
-}
-
-}
-
-if(accountButton){
-
-accountButton.addEventListener(
-"pointerup",
-handleAccountButton,
-{passive:false}
-);
-
-accountButton.addEventListener(
-"touchend",
-handleAccountButton,
-{passive:false}
-);
-
-accountButton.addEventListener(
+document
+.getElementById("accountButton")
+.addEventListener(
 "click",
-handleAccountButton
-);
+event=>{
+
+event.stopPropagation();
+
+if(
+localStorage.getItem(
+"veloraToken"
+)
+){
+toggleAccountMenu();
+}else{
+openAuth();
+}
 
 }
+);
 
 document
 .getElementById("favoritesMenuButton")
