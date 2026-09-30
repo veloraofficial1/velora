@@ -826,6 +826,31 @@ transform:translateY(0)
 }
 }
 
+/* =========================
+   KAYIT BİLGİLENDİRME
+========================= */
+
+.register-notice{
+background:#f7f1e7;
+border:1px solid #d8c5a9;
+padding:14px 16px;
+margin-bottom:18px;
+color:#6b5640;
+font-size:13px;
+line-height:1.6
+}
+
+.register-notice-title{
+color:#85633d;
+font-size:15px;
+font-weight:bold;
+margin-bottom:5px
+}
+
+.register-notice strong{
+color:#5a4632
+}
+
 .auth-form{
 display:flex;
 flex-direction:column;
@@ -1498,6 +1523,21 @@ Hesap Oluştur
 
 <h2>Hesap Oluştur</h2>
 
+<div class="register-notice">
+
+<div class="register-notice-title">
+Önemli Bilgilendirme
+</div>
+
+<div>
+Lütfen hesap oluştururken tüm bilgilerinizi
+<strong>eksiksiz ve doğru</strong> şekilde giriniz.
+Bilgilerinizin doğruluğu, sipariş ve hesap işlemlerinizin
+sorunsuz ilerlemesi için önemlidir.
+</div>
+
+</div>
+
 <form class="auth-form" id="registerAuthForm">
 
 <input
@@ -2000,9 +2040,6 @@ document.getElementById(
 
 if(!container)return;
 
-
-/* Artık olmayan ürünleri temizle */
-
 cart=
 cart.filter(item=>
 products.some(
@@ -2013,7 +2050,6 @@ Number(item.productId)
 );
 
 saveCart();
-
 
 if(!cart.length){
 
@@ -2040,7 +2076,6 @@ Beğendiğin ürünleri sepete ekleyebilirsin.
 return;
 
 }
-
 
 container.innerHTML=`
 
