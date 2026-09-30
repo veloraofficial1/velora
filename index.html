@@ -2371,11 +2371,54 @@ modal.classList.remove("active");
 }
 
 
+/* =========================
+   YANLIŞ KOD YAZISINI TEMİZLE
+========================= */
+
+function removeAccidentalCodeText(){
+
+const badTexts=[
+"//html",
+"```html",
+"```"
+];
+
+const walker=
+document.createTreeWalker(
+document.body,
+NodeFilter.SHOW_TEXT
+);
+
+const nodes=[];
+
+let node;
+
+while(
+node=walker.nextNode()
+){
+nodes.push(node);
+}
+
+nodes.forEach(textNode=>{
+
+const value=
+textNode.nodeValue.trim();
+
+if(badTexts.includes(value)){
+
+textNode.parentNode.removeChild(
+textNode
+);
+
+}
+
+});
+
+}
 
 
 /* =========================
-   SEPET / ÜRÜNLER / FAVORİLER / SİPARİŞLER
-   Eksik fonksiyonlar geri yüklendi
+   EKSIK FONKSIYONLAR - TAMAMLANDI
 ========================= */
 
 function loadCart(){
@@ -4508,55 +4551,8 @@ container.appendChild(orderCard);
 
 }
 
-/* Eski sipariş butonu adıyla uyumluluk */
 function openOrderForm(){
 openCheckout();
-}
-
-
-/* =========================
-   YANLIŞ KOD YAZISINI TEMİZLE
-========================= */
-
-function removeAccidentalCodeText(){
-
-const badTexts=[
-"//html",
-"```html",
-"```"
-];
-
-const walker=
-document.createTreeWalker(
-document.body,
-NodeFilter.SHOW_TEXT
-);
-
-const nodes=[];
-
-let node;
-
-while(
-node=walker.nextNode()
-){
-nodes.push(node);
-}
-
-nodes.forEach(textNode=>{
-
-const value=
-textNode.nodeValue.trim();
-
-if(badTexts.includes(value)){
-
-textNode.parentNode.removeChild(
-textNode
-);
-
-}
-
-});
-
 }
 
 
