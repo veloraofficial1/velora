@@ -71,8 +71,7 @@ nav{
     gap:20px;
 }
 
-nav a,
-.dropbtn{
+nav a{
     color:#5a4632;
     font-size:16px;
     cursor:pointer;
@@ -82,13 +81,11 @@ nav a,
     text-decoration:none;
 }
 
-nav a:hover,
-.dropbtn:hover{
+nav a:hover{
     color:#a67c48;
 }
 
 .menu-wrapper,
-.dropdown,
 .account-area{
     position:relative;
 }
@@ -184,37 +181,6 @@ nav a:hover,
     color:#806344;
     font-size:17px;
     cursor:pointer;
-}
-
-.dropdown-content{
-    display:none;
-    position:absolute;
-    top:calc(100% - 1px);
-    left:0;
-    min-width:180px;
-    background:#fffaf3;
-    border:1px solid #dbc8ad;
-    box-shadow:0 10px 25px rgba(70,50,30,.12);
-    padding:8px 0;
-    z-index:2500;
-}
-
-.dropdown:hover .dropdown-content{
-    display:block;
-}
-
-.dropdown-content a{
-    display:block;
-    padding:10px 16px;
-    font-size:14px;
-    color:#5a4632;
-    text-decoration:none;
-    white-space:nowrap;
-}
-
-.dropdown-content a:hover{
-    background:#f1e5d3;
-    color:#9b7445;
 }
 
 .account-area{
@@ -442,9 +408,7 @@ section{
     letter-spacing:3px;
 }
 
-/* =========================================================
-   BİLGİSAYAR GÖRÜNÜMÜ: ESKİ ORİJİNAL FOTOĞRAF BOYUTLARI
-   ========================================================= */
+/* KATEGORİLER */
 .category-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -455,16 +419,20 @@ section{
 
 .category-card{
     position:relative;
-    height:280px;
+    width:100%;
+    height:auto;
+    aspect-ratio: 4 / 5;
     overflow:hidden;
     cursor:pointer;
     border:1px solid #d8c2a4;
+    background: #fffdf9;
 }
 
 .category-card img{
     width:100%;
     height:100%;
     object-fit:cover;
+    object-position:center;
     transition:.5s;
 }
 
@@ -482,8 +450,10 @@ section{
     color:#fff;
     font-size:27px;
     letter-spacing:3px;
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.5);
 }
 
+/* ÜRÜNLER LİSTE */
 #urunler{
     background:#fbf7f0;
 }
@@ -535,8 +505,11 @@ section{
 
 .product-image{
     width:100%;
-    height:260px;
+    height:auto;
+    aspect-ratio: 4 / 5;
     object-fit:cover;
+    object-position:center;
+    background: #fffdf9;
     display:block;
     transition:transform .4s ease;
 }
@@ -728,7 +701,7 @@ section{
 .product-detail-image{
     width:100%;
     max-height:480px;
-    object-fit:contain; /* KESİLMEYİ ÖNLER */
+    object-fit:contain; 
     display:block;
     border:1px solid #dfccb2;
     background:#fffdf9;
@@ -856,7 +829,6 @@ section{
     margin-bottom:10px;
 }
 
-/* FOTOĞRAFLI YORUM EKLEMELERİ */
 .review-photo-upload {
     margin-bottom: 15px;
 }
@@ -941,7 +913,6 @@ section{
     text-align:center;
 }
 
-/* ADMIN PANELİ İÇİN EK BUTONLAR */
 .admin-actions {
     margin-top: 10px;
     padding-top: 10px;
@@ -993,7 +964,7 @@ section{
 .cart-item img{
     width:75px;
     height:75px;
-    object-fit:contain; /* KESİLMEYİ ÖNLER */
+    object-fit:contain;
     background: #fff;
 }
 
@@ -1287,7 +1258,7 @@ section{
 .favorite-item img{
     width:90px;
     height:90px;
-    object-fit:contain; /* KESİLMEYİ ÖNLER */
+    object-fit:contain;
 }
 
 .favorite-item-info{
@@ -1441,8 +1412,11 @@ section{
 
 .featured-card img{
     width:100%;
-    height:230px;
+    height:auto;
+    aspect-ratio: 4 / 5;
     object-fit:cover;
+    object-position:center;
+    background: #fffdf9;
 }
 
 .featured-info{
@@ -1472,7 +1446,6 @@ section{
     color:#6b5640;
 }
 
-/* İLETİŞİM CSS */
 .contact-info-container {
     display: flex;
     justify-content: center;
@@ -1525,7 +1498,7 @@ footer{
 }
 
 /* =========================================================
-   RESPONSIVE (SADECE TELEFON İÇİN DÜZELTMELER)
+   RESPONSIVE (MOBİL VE TABLET ENTEGRASYONU)
    ========================================================= */
 @media(max-width:1000px){
     .header-center{gap:12px;}
@@ -1560,7 +1533,7 @@ footer{
     }
 
     nav{gap:10px;}
-    nav a, .dropbtn{font-size:14px;}
+    nav a{font-size:14px;}
     
     /* TELEFONDA ARAMA ÇUBUĞU GİZLENİYOR */
     .search-box{
@@ -1638,12 +1611,10 @@ footer{
     
     .featured-card img { height:auto !important; aspect-ratio:1/1; object-fit:contain !important; background:#fffdf9; }
 
-
     .category-overlay{
         font-size:19px;
     }
 
-    /* ÜRÜN MODAL VE DETAY RESPONSIVE */
     .modal{
         padding:10px;
         align-items:flex-start;
@@ -1699,7 +1670,6 @@ footer{
         width:250px;
     }
 
-    /* İLETİŞİM MOBİL UYUM */
     .contact-info-container {
         gap: 15px;
     }
@@ -1711,7 +1681,6 @@ footer{
 }
 
 @media(max-width:500px){
-    /* Telefonlarda yan yana 2'li düzen korunur */
     .product-grid, .featured-grid {
         grid-template-columns: repeat(2,1fr);
         gap: 10px;
@@ -1721,7 +1690,7 @@ footer{
         gap:5px;
     }
 
-    nav a, .dropbtn{
+    nav a{
         font-size:12px;
     }
 
@@ -1742,8 +1711,9 @@ footer{
 
 <div class="menu-wrapper">
 
+<!-- BUTON İSMİ KATEGORİLER OLARAK DEĞİŞTİ -->
 <button class="menu-button" id="menuButton" type="button">
-☰ Menü
+☰ Kategoriler
 </button>
 
 <div class="menu-panel" id="menuPanel">
@@ -1776,6 +1746,11 @@ Kolye
 Öne Çıkanlar
 </button>
 
+<!-- İLETİŞİM MENÜNÜN EN ALTINA EKLENDİ -->
+<button type="button" data-action="contact" style="margin-top: 10px; border-top: 1px solid #eadbc8; padding-top: 15px;">
+İletişim
+</button>
+
 </div>
 </div>
 
@@ -1784,34 +1759,6 @@ Kolye
 <a href="#urunler">
 Koleksiyon
 </a>
-
-<div class="dropdown">
-
-<!-- KATEGORİLER OK İŞARETİ GERİ GELDİ -->
-<button class="dropbtn" type="button">
-Kategoriler ▾
-</button>
-
-<div class="dropdown-content">
-
-<a href="#urunler" data-category="Yüzük">
-Yüzük
-</a>
-
-<a href="#urunler" data-category="Bileklik">
-Bileklik
-</a>
-
-<a href="#urunler" data-category="Küpe">
-Küpe
-</a>
-
-<a href="#urunler" data-category="Kolye">
-Kolye
-</a>
-
-</div>
-</div>
 
 <a href="#one-cikanlar">
 Öne Çıkanlar
@@ -1823,7 +1770,7 @@ Kolye
 
 </nav>
 
-<!-- ARAMA ÇUBUĞU BİLGİSAYAR İÇİN GERİ EKLENDİ, MOBİLDE GİZLENECEK -->
+<!-- ARAMA ÇUBUĞU BİLGİSAYARDA GÖRÜNÜR, MOBİLDE GİZLİ -->
 <div class="search-box">
 
 <input
@@ -2103,7 +2050,6 @@ class="search-result-info"
 
 </section>
 
-<!-- İLETİŞİM BÖLÜMÜ -->
 <section id="iletisim">
 
 <h2 class="section-title">
@@ -4530,6 +4476,10 @@ function initEvents(){
             const action=element.dataset.action;
             if(action==="all-products") showAllProducts();
             if(action==="featured") filterFeatured();
+            if(action==="contact") {
+                closeMenu();
+                $("iletisim")?.scrollIntoView({behavior:"smooth"});
+            }
         });
     });
 
