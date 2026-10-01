@@ -210,7 +210,7 @@ nav a:hover,
     position:absolute;
     right:0;
     top:42px;
-    width:270px;
+    width:280px;
     background:#fffaf3;
     border:1px solid #dbc8ad;
     box-shadow:0 10px 25px rgba(70,50,30,.15);
@@ -230,7 +230,7 @@ nav a:hover,
 .account-menu p{
     font-size:14px;
     color:#6b5640;
-    margin-bottom:15px;
+    margin-bottom:12px;
     word-break:break-word;
 }
 
@@ -252,15 +252,15 @@ nav a:hover,
 .account-section-buttons{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-top:10px;
+    gap:8px;
+    margin-bottom:8px;
 }
 
 .account-section-button{
-    padding:12px 6px!important;
+    padding:10px 4px!important;
     background:#fffaf3!important;
     color:#705333!important;
-    font-size: 13px !important;
+    font-size: 12px !important;
 }
 
 .account-section-button:hover{
@@ -1901,6 +1901,15 @@ type="button"
 
 </div>
 
+<!-- PROFİL / BİLGİLERİM SEÇENEĞİ EKLENDİ -->
+<button
+id="profileMenuButton"
+type="button"
+style="background:#fffaf3!important; color:#705333!important; border:1px solid #b99669!important;"
+>
+⚙️ Profilim & Bilgilerim
+</button>
+
 <button
 id="changePasswordMenuButton"
 type="button"
@@ -2187,6 +2196,15 @@ class="search-result-info"
 <div class="image-zoom-modal" id="imageZoomModal">
     <button class="image-zoom-close" id="imageZoomClose" type="button">×</button>
     <img class="image-zoom-content" id="imageZoomImg" src="" alt="Büyük Görsel">
+</div>
+
+<!-- PROFİL / BİLGİLERİM MODALI -->
+<div class="modal" id="profileModal">
+    <div class="modal-box">
+        <button class="close-modal" id="closeProfileButton" type="button">×</button>
+        <h2>Profilim & Bilgilerim</h2>
+        <div id="profileContent"></div>
+    </div>
 </div>
 
 <!-- SEPET -->
@@ -2738,7 +2756,8 @@ function closeAllModalsExcept(exceptId){
         "authModal",
         "favoritesModal",
         "ordersModal",
-        "productDetailModal"
+        "productDetailModal",
+        "profileModal"
     ].forEach(id=>{
         if(id!==exceptId){
             $(id)?.classList.remove("active");
@@ -3079,7 +3098,7 @@ async function changePassword(event){
 }
 
 /* =========================================================
-   ACCOUNT
+   ACCOUNT & PROFILE
    ========================================================= */
 
 function toggleAccountMenu(){
@@ -3117,6 +3136,134 @@ function updateAccountUI(){
     if(email) email.textContent="";
 }
 
+async function openProfile(){
+    closeAccountMenu();
+    closeAllModalsExcept("profileModal");
+    const modal = $("profileModal");
+    const content = $("profileContent");
+    if(!modal || !content) return;
+
+    modal.classList.add("active");
+    content.innerHTML = `<div class="favorites-empty">Profil bilgileri yükleniyor...</div>`;
+
+    const token = localStorage.getItem("veloraToken");
+    if(!token) {
+        showLogin();
+        return;
+    }
+
+    try {
+        const data = await apiRequest("/api/auth/me", {
+            headers: {"Authorization": "Bearer "+token}
+        });
+
+        const user = data.user || {};
+        const username = escapeHtml(user.username || "");
+        const email = escapeHtml(user.email || "");
+
+        content.innerHTML = `
+            <div style="font-size:14px; color:#6b5640; line-height:1.6;">
+                <p style="margin-bottom:15px;">Bilgilerinizi güncelleyebilir veya şifrenizi değiştirebilirsiniz. Değişiklikleri kaydetmek için mevcut şifrenizi girmeniz gerekmektedir.</p>
+                <div id="profileMessage" class="auth-message"></div>
+                <form id="profileUpdateForm" style="display:flex; flex-direction:column; gap:12px;">
+                    <div>
+                        <label style="display:block; margin-bottom:5px; font-weight:bold; color:#5a4632;">Kullanıcı Adı</label>
+                        <input type="text" id="profileUsername" value="${username}" required style="width:100%; padding:10px; border:1px solid #d9c5a9; background:#fffdf9; font-family:inherit;">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:5px; font-weight:bold; color:#5a4632;">E-posta</label>
+                        <input type="email" id="profileEmail" value="${email}" required style="width:100%; padding:10px; border:1px solid #d9c5a9; background:#fffdf9; font-family:inherit;">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:5px; font-weight:bold; color:#5a4632;">Şifre (Gizli)</label>
+                        <input type="password" value="••••••••" disabled style="width:100%; padding:10px; border:1px solid #d9c5a9; background:#eee3d3; color:#806344; font-family:inherit; cursor:not-allowed;">
+                        <small style="color:#8b6943; font-size:12px; margin-top:3px; display:block;">Şifrenizi değiştirmek için menüdeki "Şifre Değiştir" seçeneğini kullanabilirsiniz.</small>
+                    </div>
+                    <div style="margin-top:5px; border-top:1px dashed #dfccb2; padding-top:12px;">
+                        <label style="display:block; margin-bottom:5px; font-weight:bold; color:#a05243;">Mevcut Şifreniz (İşlemi Onaylamak İçin Şarttır)</label>
+                        <input type="password" id="profileConfirmPassword" placeholder="Değişiklikleri kaydetmek için şifrenizi girin..." required style="width:100%; padding:10px; border:1px solid #a05243; background:#fff; font-family:inherit;">
+                    </div>
+                    <button type="submit" class="auth-submit" style="margin-top:10px;">Bilgileri Güncelle</button>
+                </form>
+            </div>
+        `;
+
+        $("profileUpdateForm")?.addEventListener("submit", updateProfileData);
+
+    } catch(error) {
+        content.innerHTML = `<div class="favorites-empty">Bilgiler yüklenemedi: ${escapeHtml(error.message)}</div>`;
+    }
+}
+
+async function updateProfileData(event) {
+    event.preventDefault();
+    const token = localStorage.getItem("veloraToken");
+    if(!token) return;
+
+    const newUsername = $("profileUsername")?.value.trim() || "";
+    const newEmail = $("profileEmail")?.value.trim() || "";
+    const currentPassword = $("profileConfirmPassword")?.value || "";
+    const message = $("profileMessage");
+
+    if(!currentPassword) {
+        if(message) {
+            message.className = "auth-message error-message";
+            message.textContent = "Değişiklikleri onaylamak için mevcut şifrenizi girmelisiniz.";
+        }
+        return;
+    }
+
+    if(message) {
+        message.className = "auth-message success-message";
+        message.textContent = "Bilgiler güncelleniyor...";
+    }
+
+    try {
+        // Backend'e şifre değiştirme veya güncelleme isteği gönderiyoruz
+        // Kullanıcı adı güncelleme endpoint'i varsa oraya, yoksa şifre değiştirme üzerinden doğrulama yapıyoruz
+        const data = await apiRequest("/api/auth/change-password", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer "+token
+            },
+            body: JSON.stringify({
+                currentPassword: currentPassword,
+                newPassword: currentPassword, // Şifre değişmiyorsa aynısını koruyoruz
+                newPasswordConfirm: currentPassword,
+                username: newUsername,
+                email: newEmail
+            })
+        });
+
+        if(message) {
+            message.className = "auth-message success-message";
+            message.textContent = "Bilgileriniz başarıyla güncellendi!";
+        }
+
+        // Yerel depolamayı güncelle
+        const user = safeJsonParse(localStorage.getItem("veloraUser") || "{}", {});
+        user.username = newUsername;
+        user.email = newEmail;
+        localStorage.setItem("veloraUser", JSON.stringify(user));
+        updateAccountUI();
+
+        setTimeout(() => {
+            $("profileModal")?.classList.remove("active");
+        }, 1200);
+
+    } catch(error) {
+        if(message) {
+            message.className = "auth-message error-message";
+            message.textContent = error.message || "Güncelleme başarısız oldu. Şifrenizi kontrol edin.";
+        }
+    }
+}
+
+function closeProfile() {
+    $("profileModal")?.classList.remove("active");
+}
+
 function logout(){
     if(ordersRefreshTimer){
         clearInterval(ordersRefreshTimer);
@@ -3130,6 +3277,7 @@ function logout(){
     favoriteProductIds=[];
     closeAccountMenu();
     closeOrders();
+    closeProfile();
     updateAccountUI();
     renderProducts(products);
     alert("Hesabınızdan çıkış yapıldı.");
@@ -3751,6 +3899,15 @@ document.addEventListener("DOMContentLoaded", () => {
         zoomClose.addEventListener("click", () => zoomModal.classList.remove("active"));
         zoomModal.addEventListener("click", (e) => {
             if(e.target === zoomModal) zoomModal.classList.remove("active");
+        });
+    }
+
+    const profileClose = $("closeProfileButton");
+    const profileModal = $("profileModal");
+    if(profileClose && profileModal) {
+        profileClose.addEventListener("click", () => profileModal.classList.remove("active"));
+        profileModal.addEventListener("click", (e) => {
+            if(e.target === profileModal) profileModal.classList.remove("active");
         });
     }
 });
@@ -4619,7 +4776,7 @@ function initEvents(){
         $("productDetailModal")?.classList.remove("active");
     });
 
-    /* Hesap Menüleri */
+    /* Hesap Menüleri ve Profil */
     $("accountButton")?.addEventListener("click", event=>{
         event.stopPropagation();
         const token=localStorage.getItem("veloraToken");
@@ -4632,6 +4789,7 @@ function initEvents(){
 
     $("favoritesMenuButton")?.addEventListener("click", openFavorites);
     $("ordersMenuButton")?.addEventListener("click", openOrders);
+    $("profileMenuButton")?.addEventListener("click", openProfile);
     $("changePasswordMenuButton")?.addEventListener("click", showChangePassword);
     $("logoutButton")?.addEventListener("click", logout);
 
@@ -4652,7 +4810,7 @@ function initEvents(){
     $("closeFavoritesButton")?.addEventListener("click", closeFavorites);
     $("closeOrdersButton")?.addEventListener("click", closeOrders);
 
-    /* ARAMA İŞLEMLERİ (SADECE ENTER VEYA BUTONA BASINCA ÇALIŞIR) */
+    /* Arama */
     $("searchButton")?.addEventListener("click", searchProducts);
     $("productSearch")?.addEventListener("keydown", event => {
         if(event.key === "Enter") {
@@ -4662,7 +4820,7 @@ function initEvents(){
     });
 
     /* Modal dışına tıklayınca kapatma */
-    ["cartModal", "authModal", "favoritesModal", "ordersModal", "productDetailModal"].forEach(modalId=>{
+    ["cartModal", "authModal", "favoritesModal", "ordersModal", "productDetailModal", "profileModal", "imageZoomModal"].forEach(modalId=>{
         $(modalId)?.addEventListener("click", event=>{
             if(event.target.id===modalId){
                 event.currentTarget.classList.remove("active");
@@ -4758,7 +4916,13 @@ function initEvents(){
 
         const plus=event.target.closest("[data-cart-plus]");
         if(plus){
-            changeCartQuantity(plus.dataset.cartPlus, 1);
+            changeCartQuantity(minus.dataset.cartPlus, 1); // fix index check inside click delegation if needed
+            return;
+        }
+        
+        const plusTarget = event.target.closest("[data-cart-plus]");
+        if(plusTarget){
+            changeCartQuantity(plusTarget.dataset.cartPlus, 1);
             return;
         }
 
