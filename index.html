@@ -1254,23 +1254,23 @@ footer{
 }
 
 .product-detail-modal-box{
-    max-width:1000px;
-    width:min(100%,1000px);
-    padding:32px;
-    max-height:92vh;
+    max-width:1180px;
+    width:min(96vw,1180px);
+    padding:38px;
+    max-height:94vh;
 }
 
 .product-detail{
     display:grid;
-    grid-template-columns:minmax(300px, 0.95fr) minmax(320px, 1.05fr);
-    gap:34px;
+    grid-template-columns:minmax(380px, 1fr) minmax(420px, 1fr);
+    gap:42px;
     align-items:start;
 }
 
 .product-detail-image-wrap{
     background:#f7efe3;
     border:1px solid #dfccb2;
-    min-height:440px;
+    min-height:520px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -1279,8 +1279,9 @@ footer{
 
 .product-detail-image{
     width:100%;
-    height:440px;
-    object-fit:cover;
+    height:520px;
+    object-fit:contain;
+    padding:14px;
     display:block;
 }
 
@@ -1388,6 +1389,23 @@ footer{
 
 .product-detail-review-list .review-item{
     margin:0;
+    background:#fffdf9;
+    border:1px solid #eadbc8;
+    border-radius:10px;
+    padding:13px 15px;
+    color:#6b5640;
+}
+
+.product-detail-review-list .review-item strong{
+    display:block;
+    margin:4px 0 6px;
+    color:#60482f;
+}
+
+.product-detail-review-list .review-item small{
+    display:block;
+    margin-top:7px;
+    color:#9a8064;
 }
 
 @media(max-width:700px){
@@ -1415,26 +1433,31 @@ footer{
 
 @media(max-width:700px){
     .product-detail-modal-box{
-        width:100%;
-        max-width:none;
-        padding:18px;
-        max-height:95vh;
+        width:96vw;
+        max-width:96vw;
+        padding:16px;
+        max-height:94vh;
+        overflow-y:auto;
+        margin:3vh auto;
     }
 
     .product-detail{
         grid-template-columns:1fr;
-        gap:20px;
+        gap:18px;
     }
 
     .product-detail-image-wrap{
-        min-height:260px;
-        max-height:52vh;
+        min-height:300px;
+        max-height:46vh;
+        border-radius:10px;
     }
 
     .product-detail-image{
-        height:52vh;
-        max-height:420px;
-        object-fit:cover;
+        width:100%;
+        height:46vh;
+        max-height:440px;
+        object-fit:contain;
+        padding:10px;
     }
 
     .product-detail-title{
@@ -1451,10 +1474,11 @@ footer{
     }
 
     .product-spec-row{
-        grid-template-columns:110px 1fr;
-        gap:10px;
-        padding:10px 12px;
+        grid-template-columns:105px minmax(0,1fr);
+        gap:9px;
+        padding:10px 11px;
         font-size:13px;
+        line-height:1.45;
     }
 
     .product-detail-actions{
@@ -4163,26 +4187,12 @@ function scrollToProducts(){
 
 function getProductDetails(product){
     const category=String(product.category || "Takı");
-    const subcategory=String(product.subcategory || "");
-
-    let style="Zarif";
-    let stone="Belirtilmemiş";
-    let material="Takı ürünü";
-
-    if(subcategory.toLocaleLowerCase("tr-TR").includes("inci")){
-        style="İnci detaylı";
-        stone="İnci";
-    }else if(subcategory.toLocaleLowerCase("tr-TR").includes("taş")){
-        style="Taşlı";
-        stone="Dekoratif taş";
-    }else if(subcategory.toLocaleLowerCase("tr-TR").includes("altın")){
-        style="Altın koleksiyonu";
-        material="Altın koleksiyonu";
-    }else if(subcategory.toLocaleLowerCase("tr-TR").includes("günlük")){
-        style="Günlük kullanım";
-    }else if(subcategory.toLocaleLowerCase("tr-TR").includes("özel")){
-        style="Özel koleksiyon";
-    }
+    const subcategory=String(product.subcategory || product.type || "");
+    const material=String(product.material || product.malzeme || "Takı ürünü");
+    const stone=String(product.stone || product.tas || product.detaill || "Belirtilmemiş");
+    const style=String(product.style || product.stil || "Zarif");
+    const usage=String(product.usage || product.kullanim || "Günlük ve özel kombinlerde kullanıma uygun");
+    const care=String(product.care || product.bakim || "Parfüm, krem ve kimyasallarla uzun süreli temastan kaçının. Kuru ve kapalı yerde saklayın.");
 
     return {
         category,
@@ -4190,8 +4200,9 @@ function getProductDetails(product){
         style,
         stone,
         material,
-        usage:"Günlük ve özel kombinlerde kullanıma uygun",
-        care:"Parfüm, krem ve kimyasallarla uzun süreli temastan kaçının. Kuru ve kapalı yerde saklayın."
+        usage,
+        care,
+        description:String(product.description || product.aciklama || "")
     };
 }
 
@@ -4240,9 +4251,7 @@ function openProductDetail(productId){
                 </div>
 
                 <p class="product-detail-description">
-                    VELORA koleksiyonundan ${escapeHtml(product.name)},
-                    zarif görünümü ve ${escapeHtml(details.style.toLocaleLowerCase("tr-TR"))}
-                    ile farklı kombinlere uyum sağlayacak şekilde tasarlanmıştır.
+                    ${escapeHtml(details.description || (`VELORA koleksiyonundan ${product.name}, ${details.style.toLocaleLowerCase("tr-TR")} tasarımıyla farklı kombinlere uyum sağlayacak şekilde hazırlanmıştır.`))}
                 </p>
 
                 <div class="product-specs">
@@ -4296,7 +4305,7 @@ function openProductDetail(productId){
                 <div class="product-detail-reviews">
                     <h3>Yapılan Değerlendirmeler</h3>
                     <div class="product-detail-review-list" id="detail-reviews-${product.id}">
-                        Değerlendirmeler yükleniyor...
+                        <div class="favorites-empty">Değerlendirmeler yükleniyor...</div>
                     </div>
                 </div>
             </div>
