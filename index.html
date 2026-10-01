@@ -1816,136 +1816,69 @@ type="button"
 <section class="hero-slider" id="heroSlider">
 
 <div class="hero-slide active">
-
-<img
-src="resimler/resim1.jpg"
-alt="VELORA Zarif Takılar"
-onerror="this.style.display='none'"
->
-
+<img src="resimler/resim1.jpg" alt="VELORA Zarif Takılar" onerror="this.style.display='none'">
 <div class="hero-overlay"></div>
-
 <div class="hero-content">
-
 <span>VELORA</span>
-
 <h1>Tarzını Yansıt.</h1>
-
-<p>
-Zarafetin en güzel hali, senin stilin.
-</p>
-
-<a href="#urunler" class="hero-button">
-Koleksiyonu Keşfet
-</a>
-
+<p>Zarafetin en güzel hali, senin stilin.</p>
+<a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
 </div>
 </div>
 
 <div class="hero-slide">
-
-<img
-src="resimler/resim2.jpg"
-alt="VELORA Takı Koleksiyonu"
-onerror="this.style.display='none'"
->
-
+<img src="resimler/resim2.jpg" alt="VELORA Takı Koleksiyonu" onerror="this.style.display='none'">
 <div class="hero-overlay"></div>
-
 <div class="hero-content">
-
 <span>VELORA</span>
-
 <h1>Zarafet Detaylarda Saklıdır.</h1>
-
-<p>
-Her detayda sana ait bir ışıltı.
-</p>
-
-<a href="#urunler" class="hero-button">
-Koleksiyonu Keşfet
-</a>
-
+<p>Her detayda sana ait bir ışıltı.</p>
+<a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
 </div>
 </div>
 
 <div class="hero-slide">
-
-<img
-src="resimler/resim3.jpg"
-alt="VELORA Özel Koleksiyon"
-onerror="this.style.display='none'"
->
-
+<img src="resimler/resim3.jpg" alt="VELORA Özel Koleksiyon" onerror="this.style.display='none'">
 <div class="hero-overlay"></div>
-
 <div class="hero-content">
-
 <span>VELORA</span>
-
 <h1>Her Anına Bir Işıltı.</h1>
-
-<p>
-Sade, zarif ve sana özel.
-</p>
-
-<a href="#urunler" class="hero-button">
-Koleksiyonu Keşfet
-</a>
-
+<p>Sade, zarif ve sana özel.</p>
+<a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
 </div>
 </div>
 
 <div class="hero-slide">
-
-<img
-src="resimler/urun1.jpg"
-alt="VELORA Koleksiyonu"
-onerror="this.style.display='none'"
->
-
+<img src="resimler/urun1.jpg" alt="VELORA Koleksiyonu" onerror="this.style.display='none'">
 <div class="hero-overlay"></div>
-
 <div class="hero-content">
-
 <span>VELORA</span>
-
 <h1>Zarif Bir Dokunuş.</h1>
-
-<p>
-Stiline eşlik eden özel parçalar.
-</p>
-
-<a href="#urunler" class="hero-button">
-Koleksiyonu Keşfet
-</a>
-
+<p>Stiline eşlik eden özel parçalar.</p>
+<a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
 </div>
 </div>
 
-<button
-class="hero-arrow hero-prev"
-id="heroPrev"
-type="button"
->
-‹
-</button>
+<div class="hero-slide">
+<img src="resimler/kargo.jpg" alt="VELORA Ücretsiz Kargo Kampanyası" onerror="this.src='resimler/resim1.jpg'">
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<span>VELORA KAMPANYA</span>
+<h1>1500 TL Üzeri<br>Kargo Ücretsiz!</h1>
+<p>Seçkin parçalarla tarzını yansıt, kargo bedavaya gelsin.</p>
+<a href="#urunler" class="hero-button">Alışverişe Başla</a>
+</div>
+</div>
 
-<button
-class="hero-arrow hero-next"
-id="heroNext"
-type="button"
->
-›
-</button>
+<button class="hero-arrow hero-prev" id="heroPrev" type="button">‹</button>
+<button class="hero-arrow hero-next" id="heroNext" type="button">›</button>
 
 <div class="hero-dots">
-
 <button class="hero-dot active" data-slide="0" type="button"></button>
 <button class="hero-dot" data-slide="1" type="button"></button>
 <button class="hero-dot" data-slide="2" type="button"></button>
 <button class="hero-dot" data-slide="3" type="button"></button>
-
+<button class="hero-dot" data-slide="4" type="button"></button>
 </div>
 
 </section>
@@ -3558,7 +3491,6 @@ function getProductFeatures(product){
     ];
 }
 
-/* YENİ: TARİH VE SAAT FORMATI */
 function formatReviewDate(value){
     if(!value) return "";
     const date=new Date(value);
@@ -3678,7 +3610,6 @@ async function loadProductDetailReviews(productId){
 
     container.innerHTML=`<div class="detail-empty">Değerlendirmeler yükleniyor...</div>`;
 
-    // Admin mi diye kontrol ediyoruz
     const currentUserStr = localStorage.getItem("veloraUser");
     const currentUser = currentUserStr ? safeJsonParse(currentUserStr, null) : null;
     const isAdmin = currentUser && (currentUser.role === "admin" || currentUser.isAdmin === true);
@@ -3714,7 +3645,6 @@ async function loadProductDetailReviews(productId){
             const username=review.username || review.users?.username || "Müşteri";
             const reviewId=review.id || review._id;
 
-            // ADMİN BUTONLARI (Sadece adminse HTML içine eklenecek)
             let adminToolsHtml = "";
             if(isAdmin && reviewId) {
                 adminToolsHtml = `
@@ -3814,10 +3744,6 @@ async function submitModalReview(productId){
         }
     }
 }
-
-/* =========================================================
-   ADMİN YORUM SİLME VE DÜZENLEME FONKSİYONLARI
-   ========================================================= */
 
 async function deleteReviewAdmin(reviewId, productId) {
     if(!confirm("Bu yorumu tamamen silmek istediğinize emin misiniz?")) return;
@@ -4449,9 +4375,8 @@ function initEvents(){
         }
     });
 
-    /* Dinamik Ürün Kartı Tıklamaları (Ürüne tıklandığında özellik ve yorum açılması) */
+    /* Dinamik Ürün Kartı Tıklamaları */
     $("productContainer")?.addEventListener("click", async event=>{
-        // 1. Favori butonu
         const favorite=event.target.closest("[data-favorite]");
         if(favorite){
             event.stopPropagation();
@@ -4459,7 +4384,6 @@ function initEvents(){
             return;
         }
 
-        // 2. Sepete Ekle butonu
         const addCart=event.target.closest("[data-add-cart]");
         if(addCart){
             event.stopPropagation();
@@ -4467,7 +4391,6 @@ function initEvents(){
             return;
         }
 
-        // 3. Özellikler ve Yorumlar butonu VEYA Ürün kartına doğrudan tıklama
         const detailBtn=event.target.closest("[data-open-detail]");
         const clickedCard=event.target.closest(".product-card");
 
@@ -4483,38 +4406,33 @@ function initEvents(){
         }
     });
 
-    /* Ürün Detay Modalı İçindeki Tıklamalar (Yorum Gönderme, Yıldız Seçme ve ADMİN BUTONLARI) */
+    /* Ürün Detay Modalı İçindeki Tıklamalar */
     $("productDetailModal")?.addEventListener("click", async event=>{
         
-        // ADMİN BUTONLARI: Silme
         const adminDeleteBtn = event.target.closest("[data-admin-delete]");
         if(adminDeleteBtn){
             deleteReviewAdmin(adminDeleteBtn.dataset.adminDelete, adminDeleteBtn.dataset.adminProduct);
             return;
         }
 
-        // ADMİN BUTONLARI: Düzenleme
         const adminEditBtn = event.target.closest("[data-admin-edit]");
         if(adminEditBtn){
             editReviewAdmin(adminEditBtn.dataset.adminEdit, adminEditBtn.dataset.adminProduct);
             return;
         }
 
-        // Yıldız puanlama
         const star=event.target.closest("[data-star-product]");
         if(star){
             selectStar(Number(star.dataset.starProduct), Number(star.dataset.starRating));
             return;
         }
 
-        // Yorum Gönder Butonu
         const submitReviewBtn=event.target.closest("[data-submit-review]");
         if(submitReviewBtn){
             await submitModalReview(submitReviewBtn.dataset.submitReview);
             return;
         }
 
-        // Detay içi Sepete Ekle Butonu
         const detailCart=event.target.closest("[data-detail-add-cart]");
         if(detailCart){
             addToCart(detailCart.dataset.detailAddCart);
