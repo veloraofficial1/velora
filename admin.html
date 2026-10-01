@@ -1173,8 +1173,8 @@
         for (let i = 1; i <= 5; i++) {
           stars += i <= Number(review.rating) ? "★" : "☆";
         }
-        const username = review.users?.username || "Müşteri";
-        const email = review.users?.email || "";
+        const username = review.username || review.users?.username || "Müşteri";
+        const email = review.email || review.users?.email || "";
         const date = review.created_at ? new Date(review.created_at).toLocaleString("tr-TR") : "-";
 
         row.innerHTML = `
