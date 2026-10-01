@@ -1659,10 +1659,29 @@ footer{
     .account-menu{
         right:0;
         width:260px;
+        max-width:calc(100vw - 20px);
+        box-sizing:border-box;
+        overflow:hidden;
     }
 }
 
 @media(max-width:450px){
+
+    /* Hesap menüsü mobilde ekran dışına taşmasın */
+    .account-area{
+        position:relative;
+    }
+
+    .account-menu{
+        right:0;
+        left:auto;
+        width:min(260px, calc(100vw - 20px));
+        max-width:calc(100vw - 20px);
+        box-sizing:border-box;
+        padding:14px;
+        overflow:hidden;
+    }
+
 
     .category-grid{
         grid-template-columns:1fr;
