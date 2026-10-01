@@ -45,13 +45,13 @@ header{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:20px;
+    gap:15px;
 }
 
 .logo{
-    font-size:30px;
+    font-size:26px;
     font-weight:bold;
-    letter-spacing:6px;
+    letter-spacing:5px;
     color:#9b7445;
     text-decoration:none;
     white-space:nowrap;
@@ -60,7 +60,7 @@ header{
 .header-center{
     display:flex;
     align-items:center;
-    gap:22px;
+    gap:15px;
     flex:1;
     justify-content:center;
 }
@@ -68,13 +68,13 @@ header{
 nav{
     display:flex;
     align-items:center;
-    gap:20px;
+    gap:15px;
 }
 
 nav a,
 .dropbtn{
     color:#5a4632;
-    font-size:16px;
+    font-size:15px;
     cursor:pointer;
     background:none;
     border:none;
@@ -99,12 +99,13 @@ nav a:hover,
     border:1px solid #b99669;
     background:#fffaf3;
     color:#705333;
-    padding:9px 15px;
+    padding:8px 12px;
     font-family:inherit;
     cursor:pointer;
     transition:.3s;
     white-space:nowrap;
     border-radius:2px;
+    font-size: 14px;
 }
 
 .menu-button:hover,
@@ -157,11 +158,11 @@ nav a:hover,
     color:#9b7445;
 }
 
-/* YENİ ZARİF ARAMA ÇUBUĞU */
+/* ARAMA ÇUBUĞU */
 .search-box{
     display:flex;
     align-items:center;
-    width:260px;
+    width:240px;
     border:1px solid #d8c2a4;
     background:#fffdf9;
     border-radius:30px;
@@ -177,63 +178,31 @@ nav a:hover,
     width:100%;
     border:0;
     outline:0;
-    padding:10px 15px;
+    padding:8px 12px;
     background:transparent;
     color:#4c3b2b;
     font-family:inherit;
-    font-size:14px;
+    font-size:13px;
 }
 
 .search-button{
     border:0;
     background:none;
-    padding:0 15px 0 5px;
+    padding:0 12px 0 2px;
     color:#b99669;
-    font-size:18px;
+    font-size:16px;
     cursor:pointer;
     transition: 0.2s;
 }
 
 .search-button:hover {
     color: #8b6943;
-    transform: scale(1.1);
-}
-
-.dropdown-content{
-    display:none;
-    position:absolute;
-    top:calc(100% - 1px);
-    left:0;
-    min-width:180px;
-    background:#fffaf3;
-    border:1px solid #dbc8ad;
-    box-shadow:0 10px 25px rgba(70,50,30,.12);
-    padding:8px 0;
-    z-index:2500;
-}
-
-.dropdown:hover .dropdown-content{
-    display:block;
-}
-
-.dropdown-content a{
-    display:block;
-    padding:10px 16px;
-    font-size:14px;
-    color:#5a4632;
-    text-decoration:none;
-    white-space:nowrap;
-}
-
-.dropdown-content a:hover{
-    background:#f1e5d3;
-    color:#9b7445;
 }
 
 .account-area{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:8px;
 }
 
 .account-menu{
@@ -241,7 +210,7 @@ nav a:hover,
     position:absolute;
     right:0;
     top:42px;
-    width:290px;
+    width:270px;
     background:#fffaf3;
     border:1px solid #dbc8ad;
     box-shadow:0 10px 25px rgba(70,50,30,.15);
@@ -467,8 +436,7 @@ section{
 .category-card{
     position:relative;
     width:100%;
-    height:auto;
-    aspect-ratio: 4 / 5;
+    height:280px;
     overflow:hidden;
     cursor:pointer;
     border:1px solid #d8c2a4;
@@ -497,7 +465,6 @@ section{
     color:#fff;
     font-size:27px;
     letter-spacing:3px;
-    text-shadow: 0px 2px 4px rgba(0,0,0,0.5);
 }
 
 /* ÜRÜNLER LİSTE */
@@ -552,8 +519,7 @@ section{
 
 .product-image{
     width:100%;
-    height:auto;
-    aspect-ratio: 4 / 5;
+    height:260px;
     object-fit:cover;
     object-position:center;
     background: #fffdf9;
@@ -876,7 +842,6 @@ section{
     margin-bottom:10px;
 }
 
-/* FOTOĞRAFLI YORUM EKLEMELERİ VE SİLME BUTONU CSS'İ */
 .review-photo-upload {
     margin-bottom: 15px;
 }
@@ -1575,13 +1540,13 @@ footer{
    RESPONSIVE (MOBİL VE TABLET ENTEGRASYONU)
    ========================================================= */
 @media(max-width:1000px){
-    .header-center{gap:12px;}
-    nav{gap:12px;}
-    .search-box{width:220px;}
+    .header-center{gap:10px;}
+    nav{gap:10px;}
+    .search-box{width:180px;}
     .product-grid,
     .featured-grid{
         grid-template-columns:repeat(2,1fr);
-        gap:18px;
+        gap:15px;
     }
     .category-grid{
         grid-template-columns:repeat(2,1fr);
@@ -1590,34 +1555,40 @@ footer{
 
 @media(max-width:768px){
     header{
-        padding:12px 4%;
+        padding:10px 3%;
         flex-wrap:wrap;
+        gap:10px;
     }
 
     .logo{
-        font-size:24px;
-        letter-spacing:4px;
+        font-size:22px;
+        letter-spacing:3px;
     }
 
     .header-center{
         order:3;
         width:100%;
         justify-content:space-between;
-        margin-top:5px;
+        margin-top:2px;
     }
 
-    nav{gap:10px;}
-    nav a{font-size:14px;}
+    nav{gap:8px;}
+    nav a{font-size:13px;}
     
+    /* TELEFONA ARAMA ÇUBUĞU EKLENDİ VE BOYUTLANDIRILDI */
     .search-box{
-        display: none !important;
+        width: 140px !important;
+    }
+    .search-box input {
+        padding: 6px 8px;
+        font-size: 12px;
     }
 
     .menu-button,
     .account-button,
     .cart-button{
-        padding:8px 10px;
-        font-size:13px;
+        padding:7px 9px;
+        font-size:12px;
     }
 
     .hero-slider{
@@ -1648,23 +1619,23 @@ footer{
     }
 
     .hero-content h1{
-        font-size:34px;
+        font-size:30px;
         margin-bottom:12px;
     }
 
     .hero-content p{
-        font-size:14px;
+        font-size:13px;
         margin-bottom:18px;
     }
 
     .hero-arrow{
-        width:38px;
-        height:38px;
-        font-size:28px;
+        width:35px;
+        height:35px;
+        font-size:24px;
     }
 
     section{
-        padding:50px 4%;
+        padding:40px 4%;
     }
 
     .category-grid{
@@ -1673,9 +1644,10 @@ footer{
     }
     .product-grid, .featured-grid {
         grid-template-columns: repeat(2,1fr);
-        gap:12px;
+        gap:10px;
     }
 
+    /* TELEFONDA FOTOĞRAFLARIN KESİLMESİ (COVER) KESİN OLARAK ENGELLENDİ (CONTAIN) */
     .category-card { height:auto; aspect-ratio:1/1; background:#fffdf9; }
     .category-card img { object-fit:contain !important; }
     
@@ -1684,7 +1656,7 @@ footer{
     .featured-card img { height:auto !important; aspect-ratio:1/1; object-fit:contain !important; background:#fffdf9; }
 
     .category-overlay{
-        font-size:19px;
+        font-size:17px;
     }
 
     .modal{
@@ -1714,7 +1686,7 @@ footer{
     }
 
     .product-detail-image{
-        max-height:300px;
+        max-height:280px;
     }
 
     .product-features{
@@ -1739,7 +1711,7 @@ footer{
 
     .account-menu{
         right:0;
-        width:250px;
+        width:240px;
     }
 
     .contact-info-container {
@@ -1752,22 +1724,17 @@ footer{
     }
 }
 
-@media(max-width:500px){
+@media(max-width:480px){
+    .search-box {
+        width: 120px !important;
+    }
     .product-grid, .featured-grid {
         grid-template-columns: repeat(2,1fr);
-        gap: 10px;
+        gap: 8px;
     }
-    
-    .header-center{
-        gap:5px;
-    }
-
-    nav a{
-        font-size:12px;
-    }
-
-    .hero-content h1{
-        font-size:30px;
+    .menu-button, .account-button, .cart-button {
+        padding: 6px 8px;
+        font-size: 11px;
     }
 }
 </style>
@@ -1783,7 +1750,6 @@ footer{
 
 <div class="menu-wrapper">
 
-<!-- KATEGORİLER YAZAN MENÜ BUTONU -->
 <button class="menu-button" id="menuButton" type="button">
 ☰ Kategoriler
 </button>
@@ -1818,7 +1784,6 @@ Kolye
 Öne Çıkanlar
 </button>
 
-<!-- MENÜ İÇİ İLETİŞİM SEÇENEĞİ -->
 <button type="button" data-action="contact" style="margin-top: 10px; border-top: 1px solid #eadbc8; padding-top: 15px;">
 İletişim
 </button>
@@ -1838,7 +1803,7 @@ Koleksiyon
 
 </nav>
 
-<!-- YENİ ŞIK VE OVAL ARAMA ÇUBUĞU (Mobilde gizli, masaüstünde görünür) -->
+<!-- ARAMA ÇUBUĞU (Artık hem mobilde hem masaüstünde aktif) -->
 <div class="search-box">
 
 <input
@@ -2537,7 +2502,7 @@ type="button"
 ×
 </button>
 
-<h2>❤️ Favorilerim</h2>
+<h2>❤️️ Favorilerim</h2>
 
 <div id="favoritesContainer"></div>
 
@@ -3689,9 +3654,6 @@ function formatReviewDate(value){
     });
 }
 
-/* =========================================================
-   FOTOĞRAFLI YORUM İŞLEMLERİ (SIKIŞTIRMA VE SİLME)
-   ========================================================= */
 window.previewReviewPhoto = function(event, productId) {
     const file = event.target.files[0];
     const preview = $("reviewPhotoPreview-" + productId);
@@ -3703,7 +3665,6 @@ window.previewReviewPhoto = function(event, productId) {
                 const canvas = document.createElement("canvas");
                 const ctx = canvas.getContext("2d");
                 
-                // SUNUCUYU YORMAMAK İÇİN FOTOĞRAF KÜÇÜLTÜLÜYOR
                 const MAX_WIDTH = 500;
                 let width = img.width;
                 let height = img.height;
@@ -3716,7 +3677,6 @@ window.previewReviewPhoto = function(event, productId) {
                 canvas.height = height;
                 ctx.drawImage(img, 0, 0, width, height);
                 
-                // Kaliteyi %60'a çekerek Base64 alıyoruz
                 const compressedBase64 = canvas.toDataURL("image/jpeg", 0.6);
 
                 preview.innerHTML = `
@@ -3961,7 +3921,6 @@ async function submitModalReview(productId){
     let text=input ? input.value.trim() : "";
     const rating=selectedStars[productId];
     
-    // Fotoğrafı çek (Varsa)
     const previewImg = document.querySelector(`#reviewPhotoPreview-${productId} img`);
 
     if(!rating){
@@ -3974,12 +3933,9 @@ async function submitModalReview(productId){
         return;
     }
 
-    // Fotoğraf varsa metnin sonuna ekle
     if (previewImg) {
         text += "|||IMAGE|||" + previewImg.src;
     }
-
-    // ARTIK 1000 KARAKTER LİMİT UYARISI YOK :)
 
     const btn=$("btnSubmitReview");
     if(btn){
