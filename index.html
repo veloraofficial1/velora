@@ -696,6 +696,38 @@ section{
     line-height:1;
 }
 
+/* FOTOĞRAF BÜYÜTME (LIGHTBOX) MODALI */
+.image-zoom-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.image-zoom-modal.active {
+    display: flex;
+}
+.image-zoom-content {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.image-zoom-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: #fff;
+    font-size: 35px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 /* =========================================================
    ÜRÜN DETAYI VE YORUM/ÖZELLİK MODALI
    ========================================================= */
@@ -874,6 +906,7 @@ section{
     object-fit: cover;
     border-radius: 4px;
     border: 1px solid #d9c5a9;
+    cursor: pointer;
 }
 .photo-remove-btn {
     position: absolute;
@@ -1575,7 +1608,6 @@ footer{
     nav{gap:8px;}
     nav a{font-size:13px;}
     
-    /* TELEFONA ARAMA ÇUBUĞU EKLENDİ VE BOYUTLANDIRILDI */
     .search-box{
         width: 140px !important;
     }
@@ -1647,7 +1679,6 @@ footer{
         gap:10px;
     }
 
-    /* TELEFONDA FOTOĞRAFLARIN KESİLMESİ (COVER) KESİN OLARAK ENGELLENDİ (CONTAIN) */
     .category-card { height:auto; aspect-ratio:1/1; background:#fffdf9; }
     .category-card img { object-fit:contain !important; }
     
@@ -1803,7 +1834,6 @@ Koleksiyon
 
 </nav>
 
-<!-- ARAMA ÇUBUĞU (Artık hem mobilde hem masaüstünde aktif) -->
 <div class="search-box">
 
 <input
@@ -2151,6 +2181,12 @@ class="search-result-info"
         <button class="close-modal" id="closeProductDetailButton" type="button">×</button>
         <div id="productDetailContent"></div>
     </div>
+</div>
+
+<!-- FOTOĞRAF BÜYÜTME (ZOOM) MODALI -->
+<div class="image-zoom-modal" id="imageZoomModal">
+    <button class="image-zoom-close" id="imageZoomClose" type="button">×</button>
+    <img class="image-zoom-content" id="imageZoomImg" src="" alt="Büyük Görsel">
 </div>
 
 <!-- SEPET -->
@@ -2502,7 +2538,7 @@ type="button"
 ×
 </button>
 
-<h2>❤️️ Favorilerim</h2>
+<h2>❤️ Favorilerim</h2>
 
 <div id="favoritesContainer"></div>
 
@@ -3681,7 +3717,7 @@ window.previewReviewPhoto = function(event, productId) {
 
                 preview.innerHTML = `
                     <div class="photo-preview-wrapper">
-                        <img src="${compressedBase64}" alt="Yorum Fotoğrafı">
+                        <img src="${compressedBase64}" alt="Yorum Fotoğrafı" onclick="openImageZoom('${compressedBase64}')">
                         <button type="button" class="photo-remove-btn" onclick="removeReviewPhoto(${productId})">×</button>
                     </div>
                 `;
@@ -3698,6 +3734,27 @@ window.removeReviewPhoto = function(productId) {
     const input = $("reviewPhotoInput-" + productId);
     if(input) input.value = "";
 };
+
+// FOTOĞRAFI BÜYÜTME (LIGHTBOX) FONKSİYONLARI
+window.openImageZoom = function(imgSrc) {
+    const modal = $("imageZoomModal");
+    const img = $("imageZoomImg");
+    if(modal && img) {
+        img.src = imgSrc;
+        modal.classList.add("active");
+    }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    const zoomModal = $("imageZoomModal");
+    const zoomClose = $("imageZoomClose");
+    if(zoomClose && zoomModal) {
+        zoomClose.addEventListener("click", () => zoomModal.classList.remove("active"));
+        zoomModal.addEventListener("click", (e) => {
+            if(e.target === zoomModal) zoomModal.classList.remove("active");
+        });
+    }
+});
 
 /* =========================================================
    ÜRÜN DETAY MODALI VE YORUM YAPMA ALANI
@@ -3885,6 +3942,12 @@ async function loadProductDetailReviews(productId){
                 `;
             }
 
+            // UZUN DOSYA ADI YERİNE TEMİZ "📷 Fotoğraf" YAZISI EKLENDİ
+            let commentDisplay = escapeHtml(commentText);
+            if(commentDisplay.startsWith("data:image/") || commentDisplay.length > 200) {
+                commentDisplay = "📷 Fotoğraf";
+            }
+
             item.innerHTML=`
                 <div class="detail-review-head">
                     <span class="detail-review-user">${escapeHtml(username)}</span>
@@ -3894,9 +3957,9 @@ async function loadProductDetailReviews(productId){
                     ${reviewStarsHtml(review.rating)}
                 </div>
                 <div class="detail-review-comment">
-                    ${escapeHtml(commentText)}
+                    ${commentDisplay}
                 </div>
-                ${commentImg ? `<div style="margin-top:10px;"><img src="${commentImg}" style="width:80px;height:80px;object-fit:cover;border-radius:4px;border:1px solid #dfccb2;"></div>` : ""}
+                ${commentImg ? `<div style="margin-top:10px;"><img src="${commentImg}" alt="Yorum Fotoğrafı" style="width:80px;height:80px;object-fit:cover;border-radius:4px;border:1px solid #dfccb2;cursor:pointer;" onclick="openImageZoom('${commentImg}')"></div>` : ""}
                 ${adminToolsHtml}
             `;
             container.appendChild(item);
