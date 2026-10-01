@@ -442,7 +442,9 @@ section{
     letter-spacing:3px;
 }
 
-/* FOTOĞRAFLARIN KESİLMEMESİ İÇİN DÜZELTİLMİŞ CSS (CONTAIN) */
+/* =========================================================
+   BİLGİSAYAR GÖRÜNÜMÜ: ESKİ ORİJİNAL FOTOĞRAF BOYUTLARI
+   ========================================================= */
 .category-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -453,21 +455,16 @@ section{
 
 .category-card{
     position:relative;
-    width:100%;
-    aspect-ratio: 4 / 5;
-    background: #fffdf9;
+    height:280px;
     overflow:hidden;
     cursor:pointer;
     border:1px solid #d8c2a4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .category-card img{
     width:100%;
     height:100%;
-    object-fit:contain; /* FOTOĞRAF KESİLMEYECEK */
+    object-fit:cover;
     transition:.5s;
 }
 
@@ -481,14 +478,12 @@ section{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:rgba(55,40,25,.18);
+    background:rgba(55,40,25,.28);
     color:#fff;
     font-size:27px;
     letter-spacing:3px;
-    text-shadow: 0px 2px 4px rgba(0,0,0,0.5);
 }
 
-/* ÜRÜNLER LİSTE */
 #urunler{
     background:#fbf7f0;
 }
@@ -538,12 +533,10 @@ section{
     box-shadow:0 12px 25px rgba(90,65,40,.12);
 }
 
-/* KESİLMEYEN ÜRÜN RESİMLERİ */
 .product-image{
     width:100%;
-    aspect-ratio: 1 / 1;
-    object-fit:contain; /* FOTOĞRAF KESİLMEYECEK */
-    background: #fffdf9;
+    height:260px;
+    object-fit:cover;
     display:block;
     transition:transform .4s ease;
 }
@@ -1448,9 +1441,8 @@ section{
 
 .featured-card img{
     width:100%;
-    aspect-ratio: 1 / 1;
-    object-fit:contain; /* KESİLMEYİ ÖNLER */
-    background: #fffdf9;
+    height:230px;
+    object-fit:cover;
 }
 
 .featured-info{
@@ -1533,7 +1525,7 @@ footer{
 }
 
 /* =========================================================
-   RESPONSIVE (MOBİL VE TABLET ENTEGRASYONU)
+   RESPONSIVE (SADECE TELEFON İÇİN DÜZELTMELER)
    ========================================================= */
 @media(max-width:1000px){
     .header-center{gap:12px;}
@@ -1569,7 +1561,11 @@ footer{
 
     nav{gap:10px;}
     nav a, .dropbtn{font-size:14px;}
-    .search-box{width:160px;}
+    
+    /* TELEFONDA ARAMA ÇUBUĞU GİZLENİYOR */
+    .search-box{
+        display: none !important;
+    }
 
     .menu-button,
     .account-button,
@@ -1625,15 +1621,23 @@ footer{
         padding:50px 4%;
     }
 
+    /* TELEFONDA ÜRÜNLER YAN YANA İKİLİ ÇIKAR VE FOTOĞRAFLAR KESİLMEZ (CONTAIN) */
     .category-grid{
         grid-template-columns:repeat(2,1fr);
         gap:10px;
     }
-
-    .category-card{
-        height:auto;
-        aspect-ratio: 1/1;
+    .product-grid, .featured-grid {
+        grid-template-columns: repeat(2,1fr);
+        gap:12px;
     }
+
+    .category-card { height:auto; aspect-ratio:1/1; background:#fffdf9; }
+    .category-card img { object-fit:contain !important; }
+    
+    .product-image { height:auto !important; aspect-ratio:1/1; object-fit:contain !important; background:#fffdf9; }
+    
+    .featured-card img { height:auto !important; aspect-ratio:1/1; object-fit:contain !important; background:#fffdf9; }
+
 
     .category-overlay{
         font-size:19px;
@@ -1707,15 +1711,12 @@ footer{
 }
 
 @media(max-width:500px){
-    .product-grid,
-    .featured-grid{
-        grid-template-columns:1fr;
+    /* Telefonlarda yan yana 2'li düzen korunur */
+    .product-grid, .featured-grid {
+        grid-template-columns: repeat(2,1fr);
+        gap: 10px;
     }
-
-    .search-box{
-        width:140px;
-    }
-
+    
     .header-center{
         gap:5px;
     }
@@ -1786,6 +1787,7 @@ Koleksiyon
 
 <div class="dropdown">
 
+<!-- KATEGORİLER OK İŞARETİ GERİ GELDİ -->
 <button class="dropbtn" type="button">
 Kategoriler ▾
 </button>
@@ -1821,6 +1823,7 @@ Kolye
 
 </nav>
 
+<!-- ARAMA ÇUBUĞU BİLGİSAYAR İÇİN GERİ EKLENDİ, MOBİLDE GİZLENECEK -->
 <div class="search-box">
 
 <input
@@ -1870,7 +1873,6 @@ Hesabım
 
 <div class="account-section-buttons">
 
-<!-- EMOJİLER EKLENDİ VE İSİMLER DEĞİŞTİRİLDİ -->
 <button
 class="account-section-button"
 id="favoritesMenuButton"
@@ -2583,7 +2585,7 @@ let favoriteProductIds = [];
 let selectedStars = {};
 let productReviewsCache = {};
 let ordersRefreshTimer = null;
-let userOrdersCache = null; // Sadece satın alanlar kontrolü için
+let userOrdersCache = null;
 
 let heroCurrent = 0;
 let heroTimer = null;
@@ -3435,7 +3437,7 @@ async function submitOrder(event){
 
         cart=[];
         saveCart();
-        userOrdersCache=null; // Sipariş cache'i temizle (Yorum onayı için)
+        userOrdersCache=null; 
 
         setTimeout(()=>{
             closeCart();
@@ -3458,7 +3460,6 @@ async function submitOrder(event){
    PRODUCTS & REVIEWS
    ========================================================= */
 
-// Sadece alanlar yorum yapabilsin diye sipariş ID'lerini çeker
 async function getUserPurchasedProductIds() {
     const token = localStorage.getItem("veloraToken");
     if (!token) return [];
@@ -3673,7 +3674,6 @@ function formatReviewDate(value){
     });
 }
 
-// Fotoğraf seçilince önizleme yapmak için
 window.previewReviewPhoto = function(event, productId) {
     const file = event.target.files[0];
     const preview = $("reviewPhotoPreview-" + productId);
@@ -3701,13 +3701,11 @@ async function openProductDetail(productId){
     modal.dataset.productId=String(product.id);
     const features=getProductFeatures(product);
 
-    // SADECE ALANLAR YORUM YAPABİLSİN KONTROLÜ
     const token = localStorage.getItem("veloraToken");
     let canReview = false;
     let reviewMessage = "Yorum yapabilmek için lütfen giriş yapın veya hesap oluşturun.";
 
     if(token) {
-        // Kullanıcının daha önce satın aldığı ürünleri çek ve kontrol et
         const purchasedIds = await getUserPurchasedProductIds();
         if(purchasedIds.includes(Number(product.id))) {
             canReview = true;
@@ -3741,7 +3739,6 @@ async function openProductDetail(productId){
                     🛒 Sepete Ekle
                 </button>
 
-                <!-- ÜRÜN ÖZELLİKLERİ -->
                 <div class="product-feature-box">
                     <h4>Ürün Özellikleri</h4>
                     <div class="product-features">
@@ -3754,7 +3751,6 @@ async function openProductDetail(productId){
                     </div>
                 </div>
 
-                <!-- DEĞERLENDİRMELER VE YORUM YAPMA -->
                 <div class="product-review-box">
                     <h4>Müşteri Değerlendirmeleri</h4>
 
@@ -3762,7 +3758,6 @@ async function openProductDetail(productId){
                         Değerlendirmeler yükleniyor...
                     </div>
 
-                    <!-- YORUM YAPMA FORMU (SADECE SATIN ALANLARA AÇIK) -->
                     <div class="detail-write-review">
                         <h5>Bu Ürünü Değerlendir & Yorum Yap</h5>
                         
@@ -3800,7 +3795,6 @@ async function openProductDetail(productId){
                         `}
                     </div>
 
-                    <!-- GEÇMİŞ YORUMLAR LİSTESİ -->
                     <div id="productDetailReviews" class="detail-review-list"></div>
                 </div>
             </div>
@@ -3855,7 +3849,6 @@ async function loadProductDetailReviews(productId){
             const username=review.username || review.users?.username || "Müşteri";
             const reviewId=review.id || review._id;
             
-            // Fotoğraflı yorumları ayırma (Geçici UI Hack'i)
             let rawComment = review.comment || review.text || "";
             let commentText = rawComment;
             let commentImg = "";
@@ -3927,12 +3920,10 @@ async function submitModalReview(productId){
         return;
     }
 
-    // Fotoğraf varsa metne iliştir (Şimdilik geçici yöntem)
     if (previewImg) {
         text += "|||IMAGE|||" + previewImg.src;
     }
 
-    // Backend limit koruması uyarısı
     if (text.length > 1000) {
         alert("Fotoğraflı yorumlar için sunucu altyapısında küçük bir güncelleme (Backend 1000 karakter limiti kaldırma) gerekmektedir. Lütfen fotoğraftan vazgeçin veya yöneticiden güncellemeyi talep edin.");
         return;
