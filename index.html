@@ -4629,12 +4629,12 @@ function getOrderStatus(order){
             .toLocaleLowerCase("tr-TR");
 
     const statusMap={
-        "new":"Yeni",
-        "pending":"Yeni",
-        "created":"Yeni",
-        "order received":"Yeni",
-        "sipariş alındı":"Yeni",
-        "yeni":"Yeni",
+        "new":"Sipariş Alındı",
+        "pending":"Sipariş Alındı",
+        "created":"Sipariş Alındı",
+        "order received":"Sipariş Alındı",
+        "sipariş alındı":"Sipariş Alındı",
+        "yeni":"Sipariş Alındı",
 
         "preparing":"Hazırlanıyor",
         "processing":"Hazırlanıyor",
@@ -4643,14 +4643,16 @@ function getOrderStatus(order){
         "hazirlaniyor":"Hazırlanıyor",
         "hazırlanıyor":"Hazırlanıyor",
 
-        "shipped":"Kargoda",
-        "shipping":"Kargoda",
-        "in transit":"Kargoda",
-        "out_for_delivery":"Kargoda",
-        "out for delivery":"Kargoda",
-        "kargoda":"Kargoda",
-        "kargoya verildi":"Kargoda",
-        "kargoya_verildi":"Kargoda",
+        "shipped":"Kargoya Verildi",
+        "shipping":"Kargoya Verildi",
+        "in transit":"Kargoya Verildi",
+        "kargoda":"Kargoya Verildi",
+        "kargoya verildi":"Kargoya Verildi",
+        "kargoya_verildi":"Kargoya Verildi",
+        "out_for_delivery":"Dağıtımda",
+        "out for delivery":"Dağıtımda",
+        "dagitimda":"Dağıtımda",
+        "dağıtımda":"Dağıtımda",
 
         "delivered":"Teslim Edildi",
         "completed":"Teslim Edildi",
@@ -4663,7 +4665,7 @@ function getOrderStatus(order){
         "iptal":"İptal"
     };
 
-    return statusMap[value] || raw || "Yeni";
+    return statusMap[value] || raw || "Sipariş Alındı";
 }
 
 function getTrackingNumber(order){
@@ -4680,9 +4682,10 @@ function getTrackingNumber(order){
 function renderOrderProgress(status){
 
     const statuses=[
-        "Yeni",
+        "Sipariş Alındı",
         "Hazırlanıyor",
-        "Kargoda",
+        "Kargoya Verildi",
+        "Dağıtımda",
         "Teslim Edildi"
     ];
 
