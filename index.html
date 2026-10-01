@@ -3735,7 +3735,6 @@ window.removeReviewPhoto = function(productId) {
     if(input) input.value = "";
 };
 
-// FOTOĞRAFI BÜYÜTME (LIGHTBOX) FONKSİYONLARI
 window.openImageZoom = function(imgSrc) {
     const modal = $("imageZoomModal");
     const img = $("imageZoomImg");
@@ -3942,7 +3941,6 @@ async function loadProductDetailReviews(productId){
                 `;
             }
 
-            // UZUN DOSYA ADI YERİNE TEMİZ "📷 Fotoğraf" YAZISI EKLENDİ
             let commentDisplay = escapeHtml(commentText);
             if(commentDisplay.startsWith("data:image/") || commentDisplay.length > 200) {
                 commentDisplay = "📷 Fotoğraf";
@@ -4654,9 +4652,14 @@ function initEvents(){
     $("closeFavoritesButton")?.addEventListener("click", closeFavorites);
     $("closeOrdersButton")?.addEventListener("click", closeOrders);
 
-    /* Arama */
-    $("productSearch")?.addEventListener("input", searchProducts);
+    /* ARAMA İŞLEMLERİ (SADECE ENTER VEYA BUTONA BASINCA ÇALIŞIR) */
     $("searchButton")?.addEventListener("click", searchProducts);
+    $("productSearch")?.addEventListener("keydown", event => {
+        if(event.key === "Enter") {
+            event.preventDefault();
+            searchProducts();
+        }
+    });
 
     /* Modal dışına tıklayınca kapatma */
     ["cartModal", "authModal", "favoritesModal", "ordersModal", "productDetailModal"].forEach(modalId=>{
