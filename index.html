@@ -1274,6 +1274,17 @@ section{
     margin-bottom:6px;
 }
 
+.auth-form input{
+    width:100%;
+    padding:11px;
+    margin-bottom:14px;
+    border:1px solid #d9c5a9;
+    background:#fffdf9;
+    color:#4c3b2b;
+    font-family:inherit;
+    outline:0;
+}
+
 .auth-submit{
     width:100%;
     padding:12px;
@@ -1888,12 +1899,13 @@ type="button"
 🛒 Sepet <span id="cartCount">0</span>
 </button>
 
+<!-- HESAP OLUŞTUR BUTONU "GİRİŞ YAP" OLARAK DEĞİŞTİRİLDİ -->
 <button
 class="account-button"
 id="accountButton"
 type="button"
 >
-👤 Hesap Oluştur
+👤 Giriş Yap
 </button>
 
 <div class="account-menu" id="accountMenu">
@@ -3150,7 +3162,7 @@ function updateAccountUI(){
         }
     }
 
-    if(button) button.textContent="👤 Hesap Oluştur";
+    if(button) button.textContent="👤 Giriş Yap";
     if(username) username.textContent="Hesabım";
     if(email) email.textContent="";
 }
