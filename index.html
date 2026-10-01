@@ -228,7 +228,7 @@ nav a:hover,
     position:absolute;
     right:0;
     top:42px;
-    width:270px;
+    width:290px;
     background:#fffaf3;
     border:1px solid #dbc8ad;
     box-shadow:0 10px 25px rgba(70,50,30,.15);
@@ -275,9 +275,10 @@ nav a:hover,
 }
 
 .account-section-button{
-    padding:12px 8px!important;
+    padding:12px 6px!important;
     background:#fffaf3!important;
     color:#705333!important;
+    font-size: 13px !important;
 }
 
 .account-section-button:hover{
@@ -441,7 +442,7 @@ section{
     letter-spacing:3px;
 }
 
-/* KATEGORİLER (DÜZELTİLDİ: Artık resimler kesilmeyecek) */
+/* FOTOĞRAFLARIN KESİLMEMESİ İÇİN DÜZELTİLMİŞ CSS (CONTAIN) */
 .category-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -453,17 +454,20 @@ section{
 .category-card{
     position:relative;
     width:100%;
-    aspect-ratio: 4 / 5; /* Sabit yükseklik yerine portre orantısı */
+    aspect-ratio: 4 / 5;
+    background: #fffdf9;
     overflow:hidden;
     cursor:pointer;
     border:1px solid #d8c2a4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .category-card img{
     width:100%;
     height:100%;
-    object-fit:cover;
-    object-position:center;
+    object-fit:contain; /* FOTOĞRAF KESİLMEYECEK */
     transition:.5s;
 }
 
@@ -477,10 +481,11 @@ section{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:rgba(55,40,25,.28);
+    background:rgba(55,40,25,.18);
     color:#fff;
     font-size:27px;
     letter-spacing:3px;
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.5);
 }
 
 /* ÜRÜNLER LİSTE */
@@ -533,13 +538,12 @@ section{
     box-shadow:0 12px 25px rgba(90,65,40,.12);
 }
 
-/* ÜRÜN RESİMLERİ (DÜZELTİLDİ: Sabit yükseklik kalktı, kare yapıldı) */
+/* KESİLMEYEN ÜRÜN RESİMLERİ */
 .product-image{
     width:100%;
-    aspect-ratio: 1 / 1; /* Her zaman kusursuz kare */
-    height:auto;
-    object-fit:cover;
-    object-position:center;
+    aspect-ratio: 1 / 1;
+    object-fit:contain; /* FOTOĞRAF KESİLMEYECEK */
+    background: #fffdf9;
     display:block;
     transition:transform .4s ease;
 }
@@ -728,14 +732,13 @@ section{
     top:0;
 }
 
-/* DETAY RESMİ (DÜZELTİLDİ: Contain ile tam sığacak) */
 .product-detail-image{
     width:100%;
     max-height:480px;
-    object-fit:contain; 
+    object-fit:contain; /* KESİLMEYİ ÖNLER */
     display:block;
     border:1px solid #dfccb2;
-    background:#f7efe3;
+    background:#fffdf9;
 }
 
 .product-detail-info h3{
@@ -860,6 +863,37 @@ section{
     margin-bottom:10px;
 }
 
+/* FOTOĞRAFLI YORUM EKLEMELERİ */
+.review-photo-upload {
+    margin-bottom: 15px;
+}
+.photo-upload-label {
+    cursor: pointer;
+    display: inline-block;
+    padding: 8px 12px;
+    background: #fff;
+    border: 1px solid #d9c5a9;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #7a5833;
+    transition: .2s;
+}
+.photo-upload-label:hover {
+    background: #f7efe3;
+}
+.photo-preview-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.photo-preview-container img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #d9c5a9;
+}
+
 .detail-review-list{
     display:flex;
     flex-direction:column;
@@ -966,7 +1000,8 @@ section{
 .cart-item img{
     width:75px;
     height:75px;
-    object-fit:cover;
+    object-fit:contain; /* KESİLMEYİ ÖNLER */
+    background: #fff;
 }
 
 .cart-item-info{
@@ -1259,7 +1294,7 @@ section{
 .favorite-item img{
     width:90px;
     height:90px;
-    object-fit:cover;
+    object-fit:contain; /* KESİLMEYİ ÖNLER */
 }
 
 .favorite-item-info{
@@ -1399,7 +1434,6 @@ section{
     gap:20px;
 }
 
-/* ÖNE ÇIKANLAR RESİMLERİ (DÜZELTİLDİ) */
 .featured-card{
     background:#fffaf3;
     border:1px solid #d9c3a5;
@@ -1415,9 +1449,8 @@ section{
 .featured-card img{
     width:100%;
     aspect-ratio: 1 / 1;
-    height:auto;
-    object-fit:cover;
-    object-position:center;
+    object-fit:contain; /* KESİLMEYİ ÖNLER */
+    background: #fffdf9;
 }
 
 .featured-info{
@@ -1545,7 +1578,6 @@ footer{
         font-size:13px;
     }
 
-    /* MOBİL HERO SLIDER DÜZELTMESİ (Kesilmeyi engeller) */
     .hero-slider{
         height:60vh;
         min-height:400px;
@@ -1596,6 +1628,11 @@ footer{
     .category-grid{
         grid-template-columns:repeat(2,1fr);
         gap:10px;
+    }
+
+    .category-card{
+        height:auto;
+        aspect-ratio: 1/1;
     }
 
     .category-overlay{
@@ -1833,12 +1870,13 @@ Hesabım
 
 <div class="account-section-buttons">
 
+<!-- EMOJİLER EKLENDİ VE İSİMLER DEĞİŞTİRİLDİ -->
 <button
 class="account-section-button"
 id="favoritesMenuButton"
 type="button"
 >
-♡ Favoriler
+❤️ Favorilerim
 </button>
 
 <button
@@ -1846,7 +1884,7 @@ class="account-section-button"
 id="ordersMenuButton"
 type="button"
 >
-Siparişler
+📦 Siparişlerim
 </button>
 
 </div>
@@ -2063,7 +2101,7 @@ class="search-result-info"
 
 </section>
 
-<!-- İLETİŞİM BÖLÜMÜ (LOGOLARLA) -->
+<!-- İLETİŞİM BÖLÜMÜ -->
 <section id="iletisim">
 
 <h2 class="section-title">
@@ -2260,7 +2298,6 @@ type="button"
 
 </div>
 
-<!-- ŞIK KAYIT FORMU VE UYARI -->
 <div id="registerForm" class="auth-form">
 
 <div id="registerMessage" class="auth-message"></div>
@@ -2483,7 +2520,7 @@ type="button"
 ×
 </button>
 
-<h2>Favorilerim</h2>
+<h2>❤️ Favorilerim</h2>
 
 <div id="favoritesContainer"></div>
 
@@ -2503,7 +2540,7 @@ type="button"
 ×
 </button>
 
-<h2>Siparişlerim</h2>
+<h2>📦 Siparişlerim</h2>
 
 <div id="ordersContainer"></div>
 
@@ -2546,6 +2583,7 @@ let favoriteProductIds = [];
 let selectedStars = {};
 let productReviewsCache = {};
 let ordersRefreshTimer = null;
+let userOrdersCache = null; // Sadece satın alanlar kontrolü için
 
 let heroCurrent = 0;
 let heroTimer = null;
@@ -3066,6 +3104,7 @@ function logout(){
         clearInterval(ordersRefreshTimer);
         ordersRefreshTimer=null;
     }
+    userOrdersCache = null;
 
     localStorage.removeItem("veloraToken");
     localStorage.removeItem("veloraUser");
@@ -3396,6 +3435,7 @@ async function submitOrder(event){
 
         cart=[];
         saveCart();
+        userOrdersCache=null; // Sipariş cache'i temizle (Yorum onayı için)
 
         setTimeout(()=>{
             closeCart();
@@ -3417,6 +3457,30 @@ async function submitOrder(event){
 /* =========================================================
    PRODUCTS & REVIEWS
    ========================================================= */
+
+// Sadece alanlar yorum yapabilsin diye sipariş ID'lerini çeker
+async function getUserPurchasedProductIds() {
+    const token = localStorage.getItem("veloraToken");
+    if (!token) return [];
+    if (userOrdersCache) return userOrdersCache;
+
+    try {
+        const data = await apiRequest("/api/orders/my", {
+            headers: {"Authorization": "Bearer " + token}
+        });
+        const purchasedIds = new Set();
+        (data.orders || []).forEach(order => {
+            const items = parseOrderItems(order);
+            items.forEach(item => {
+                if(item.productId) purchasedIds.add(Number(item.productId));
+            });
+        });
+        userOrdersCache = Array.from(purchasedIds);
+        return userOrdersCache;
+    } catch (error) {
+        return [];
+    }
+}
 
 function createStars(productId){
     let html="";
@@ -3609,6 +3673,19 @@ function formatReviewDate(value){
     });
 }
 
+// Fotoğraf seçilince önizleme yapmak için
+window.previewReviewPhoto = function(event, productId) {
+    const file = event.target.files[0];
+    const preview = $("reviewPhotoPreview-" + productId);
+    if(file && preview) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            preview.innerHTML = `<img src="${e.target.result}" alt="Yorum Fotoğrafı">`;
+        };
+        reader.readAsDataURL(file);
+    }
+};
+
 /* =========================================================
    ÜRÜN DETAY MODALI VE YORUM YAPMA ALANI
    ========================================================= */
@@ -3623,6 +3700,21 @@ async function openProductDetail(productId){
 
     modal.dataset.productId=String(product.id);
     const features=getProductFeatures(product);
+
+    // SADECE ALANLAR YORUM YAPABİLSİN KONTROLÜ
+    const token = localStorage.getItem("veloraToken");
+    let canReview = false;
+    let reviewMessage = "Yorum yapabilmek için lütfen giriş yapın veya hesap oluşturun.";
+
+    if(token) {
+        // Kullanıcının daha önce satın aldığı ürünleri çek ve kontrol et
+        const purchasedIds = await getUserPurchasedProductIds();
+        if(purchasedIds.includes(Number(product.id))) {
+            canReview = true;
+        } else {
+            reviewMessage = "Yalnızca bu ürünü satın alan müşterilerimiz değerlendirme yapabilir.";
+        }
+    }
 
     content.innerHTML=`
         <div class="product-detail">
@@ -3670,28 +3762,42 @@ async function openProductDetail(productId){
                         Değerlendirmeler yükleniyor...
                     </div>
 
-                    <!-- YORUM YAPMA FORMU -->
+                    <!-- YORUM YAPMA FORMU (SADECE SATIN ALANLARA AÇIK) -->
                     <div class="detail-write-review">
                         <h5>Bu Ürünü Değerlendir & Yorum Yap</h5>
                         
-                        <div class="stars" id="detail-stars-${product.id}">
-                            ${createStars(product.id)}
-                        </div>
+                        ${canReview ? `
+                            <div class="stars" id="detail-stars-${product.id}">
+                                ${createStars(product.id)}
+                            </div>
 
-                        <textarea
-                            id="detail-review-input-${product.id}"
-                            class="review-input"
-                            placeholder="Ürün kalitesi, zarafeti ve stilinizle uyumu hakkında bir yorum bırakın..."
-                        ></textarea>
+                            <textarea
+                                id="detail-review-input-${product.id}"
+                                class="review-input"
+                                placeholder="Ürün kalitesi, zarafeti ve stilinizle uyumu hakkında bir yorum bırakın..."
+                            ></textarea>
 
-                        <button
-                            class="review-button"
-                            type="button"
-                            id="btnSubmitReview"
-                            data-submit-review="${product.id}"
-                        >
-                            Yorumu Gönder
-                        </button>
+                            <div class="review-photo-upload">
+                                <label for="reviewPhotoInput-${product.id}" class="photo-upload-label">
+                                    📷 Fotoğraf Ekle
+                                </label>
+                                <input type="file" id="reviewPhotoInput-${product.id}" accept="image/*" style="display:none;" onchange="previewReviewPhoto(event, ${product.id})">
+                                <div id="reviewPhotoPreview-${product.id}" class="photo-preview-container"></div>
+                            </div>
+
+                            <button
+                                class="review-button"
+                                type="button"
+                                id="btnSubmitReview"
+                                data-submit-review="${product.id}"
+                            >
+                                Yorumu Gönder
+                            </button>
+                        ` : `
+                            <div style="padding:15px; background:#f7efe3; color:#85633d; border:1px dashed #dfccb2; text-align:center; font-size:14px;">
+                                ${reviewMessage}
+                            </div>
+                        `}
                     </div>
 
                     <!-- GEÇMİŞ YORUMLAR LİSTESİ -->
@@ -3748,6 +3854,16 @@ async function loadProductDetailReviews(productId){
 
             const username=review.username || review.users?.username || "Müşteri";
             const reviewId=review.id || review._id;
+            
+            // Fotoğraflı yorumları ayırma (Geçici UI Hack'i)
+            let rawComment = review.comment || review.text || "";
+            let commentText = rawComment;
+            let commentImg = "";
+            if (rawComment.includes("|||IMAGE|||")) {
+                 const parts = rawComment.split("|||IMAGE|||");
+                 commentText = parts[0];
+                 commentImg = parts[1];
+            }
 
             let adminToolsHtml = "";
             if(isAdmin && reviewId) {
@@ -3772,8 +3888,9 @@ async function loadProductDetailReviews(productId){
                     ${reviewStarsHtml(review.rating)}
                 </div>
                 <div class="detail-review-comment">
-                    ${escapeHtml(review.comment || review.text || "")}
+                    ${escapeHtml(commentText)}
                 </div>
+                ${commentImg ? `<div style="margin-top:10px;"><img src="${commentImg}" style="width:80px;height:80px;object-fit:cover;border-radius:4px;border:1px solid #dfccb2;"></div>` : ""}
                 ${adminToolsHtml}
             `;
             container.appendChild(item);
@@ -3795,8 +3912,10 @@ async function submitModalReview(productId){
     }
 
     const input=$("detail-review-input-"+productId);
-    const text=input ? input.value.trim() : "";
+    let text=input ? input.value.trim() : "";
     const rating=selectedStars[productId];
+    
+    const previewImg = document.querySelector(`#reviewPhotoPreview-${productId} img`);
 
     if(!rating){
         alert("Lütfen bir yıldız puanı seçin.");
@@ -3805,6 +3924,17 @@ async function submitModalReview(productId){
 
     if(!text){
         alert("Lütfen ürün hakkında bir yorum yazın.");
+        return;
+    }
+
+    // Fotoğraf varsa metne iliştir (Şimdilik geçici yöntem)
+    if (previewImg) {
+        text += "|||IMAGE|||" + previewImg.src;
+    }
+
+    // Backend limit koruması uyarısı
+    if (text.length > 1000) {
+        alert("Fotoğraflı yorumlar için sunucu altyapısında küçük bir güncelleme (Backend 1000 karakter limiti kaldırma) gerekmektedir. Lütfen fotoğraftan vazgeçin veya yöneticiden güncellemeyi talep edin.");
         return;
     }
 
@@ -3832,6 +3962,9 @@ async function submitModalReview(productId){
         );
 
         if(input) input.value="";
+        const previewContainer = $("reviewPhotoPreview-" + productId);
+        if(previewContainer) previewContainer.innerHTML = "";
+        
         selectedStars[productId]=0;
         selectStar(productId, 0);
 
