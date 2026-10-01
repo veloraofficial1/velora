@@ -870,6 +870,7 @@ section{
 .detail-review-head{
     display:flex;
     justify-content:space-between;
+    align-items:center;
     gap:10px;
     margin-bottom:6px;
     font-size:13px;
@@ -882,6 +883,7 @@ section{
 
 .detail-review-date{
     color:#9a8064;
+    font-size:12px;
 }
 
 .detail-review-stars{
@@ -903,6 +905,39 @@ section{
     font-size:14px;
     padding:10px 0;
     text-align:center;
+}
+
+/* ADMIN PANELİ İÇİN EK BUTONLAR */
+.admin-actions {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #dfccb2;
+    display: flex;
+    gap: 10px;
+}
+
+.admin-btn {
+    border: none;
+    padding: 6px 12px;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    color: #fff;
+    transition: .2s;
+}
+
+.admin-btn.delete {
+    background: #a05243;
+}
+.admin-btn.delete:hover {
+    background: #8a4133;
+}
+.admin-btn.edit {
+    background: #8b6943;
+}
+.admin-btn.edit:hover {
+    background: #735433;
 }
 
 /* SEPET */
@@ -3523,15 +3558,18 @@ function getProductFeatures(product){
     ];
 }
 
+/* YENİ: TARİH VE SAAT FORMATI */
 function formatReviewDate(value){
     if(!value) return "";
     const date=new Date(value);
     if(Number.isNaN(date.getTime())) return String(value);
 
-    return date.toLocaleDateString("tr-TR",{
+    return date.toLocaleString("tr-TR",{
         day:"2-digit",
         month:"2-digit",
-        year:"numeric"
+        year:"numeric",
+        hour:"2-digit",
+        minute:"2-digit"
     });
 }
 
@@ -3640,6 +3678,11 @@ async function loadProductDetailReviews(productId){
 
     container.innerHTML=`<div class="detail-empty">Değerlendirmeler yükleniyor...</div>`;
 
+    // Admin mi diye kontrol ediyoruz
+    const currentUserStr = localStorage.getItem("veloraUser");
+    const currentUser = currentUserStr ? safeJsonParse(currentUserStr, null) : null;
+    const isAdmin = currentUser && (currentUser.role === "admin" || currentUser.isAdmin === true);
+
     try{
         const data=await apiRequest("/api/reviews/"+encodeURIComponent(productId));
         const reviews=Array.isArray(data.reviews) ? data.reviews : [];
@@ -3669,6 +3712,22 @@ async function loadProductDetailReviews(productId){
             item.className="detail-review-item";
 
             const username=review.username || review.users?.username || "Müşteri";
+            const reviewId=review.id || review._id;
+
+            // ADMİN BUTONLARI (Sadece adminse HTML içine eklenecek)
+            let adminToolsHtml = "";
+            if(isAdmin && reviewId) {
+                adminToolsHtml = `
+                    <div class="admin-actions">
+                        <button class="admin-btn delete" data-admin-delete="${reviewId}" data-admin-product="${productId}">
+                            Sil
+                        </button>
+                        <button class="admin-btn edit" data-admin-edit="${reviewId}" data-admin-product="${productId}">
+                            Düzenle
+                        </button>
+                    </div>
+                `;
+            }
 
             item.innerHTML=`
                 <div class="detail-review-head">
@@ -3681,6 +3740,7 @@ async function loadProductDetailReviews(productId){
                 <div class="detail-review-comment">
                     ${escapeHtml(review.comment || review.text || "")}
                 </div>
+                ${adminToolsHtml}
             `;
             container.appendChild(item);
         });
@@ -3752,6 +3812,50 @@ async function submitModalReview(productId){
             btn.disabled=false;
             btn.textContent="Yorumu Gönder";
         }
+    }
+}
+
+/* =========================================================
+   ADMİN YORUM SİLME VE DÜZENLEME FONKSİYONLARI
+   ========================================================= */
+
+async function deleteReviewAdmin(reviewId, productId) {
+    if(!confirm("Bu yorumu tamamen silmek istediğinize emin misiniz?")) return;
+    
+    const token = localStorage.getItem("veloraToken");
+    try {
+        await apiRequest("/api/reviews/" + reviewId, {
+            method: "DELETE",
+            headers: { "Authorization": "Bearer " + token }
+        });
+        alert("Yorum başarıyla silindi.");
+        await loadProductDetailReviews(productId);
+    } catch(error) {
+        alert("Yorum silinemedi: " + error.message);
+    }
+}
+
+async function editReviewAdmin(reviewId, productId) {
+    const reviews = productReviewsCache[productId] || [];
+    const review = reviews.find(r => String(r.id) === String(reviewId) || String(r._id) === String(reviewId));
+    
+    const newText = prompt("Yorumu düzenleyin:", review ? (review.comment || review.text) : "");
+    if(newText === null) return; 
+    
+    const token = localStorage.getItem("veloraToken");
+    try {
+        await apiRequest("/api/reviews/" + reviewId, {
+            method: "PUT",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token 
+            },
+            body: JSON.stringify({ comment: newText })
+        });
+        alert("Yorum başarıyla güncellendi.");
+        await loadProductDetailReviews(productId);
+    } catch(error) {
+        alert("Yorum güncellenemedi: " + error.message);
     }
 }
 
@@ -4379,8 +4483,23 @@ function initEvents(){
         }
     });
 
-    /* Ürün Detay Modalı İçindeki Tıklamalar (Yorum Gönderme ve Yıldız Seçme) */
+    /* Ürün Detay Modalı İçindeki Tıklamalar (Yorum Gönderme, Yıldız Seçme ve ADMİN BUTONLARI) */
     $("productDetailModal")?.addEventListener("click", async event=>{
+        
+        // ADMİN BUTONLARI: Silme
+        const adminDeleteBtn = event.target.closest("[data-admin-delete]");
+        if(adminDeleteBtn){
+            deleteReviewAdmin(adminDeleteBtn.dataset.adminDelete, adminDeleteBtn.dataset.adminProduct);
+            return;
+        }
+
+        // ADMİN BUTONLARI: Düzenleme
+        const adminEditBtn = event.target.closest("[data-admin-edit]");
+        if(adminEditBtn){
+            editReviewAdmin(adminEditBtn.dataset.adminEdit, adminEditBtn.dataset.adminProduct);
+            return;
+        }
+
         // Yıldız puanlama
         const star=event.target.closest("[data-star-product]");
         if(star){
