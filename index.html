@@ -272,6 +272,39 @@ nav a:hover,
     margin-left:3px;
 }
 
+/* ŞİFRE GÖSTER / GİZLE İKONLU ALAN KAPSAYICISI */
+.password-field-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 14px;
+}
+
+.password-field-wrapper input {
+    width: 100%;
+    padding: 11px;
+    padding-right: 40px;
+    border: 1px solid #d9c5a9;
+    background: #fffdf9;
+    color: #4c3b2b;
+    font-family: inherit;
+    outline: 0;
+    margin-bottom: 0 !important;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #8b6943;
+    padding: 0;
+    line-height: 1;
+}
+
 /* HERO SLIDER */
 .hero-slider{
     position:relative;
@@ -1241,17 +1274,6 @@ section{
     margin-bottom:6px;
 }
 
-.auth-form input{
-    width:100%;
-    padding:11px;
-    margin-bottom:14px;
-    border:1px solid #d9c5a9;
-    background:#fffdf9;
-    color:#4c3b2b;
-    font-family:inherit;
-    outline:0;
-}
-
 .auth-submit{
     width:100%;
     padding:12px;
@@ -1260,6 +1282,7 @@ section{
     color:#fff;
     font-family:inherit;
     cursor:pointer;
+    margin-top: 14px;
 }
 
 .auth-submit:hover{
@@ -1901,7 +1924,6 @@ type="button"
 
 </div>
 
-<!-- PROFİL / BİLGİLERİM SEÇENEĞİ EKLENDİ -->
 <button
 id="profileMenuButton"
 type="button"
@@ -2308,12 +2330,10 @@ required
 >
 
 <label>Şifre</label>
-
-<input
-type="password"
-id="loginPassword"
-required
->
+<div class="password-field-wrapper">
+    <input type="password" id="loginPassword" required>
+    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('loginPassword', this)">👁</button>
+</div>
 
 <button
 class="auth-submit"
@@ -2362,20 +2382,16 @@ required
 >
 
 <label>Şifre</label>
-
-<input
-type="password"
-id="registerPassword"
-required
->
+<div class="password-field-wrapper">
+    <input type="password" id="registerPassword" required>
+    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('registerPassword', this)">👁</button>
+</div>
 
 <label>Şifre Tekrar</label>
-
-<input
-type="password"
-id="registerPasswordConfirm"
-required
->
+<div class="password-field-wrapper">
+    <input type="password" id="registerPasswordConfirm" required>
+    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('registerPasswordConfirm', this)">👁</button>
+</div>
 
 <button
 class="auth-submit"
@@ -2473,20 +2489,16 @@ required
 >
 
 <label>Yeni Şifre</label>
-
-<input
-type="password"
-id="resetPassword"
-required
->
+<div class="password-field-wrapper">
+    <input type="password" id="resetPassword" required>
+    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('resetPassword', this)">👁</button>
+</div>
 
 <label>Yeni Şifre Tekrar</label>
-
-<input
-type="password"
-id="resetPasswordConfirm"
-required
->
+<div class="password-field-wrapper">
+    <input type="password" id="resetPasswordConfirm" required>
+    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('resetPasswordConfirm', this)">👁</button>
+</div>
 
 <button
 class="auth-submit"
@@ -2506,28 +2518,22 @@ type="submit"
 <form id="changeAuthForm">
 
 <label>Mevcut Şifre</label>
-
-<input
-type="password"
-id="currentPassword"
-required
->
+<div class="password-field-wrapper">
+    <input type="password" id="currentPassword" required>
+    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('currentPassword', this)">👁</button>
+</div>
 
 <label>Yeni Şifre</label>
-
-<input
-type="password"
-id="newPassword"
-required
->
+<div class="password-field-wrapper">
+    <input type="password" id="newPassword" required>
+    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('newPassword', this)">👁</button>
+</div>
 
 <label>Yeni Şifre Tekrar</label>
-
-<input
-type="password"
-id="newPasswordConfirm"
-required
->
+<div class="password-field-wrapper">
+    <input type="password" id="newPasswordConfirm" required>
+    <button type="button" class="toggle-password" onclick="togglePasswordVisibility('newPasswordConfirm', this)">👁</button>
+</div>
 
 <button
 class="auth-submit"
@@ -2645,6 +2651,19 @@ function escapeHtml(text){
     div.textContent=String(text ?? "");
     return div.innerHTML;
 }
+
+// Şifre Göster / Gizle Fonksiyonu
+window.togglePasswordVisibility = function(inputId, btn) {
+    const input = $(inputId);
+    if (!input) return;
+    if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "🙈";
+    } else {
+        input.type = "password";
+        btn.textContent = "👁";
+    }
+};
 
 async function apiRequest(path,options={}){
     let response;
@@ -3181,7 +3200,10 @@ async function openProfile(){
                     </div>
                     <div style="margin-top:5px; border-top:1px dashed #dfccb2; padding-top:12px;">
                         <label style="display:block; margin-bottom:5px; font-weight:bold; color:#a05243;">Mevcut Şifreniz (İşlemi Onaylamak İçin Şarttır)</label>
-                        <input type="password" id="profileConfirmPassword" placeholder="Değişiklikleri kaydetmek için şifrenizi girin..." required style="width:100%; padding:10px; border:1px solid #a05243; background:#fff; font-family:inherit;">
+                        <div class="password-field-wrapper">
+                            <input type="password" id="profileConfirmPassword" placeholder="Değişiklikleri kaydetmek için şifrenizi girin..." required style="margin-bottom:0 !important;">
+                            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('profileConfirmPassword', this)">👁</button>
+                        </div>
                     </div>
                     <button type="submit" class="auth-submit" style="margin-top:10px;">Bilgileri Güncelle</button>
                 </form>
@@ -3219,8 +3241,6 @@ async function updateProfileData(event) {
     }
 
     try {
-        // Backend'e şifre değiştirme veya güncelleme isteği gönderiyoruz
-        // Kullanıcı adı güncelleme endpoint'i varsa oraya, yoksa şifre değiştirme üzerinden doğrulama yapıyoruz
         const data = await apiRequest("/api/auth/change-password", {
             method: "POST",
             headers: {
@@ -3229,7 +3249,7 @@ async function updateProfileData(event) {
             },
             body: JSON.stringify({
                 currentPassword: currentPassword,
-                newPassword: currentPassword, // Şifre değişmiyorsa aynısını koruyoruz
+                newPassword: currentPassword, 
                 newPasswordConfirm: currentPassword,
                 username: newUsername,
                 email: newEmail
@@ -3241,7 +3261,6 @@ async function updateProfileData(event) {
             message.textContent = "Bilgileriniz başarıyla güncellendi!";
         }
 
-        // Yerel depolamayı güncelle
         const user = safeJsonParse(localStorage.getItem("veloraUser") || "{}", {});
         user.username = newUsername;
         user.email = newEmail;
@@ -4911,12 +4930,6 @@ function initEvents(){
         const minus=event.target.closest("[data-cart-minus]");
         if(minus){
             changeCartQuantity(minus.dataset.cartMinus, -1);
-            return;
-        }
-
-        const plus=event.target.closest("[data-cart-plus]");
-        if(plus){
-            changeCartQuantity(minus.dataset.cartPlus, 1); // fix index check inside click delegation if needed
             return;
         }
         
