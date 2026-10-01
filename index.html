@@ -1437,7 +1437,7 @@ section{
     color:#6b5640;
 }
 
-/* YENİ EKLENEN İLETİŞİM CSS */
+/* İLETİŞİM CSS */
 .contact-info-container {
     display: flex;
     justify-content: center;
@@ -1465,7 +1465,9 @@ section{
     box-shadow: 0 12px 25px rgba(90,65,40,.08);
 }
 .contact-icon {
-    font-size: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 5px;
 }
 .contact-title {
@@ -2058,7 +2060,7 @@ class="search-result-info"
 
 </section>
 
-<!-- İLETİŞİM BÖLÜMÜ GÜNCELLENDİ -->
+<!-- YENİ İLETİŞİM BÖLÜMÜ (LOGOLARLA) -->
 <section id="iletisim">
 
 <h2 class="section-title">
@@ -2071,20 +2073,42 @@ class="search-result-info"
 
 <div class="contact-info-container">
     
+    <!-- WhatsApp -->
     <a href="https://wa.me/905322752807" target="_blank" class="contact-item">
-        <span class="contact-icon">📱</span>
+        <span class="contact-icon">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="#25D366">
+              <path d="M12.031 0C5.38 0 0 5.383 0 12.036c0 2.124.553 4.195 1.603 6.012L.264 24l6.096-1.597c1.761.944 3.754 1.442 5.805 1.442 6.649 0 12.03-5.383 12.03-12.036C24.195 5.383 18.814 0 12.031 0zm0 21.84c-1.782 0-3.528-.48-5.062-1.386l-.36-.216-3.766.984.996-3.674-.24-.378a10.015 10.015 0 01-1.542-5.334c0-5.55 4.512-10.062 10.056-10.062 5.544 0 10.05 4.512 10.05 10.062 0 5.55-4.506 10.062-10.05 10.062zm5.52-7.536c-.306-.15-1.8-.888-2.082-.99-.282-.102-.486-.15-.69.15-.204.3-.786.99-1.026 1.254-.24.264-.48.294-.786.144-.306-.15-1.284-.474-2.448-1.512-1.128-1.008-1.89-2.256-2.112-2.562-.222-.306-.024-.474.126-.624.138-.138.306-.36.462-.54.156-.18.21-.306.312-.51.102-.204.048-.384-.024-.534-.078-.15-.69-1.662-.942-2.274-.246-.594-.498-.51-.69-.522-.18-.012-.384-.012-.588-.012-.204 0-.54.078-.822.384-.282.306-1.086 1.062-1.086 2.592 0 1.53 1.11 3.012 1.266 3.222.156.21 2.196 3.354 5.322 4.704.744.318 1.326.51 1.776.654.75.24 1.434.204 1.974.126.606-.09 1.8-.738 2.052-1.452.252-.714.252-1.326.18-1.452-.072-.126-.276-.204-.582-.354z"/>
+            </svg>
+        </span>
         <span class="contact-title">WhatsApp</span>
         <span class="contact-detail">0532 275 28 07</span>
     </a>
     
+    <!-- Instagram -->
     <a href="https://instagram.com/veloraa.butik" target="_blank" class="contact-item">
-        <span class="contact-icon">📸</span>
+        <span class="contact-icon">
+            <svg viewBox="0 0 24 24" width="40" height="40">
+              <defs>
+                <linearGradient id="ig-grad" x1="20%" y1="100%" x2="80%" y2="0%">
+                  <stop offset="0%" stop-color="#fd5949" />
+                  <stop offset="50%" stop-color="#d6249f" />
+                  <stop offset="100%" stop-color="#285AEB" />
+                </linearGradient>
+              </defs>
+              <path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838A6.162 6.162 0 1018.162 12 6.162 6.162 0 0012 5.838zm0 10.162A4 4 0 1116 12a4 4 0 01-4 4zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
+            </svg>
+        </span>
         <span class="contact-title">Instagram</span>
         <span class="contact-detail">@veloraa.butik</span>
     </a>
     
+    <!-- Gmail -->
     <a href="mailto:veloraofficial6022@gmail.com" class="contact-item">
-        <span class="contact-icon">✉️</span>
+        <span class="contact-icon">
+            <svg viewBox="0 0 24 24" width="40" height="40" fill="#EA4335">
+              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+            </svg>
+        </span>
         <span class="contact-title">E-posta</span>
         <span class="contact-detail">veloraofficial6022@gmail.com</span>
     </a>
@@ -2233,14 +2257,15 @@ type="button"
 
 </div>
 
-<!-- KAYIT FORMU VE UYARI -->
+<!-- YENİ KAYIT FORMU VE UYARI -->
 <div id="registerForm" class="auth-form">
 
 <div id="registerMessage" class="auth-message"></div>
 
-<!-- YENİ EKLENEN KAYIT UYARISI -->
-<div style="background:#f7efe3; border:1px dashed #d9c5a9; padding:12px; margin-bottom:15px; text-align:center; font-size:13px; color:#6b5640; line-height:1.5;">
-    <strong>Önemli:</strong> Doğrulama kodu e-postanıza gönderilecektir. Lütfen bilgilerinizi eksiksiz ve doğru girdiğinizden emin olun.
+<!-- YENİ ŞIK KAYIT UYARISI -->
+<div style="background:#fffaf3; border-left:4px solid #b99669; padding:15px; margin-bottom:18px; font-size:13px; color:#6b5640; line-height:1.6; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+    <strong style="color:#85633d; display:block; margin-bottom:5px; font-size:14px;">VELORA Ailesine Hoş Geldiniz ✨</strong>
+    Sipariş bilgilendirmelerinizin ve hesap doğrulama kodunuzun size sorunsuz ulaşabilmesi için lütfen e-posta ve diğer bilgilerinizi eksiksiz, doğru girdiğinizden emin olun.
 </div>
 
 <form id="registerAuthForm">
