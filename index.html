@@ -661,85 +661,6 @@ section{
     margin-bottom:5px;
 }
 
-
-.product-card{
-    position:relative;
-}
-.product-card .product-image,
-.product-card .product-name,
-.product-card .product-category{
-    cursor:pointer;
-}
-.product-detail-box{
-    max-width:760px;
-}
-.product-detail-content{
-    display:grid;
-    grid-template-columns:minmax(240px, 1fr) minmax(240px, 1fr);
-    gap:24px;
-}
-.product-detail-image{
-    width:100%;
-    max-height:420px;
-    object-fit:contain;
-    background:#f7efe3;
-    border:1px solid #dfccb2;
-}
-.product-detail-info h3{
-    color:#5d4631;
-    font-size:25px;
-    margin-bottom:8px;
-}
-.product-detail-category{
-    color:#a18058;
-    margin-bottom:18px;
-}
-.product-specs{
-    border-top:1px solid #eadbc8;
-    border-bottom:1px solid #eadbc8;
-    padding:14px 0;
-    margin-bottom:18px;
-}
-.product-spec-row{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    padding:7px 0;
-    color:#60482f;
-}
-.product-spec-row span:first-child{
-    color:#96724c;
-}
-.product-detail-reviews h4{
-    color:#60482f;
-    margin-bottom:10px;
-}
-.product-detail-reviews-list{
-    max-height:260px;
-    overflow:auto;
-}
-.product-detail-review-empty{
-    color:#8a6a48;
-    background:#f7efe3;
-    padding:14px;
-}
-@media(max-width:700px){
-    .product-detail-box{
-        padding:18px;
-        max-height:92vh;
-    }
-    .product-detail-content{
-        grid-template-columns:1fr;
-        gap:16px;
-    }
-    .product-detail-image{
-        max-height:240px;
-    }
-    .product-detail-info h3{
-        font-size:21px;
-    }
-}
-
 #one-cikanlar{
     background:#efe3d2;
 }
@@ -1313,31 +1234,6 @@ footer{
 
 @media(max-width:700px){
 
-
-    .header-center{
-        position:relative;
-        overflow:visible;
-    }
-
-    .menu-wrapper{
-        position:relative;
-        flex:0 0 auto;
-    }
-
-    .menu-panel{
-        left:50%;
-        right:auto;
-        width:min(300px, calc(100vw - 24px));
-        max-width:calc(100vw - 24px);
-        box-sizing:border-box;
-        transform:translateX(-50%);
-        top:44px;
-    }
-
-    .menu-panel button{
-        padding:10px 12px;
-    }
-
     header{
         padding:12px 4%;
         flex-wrap:wrap;
@@ -1501,203 +1397,6 @@ footer{
         font-size:12px;
     }
 }
-
-
-/* Yalnızca mobil kullanılabilirlik ve hesap uyarısı */
-.register-info-box{
-    margin:0 0 18px;
-    padding:14px 16px;
-    border:1px solid #d9c3a5;
-    background:#f8f0e4;
-    color:#6b5238;
-    border-radius:8px;
-    line-height:1.5;
-    font-size:13px;
-}
-
-.register-info-box strong{
-    display:block;
-    margin-bottom:5px;
-    color:#765636;
-    font-size:14px;
-}
-
-.register-info-box span{
-    display:block;
-}
-
-@media(max-width:700px){
-
-    .header-center{
-        gap:8px;
-    }
-
-    .header-center nav{
-        display:flex;
-        gap:7px;
-        flex-wrap:wrap;
-        align-items:center;
-    }
-
-    .search-box{
-        width:min(42vw,180px);
-    }
-
-    .menu-button,
-    .account-button,
-    .cart-button{
-        min-height:40px;
-        padding:8px 9px;
-        border-radius:7px;
-        white-space:nowrap;
-    }
-
-    .product-image{
-        height:230px;
-        max-height:230px;
-        object-fit:cover;
-    }
-
-    .product-card .stock-button,
-    .product-card .review-button{
-        width:100%;
-        min-height:42px;
-        margin-top:8px;
-    }
-
-    .review-input{
-        min-height:82px;
-    }
-
-    .cart-actions{
-        flex-direction:column;
-    }
-
-    .cart-actions button{
-        width:100%;
-        min-height:44px;
-    }
-
-    .order-progress{
-        gap:5px;
-    }
-
-    .progress-step{
-        font-size:11px;
-        min-width:0;
-        text-align:center;
-    }
-
-    .modal-box{
-        width:100%;
-        padding:20px 16px;
-        border-radius:10px;
-    }
-}
-
-@media(max-width:450px){
-
-    .header-center{
-        align-items:stretch;
-    }
-
-    nav{
-        width:100%;
-        justify-content:center;
-    }
-
-    nav a,
-    .dropbtn{
-        font-size:12px;
-    }
-
-    .search-box{
-        width:100%;
-    }
-
-    .product-image{
-        height:205px;
-        max-height:205px;
-    }
-
-    .featured-card img{
-        height:190px;
-    }
-
-    .category-card{
-        height:190px;
-    }
-
-    .menu-button,
-    .account-button,
-    .cart-button{
-        flex:1;
-        min-width:0;
-        font-size:12px;
-        padding:8px 6px;
-    }
-
-    .account-area{
-        gap:6px;
-    }
-
-    .order-progress{
-        overflow-x:auto;
-        padding-bottom:4px;
-    }
-
-    .progress-step{
-        flex:0 0 auto;
-        font-size:10px;
-    }
-}
-
-
-/* Mobil düzenleme: isim uzunluğunda taşmayı ve büyük görselleri önle */
-@media(max-width:600px){
-  header{display:flex;align-items:center;gap:6px;padding:9px 10px;overflow:hidden;}
-  .logo{font-size:18px;white-space:nowrap;flex:0 0 auto;}
-  .header-center{min-width:0;flex:1;display:flex;align-items:center;gap:5px;overflow:hidden;}
-  .menu-wrapper{flex:0 0 auto;min-width:0;}
-  .menu-button{display:block!important;max-width:78px;min-width:0;padding:8px 7px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  nav,.search-box{display:none!important;}
-  .account-area{display:flex;align-items:center;gap:5px;flex:0 0 auto;min-width:0;}
-  .account-button,.cart-button{max-width:96px;min-width:0;padding:8px 7px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .account-button .account-name{display:inline-block;max-width:45px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;}
-  .product-image{height:205px!important;object-fit:contain!important;background:#f7f1e7;}
-  .featured-card img{height:175px!important;object-fit:contain!important;background:#f7f1e7;}
-  .category-card{height:165px!important;}
-  .category-overlay{font-size:17px;}
-  .product-info{padding:11px;}
-  .product-info h3{font-size:15px;line-height:1.25;}
-  .product-actions{display:flex;gap:6px;}
-  .product-actions button{flex:1;min-width:0;padding:9px 6px;font-size:11px;}
-  .modal-box{padding:18px;max-width:calc(100vw - 20px);}
-  .cart-actions{flex-direction:column;}
-  .cart-actions button{width:100%;}
-}
-@media(max-width:420px){
-  .logo{font-size:17px;}
-  .menu-button{max-width:72px;font-size:10px;padding:8px 6px;}
-  .account-button,.cart-button{max-width:82px;font-size:10px;padding:8px 5px;}
-  .account-button .account-name{max-width:34px;}
-  .product-image{height:180px!important;object-fit:contain!important;}
-  .featured-card img{height:155px!important;object-fit:contain!important;}
-  .category-card{height:145px!important;}
-}
-
-/* Mobil menü düzeltmesi */
-@media(max-width:600px){
-  header{overflow:visible!important;position:relative;z-index:3000;}
-  .header-center{overflow:visible!important;position:relative;z-index:3001;}
-  .menu-wrapper{position:relative!important;z-index:3002;}
-  .menu-button{position:relative!important;z-index:3003;cursor:pointer!important;}
-  .menu-panel{top:calc(100% + 6px)!important;left:0!important;width:220px!important;max-width:calc(100vw - 24px)!important;z-index:9999!important;}
-  .menu-panel.active{display:block!important;}
-}
-@media(max-width:420px){
-  .menu-panel{width:210px!important;max-width:calc(100vw - 20px)!important;}
-}
 </style>
 </head>
 
@@ -1757,7 +1456,7 @@ Koleksiyon
 <div class="dropdown">
 
 <button class="dropbtn" type="button">
-Kategoriler
+Kategoriler ▾
 </button>
 
 <div class="dropdown-content">
@@ -2290,15 +1989,6 @@ type="button"
 
 <div id="registerMessage" class="auth-message"></div>
 
-<div class="register-info-box">
-<strong>Bilgilerinizi kontrol edin</strong>
-<span>
-Siparişinizin sorunsuz hazırlanıp size ulaştırılabilmesi için
-hesap oluştururken girdiğiniz bilgilerin doğru olduğundan emin olun.
-Özellikle e-posta adresinizi kontrol etmeyi unutmayın.
-</span>
-</div>
-
 <form id="registerAuthForm">
 
 <label>Kullanıcı Adı</label>
@@ -2539,14 +2229,6 @@ type="button"
 <div id="ordersContainer"></div>
 
 </div>
-</div>
-
-
-<div class="modal" id="productDetailModal">
-    <div class="modal-box product-detail-box">
-        <button class="close-modal" id="closeProductDetailButton" type="button">×</button>
-        <div id="productDetailContent"></div>
-    </div>
 </div>
 
 <script>
@@ -3882,107 +3564,6 @@ async function submitOrder(event){
 }
 
 
-
-function openProductDetail(productId){
-    const product=products.find(
-        item=>Number(item.id)===Number(productId)
-    );
-
-    const modal=$("productDetailModal");
-    const container=$("productDetailContent");
-
-    if(!product || !modal || !container){
-        return;
-    }
-
-    const reviews=safeJsonParse(
-        localStorage.getItem("velora-reviews-"+product.id) || "[]",
-        []
-    );
-
-    let reviewsHtml="";
-
-    if(Array.isArray(reviews) && reviews.length){
-        reviewsHtml=reviews.map(review=>{
-            let stars="";
-            for(let i=1;i<=5;i++){
-                stars+=i<=Number(review.rating)?"★":"☆";
-            }
-            return `
-                <div class="review-item">
-                    <div class="review-stars">${stars}</div>
-                    <div>${escapeHtml(review.text)}</div>
-                    <small>${escapeHtml(review.date)}</small>
-                </div>
-            `;
-        }).join("");
-    }else{
-        reviewsHtml=`
-            <div class="product-detail-review-empty">
-                Bu ürün için henüz değerlendirme yapılmamış.
-            </div>
-        `;
-    }
-
-    container.innerHTML=`
-        <div class="product-detail-content">
-            <div>
-                <img
-                    class="product-detail-image"
-                    src="${escapeHtml(product.image)}"
-                    alt="${escapeHtml(product.name)}"
-                    onerror="this.src='resimler/urun1.jpg'"
-                >
-            </div>
-
-            <div class="product-detail-info">
-                <h3>${escapeHtml(product.name)}</h3>
-
-                <div class="product-detail-category">
-                    ${escapeHtml(product.category)} ·
-                    ${escapeHtml(product.subcategory)}
-                </div>
-
-                <div class="product-specs">
-                    <div class="product-spec-row">
-                        <span>Kategori</span>
-                        <strong>${escapeHtml(product.category)}</strong>
-                    </div>
-                    <div class="product-spec-row">
-                        <span>Stil</span>
-                        <strong>${escapeHtml(product.subcategory)}</strong>
-                    </div>
-                    <div class="product-spec-row">
-                        <span>Stok durumu</span>
-                        <strong>Çok Yakında Stoklarda</strong>
-                    </div>
-                </div>
-
-                <button
-                    class="stock-button"
-                    type="button"
-                    data-detail-add-cart="${product.id}"
-                >
-                    🛒 Sepete Ekle
-                </button>
-            </div>
-        </div>
-
-        <div class="product-detail-reviews" style="margin-top:24px;">
-            <h4>Yapılan Değerlendirmeler</h4>
-            <div class="product-detail-reviews-list">
-                ${reviewsHtml}
-            </div>
-        </div>
-    `;
-
-    modal.classList.add("active");
-}
-
-function closeProductDetail(){
-    $("productDetailModal")?.classList.remove("active");
-}
-
 /* =========================================================
    PRODUCTS
    ========================================================= */
@@ -4086,7 +3667,6 @@ function renderProducts(list=products){
                 document.createElement("div");
 
             card.className="product-card";
-            card.dataset.productId=product.id;
 
             card.innerHTML=`
 
@@ -4102,7 +3682,6 @@ function renderProducts(list=products){
 
                 <img
                     class="product-image"
-                    data-product-id="${product.id}"
                     src="${escapeHtml(product.image)}"
                     alt="${escapeHtml(product.name)}"
                     onerror="this.src='resimler/urun1.jpg'"
@@ -4292,135 +3871,114 @@ function scrollToProducts(){
    REVIEWS
    ========================================================= */
 
-function addReview(productId){
+async function addReview(productId){
 
-    const input=
-        $("review-"+productId);
+    const input=$("review-"+productId);
+    const token=localStorage.getItem("veloraToken");
+
+    if(!token){
+        alert("Değerlendirme yapmak için önce giriş yapmalısınız.");
+        openAuth();
+        return;
+    }
 
     if(!input){
         return;
     }
 
     const text=input.value.trim();
-
-    const rating=
-        selectedStars[productId];
+    const rating=selectedStars[productId];
 
     if(!rating){
-
-        alert(
-            "Lütfen yıldız puanı seçin."
-        );
-
+        alert("Lütfen yıldız puanı seçin.");
         return;
     }
 
     if(!text){
-
-        alert(
-            "Lütfen yorumunuzu yazın."
-        );
-
+        alert("Lütfen yorumunuzu yazın.");
         return;
     }
 
-    const key=
-        "velora-reviews-"+productId;
-
-    let reviews=
-        safeJsonParse(
-            localStorage.getItem(key) || "[]",
-            []
+    try{
+        await apiRequest(
+            "/api/reviews",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":"Bearer "+token
+                },
+                body:JSON.stringify({
+                    productId:Number(productId),
+                    rating:Number(rating),
+                    text
+                })
+            }
         );
 
-    if(!Array.isArray(reviews)){
-        reviews=[];
+        input.value="";
+        selectedStars[productId]=0;
+
+        const stars=$("stars-"+productId);
+        if(stars){
+            stars.innerHTML=createStars(productId);
+        }
+
+        await loadReviews(productId);
+
+    }catch(error){
+        alert(error.message || "Yorum gönderilemedi.");
     }
-
-    reviews.push({
-        rating,
-        text,
-        date:new Date().toLocaleDateString("tr-TR")
-    });
-
-    localStorage.setItem(
-        key,
-        JSON.stringify(reviews)
-    );
-
-    input.value="";
-
-    selectedStars[productId]=0;
-
-    const stars=
-        $("stars-"+productId);
-
-    if(stars){
-        stars.innerHTML=
-            createStars(productId);
-    }
-
-    loadReviews(productId);
 }
 
-function loadReviews(productId){
+async function loadReviews(productId){
 
-    const container=
-        $("reviews-"+productId);
+    const container=$("reviews-"+productId);
 
     if(!container){
         return;
     }
 
-    const reviews=
-        safeJsonParse(
-            localStorage.getItem(
-                "velora-reviews-"+productId
-            ) || "[]",
-            []
+    try{
+        const data=await apiRequest(
+            "/api/reviews/"+encodeURIComponent(productId),
+            {cache:"no-store"}
         );
 
-    container.innerHTML="";
+        const reviews=Array.isArray(data.reviews)
+            ? data.reviews
+            : [];
 
-    if(!Array.isArray(reviews)){
-        return;
+        container.innerHTML="";
+
+        reviews.forEach(review=>{
+
+            let stars="";
+
+            for(let i=1;i<=5;i++){
+                stars+=i<=Number(review.rating) ? "★" : "☆";
+            }
+
+            const item=document.createElement("div");
+            item.className="review-item";
+
+            const date=review.created_at
+                ? new Date(review.created_at).toLocaleDateString("tr-TR")
+                : "";
+
+            item.innerHTML=`
+                <div class="review-stars">${stars}</div>
+                <strong>${escapeHtml(review.username || "Müşteri")}</strong>
+                <div>${escapeHtml(review.text)}</div>
+                <small>${escapeHtml(date)}</small>
+            `;
+
+            container.appendChild(item);
+        });
+
+    }catch(error){
+        console.warn("Değerlendirmeler yüklenemedi:",error.message);
     }
-
-    reviews.forEach(review=>{
-
-        let stars="";
-
-        for(let i=1;i<=5;i++){
-
-            stars+=
-                i<=Number(review.rating)
-                ?"★"
-                :"☆";
-        }
-
-        const item=
-            document.createElement("div");
-
-        item.className="review-item";
-
-        item.innerHTML=`
-
-            <div class="review-stars">
-                ${stars}
-            </div>
-
-            <div>
-                ${escapeHtml(review.text)}
-            </div>
-
-            <small>
-                ${escapeHtml(review.date)}
-            </small>
-
-        `;
-
-        container.appendChild(item);
-    });
 }
 
 
@@ -4714,64 +4272,6 @@ function closeFavorites(){
    ORDERS
    ========================================================= */
 
-async function refreshOrders(showLoading=false){
-
-    const token=
-        localStorage.getItem("veloraToken");
-
-    const container=$("ordersContainer");
-
-    if(!token || !container){
-        return;
-    }
-
-    if(showLoading){
-        container.innerHTML=`
-            <div class="favorites-empty">
-                Siparişler yükleniyor...
-            </div>
-        `;
-    }
-
-    try{
-
-        const data=
-            await apiRequest(
-                "/api/orders/my",
-                {
-                    headers:{
-                        "Authorization":
-                            "Bearer "+token
-                    }
-                }
-            );
-
-        renderOrders(
-            Array.isArray(data.orders)
-                ?data.orders
-                :[]
-        );
-
-    }catch(error){
-
-        if(showLoading){
-            container.innerHTML=`
-                <div class="favorites-empty">
-
-                    <strong>
-                        Siparişler alınamadı
-                    </strong>
-
-                    <p>
-                        ${escapeHtml(error.message)}
-                    </p>
-
-                </div>
-            `;
-        }
-    }
-}
-
 async function openOrders(){
 
     const token=
@@ -4797,21 +4297,45 @@ async function openOrders(){
 
     modal.classList.add("active");
 
-    await refreshOrders(true);
+    container.innerHTML=`
+        <div class="favorites-empty">
+            Siparişler yükleniyor...
+        </div>
+    `;
 
-    if(ordersRefreshTimer){
-        clearInterval(ordersRefreshTimer);
-    }
+    try{
 
-    ordersRefreshTimer=
-        setInterval(
-            ()=>{
-                if($("ordersModal")?.classList.contains("active")){
-                    refreshOrders(false);
+        const data=
+            await apiRequest(
+                "/api/orders/my",
+                {
+                    headers:{
+                        "Authorization":
+                            "Bearer "+token
+                    }
                 }
-            },
-            5000
+            );
+
+        renderOrders(
+            data.orders || []
         );
+
+    }catch(error){
+
+        container.innerHTML=`
+            <div class="favorites-empty">
+
+                <strong>
+                    Siparişler alınamadı
+                </strong>
+
+                <p>
+                    ${escapeHtml(error.message)}
+                </p>
+
+            </div>
+        `;
+    }
 }
 
 function closeOrders(){
@@ -4878,55 +4402,11 @@ function formatOrderDate(value){
 
 function getOrderStatus(order){
 
-    const raw=
-        order.status ??
-        order.order_status ??
-        order.orderStatus ??
-        "Yeni";
-
-    const value=
-        String(raw)
-            .trim()
-            .toLocaleLowerCase("tr-TR");
-
-    const statusMap={
-        "new":"Sipariş Alındı",
-        "pending":"Sipariş Alındı",
-        "created":"Sipariş Alındı",
-        "order received":"Sipariş Alındı",
-        "sipariş alındı":"Sipariş Alındı",
-        "yeni":"Sipariş Alındı",
-
-        "preparing":"Hazırlanıyor",
-        "processing":"Hazırlanıyor",
-        "preparing order":"Hazırlanıyor",
-        "hazırlanıyor":"Hazırlanıyor",
-        "hazirlaniyor":"Hazırlanıyor",
-        "hazırlanıyor":"Hazırlanıyor",
-
-        "shipped":"Kargoya Verildi",
-        "shipping":"Kargoya Verildi",
-        "in transit":"Kargoya Verildi",
-        "kargoda":"Kargoya Verildi",
-        "kargoya verildi":"Kargoya Verildi",
-        "kargoya_verildi":"Kargoya Verildi",
-        "out_for_delivery":"Dağıtımda",
-        "out for delivery":"Dağıtımda",
-        "dagitimda":"Dağıtımda",
-        "dağıtımda":"Dağıtımda",
-
-        "delivered":"Teslim Edildi",
-        "completed":"Teslim Edildi",
-        "teslim edildi":"Teslim Edildi",
-        "teslim_edildi":"Teslim Edildi",
-
-        "cancelled":"İptal",
-        "canceled":"İptal",
-        "cancel":"İptal",
-        "iptal":"İptal"
-    };
-
-    return statusMap[value] || raw || "Sipariş Alındı";
+    return (
+        order.status ||
+        order.order_status ||
+        "Yeni"
+    );
 }
 
 function getTrackingNumber(order){
@@ -4943,10 +4423,9 @@ function getTrackingNumber(order){
 function renderOrderProgress(status){
 
     const statuses=[
-        "Sipariş Alındı",
+        "Yeni",
         "Hazırlanıyor",
-        "Kargoya Verildi",
-        "Dağıtımda",
+        "Kargoda",
         "Teslim Edildi"
     ];
 
@@ -5619,55 +5098,11 @@ function initEvents(){
         }
     );
 
-    $("closeProductDetailButton")?.addEventListener(
-        "click",
-        closeProductDetail
-    );
-
-    $("productDetailModal")?.addEventListener(
-        "click",
-        event=>{
-            if(event.target.id==="productDetailModal"){
-                closeProductDetail();
-            }
-
-            const addCart=
-                event.target.closest(
-                    "[data-detail-add-cart]"
-                );
-
-            if(addCart){
-                addToCart(addCart.dataset.detailAddCart);
-                closeProductDetail();
-            }
-        }
-    );
-
     /* Dinamik ürün butonları */
 
     $("productContainer")?.addEventListener(
         "click",
         async event=>{
-
-            const clickedButton=
-                event.target.closest("button, textarea, input");
-
-            if(!clickedButton){
-                const card=
-                    event.target.closest(".product-card");
-
-                if(card){
-                    const image=card.querySelector("[data-product-id]");
-                    const productId=
-                        image?.dataset.productId ||
-                        card.dataset.productId;
-
-                    if(productId){
-                        openProductDetail(productId);
-                        return;
-                    }
-                }
-            }
 
             const favorite=
                 event.target.closest(
