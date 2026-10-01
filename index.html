@@ -2876,7 +2876,6 @@ async function forgotPassword(event){
    ========================================================= */
 
 async function resetPassword(event){
-
     event.preventDefault();
 
     const email=$("resetEmail")?.value.trim() || "";
@@ -2885,13 +2884,19 @@ async function resetPassword(event){
     const confirm=$("resetPasswordConfirm")?.value || "";
     const message=$("resetMessage");
 
-    if(password!==confirm){
+    if(!email || !code || !password || !confirm) {
+        if(message){
+            message.className="auth-message error-message";
+            message.textContent="Lütfen tüm alanları doldurun.";
+        }
+        return;
+    }
 
+    if(password!==confirm){
         if(message){
             message.className="auth-message error-message";
             message.textContent="Şifreler aynı olmalı.";
         }
-
         return;
     }
 
@@ -2901,7 +2906,6 @@ async function resetPassword(event){
     }
 
     try{
-
         const data=await apiRequest(
             "/api/auth/reset-password",
             {
@@ -2910,10 +2914,12 @@ async function resetPassword(event){
                     "Content-Type":"application/json"
                 },
                 body:JSON.stringify({
-                    email,
-                    code,
-                    password,
-                    passwordConfirm:confirm
+                    email: email,
+                    code: code,
+                    token: code,
+                    password: password,
+                    newPassword: password,
+                    passwordConfirm: confirm
                 })
             }
         );
@@ -2925,10 +2931,10 @@ async function resetPassword(event){
                 "Şifren başarıyla değiştirildi.";
         }
 
-        setTimeout(showLogin,900);
+        $("resetAuthForm")?.reset();
+        setTimeout(showLogin,1200);
 
     }catch(error){
-
         if(message){
             message.className="auth-message error-message";
             message.textContent=error.message;
