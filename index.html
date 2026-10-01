@@ -1208,26 +1208,6 @@ footer{
     border-color:#b99669;
 }
 
-
-.register-info-message{
-    margin:0 0 16px;
-    padding:12px 14px;
-    border:1px solid #dfcfb8;
-    border-radius:10px;
-    background:#fffaf3;
-    color:#6f5a42;
-    font-size:13px;
-    line-height:1.5;
-}
-.register-info-message strong{
-    display:block;
-    margin-bottom:4px;
-    color:#806344;
-}
-.register-info-message p{
-    margin:0;
-}
-
 @media(max-width:1000px){
 
     .header-center{
@@ -1417,6 +1397,157 @@ footer{
         font-size:12px;
     }
 }
+
+
+/* Yalnızca mobil kullanılabilirlik ve hesap uyarısı */
+.register-info-box{
+    margin:0 0 18px;
+    padding:14px 16px;
+    border:1px solid #d9c3a5;
+    background:#f8f0e4;
+    color:#6b5238;
+    border-radius:8px;
+    line-height:1.5;
+    font-size:13px;
+}
+
+.register-info-box strong{
+    display:block;
+    margin-bottom:5px;
+    color:#765636;
+    font-size:14px;
+}
+
+.register-info-box span{
+    display:block;
+}
+
+@media(max-width:700px){
+
+    .header-center{
+        gap:8px;
+    }
+
+    .header-center nav{
+        display:flex;
+        gap:7px;
+        flex-wrap:wrap;
+        align-items:center;
+    }
+
+    .search-box{
+        width:min(42vw,180px);
+    }
+
+    .menu-button,
+    .account-button,
+    .cart-button{
+        min-height:40px;
+        padding:8px 9px;
+        border-radius:7px;
+        white-space:nowrap;
+    }
+
+    .product-image{
+        height:230px;
+        max-height:230px;
+        object-fit:cover;
+    }
+
+    .product-card .stock-button,
+    .product-card .review-button{
+        width:100%;
+        min-height:42px;
+        margin-top:8px;
+    }
+
+    .review-input{
+        min-height:82px;
+    }
+
+    .cart-actions{
+        flex-direction:column;
+    }
+
+    .cart-actions button{
+        width:100%;
+        min-height:44px;
+    }
+
+    .order-progress{
+        gap:5px;
+    }
+
+    .progress-step{
+        font-size:11px;
+        min-width:0;
+        text-align:center;
+    }
+
+    .modal-box{
+        width:100%;
+        padding:20px 16px;
+        border-radius:10px;
+    }
+}
+
+@media(max-width:450px){
+
+    .header-center{
+        align-items:stretch;
+    }
+
+    nav{
+        width:100%;
+        justify-content:center;
+    }
+
+    nav a,
+    .dropbtn{
+        font-size:12px;
+    }
+
+    .search-box{
+        width:100%;
+    }
+
+    .product-image{
+        height:205px;
+        max-height:205px;
+    }
+
+    .featured-card img{
+        height:190px;
+    }
+
+    .category-card{
+        height:190px;
+    }
+
+    .menu-button,
+    .account-button,
+    .cart-button{
+        flex:1;
+        min-width:0;
+        font-size:12px;
+        padding:8px 6px;
+    }
+
+    .account-area{
+        gap:6px;
+    }
+
+    .order-progress{
+        overflow-x:auto;
+        padding-bottom:4px;
+    }
+
+    .progress-step{
+        flex:0 0 auto;
+        font-size:10px;
+    }
+}
+
 </style>
 </head>
 
@@ -2009,9 +2140,13 @@ type="button"
 
 <div id="registerMessage" class="auth-message"></div>
 
-<div class="register-info-message">
+<div class="register-info-box">
 <strong>Bilgilerinizi kontrol edin</strong>
-<p>Siparişinizin sorunsuz hazırlanıp size ulaşabilmesi için hesap oluştururken girdiğiniz bilgilerin doğru olduğundan emin olun.</p>
+<span>
+Siparişinizin sorunsuz hazırlanıp size ulaştırılabilmesi için
+hesap oluştururken girdiğiniz bilgilerin doğru olduğundan emin olun.
+Özellikle e-posta adresinizi kontrol etmeyi unutmayın.
+</span>
 </div>
 
 <form id="registerAuthForm">
@@ -4318,6 +4453,64 @@ function closeFavorites(){
    ORDERS
    ========================================================= */
 
+async function refreshOrders(showLoading=false){
+
+    const token=
+        localStorage.getItem("veloraToken");
+
+    const container=$("ordersContainer");
+
+    if(!token || !container){
+        return;
+    }
+
+    if(showLoading){
+        container.innerHTML=`
+            <div class="favorites-empty">
+                Siparişler yükleniyor...
+            </div>
+        `;
+    }
+
+    try{
+
+        const data=
+            await apiRequest(
+                "/api/orders/my",
+                {
+                    headers:{
+                        "Authorization":
+                            "Bearer "+token
+                    }
+                }
+            );
+
+        renderOrders(
+            Array.isArray(data.orders)
+                ?data.orders
+                :[]
+        );
+
+    }catch(error){
+
+        if(showLoading){
+            container.innerHTML=`
+                <div class="favorites-empty">
+
+                    <strong>
+                        Siparişler alınamadı
+                    </strong>
+
+                    <p>
+                        ${escapeHtml(error.message)}
+                    </p>
+
+                </div>
+            `;
+        }
+    }
+}
+
 async function openOrders(){
 
     const token=
@@ -4343,72 +4536,21 @@ async function openOrders(){
 
     modal.classList.add("active");
 
-    container.innerHTML=`
-        <div class="favorites-empty">
-            Siparişler yükleniyor...
-        </div>
-    `;
+    await refreshOrders(true);
 
-    try{
-
-        const data=
-            await apiRequest(
-                "/api/orders/my",
-                {
-                    headers:{
-                        "Authorization":
-                            "Bearer "+token
-                    }
-                }
-            );
-
-        renderOrders(
-            data.orders || []
-        );
-
-        if(ordersRefreshTimer){
-            clearInterval(ordersRefreshTimer);
-        }
-
-        ordersRefreshTimer=setInterval(async ()=>{
-            if(!$('ordersModal')?.classList.contains('active')){
-                clearInterval(ordersRefreshTimer);
-                ordersRefreshTimer=null;
-                return;
-            }
-
-            const freshToken=localStorage.getItem("veloraToken");
-            if(!freshToken){
-                return;
-            }
-
-            try{
-                const freshData=await apiRequest(
-                    "/api/orders/my",
-                    {headers:{"Authorization":"Bearer "+freshToken}}
-                );
-                renderOrders(freshData.orders || []);
-            }catch(error){
-                // Mevcut sipariş görünümünü koru; geçici ağ hatasında ekranı bozma.
-            }
-        },10000);
-
-    }catch(error){
-
-        container.innerHTML=`
-            <div class="favorites-empty">
-
-                <strong>
-                    Siparişler alınamadı
-                </strong>
-
-                <p>
-                    ${escapeHtml(error.message)}
-                </p>
-
-            </div>
-        `;
+    if(ordersRefreshTimer){
+        clearInterval(ordersRefreshTimer);
     }
+
+    ordersRefreshTimer=
+        setInterval(
+            ()=>{
+                if($("ordersModal")?.classList.contains("active")){
+                    refreshOrders(false);
+                }
+            },
+            5000
+        );
 }
 
 function closeOrders(){
@@ -4475,11 +4617,53 @@ function formatOrderDate(value){
 
 function getOrderStatus(order){
 
-    return (
-        order.status ||
-        order.order_status ||
-        "Yeni"
-    );
+    const raw=
+        order.status ??
+        order.order_status ??
+        order.orderStatus ??
+        "Yeni";
+
+    const value=
+        String(raw)
+            .trim()
+            .toLocaleLowerCase("tr-TR");
+
+    const statusMap={
+        "new":"Yeni",
+        "pending":"Yeni",
+        "created":"Yeni",
+        "order received":"Yeni",
+        "sipariş alındı":"Yeni",
+        "yeni":"Yeni",
+
+        "preparing":"Hazırlanıyor",
+        "processing":"Hazırlanıyor",
+        "preparing order":"Hazırlanıyor",
+        "hazırlanıyor":"Hazırlanıyor",
+        "hazirlaniyor":"Hazırlanıyor",
+        "hazırlanıyor":"Hazırlanıyor",
+
+        "shipped":"Kargoda",
+        "shipping":"Kargoda",
+        "in transit":"Kargoda",
+        "out_for_delivery":"Kargoda",
+        "out for delivery":"Kargoda",
+        "kargoda":"Kargoda",
+        "kargoya verildi":"Kargoda",
+        "kargoya_verildi":"Kargoda",
+
+        "delivered":"Teslim Edildi",
+        "completed":"Teslim Edildi",
+        "teslim edildi":"Teslim Edildi",
+        "teslim_edildi":"Teslim Edildi",
+
+        "cancelled":"İptal",
+        "canceled":"İptal",
+        "cancel":"İptal",
+        "iptal":"İptal"
+    };
+
+    return statusMap[value] || raw || "Yeni";
 }
 
 function getTrackingNumber(order){
