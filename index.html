@@ -1178,34 +1178,51 @@ footer{
 .order-progress{
     display:flex;
     justify-content:space-between;
-    gap:5px;
+    align-items:stretch;
+    gap:8px;
     margin:18px 0;
+    width:100%;
 }
 
 .progress-step{
     flex:1;
+    min-width:0;
     text-align:center;
     font-size:11px;
+    line-height:1.25;
     color:#b8a38a;
     position:relative;
+    padding:9px 5px;
+    border:1px solid #dfccb2;
+    border-radius:10px;
+    background:#fffaf3;
+    box-sizing:border-box;
 }
 
 .progress-dot{
-    width:14px;
-    height:14px;
+    width:13px;
+    height:13px;
     border-radius:50%;
     border:2px solid #cdb99c;
     background:#fffaf3;
-    margin:0 auto 6px;
+    margin:0 auto 5px;
+    box-sizing:border-box;
 }
 
 .progress-step.active{
     color:#806344;
+    border-color:#b99669;
+    background:#f7efe3;
+    font-weight:600;
 }
 
 .progress-step.active .progress-dot{
     background:#b99669;
     border-color:#b99669;
+}
+
+.progress-step.current{
+    box-shadow:0 0 0 2px rgba(185,150,105,.16);
 }
 
 
@@ -1371,6 +1388,29 @@ footer{
 
 .product-detail-review-list .review-item{
     margin:0;
+}
+
+@media(max-width:700px){
+    .order-progress{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:8px;
+        margin:14px 0;
+    }
+
+    .progress-step{
+        width:100%;
+        min-width:0;
+        font-size:11px;
+        padding:9px 4px;
+        border-radius:9px;
+    }
+
+    .progress-dot{
+        width:12px;
+        height:12px;
+        margin-bottom:4px;
+    }
 }
 
 @media(max-width:700px){
@@ -4904,10 +4944,33 @@ function formatOrderDate(value){
 
 function getOrderStatus(order){
 
-    return (
+    const rawStatus =
         order.status ||
         order.order_status ||
-        "Yeni"
+        "pending";
+
+    const statusMap = {
+        "pending": "Sipariş Alındı",
+        "preparing": "Hazırlanıyor",
+        "shipped": "Kargoya Verildi",
+        "out_for_delivery": "Dağıtımda",
+        "delivered": "Teslim Edildi",
+
+        "Yeni": "Sipariş Alındı",
+        "Sipariş Alındı": "Sipariş Alındı",
+        "Hazırlanıyor": "Hazırlanıyor",
+        "Kargoda": "Kargoya Verildi",
+        "Kargoya Verildi": "Kargoya Verildi",
+        "Dağıtımda": "Dağıtımda",
+        "Teslim Edildi": "Teslim Edildi",
+        "İptal": "İptal Edildi",
+        "cancelled": "İptal Edildi"
+    };
+
+    return (
+        statusMap[rawStatus] ||
+        rawStatus ||
+        "Sipariş Alındı"
     );
 }
 
@@ -4925,25 +4988,21 @@ function getTrackingNumber(order){
 function renderOrderProgress(status){
 
     const statuses=[
-        "Yeni",
+        "Sipariş Alındı",
         "Hazırlanıyor",
-        "Kargoda",
+        "Kargoya Verildi",
+        "Dağıtımda",
         "Teslim Edildi"
     ];
 
-    if(status==="İptal"){
+    if(status==="İptal Edildi"){
 
         return`
             <div class="order-progress">
-
-                <div class="progress-step active">
-
+                <div class="progress-step active current">
                     <div class="progress-dot"></div>
-
-                    İptal
-
+                    İptal Edildi
                 </div>
-
             </div>
         `;
     }
@@ -4956,7 +5015,7 @@ function renderOrderProgress(status){
     }
 
     return`
-        <div class="order-progress">
+        <div class="order-progress" aria-label="Sipariş durumu">
 
             ${statuses.map(
                 (item,index)=>`
@@ -4966,6 +5025,11 @@ function renderOrderProgress(status){
                     ${
                         index<=currentIndex
                         ?"active"
+                        :""
+                    }
+                    ${
+                        index===currentIndex
+                        ?"current"
                         :""
                     }
                 ">
