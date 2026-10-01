@@ -661,6 +661,85 @@ section{
     margin-bottom:5px;
 }
 
+
+.product-card{
+    position:relative;
+}
+.product-card .product-image,
+.product-card .product-name,
+.product-card .product-category{
+    cursor:pointer;
+}
+.product-detail-box{
+    max-width:760px;
+}
+.product-detail-content{
+    display:grid;
+    grid-template-columns:minmax(240px, 1fr) minmax(240px, 1fr);
+    gap:24px;
+}
+.product-detail-image{
+    width:100%;
+    max-height:420px;
+    object-fit:contain;
+    background:#f7efe3;
+    border:1px solid #dfccb2;
+}
+.product-detail-info h3{
+    color:#5d4631;
+    font-size:25px;
+    margin-bottom:8px;
+}
+.product-detail-category{
+    color:#a18058;
+    margin-bottom:18px;
+}
+.product-specs{
+    border-top:1px solid #eadbc8;
+    border-bottom:1px solid #eadbc8;
+    padding:14px 0;
+    margin-bottom:18px;
+}
+.product-spec-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:7px 0;
+    color:#60482f;
+}
+.product-spec-row span:first-child{
+    color:#96724c;
+}
+.product-detail-reviews h4{
+    color:#60482f;
+    margin-bottom:10px;
+}
+.product-detail-reviews-list{
+    max-height:260px;
+    overflow:auto;
+}
+.product-detail-review-empty{
+    color:#8a6a48;
+    background:#f7efe3;
+    padding:14px;
+}
+@media(max-width:700px){
+    .product-detail-box{
+        padding:18px;
+        max-height:92vh;
+    }
+    .product-detail-content{
+        grid-template-columns:1fr;
+        gap:16px;
+    }
+    .product-detail-image{
+        max-height:240px;
+    }
+    .product-detail-info h3{
+        font-size:21px;
+    }
+}
+
 #one-cikanlar{
     background:#efe3d2;
 }
@@ -2462,6 +2541,14 @@ type="button"
 </div>
 </div>
 
+
+<div class="modal" id="productDetailModal">
+    <div class="modal-box product-detail-box">
+        <button class="close-modal" id="closeProductDetailButton" type="button">×</button>
+        <div id="productDetailContent"></div>
+    </div>
+</div>
+
 <script>
 "use strict";
 
@@ -3795,6 +3882,107 @@ async function submitOrder(event){
 }
 
 
+
+function openProductDetail(productId){
+    const product=products.find(
+        item=>Number(item.id)===Number(productId)
+    );
+
+    const modal=$("productDetailModal");
+    const container=$("productDetailContent");
+
+    if(!product || !modal || !container){
+        return;
+    }
+
+    const reviews=safeJsonParse(
+        localStorage.getItem("velora-reviews-"+product.id) || "[]",
+        []
+    );
+
+    let reviewsHtml="";
+
+    if(Array.isArray(reviews) && reviews.length){
+        reviewsHtml=reviews.map(review=>{
+            let stars="";
+            for(let i=1;i<=5;i++){
+                stars+=i<=Number(review.rating)?"★":"☆";
+            }
+            return `
+                <div class="review-item">
+                    <div class="review-stars">${stars}</div>
+                    <div>${escapeHtml(review.text)}</div>
+                    <small>${escapeHtml(review.date)}</small>
+                </div>
+            `;
+        }).join("");
+    }else{
+        reviewsHtml=`
+            <div class="product-detail-review-empty">
+                Bu ürün için henüz değerlendirme yapılmamış.
+            </div>
+        `;
+    }
+
+    container.innerHTML=`
+        <div class="product-detail-content">
+            <div>
+                <img
+                    class="product-detail-image"
+                    src="${escapeHtml(product.image)}"
+                    alt="${escapeHtml(product.name)}"
+                    onerror="this.src='resimler/urun1.jpg'"
+                >
+            </div>
+
+            <div class="product-detail-info">
+                <h3>${escapeHtml(product.name)}</h3>
+
+                <div class="product-detail-category">
+                    ${escapeHtml(product.category)} ·
+                    ${escapeHtml(product.subcategory)}
+                </div>
+
+                <div class="product-specs">
+                    <div class="product-spec-row">
+                        <span>Kategori</span>
+                        <strong>${escapeHtml(product.category)}</strong>
+                    </div>
+                    <div class="product-spec-row">
+                        <span>Stil</span>
+                        <strong>${escapeHtml(product.subcategory)}</strong>
+                    </div>
+                    <div class="product-spec-row">
+                        <span>Stok durumu</span>
+                        <strong>Çok Yakında Stoklarda</strong>
+                    </div>
+                </div>
+
+                <button
+                    class="stock-button"
+                    type="button"
+                    data-detail-add-cart="${product.id}"
+                >
+                    🛒 Sepete Ekle
+                </button>
+            </div>
+        </div>
+
+        <div class="product-detail-reviews" style="margin-top:24px;">
+            <h4>Yapılan Değerlendirmeler</h4>
+            <div class="product-detail-reviews-list">
+                ${reviewsHtml}
+            </div>
+        </div>
+    `;
+
+    modal.classList.add("active");
+}
+
+function closeProductDetail(){
+    $("productDetailModal")?.classList.remove("active");
+}
+
 /* =========================================================
    PRODUCTS
    ========================================================= */
@@ -3898,6 +4086,7 @@ function renderProducts(list=products){
                 document.createElement("div");
 
             card.className="product-card";
+            card.dataset.productId=product.id;
 
             card.innerHTML=`
 
@@ -3913,6 +4102,7 @@ function renderProducts(list=products){
 
                 <img
                     class="product-image"
+                    data-product-id="${product.id}"
                     src="${escapeHtml(product.image)}"
                     alt="${escapeHtml(product.name)}"
                     onerror="this.src='resimler/urun1.jpg'"
@@ -5429,11 +5619,55 @@ function initEvents(){
         }
     );
 
+    $("closeProductDetailButton")?.addEventListener(
+        "click",
+        closeProductDetail
+    );
+
+    $("productDetailModal")?.addEventListener(
+        "click",
+        event=>{
+            if(event.target.id==="productDetailModal"){
+                closeProductDetail();
+            }
+
+            const addCart=
+                event.target.closest(
+                    "[data-detail-add-cart]"
+                );
+
+            if(addCart){
+                addToCart(addCart.dataset.detailAddCart);
+                closeProductDetail();
+            }
+        }
+    );
+
     /* Dinamik ürün butonları */
 
     $("productContainer")?.addEventListener(
         "click",
         async event=>{
+
+            const clickedButton=
+                event.target.closest("button, textarea, input");
+
+            if(!clickedButton){
+                const card=
+                    event.target.closest(".product-card");
+
+                if(card){
+                    const image=card.querySelector("[data-product-id]");
+                    const productId=
+                        image?.dataset.productId ||
+                        card.dataset.productId;
+
+                    if(productId){
+                        openProductDetail(productId);
+                        return;
+                    }
+                }
+            }
 
             const favorite=
                 event.target.closest(
