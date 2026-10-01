@@ -1208,6 +1208,26 @@ footer{
     border-color:#b99669;
 }
 
+
+.register-info-message{
+    margin:0 0 16px;
+    padding:12px 14px;
+    border:1px solid #dfcfb8;
+    border-radius:10px;
+    background:#fffaf3;
+    color:#6f5a42;
+    font-size:13px;
+    line-height:1.5;
+}
+.register-info-message strong{
+    display:block;
+    margin-bottom:4px;
+    color:#806344;
+}
+.register-info-message p{
+    margin:0;
+}
+
 @media(max-width:1000px){
 
     .header-center{
@@ -1456,7 +1476,7 @@ Koleksiyon
 <div class="dropdown">
 
 <button class="dropbtn" type="button">
-Kategoriler ▾
+Kategoriler
 </button>
 
 <div class="dropdown-content">
@@ -1988,6 +2008,11 @@ type="button"
 <div id="registerForm" class="auth-form">
 
 <div id="registerMessage" class="auth-message"></div>
+
+<div class="register-info-message">
+<strong>Bilgilerinizi kontrol edin</strong>
+<p>Siparişinizin sorunsuz hazırlanıp size ulaşabilmesi için hesap oluştururken girdiğiniz bilgilerin doğru olduğundan emin olun.</p>
+</div>
 
 <form id="registerAuthForm">
 
@@ -4340,6 +4365,33 @@ async function openOrders(){
         renderOrders(
             data.orders || []
         );
+
+        if(ordersRefreshTimer){
+            clearInterval(ordersRefreshTimer);
+        }
+
+        ordersRefreshTimer=setInterval(async ()=>{
+            if(!$('ordersModal')?.classList.contains('active')){
+                clearInterval(ordersRefreshTimer);
+                ordersRefreshTimer=null;
+                return;
+            }
+
+            const freshToken=localStorage.getItem("veloraToken");
+            if(!freshToken){
+                return;
+            }
+
+            try{
+                const freshData=await apiRequest(
+                    "/api/orders/my",
+                    {headers:{"Authorization":"Bearer "+freshToken}}
+                );
+                renderOrders(freshData.orders || []);
+            }catch(error){
+                // Mevcut sipariş görünümünü koru; geçici ağ hatasında ekranı bozma.
+            }
+        },10000);
 
     }catch(error){
 
