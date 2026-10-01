@@ -4895,12 +4895,32 @@ function formatOrderDate(value){
     );
 }
 
-function getOrderStatus(order){
+const CUSTOMER_ORDER_STATUS_LABELS = {
+    pending: "Sipariş Alındı",
+    preparing: "Hazırlanıyor",
+    shipped: "Kargoya Verildi",
+    out_for_delivery: "Dağıtımda",
+    delivered: "Teslim Edildi",
+    cancelled: "İptal Edildi",
+    Yeni: "Sipariş Alındı",
+    "Sipariş Alındı": "Sipariş Alındı",
+    "Hazırlanıyor": "Hazırlanıyor",
+    Kargoda: "Kargoya Verildi",
+    "Kargoya Verildi": "Kargoya Verildi",
+    Dağıtımda: "Dağıtımda",
+    "Teslim Edildi": "Teslim Edildi",
+    İptal: "İptal Edildi",
+    "İptal Edildi": "İptal Edildi"
+};
 
-    return (
-        order.status ||
-        order.order_status ||
-        "Yeni"
+function normalizeCustomerOrderStatus(status){
+    const value=String(status || "pending").trim();
+    return CUSTOMER_ORDER_STATUS_LABELS[value] || "Sipariş Alındı";
+}
+
+function getOrderStatus(order){
+    return normalizeCustomerOrderStatus(
+        order.status || order.order_status || "pending"
     );
 }
 
@@ -4918,13 +4938,16 @@ function getTrackingNumber(order){
 function renderOrderProgress(status){
 
     const statuses=[
-        "Yeni",
+        "Sipariş Alındı",
         "Hazırlanıyor",
-        "Kargoda",
+        "Kargoya Verildi",
+        "Dağıtımda",
         "Teslim Edildi"
     ];
 
-    if(status==="İptal"){
+    status=normalizeCustomerOrderStatus(status);
+
+    if(status==="İptal Edildi"){
 
         return`
             <div class="order-progress">
