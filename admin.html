@@ -411,6 +411,32 @@
       </div>
 
 
+
+      <!-- ÜRÜN DEĞERLENDİRMELERİ -->
+      <div class="section">
+
+        <h2>Ürün Değerlendirmeleri</h2>
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Ürün ID</th>
+              <th>Müşteri</th>
+              <th>Puan</th>
+              <th>Yorum</th>
+              <th>Tarih</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+
+          <tbody id="reviewsTable"></tbody>
+
+        </table>
+
+      </div>
+
       <!-- SİPARİŞLER -->
       <div class="section">
 
@@ -886,6 +912,8 @@
 
             await loadStats();
 
+            await loadReviews();
+
           } catch (error) {
 
             console.error(
@@ -942,7 +970,8 @@
       await Promise.all([
         loadStats(),
         loadUsers(),
-        loadOrders()
+        loadOrders(),
+        loadReviews()
       ]);
 
 
@@ -1126,6 +1155,91 @@
       }
     );
 
+  }
+
+
+  /*
+   * ÜRÜN DEĞERLENDİRMELERİ
+   */
+  async function loadReviews() {
+
+    const data = await apiRequest(
+      "/api/admin/reviews"
+    );
+
+    const reviews =
+      Array.isArray(data)
+        ? data
+        : (data.reviews || data.data || []);
+
+    const table =
+      document.getElementById("reviewsTable");
+
+    table.innerHTML = "";
+
+    if (!reviews.length) {
+      table.innerHTML = `
+        <tr>
+          <td colspan="7">
+            Henüz değerlendirme yok.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    reviews.forEach(function(review) {
+      const row = document.createElement("tr");
+      const date = review.created_at
+        ? new Date(review.created_at).toLocaleString("tr-TR")
+        : "";
+
+      const stars = "★".repeat(Number(review.rating) || 0) +
+        "☆".repeat(Math.max(0, 5 - (Number(review.rating) || 0)));
+
+      row.innerHTML = `
+        <td>${escapeHtml(review.id)}</td>
+        <td>${escapeHtml(review.product_id)}</td>
+        <td>${escapeHtml(review.username || "Müşteri")}</td>
+        <td>${escapeHtml(stars)}</td>
+        <td style="max-width:360px; white-space:normal;">${escapeHtml(review.text || "")}</td>
+        <td>${escapeHtml(date)}</td>
+        <td>
+          <button
+            class="danger"
+            onclick="deleteReview(${Number(review.id)})"
+          >
+            Sil
+          </button>
+        </td>
+      `;
+
+      table.appendChild(row);
+    });
+  }
+
+
+  async function deleteReview(id) {
+
+    if (!confirm("Bu değerlendirmeyi silmek istediğinize emin misiniz?")) {
+      return;
+    }
+
+    try {
+      await apiRequest(
+        "/api/admin/reviews/" + encodeURIComponent(id),
+        {
+          method: "DELETE"
+        }
+      );
+
+      showMessage("Değerlendirme silindi.");
+      await loadReviews();
+
+    } catch (error) {
+      console.error(error);
+      showMessage(error.message);
+    }
   }
 
 
