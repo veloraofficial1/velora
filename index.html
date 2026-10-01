@@ -1548,6 +1548,36 @@ footer{
     }
 }
 
+
+/* Mobil düzenleme: isim uzunluğunda taşmayı ve büyük görselleri önle */
+@media(max-width:600px){
+  header{gap:8px;padding:10px 12px;}
+  .logo{font-size:20px;white-space:nowrap;}
+  .header-center{min-width:0;flex:1;gap:6px;}
+  .account-button,.cart-button,.menu-button{max-width:100%;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .account-button{padding:8px 10px;font-size:12px;}
+  .account-button .account-name{display:inline-block;max-width:90px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;}
+  .cart-button,.menu-button{padding:8px 9px;font-size:12px;}
+  .product-image{height:220px!important;object-fit:cover;}
+  .featured-card img{height:190px!important;object-fit:cover;}
+  .category-card{height:170px!important;}
+  .category-overlay{font-size:17px;}
+  .product-info{padding:12px;}
+  .product-info h3{font-size:16px;line-height:1.25;}
+  .product-actions{gap:7px;}
+  .product-actions button{padding:9px 8px;font-size:12px;}
+  .modal-box{padding:18px;max-width:calc(100vw - 20px);}
+  .cart-actions{flex-direction:column;}
+  .cart-actions button{width:100%;}
+}
+@media(max-width:420px){
+  .logo{font-size:18px;}
+  .account-button{max-width:120px;}
+  .account-button .account-name{max-width:62px;}
+  .product-image{height:190px!important;}
+  .featured-card img{height:165px!important;}
+  .category-card{height:150px!important;}
+}
 </style>
 </head>
 
