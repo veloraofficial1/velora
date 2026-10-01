@@ -1437,6 +1437,48 @@ section{
     color:#6b5640;
 }
 
+/* YENİ EKLENEN İLETİŞİM CSS */
+.contact-info-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 45px;
+    flex-wrap: wrap;
+}
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #5d4631;
+    transition: transform 0.3s;
+    padding: 30px 20px;
+    background: #fffdf9;
+    border: 1px solid #dfccb2;
+    min-width: 260px;
+    border-radius: 4px;
+}
+.contact-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(90,65,40,.08);
+}
+.contact-icon {
+    font-size: 35px;
+    margin-bottom: 5px;
+}
+.contact-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #8b6943;
+    letter-spacing: 1px;
+}
+.contact-detail {
+    font-size: 15px;
+    color: #6b5640;
+}
+
 footer{
     background:#4d3b2a;
     color:#f5e9d8;
@@ -1605,6 +1647,16 @@ footer{
     .account-menu{
         right:0;
         width:250px;
+    }
+
+    /* İLETİŞİM MOBİL UYUM */
+    .contact-info-container {
+        gap: 15px;
+    }
+    .contact-item {
+        width: 100%;
+        min-width: unset;
+        padding: 20px 15px;
     }
 }
 
@@ -2006,6 +2058,7 @@ class="search-result-info"
 
 </section>
 
+<!-- İLETİŞİM BÖLÜMÜ GÜNCELLENDİ -->
 <section id="iletisim">
 
 <h2 class="section-title">
@@ -2013,10 +2066,28 @@ class="search-result-info"
 </h2>
 
 <div class="contact-text">
+<p>VELORA hakkında sorularınız, ürünlerimiz veya siparişleriniz için bizimle dilediğiniz zaman iletişime geçebilirsiniz.</p>
+</div>
 
-<p>
-VELORA hakkında sorularınız, ürünlerimiz veya siparişleriniz için bizimle iletişime geçebilirsiniz.
-</p>
+<div class="contact-info-container">
+    
+    <a href="https://wa.me/905322752807" target="_blank" class="contact-item">
+        <span class="contact-icon">📱</span>
+        <span class="contact-title">WhatsApp</span>
+        <span class="contact-detail">0532 275 28 07</span>
+    </a>
+    
+    <a href="https://instagram.com/veloraa.butik" target="_blank" class="contact-item">
+        <span class="contact-icon">📸</span>
+        <span class="contact-title">Instagram</span>
+        <span class="contact-detail">@veloraa.butik</span>
+    </a>
+    
+    <a href="mailto:veloraofficial6022@gmail.com" class="contact-item">
+        <span class="contact-icon">✉️</span>
+        <span class="contact-title">E-posta</span>
+        <span class="contact-detail">veloraofficial6022@gmail.com</span>
+    </a>
 
 </div>
 
@@ -2162,9 +2233,15 @@ type="button"
 
 </div>
 
+<!-- KAYIT FORMU VE UYARI -->
 <div id="registerForm" class="auth-form">
 
 <div id="registerMessage" class="auth-message"></div>
+
+<!-- YENİ EKLENEN KAYIT UYARISI -->
+<div style="background:#f7efe3; border:1px dashed #d9c5a9; padding:12px; margin-bottom:15px; text-align:center; font-size:13px; color:#6b5640; line-height:1.5;">
+    <strong>Önemli:</strong> Doğrulama kodu e-postanıza gönderilecektir. Lütfen bilgilerinizi eksiksiz ve doğru girdiğinizden emin olun.
+</div>
 
 <form id="registerAuthForm">
 
