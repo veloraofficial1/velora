@@ -2884,10 +2884,16 @@ async function resetPassword(event){
     const confirm=$("resetPasswordConfirm")?.value || "";
     const message=$("resetMessage");
 
-    if(!email || !code || !password || !confirm) {
+    let eksikler = [];
+    if(!email) eksikler.push("E-posta");
+    if(!code) eksikler.push("Kod");
+    if(!password) eksikler.push("Yeni Şifre");
+    if(!confirm) eksikler.push("Şifre Tekrar");
+
+    if(eksikler.length > 0) {
         if(message){
             message.className="auth-message error-message";
-            message.textContent="Lütfen tüm alanları doldurun.";
+            message.textContent="Sistem şu alanları boş görüyor: " + eksikler.join(", ");
         }
         return;
     }
@@ -2932,12 +2938,12 @@ async function resetPassword(event){
         }
 
         $("resetAuthForm")?.reset();
-        setTimeout(showLogin,1200);
+        setTimeout(showLogin,1500);
 
     }catch(error){
         if(message){
             message.className="auth-message error-message";
-            message.textContent=error.message;
+            message.textContent="Sunucu Hatası: " + error.message;
         }
     }
 }
