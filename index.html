@@ -1551,32 +1551,35 @@ footer{
 
 /* Mobil düzenleme: isim uzunluğunda taşmayı ve büyük görselleri önle */
 @media(max-width:600px){
-  header{gap:8px;padding:10px 12px;}
-  .logo{font-size:20px;white-space:nowrap;}
-  .header-center{min-width:0;flex:1;gap:6px;}
-  .account-button,.cart-button,.menu-button{max-width:100%;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .account-button{padding:8px 10px;font-size:12px;}
-  .account-button .account-name{display:inline-block;max-width:90px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;}
-  .cart-button,.menu-button{padding:8px 9px;font-size:12px;}
-  .product-image{height:220px!important;object-fit:cover;}
-  .featured-card img{height:190px!important;object-fit:cover;}
-  .category-card{height:170px!important;}
+  header{display:flex;align-items:center;gap:6px;padding:9px 10px;overflow:hidden;}
+  .logo{font-size:18px;white-space:nowrap;flex:0 0 auto;}
+  .header-center{min-width:0;flex:1;display:flex;align-items:center;gap:5px;overflow:hidden;}
+  .menu-wrapper{flex:0 0 auto;min-width:0;}
+  .menu-button{display:block!important;max-width:78px;min-width:0;padding:8px 7px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  nav,.search-box{display:none!important;}
+  .account-area{display:flex;align-items:center;gap:5px;flex:0 0 auto;min-width:0;}
+  .account-button,.cart-button{max-width:96px;min-width:0;padding:8px 7px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .account-button .account-name{display:inline-block;max-width:45px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;}
+  .product-image{height:205px!important;object-fit:contain!important;background:#f7f1e7;}
+  .featured-card img{height:175px!important;object-fit:contain!important;background:#f7f1e7;}
+  .category-card{height:165px!important;}
   .category-overlay{font-size:17px;}
-  .product-info{padding:12px;}
-  .product-info h3{font-size:16px;line-height:1.25;}
-  .product-actions{gap:7px;}
-  .product-actions button{padding:9px 8px;font-size:12px;}
+  .product-info{padding:11px;}
+  .product-info h3{font-size:15px;line-height:1.25;}
+  .product-actions{display:flex;gap:6px;}
+  .product-actions button{flex:1;min-width:0;padding:9px 6px;font-size:11px;}
   .modal-box{padding:18px;max-width:calc(100vw - 20px);}
   .cart-actions{flex-direction:column;}
   .cart-actions button{width:100%;}
 }
 @media(max-width:420px){
-  .logo{font-size:18px;}
-  .account-button{max-width:120px;}
-  .account-button .account-name{max-width:62px;}
-  .product-image{height:190px!important;}
-  .featured-card img{height:165px!important;}
-  .category-card{height:150px!important;}
+  .logo{font-size:17px;}
+  .menu-button{max-width:72px;font-size:10px;padding:8px 6px;}
+  .account-button,.cart-button{max-width:82px;font-size:10px;padding:8px 5px;}
+  .account-button .account-name{max-width:34px;}
+  .product-image{height:180px!important;object-fit:contain!important;}
+  .featured-card img{height:155px!important;object-fit:contain!important;}
+  .category-card{height:145px!important;}
 }
 </style>
 </head>
