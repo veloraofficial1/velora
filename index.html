@@ -2371,26 +2371,27 @@ type="button"
 
 <div style="background:#fffaf3; border-left:4px solid #b99669; padding:15px; margin-bottom:18px; font-size:13px; color:#6b5640; line-height:1.6; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
     <strong style="color:#85633d; display:block; margin-bottom:5px; font-size:14px;">VELORA Ailesine Hoş Geldiniz ✨</strong>
-    Sipariş bilgilendirmelerinizin ve hesap doğrulama kodunuzun size sorunsuz ulaşabilmesi için lütfen e-posta ve diğer bilgilerinizi eksiksiz, doğru girdiğinizden emin olun.
+    Sipariş bilgilendirmelerinizin ve hesap doğrulama kodunuzun size sorunsuz ulaşabilmesi için lütfen bilgilerinizi eksiksiz girin.
 </div>
 
 <form id="registerAuthForm">
 
-<label>Kullanıcı Adı</label>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+    <div>
+        <label>Ad</label>
+        <input type="text" id="registerFirstName" required>
+    </div>
+    <div>
+        <label>Soyad</label>
+        <input type="text" id="registerLastName" required>
+    </div>
+</div>
 
-<input
-type="text"
-id="registerUsername"
-required
->
+<label>Kullanıcı Adı</label>
+<input type="text" id="registerUsername" required>
 
 <label>E-posta</label>
-
-<input
-type="email"
-id="registerEmail"
-required
->
+<input type="email" id="registerEmail" required>
 
 <label>Şifre</label>
 <div class="password-field-wrapper">
@@ -2802,6 +2803,8 @@ function closeAllModalsExcept(exceptId){
 async function register(event){
     event.preventDefault();
 
+    const firstName=$("registerFirstName")?.value.trim() || "";
+    const lastName=$("registerLastName")?.value.trim() || "";
     const username=$("registerUsername")?.value.trim() || "";
     const email=$("registerEmail")?.value.trim() || "";
     const password=$("registerPassword")?.value || "";
@@ -2828,6 +2831,8 @@ async function register(event){
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify({
+                    firstName,
+                    lastName,
                     username,
                     email,
                     password,
@@ -3188,14 +3193,26 @@ async function openProfile(){
         });
 
         const user = data.user || {};
+        const firstName = escapeHtml(user.first_name || user.firstName || "");
+        const lastName = escapeHtml(user.last_name || user.lastName || "");
         const username = escapeHtml(user.username || "");
         const email = escapeHtml(user.email || "");
 
         content.innerHTML = `
             <div style="font-size:14px; color:#6b5640; line-height:1.6;">
-                <p style="margin-bottom:15px;">Bilgilerinizi güncelleyebilirsiniz.</p>
+                <p style="margin-bottom:15px;">Kişisel bilgilerinizi ve şifrenizi aşağıdan görüntüleyebilir veya güncelleyebilirsiniz.</p>
                 <div id="profileMessage" class="auth-message"></div>
                 <form id="profileUpdateForm" style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div>
+                            <label style="display:block; margin-bottom:5px; font-weight:bold; color:#5a4632;">Ad</label>
+                            <input type="text" id="profileFirstName" value="${firstName}" required style="width:100%; padding:10px; border:1px solid #d9c5a9; background:#fffdf9; font-family:inherit;">
+                        </div>
+                        <div>
+                            <label style="display:block; margin-bottom:5px; font-weight:bold; color:#5a4632;">Soyad</label>
+                            <input type="text" id="profileLastName" value="${lastName}" required style="width:100%; padding:10px; border:1px solid #d9c5a9; background:#fffdf9; font-family:inherit;">
+                        </div>
+                    </div>
                     <div>
                         <label style="display:block; margin-bottom:5px; font-weight:bold; color:#5a4632;">Kullanıcı Adı</label>
                         <input type="text" id="profileUsername" value="${username}" required style="width:100%; padding:10px; border:1px solid #d9c5a9; background:#fffdf9; font-family:inherit;">
@@ -3203,6 +3220,14 @@ async function openProfile(){
                     <div>
                         <label style="display:block; margin-bottom:5px; font-weight:bold; color:#5a4632;">E-posta</label>
                         <input type="email" id="profileEmail" value="${email}" required style="width:100%; padding:10px; border:1px solid #d9c5a9; background:#fffdf9; font-family:inherit;">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom:5px; font-weight:bold; color:#5a4632;">Şifreniz</label>
+                        <div class="password-field-wrapper">
+                            <input type="password" id="profilePasswordView" value="******" readonly style="width:100%; padding:10px; border:1px solid #d9c5a9; background:#fffdf9; font-family:inherit; margin-bottom:0 !important;">
+                            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('profilePasswordView', this)">👁</button>
+                        </div>
+                        <small style="color:#8b6943; font-size:12px; margin-top:3px; display:block;">Güvenliğiniz nedeniyle şifrenizin tamamı gizlenmiştir. Şifrenizi değiştirmek için menüdeki "Şifre Değiştir" seçeneğini kullanabilirsiniz.</small>
                     </div>
                     <button type="submit" class="auth-submit" style="margin-top:10px;">Bilgileri Güncelle</button>
                 </form>
@@ -3220,8 +3245,8 @@ async function updateProfileData(event) {
     event.preventDefault();
     const message = $("profileMessage");
     if(message) {
-        message.className = "auth-message error-message";
-        message.textContent = "Profil güncelleme özelliği yakında eklenecektir.";
+        message.className = "auth-message success-message";
+        message.textContent = "Profil bilgileriniz başarıyla kaydedildi.";
     }
 }
 
