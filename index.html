@@ -3082,7 +3082,6 @@ async function changePassword(event){
     const newPasswordConfirm=$("newPasswordConfirm")?.value || "";
     const message=$("changePasswordMessage");
 
-    // Boş alan kontrolü
     let eksikler = [];
     if(!currentPassword) eksikler.push("Mevcut Şifre");
     if(!newPassword) eksikler.push("Yeni Şifre");
