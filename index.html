@@ -1604,7 +1604,7 @@ footer{
 }
 
 /* =========================================================
-   RESPONSIVE (MOBİL VE TABLET ENTEGRASYONU)
+   RESPONSIVE (MOBİL VE TABLET İYİLEŞTİRMELERİ - FOTOĞRAF DÜZELTMESİ)
    ========================================================= */
 @media(max-width:1000px){
     .header-center{gap:10px;}
@@ -1713,12 +1713,32 @@ footer{
         gap:10px;
     }
 
-    .category-card { height:auto; aspect-ratio:1/1; background:#fffdf9; }
-    .category-card img { object-fit:contain !important; }
+    /* Mobilde fotoğrafların kesilmesini (yarım kalmasını) önleyen düzeltmeler */
+    .category-card { 
+        height: auto !important; 
+        aspect-ratio: 1 / 1; 
+        background: #fffdf9; 
+    }
+    .category-card img { 
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important; 
+    }
     
-    .product-image { height:auto !important; aspect-ratio:1/1; object-fit:contain !important; background:#fffdf9; }
+    .product-image { 
+        width: 100% !important;
+        height: 200px !important; 
+        object-fit: cover !important; 
+        background: #fffdf9; 
+    }
     
-    .featured-card img { height:auto !important; aspect-ratio:1/1; object-fit:contain !important; background:#fffdf9; }
+    .featured-card img { 
+        width: 100% !important;
+        height: auto !important; 
+        aspect-ratio: 1 / 1 !important; 
+        object-fit: cover !important; 
+        background: #fffdf9; 
+    }
 
     .category-overlay{
         font-size:17px;
@@ -1752,6 +1772,7 @@ footer{
 
     .product-detail-image{
         max-height:280px;
+        object-fit: contain !important;
     }
 
     .product-features{
@@ -1796,6 +1817,9 @@ footer{
     .product-grid, .featured-grid {
         grid-template-columns: repeat(2,1fr);
         gap: 8px;
+    }
+    .product-image {
+        height: 160px !important;
     }
     .menu-button, .account-button, .cart-button {
         padding: 6px 8px;
@@ -2231,7 +2255,7 @@ class="search-result-info"
     <img class="image-zoom-content" id="imageZoomImg" src="" alt="Büyük Görsel">
 </div>
 
-<!-- PROFİL / BİLGİLERİM MODALI -->
+<!-- PROFİL / BİLGİLERİM MODALI (Kapatma Butonu Düzeltildi) -->
 <div class="modal" id="profileModal">
     <div class="modal-box">
         <button class="close-modal" id="closeProfileButton" type="button">×</button>
@@ -4457,6 +4481,9 @@ function initEvents(){
     $("continueShoppingButton")?.addEventListener("click", closeCart);
     $("checkoutButton")?.addEventListener("click", openCheckout);
     $("closeProductDetailButton")?.addEventListener("click", ()=> $("productDetailModal")?.classList.remove("active"));
+    
+    // Profil Kapatma Butonları Düzeltildi
+    $("closeProfileButton")?.addEventListener("click", closeProfile);
 
     $("accountButton")?.addEventListener("click", event=>{
         event.stopPropagation();
