@@ -3009,16 +3009,10 @@ async function resetPassword(event){
     const confirm=$("resetPasswordConfirm")?.value || "";
     const message=$("resetMessage");
 
-    let eksikler = [];
-    if(!email) eksikler.push("E-posta");
-    if(!code) eksikler.push("Kod");
-    if(!password) eksikler.push("Yeni Şifre");
-    if(!confirm) eksikler.push("Şifre Tekrar");
-
-    if(eksikler.length > 0) {
+    if(!email || !code || !password || !confirm){
         if(message){
             message.className="auth-message error-message";
-            message.textContent="Sistem şu alanları boş görüyor: " + eksikler.join(", ");
+            message.textContent="Lütfen tüm alanları doldurun.";
         }
         return;
     }
@@ -3045,8 +3039,6 @@ async function resetPassword(event){
                 body:JSON.stringify({
                     email: email,
                     code: code,
-                    token: code,
-                    password: password,
                     newPassword: password,
                     passwordConfirm: confirm
                 })
@@ -3063,7 +3055,7 @@ async function resetPassword(event){
     }catch(error){
         if(message){
             message.className="auth-message error-message";
-            message.textContent="Sunucu Hatası: " + error.message;
+            message.textContent=error.message;
         }
     }
 }
@@ -3079,26 +3071,21 @@ async function changePassword(event){
 
     const currentPassword=$("currentPassword")?.value || "";
     const newPassword=$("newPassword")?.value || "";
-    const newPasswordConfirm=$("newPasswordConfirm")?.value || "";
+    const passwordConfirm=$("newPasswordConfirm")?.value || "";
     const message=$("changePasswordMessage");
 
-    let eksikler = [];
-    if(!currentPassword) eksikler.push("Mevcut Şifre");
-    if(!newPassword) eksikler.push("Yeni Şifre");
-    if(!newPasswordConfirm) eksikler.push("Yeni Şifre Tekrar");
-
-    if(eksikler.length > 0) {
+    if(!currentPassword || !newPassword || !passwordConfirm){
         if(message){
             message.className="auth-message error-message";
-            message.textContent="Lütfen tüm alanları doldurun: " + eksikler.join(", ");
+            message.textContent="Lütfen tüm alanları doldurun.";
         }
         return;
     }
 
-    if(newPassword!==newPasswordConfirm){
+    if(newPassword!==passwordConfirm){
         if(message){
             message.className="auth-message error-message";
-            message.textContent="Yeni şifreler aynı olmalı.";
+            message.textContent="Yeni şifreler eşleşmiyor.";
         }
         return;
     }
@@ -3120,7 +3107,7 @@ async function changePassword(event){
                 body:JSON.stringify({
                     currentPassword,
                     newPassword,
-                    newPasswordConfirm
+                    passwordConfirm
                 })
             }
         );
@@ -3206,7 +3193,7 @@ async function openProfile(){
 
         content.innerHTML = `
             <div style="font-size:14px; color:#6b5640; line-height:1.6;">
-                <p style="margin-bottom:15px;">Bilgilerinizi güncelleyebilir veya şifrenizi değiştirebilirsiniz. Değişiklikleri kaydetmek için mevcut şifrenizi girmeniz gerekmektedir.</p>
+                <p style="margin-bottom:15px;">Bilgilerinizi güncelleyebilirsiniz.</p>
                 <div id="profileMessage" class="auth-message"></div>
                 <form id="profileUpdateForm" style="display:flex; flex-direction:column; gap:12px;">
                     <div>
@@ -3216,18 +3203,6 @@ async function openProfile(){
                     <div>
                         <label style="display:block; margin-bottom:5px; font-weight:bold; color:#5a4632;">E-posta</label>
                         <input type="email" id="profileEmail" value="${email}" required style="width:100%; padding:10px; border:1px solid #d9c5a9; background:#fffdf9; font-family:inherit;">
-                    </div>
-                    <div>
-                        <label style="display:block; margin-bottom:5px; font-weight:bold; color:#5a4632;">Şifre (Gizli)</label>
-                        <input type="password" value="••••••••" disabled style="width:100%; padding:10px; border:1px solid #d9c5a9; background:#eee3d3; color:#806344; font-family:inherit; cursor:not-allowed;">
-                        <small style="color:#8b6943; font-size:12px; margin-top:3px; display:block;">Şifrenizi değiştirmek için menüdeki "Şifre Değiştir" seçeneğini kullanabilirsiniz.</small>
-                    </div>
-                    <div style="margin-top:5px; border-top:1px dashed #dfccb2; padding-top:12px;">
-                        <label style="display:block; margin-bottom:5px; font-weight:bold; color:#a05243;">Mevcut Şifreniz (İşlemi Onaylamak İçin Şarttır)</label>
-                        <div class="password-field-wrapper">
-                            <input type="password" id="profileConfirmPassword" placeholder="Değişiklikleri kaydetmek için şifrenizi girin..." required style="margin-bottom:0 !important;">
-                            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('profileConfirmPassword', this)">👁</button>
-                        </div>
                     </div>
                     <button type="submit" class="auth-submit" style="margin-top:10px;">Bilgileri Güncelle</button>
                 </form>
@@ -3243,63 +3218,10 @@ async function openProfile(){
 
 async function updateProfileData(event) {
     event.preventDefault();
-    const token = localStorage.getItem("veloraToken");
-    if(!token) return;
-
-    const newUsername = $("profileUsername")?.value.trim() || "";
-    const newEmail = $("profileEmail")?.value.trim() || "";
-    const currentPassword = $("profileConfirmPassword")?.value || "";
     const message = $("profileMessage");
-
-    if(!currentPassword) {
-        if(message) {
-            message.className = "auth-message error-message";
-            message.textContent = "Değişiklikleri onaylamak için mevcut şifrenizi girmelisiniz.";
-        }
-        return;
-    }
-
     if(message) {
-        message.className = "auth-message success-message";
-        message.textContent = "Bilgiler güncelleniyor...";
-    }
-
-    try {
-        const data = await apiRequest("/api/auth/change-password", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer "+token
-            },
-            body: JSON.stringify({
-                currentPassword: currentPassword,
-                newPassword: currentPassword, 
-                newPasswordConfirm: currentPassword,
-                username: newUsername,
-                email: newEmail
-            })
-        });
-
-        if(message) {
-            message.className = "auth-message success-message";
-            message.textContent = "Bilgileriniz başarıyla güncellendi!";
-        }
-
-        const user = safeJsonParse(localStorage.getItem("veloraUser") || "{}", {});
-        user.username = newUsername;
-        user.email = newEmail;
-        localStorage.setItem("veloraUser", JSON.stringify(user));
-        updateAccountUI();
-
-        setTimeout(() => {
-            $("profileModal")?.classList.remove("active");
-        }, 1200);
-
-    } catch(error) {
-        if(message) {
-            message.className = "auth-message error-message";
-            message.textContent = error.message || "Güncelleme başarısız oldu. Şifrenizi kontrol edin.";
-        }
+        message.className = "auth-message error-message";
+        message.textContent = "Profil güncelleme özelliği yakında eklenecektir.";
     }
 }
 
