@@ -2255,7 +2255,7 @@ class="search-result-info"
     <img class="image-zoom-content" id="imageZoomImg" src="" alt="Büyük Görsel">
 </div>
 
-<!-- PROFİL / BİLGİLERİM MODALI (Kapatma Butonu Düzeltildi) -->
+<!-- PROFİL / BİLGİLERİM MODALI -->
 <div class="modal" id="profileModal">
     <div class="modal-box">
         <button class="close-modal" id="closeProfileButton" type="button">×</button>
@@ -2395,7 +2395,7 @@ type="button"
 
 <div style="background:#fffaf3; border-left:4px solid #b99669; padding:15px; margin-bottom:18px; font-size:13px; color:#6b5640; line-height:1.6; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
     <strong style="color:#85633d; display:block; margin-bottom:5px; font-size:14px;">VELORA Ailesine Hoş Geldiniz ✨</strong>
-    Lütfen adınızı, soyadınızı ve diğer bilgilerinizi eksiksiz girin.
+    Zarif koleksiyonumuzdan haberdar olmak, siparişlerinizi takip etmek ve size özel ayrıcalıklardan yararlanabilmek için lütfen bilgilerinizi eksiksiz, güncel ve doğru bir şekilde giriniz.
 </div>
 
 <form id="registerAuthForm">
@@ -4482,7 +4482,6 @@ function initEvents(){
     $("checkoutButton")?.addEventListener("click", openCheckout);
     $("closeProductDetailButton")?.addEventListener("click", ()=> $("productDetailModal")?.classList.remove("active"));
     
-    // Profil Kapatma Butonları Düzeltildi
     $("closeProfileButton")?.addEventListener("click", closeProfile);
 
     $("accountButton")?.addEventListener("click", event=>{
