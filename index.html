@@ -305,15 +305,15 @@ nav a:hover,
     line-height: 1;
 }
 
-/* HERO SLIDER (Görsellerin çok yakın olmasını önlemek için contain ve center ayarı) */
+/* HERO SLIDER (Ekranı tam kaplayan, dengeli ve estetik görünüm) */
 .hero-slider{
     position:relative;
     width:100%;
     height:calc(100vh - 90px);
-    min-height:520px;
-    max-height:760px;
+    min-height:500px;
+    max-height:720px;
     overflow:hidden;
-    background:#eee3d3;
+    background:#2b2118;
     touch-action:pan-y;
 }
 
@@ -335,9 +335,8 @@ nav a:hover,
 .hero-slide img{
     width:100%;
     height:100%;
-    object-fit: contain !important; /* Görsellerin yakınlaşmasını ve kesilmesini engeller, uzak gösterir */
-    object-position: center;
-    background: #eee3d3;
+    object-fit: cover; /* Ekranı tam kaplar, boşluk bırakmaz */
+    object-position: center center;
     display:block;
 }
 
@@ -346,9 +345,9 @@ nav a:hover,
     inset:0;
     background:linear-gradient(
         90deg,
-        rgba(35,25,15,.58),
-        rgba(35,25,15,.25) 45%,
-        rgba(35,25,15,.05)
+        rgba(35,25,15,.65),
+        rgba(35,25,15,.3) 50%,
+        rgba(35,25,15,.1)
     );
 }
 
@@ -1672,8 +1671,8 @@ footer{
     }
 
     .hero-slider{
-        height:55vh;
-        min-height:350px;
+        height:60vh;
+        min-height:380px;
     }
 
     .hero-overlay{
