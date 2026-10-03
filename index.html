@@ -305,7 +305,7 @@ nav a:hover,
     line-height: 1;
 }
 
-/* HERO SLIDER (Fotoğrafların kesilmeden tam oturması sağlandı) */
+/* HERO SLIDER (Çerçeveyi tam dolduran, boşluk bırakmayan yapı) */
 .hero-slider{
     position:relative;
     width:100%;
@@ -335,10 +335,9 @@ nav a:hover,
 .hero-slide img{
     width:100%;
     height:100%;
-    object-fit: contain; /* Fotoğrafların hiçbir yeri kesilmeden ekrana tam oturmasını sağlar */
+    object-fit: cover; /* Çerçeveyi boşluk kalmadan tamamen doldurur */
     object-position: center center;
     display:block;
-    background: #2b2118; /* Boşluk kalırsa arka planla uyumlu durur */
 }
 
 .hero-overlay{
