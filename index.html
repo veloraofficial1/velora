@@ -272,7 +272,6 @@ nav a:hover,
     margin-left:3px;
 }
 
-/* ŞİFRE GÖSTER / GİZLE İKONLU ALAN KAPSAYICISI */
 .password-field-wrapper {
     position: relative;
     width: 100%;
@@ -305,7 +304,7 @@ nav a:hover,
     line-height: 1;
 }
 
-/* HERO SLIDER (Fotoğrafların asla kesilmemesini, tam oturmasını sağlayan profesyonel ayar) */
+/* HERO SLIDER (HİÇBİR BOŞLUK KALMAMASI İÇİN GÜNCELLENDİ) */
 .hero-slider{
     position:relative;
     width:100%;
@@ -313,7 +312,7 @@ nav a:hover,
     min-height:500px;
     max-height:720px;
     overflow:hidden;
-    background:#f7f1e7;
+    background:#2b2118;
     touch-action:pan-y;
 }
 
@@ -335,10 +334,9 @@ nav a:hover,
 .hero-slide img{
     width:100%;
     height:100%;
-    object-fit: contain; /* Fotoğrafların hiçbir yeri kırpılmaz, tamamı ekrana sığar */
-    object-position: center center;
+    object-fit: cover; /* Sağda, solda, altta ve üstte sıfır boşluk bırakır */
+    object-position: center; /* Tam merkeze odaklar */
     display:block;
-    background: #f7f1e7; /* Sitenin arka plan rengiyle aynı ton, boşluklar asla sırıtmaz */
 }
 
 .hero-overlay{
@@ -730,7 +728,7 @@ section{
     line-height:1;
 }
 
-/* PAYTR ÖDEME MODALI KUSURSUZ MOBİL & DESKTOP KAYDIRMA ÇÖZÜMÜ */
+/* PAYTR ÖDEME MODALI */
 #paytrModal {
     background-color: rgba(0, 0, 0, 0.85);
     z-index: 99999;
@@ -1671,9 +1669,10 @@ footer{
         font-size:12px;
     }
 
+    /* TELEFONDA AŞIRI KESİLMEYİ ÖNLEMEK İÇİN BOYU KISALTILDI */
     .hero-slider{
-        height:60vh;
-        min-height:380px;
+        height:50vh; 
+        min-height:350px;
     }
 
     .hero-overlay{
