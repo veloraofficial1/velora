@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -211,11 +210,6 @@
       display: none;
     }
 
-    .loading {
-      opacity: 0.65;
-      pointer-events: none;
-    }
-
     @media (max-width: 800px) {
       .stats {
         grid-template-columns: repeat(2, 1fr);
@@ -398,7 +392,7 @@
               <th>ID</th>
               <th>Kullanıcı Adı</th>
               <th>E-posta</th>
-              <th>Kayıt Tarihi</th>
+              <th>Kayıt Tarihi & Saati</th>
               <th>İşlem</th>
             </tr>
 
@@ -466,620 +460,230 @@
 
 
 <script>
-
   /*
    * VELORA BACKEND
    */
-  const API_URL =
-    "https://velora-backend-1-aft5.onrender.com";
+  const API_URL = "https://velora-backend-1-aft5.onrender.com";
 
-
-  /*
-   * ADMİN OTOMATİK YENİLEME
-   */
   let adminRefreshTimer = null;
-
   let adminRequestRunning = false;
 
-
-  /*
-   * SİPARİŞ DURUMLARI
-   *
-   * Backend'e gönderilecek değerler:
-   *
-   * pending
-   * preparing
-   * shipped
-   * out_for_delivery
-   * delivered
-   * cancelled
-   */
   const ORDER_STATUS_LABELS = {
-
     pending: "Sipariş Alındı",
-
     preparing: "Hazırlanıyor",
-
     shipped: "Kargoya Verildi",
-
     out_for_delivery: "Dağıtımda",
-
     delivered: "Teslim Edildi",
-
     cancelled: "İptal Edildi"
-
   };
 
-
-  /*
-   * ESKİ DURUM DEĞERLERİ
-   */
   const LEGACY_STATUS_MAP = {
-
     "Yeni": "pending",
-
     "Sipariş Alındı": "pending",
-
     "Hazırlanıyor": "preparing",
-
     "Kargoda": "shipped",
-
     "Kargoya Verildi": "shipped",
-
     "Dağıtımda": "out_for_delivery",
-
     "Teslim Edildi": "delivered",
-
     "İptal": "cancelled",
-
     "İptal Edildi": "cancelled"
-
   };
 
-
-  /*
-   * DURUMU NORMALLEŞTİR
-   */
   function normalizeOrderStatus(status) {
-
-    const clean =
-      String(status || "")
-        .trim();
-
-    if (
-      Object.prototype.hasOwnProperty.call(
-        ORDER_STATUS_LABELS,
-        clean
-      )
-    ) {
+    const clean = String(status || "").trim();
+    if (Object.prototype.hasOwnProperty.call(ORDER_STATUS_LABELS, clean)) {
       return clean;
     }
-
-    if (
-      Object.prototype.hasOwnProperty.call(
-        LEGACY_STATUS_MAP,
-        clean
-      )
-    ) {
+    if (Object.prototype.hasOwnProperty.call(LEGACY_STATUS_MAP, clean)) {
       return LEGACY_STATUS_MAP[clean];
     }
-
     return "pending";
-
   }
 
+  const loginPage = document.getElementById("loginPage");
+  const adminPage = document.getElementById("adminPage");
+  const loginForm = document.getElementById("loginForm");
+  const loginError = document.getElementById("loginError");
 
-  /*
-   * ELEMENTLER
-   */
-  const loginPage =
-    document.getElementById("loginPage");
-
-  const adminPage =
-    document.getElementById("adminPage");
-
-  const loginForm =
-    document.getElementById("loginForm");
-
-  const loginError =
-    document.getElementById("loginError");
-
-
-  /*
-   * HTML GÜVENLİĞİ
-   */
   function escapeHtml(value) {
-
-    if (
-      value === null ||
-      value === undefined
-    ) {
+    if (value === null || value === undefined) {
       return "";
     }
-
     return String(value)
       .replaceAll("&", "&amp;")
       .replaceAll("<", "&lt;")
       .replaceAll(">", "&gt;")
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
-
   }
 
+  function formatDate(dateValue) {
+    if (!dateValue) return "-";
+    const d = new Date(dateValue);
+    if (isNaN(d.getTime())) return escapeHtml(String(dateValue));
+    return d.toLocaleString("tr-TR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+  }
 
-  /*
-   * GENEL MESAJ
-   */
   function showMessage(message) {
-
-    const box =
-      document.getElementById(
-        "globalMessage"
-      );
-
-    box.textContent =
-      message;
-
-    box.style.display =
-      "block";
-
-
-    setTimeout(
-      () => {
-        box.style.display =
-          "none";
-      },
-      4000
-    );
-
+    const box = document.getElementById("globalMessage");
+    box.textContent = message;
+    box.style.display = "block";
+    setTimeout(() => {
+      box.style.display = "none";
+    }, 4000);
   }
 
-
-  /*
-   * API İSTEĞİ
-   */
-  async function apiRequest(
-    endpoint,
-    options = {}
-  ) {
-
-    const token =
-      localStorage.getItem(
-        "veloraAdminToken"
-      );
-
-
+  async function apiRequest(endpoint, options = {}) {
+    const token = localStorage.getItem("veloraAdminToken");
     const headers = {
-
-      "Content-Type":
-        "application/json",
-
+      "Content-Type": "application/json",
       ...(options.headers || {})
-
     };
 
-
     if (token) {
-
-      headers.Authorization =
-        "Bearer " + token;
-
+      headers.Authorization = "Bearer " + token;
     }
 
+    const response = await fetch(API_URL + endpoint, {
+      ...options,
+      headers,
+      cache: "no-store"
+    });
 
-    const response =
-      await fetch(
-        API_URL + endpoint,
-        {
-          ...options,
-          headers,
-          cache: "no-store"
-        }
-      );
-
-
-    const text =
-      await response.text();
-
-
+    const text = await response.text();
     let data;
 
-
     try {
-
-      data =
-        text
-          ? JSON.parse(text)
-          : {};
-
+      data = text ? JSON.parse(text) : {};
     } catch (error) {
-
-      console.error(
-        "Sunucudan JSON yerine gelen cevap:",
-        text
-      );
-
-      throw new Error(
-        "Sunucu JSON yerine HTML/metin döndürdü. API adresini kontrol et."
-      );
-
+      console.error("Sunucudan JSON yerine gelen cevap:", text);
+      throw new Error("Sunucu JSON yerine HTML/metin döndürdü. API adresini kontrol et.");
     }
-
 
     if (!response.ok) {
-
-      if (
-        response.status === 401 ||
-        response.status === 403
-      ) {
-
-        localStorage.removeItem(
-          "veloraAdminToken"
-        );
-
+      if (response.status === 401 || response.status === 403) {
+        localStorage.removeItem("veloraAdminToken");
       }
-
-
-      throw new Error(
-        data.message ||
-        data.error ||
-        "API isteği başarısız."
-      );
-
+      throw new Error(data.message || data.error || "API isteği başarısız.");
     }
-
 
     return data;
-
   }
 
-
-  /*
-   * ADMİN GİRİŞ
-   */
-  loginForm.addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-      loginError.style.display =
-        "none";
-
-
-      const username =
-        document
-          .getElementById(
-            "adminUsername"
-          )
-          .value
-          .trim();
-
-
-      const password =
-        document
-          .getElementById(
-            "adminPassword"
-          )
-          .value;
-
-
-      try {
-
-        const data =
-          await apiRequest(
-            "/api/admin/login",
-            {
-              method: "POST",
-
-              body:
-                JSON.stringify({
-                  username,
-                  password
-                })
-
-            }
-          );
-
-
-        if (!data.token) {
-
-          throw new Error(
-            "Sunucu token göndermedi."
-          );
-
-        }
-
-
-        localStorage.setItem(
-          "veloraAdminToken",
-          data.token
-        );
-
-
-        showAdminPanel();
-
-
-      } catch (error) {
-
-        console.error(error);
-
-        loginError.textContent =
-          error.message;
-
-        loginError.style.display =
-          "block";
-
-      }
-
-    }
-  );
-
-
-  /*
-   * PANELİ GÖSTER
-   */
-  function showAdminPanel() {
-
-    loginPage.classList.add(
-      "hidden"
-    );
-
-    adminPage.classList.remove(
-      "hidden"
-    );
-
-
-    loadAll();
-
-    startAdminAutoRefresh();
-
-  }
-
-
-  /*
-   * ÇIKIŞ
-   */
-  function logout() {
-
-    stopAdminAutoRefresh();
-
-
-    localStorage.removeItem(
-      "veloraAdminToken"
-    );
-
-
-    adminPage.classList.add(
-      "hidden"
-    );
-
-    loginPage.classList.remove(
-      "hidden"
-    );
-
-
-    loginForm.reset();
-
-  }
-
-
-  /*
-   * ADMİN OTOMATİK YENİLEMEYİ BAŞLAT
-   *
-   * 5 saniyede bir siparişleri kontrol eder.
-   */
-  function startAdminAutoRefresh() {
-
-    stopAdminAutoRefresh();
-
-
-    adminRefreshTimer =
-      setInterval(
-        async function() {
-
-          const token =
-            localStorage.getItem(
-              "veloraAdminToken"
-            );
-
-
-          if (!token) {
-
-            stopAdminAutoRefresh();
-
-            return;
-
-          }
-
-
-          if (
-            adminRequestRunning
-          ) {
-            return;
-          }
-
-
-          try {
-
-            await loadOrders();
-
-            await loadStats();
-
-            await loadReviews();
-
-          } catch (error) {
-
-            console.error(
-              "Otomatik yenileme hatası:",
-              error
-            );
-
-          }
-
-        },
-        5000
-      );
-
-  }
-
-
-  /*
-   * ADMİN OTOMATİK YENİLEMEYİ DURDUR
-   */
-  function stopAdminAutoRefresh() {
-
-    if (
-      adminRefreshTimer
-    ) {
-
-      clearInterval(
-        adminRefreshTimer
-      );
-
-      adminRefreshTimer =
-        null;
-
-    }
-
-  }
-
-
-  /*
-   * TÜM VERİLERİ YÜKLE
-   */
-  async function loadAll() {
-
-    if (adminRequestRunning) {
-      return;
-    }
-
-
-    adminRequestRunning =
-      true;
-
+  loginForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    loginError.style.display = "none";
+
+    const username = document.getElementById("adminUsername").value.trim();
+    const password = document.getElementById("adminPassword").value;
 
     try {
+      const data = await apiRequest("/api/admin/login", {
+        method: "POST",
+        body: JSON.stringify({ username, password })
+      });
 
+      if (!data.token) {
+        throw new Error("Sunucu token göndermedi.");
+      }
+
+      localStorage.setItem("veloraAdminToken", data.token);
+      showAdminPanel();
+
+    } catch (error) {
+      console.error(error);
+      loginError.textContent = error.message;
+      loginError.style.display = "block";
+    }
+  });
+
+  function showAdminPanel() {
+    loginPage.classList.add("hidden");
+    adminPage.classList.remove("hidden");
+    loadAll();
+    startAdminAutoRefresh();
+  }
+
+  function logout() {
+    stopAdminAutoRefresh();
+    localStorage.removeItem("veloraAdminToken");
+    adminPage.classList.add("hidden");
+    loginPage.classList.remove("hidden");
+    loginForm.reset();
+  }
+
+  function startAdminAutoRefresh() {
+    stopAdminAutoRefresh();
+    adminRefreshTimer = setInterval(async function() {
+      const token = localStorage.getItem("veloraAdminToken");
+      if (!token) {
+        stopAdminAutoRefresh();
+        return;
+      }
+      if (adminRequestRunning) return;
+
+      try {
+        await loadOrders();
+        await loadStats();
+        await loadReviews();
+      } catch (error) {
+        console.error("Otomatik yenileme hatası:", error);
+      }
+    }, 5000);
+  }
+
+  function stopAdminAutoRefresh() {
+    if (adminRefreshTimer) {
+      clearInterval(adminRefreshTimer);
+      adminRefreshTimer = null;
+    }
+  }
+
+  async function loadAll() {
+    if (adminRequestRunning) return;
+    adminRequestRunning = true;
+
+    try {
       await Promise.all([
         loadStats(),
         loadUsers(),
         loadOrders(),
         loadReviews()
       ]);
-
-
     } catch (error) {
-
       console.error(error);
-
-      showMessage(
-        error.message
-      );
-
-
+      showMessage(error.message);
     } finally {
-
-      adminRequestRunning =
-        false;
-
+      adminRequestRunning = false;
     }
-
   }
 
-
-  /*
-   * İSTATİSTİKLER
-   */
   async function loadStats() {
+    const data = await apiRequest("/api/admin/stats");
+    const stats = data.stats || data;
 
-    const data =
-      await apiRequest(
-        "/api/admin/stats"
-      );
+    document.getElementById("userCount").textContent = stats.userCount ?? stats.users ?? 0;
+    document.getElementById("orderCount").textContent = stats.orderCount ?? stats.orders ?? 0;
+    document.getElementById("newOrderCount").textContent = stats.newOrderCount ?? stats.newOrders ?? 0;
 
-
-    const stats =
-      data.stats || data;
-
-
-    document.getElementById(
-      "userCount"
-    ).textContent =
-      stats.userCount ??
-      stats.users ??
-      0;
-
-
-    document.getElementById(
-      "orderCount"
-    ).textContent =
-      stats.orderCount ??
-      stats.orders ??
-      0;
-
-
-    document.getElementById(
-      "newOrderCount"
-    ).textContent =
-      stats.newOrderCount ??
-      stats.newOrders ??
-      0;
-
-
-    const total =
-      Number(
-        stats.totalAmount ??
-        stats.total ??
-        0
-      );
-
-
-    document.getElementById(
-      "totalAmount"
-    ).textContent =
-      total.toLocaleString(
-        "tr-TR"
-      ) + " TL";
-
+    const total = Number(stats.totalAmount ?? stats.total ?? 0);
+    document.getElementById("totalAmount").textContent = total.toLocaleString("tr-TR") + " TL";
   }
 
-
-  /*
-   * KULLANICILAR
-   */
   async function loadUsers() {
+    const data = await apiRequest("/api/admin/users");
+    const users = Array.isArray(data) ? data : (data.users || data.data || []);
+    const table = document.getElementById("usersTable");
 
-    const data =
-      await apiRequest(
-        "/api/admin/users"
-      );
+    table.innerHTML = "";
 
-
-    const users =
-      Array.isArray(data)
-        ? data
-        : (
-            data.users ||
-            data.data ||
-            []
-          );
-
-
-    const table =
-      document.getElementById(
-        "usersTable"
-      );
-
-
-    table.innerHTML =
-      "";
-
-
-    if (
-      users.length === 0
-    ) {
-
+    if (users.length === 0) {
       table.innerHTML = `
         <tr>
           <td colspan="5">
@@ -1087,74 +691,27 @@
           </td>
         </tr>
       `;
-
       return;
-
     }
 
+    users.forEach(function(user) {
+      const row = document.createElement("tr");
+      const formattedDate = formatDate(user.created_at || user.createdAt);
 
-    users.forEach(
-      function(user) {
+      row.innerHTML = `
+        <td>${escapeHtml(user.id)}</td>
+        <td>${escapeHtml(user.username)}</td>
+        <td>${escapeHtml(user.email)}</td>
+        <td>${escapeHtml(formattedDate)}</td>
+        <td>
+          <button class="danger" onclick="deleteUser(${Number(user.id)})">Sil</button>
+        </td>
+      `;
 
-        const row =
-          document.createElement(
-            "tr"
-          );
-
-
-        row.innerHTML = `
-
-          <td>
-            ${escapeHtml(user.id)}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              user.username
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              user.email
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              user.created_at ||
-              user.createdAt ||
-              ""
-            )}
-          </td>
-
-          <td>
-
-            <button
-              class="danger"
-              onclick="deleteUser(${Number(user.id)})"
-            >
-              Sil
-            </button>
-
-          </td>
-
-        `;
-
-
-        table.appendChild(
-          row
-        );
-
-      }
-    );
-
+      table.appendChild(row);
+    });
   }
 
-
-  /*
-   * ÜRÜN DEĞERLENDİRMELERİ
-   */
   async function loadReviews() {
     const table = document.getElementById("reviewsTable");
     if (!table) return;
@@ -1177,14 +734,32 @@
         }
         const username = review.username || review.users?.username || "Müşteri";
         const email = review.email || review.users?.email || "";
-        const date = review.created_at ? new Date(review.created_at).toLocaleString("tr-TR") : "-";
+        const date = formatDate(review.created_at);
+
+        let rawComment = review.comment || review.text || "";
+        let commentDisplay = rawComment;
+        let reviewImgUrl = "";
+
+        if (rawComment.includes("|||IMAGE|||")) {
+          const parts = rawComment.split("|||IMAGE|||");
+          commentDisplay = parts[0] || "Fotoğraflı Değerlendirme";
+          reviewImgUrl = parts[1];
+        } else if (rawComment.startsWith("data:image/") || rawComment.length > 100) {
+          commentDisplay = "📷 Fotoğraflı Yorum";
+          if (rawComment.startsWith("data:image/")) {
+            reviewImgUrl = rawComment;
+          }
+        }
 
         row.innerHTML = `
           <td>${escapeHtml(review.id)}</td>
           <td>${escapeHtml(review.product_id)}</td>
           <td>${escapeHtml(username)}<br><small>${escapeHtml(email)}</small></td>
           <td style="color:#b3864e;font-size:18px;white-space:nowrap;">${stars}</td>
-          <td>${escapeHtml(review.comment)}</td>
+          <td>
+            <div>${escapeHtml(commentDisplay)}</div>
+            ${reviewImgUrl ? `<div style="margin-top:5px;"><a href="${reviewImgUrl}" target="_blank"><img src="${reviewImgUrl}" alt="Yorum Fotoğrafı" style="width:50px; height:50px; object-fit:cover; border-radius:4px; border:1px solid #d8cbb8;"></a></div>` : ""}
+          </td>
           <td>${escapeHtml(date)}</td>
           <td>
             <button class="danger" onclick="deleteReview('${escapeHtml(review.id)}')">Sil</button>
@@ -1201,7 +776,7 @@
   async function deleteReview(id) {
     if (!confirm("Bu yorumu silmek istediğine emin misin?")) return;
     try {
-      await apiRequest("/api/admin/reviews/" + encodeURIComponent(id), { method:"DELETE" });
+      await apiRequest("/api/admin/reviews/" + encodeURIComponent(id), { method: "DELETE" });
       showMessage("Yorum silindi.");
       await loadReviews();
     } catch (error) {
@@ -1210,41 +785,14 @@
     }
   }
 
-  /*
-   * SİPARİŞLER
-   */
   async function loadOrders() {
+    const data = await apiRequest("/api/admin/orders");
+    const orders = Array.isArray(data) ? data : (data.orders || data.data || []);
+    const table = document.getElementById("ordersTable");
 
-    const data =
-      await apiRequest(
-        "/api/admin/orders"
-      );
+    table.innerHTML = "";
 
-
-    const orders =
-      Array.isArray(data)
-        ? data
-        : (
-            data.orders ||
-            data.data ||
-            []
-          );
-
-
-    const table =
-      document.getElementById(
-        "ordersTable"
-      );
-
-
-    table.innerHTML =
-      "";
-
-
-    if (
-      orders.length === 0
-    ) {
-
+    if (orders.length === 0) {
       table.innerHTML = `
         <tr>
           <td colspan="9">
@@ -1252,571 +800,153 @@
           </td>
         </tr>
       `;
-
       return;
-
     }
 
+    orders.forEach(function(order) {
+      let itemsText = "";
 
-    orders.forEach(
-      function(order) {
+      try {
+        const items = typeof order.items_json === "string"
+          ? JSON.parse(order.items_json)
+          : (order.items || []);
 
-        let itemsText =
-          "";
-
-
-        try {
-
-          const items =
-            typeof order.items_json === "string"
-
-              ? JSON.parse(
-                  order.items_json
-                )
-
-              : (
-                  order.items ||
-                  []
-                );
-
-
-          if (
-            Array.isArray(items)
-          ) {
-
-            itemsText =
-              items
-                .map(
-                  item =>
-                    `${escapeHtml(
-                      item.name ||
-                      item.title ||
-                      "Ürün"
-                    )} x${
-                      item.quantity ||
-                      1
-                    }`
-                )
-                .join("<br>");
-
-
-          } else {
-
-            itemsText =
-              escapeHtml(
-                JSON.stringify(
-                  items
-                )
-              );
-
-          }
-
-
-        } catch {
-
-          itemsText =
-            escapeHtml(
-              order.items_json ||
-              ""
-            );
-
+        if (Array.isArray(items)) {
+          itemsText = items
+            .map(item => `${escapeHtml(item.name || item.title || "Ürün")} x${item.quantity || 1}`)
+            .join("<br>");
+        } else {
+          itemsText = escapeHtml(JSON.stringify(items));
         }
-
-
-        /*
-         * BACKEND'DEN GELEN DURUMU
-         * KODA ÇEVİR
-         */
-        const status =
-          normalizeOrderStatus(
-            order.status
-          );
-
-
-        /*
-         * ADRES
-         *
-         * Backend artık "address"
-         * alanını kullanıyor.
-         *
-         * Eski alanlar da destekleniyor.
-         */
-        const address =
-          order.address ||
-          order.customer_address ||
-          order.customerAddress ||
-          order.delivery_address ||
-          "";
-
-
-        const row =
-          document.createElement(
-            "tr"
-          );
-
-
-        row.innerHTML = `
-
-          <td>
-            ${escapeHtml(
-              order.id
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              order.customer_name ||
-              order.customerName ||
-              ""
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              order.customer_phone ||
-              order.customerPhone ||
-              ""
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              address
-            )}
-          </td>
-
-          <td>
-            ${itemsText}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              order.total || 0
-            )} TL
-          </td>
-
-          <td>
-
-            <select
-              class="status"
-              data-order-id="${escapeHtml(order.id)}"
-              onchange="changeOrderStatus(
-                this.dataset.orderId,
-                this.value,
-                this
-              )"
-            >
-
-              ${statusOption(
-                "pending",
-                status
-              )}
-
-              ${statusOption(
-                "preparing",
-                status
-              )}
-
-              ${statusOption(
-                "shipped",
-                status
-              )}
-
-              ${statusOption(
-                "out_for_delivery",
-                status
-              )}
-
-              ${statusOption(
-                "delivered",
-                status
-              )}
-
-              ${statusOption(
-                "cancelled",
-                status
-              )}
-
-            </select>
-
-          </td>
-
-          <td>
-            ${escapeHtml(
-              order.created_at ||
-              order.createdAt ||
-              ""
-            )}
-          </td>
-
-          <td>
-
-            <button
-              class="danger"
-              onclick="deleteOrder('${escapeHtml(order.id)}')"
-            >
-              Sil
-            </button>
-
-          </td>
-
-        `;
-
-
-        table.appendChild(
-          row
-        );
-
+      } catch {
+        itemsText = escapeHtml(order.items_json || "");
       }
-    );
 
+      const status = normalizeOrderStatus(order.status);
+      const address = order.address || order.customer_address || order.customerAddress || order.delivery_address || "";
+      const formattedOrderDate = formatDate(order.created_at || order.createdAt);
+
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${escapeHtml(order.id)}</td>
+        <td>${escapeHtml(order.customer_name || order.customerName || "")}</td>
+        <td>${escapeHtml(order.customer_phone || order.customerPhone || "")}</td>
+        <td>${escapeHtml(address)}</td>
+        <td>${itemsText}</td>
+        <td>${escapeHtml(order.total || 0)} TL</td>
+        <td>
+          <select
+            class="status"
+            data-order-id="${escapeHtml(order.id)}"
+            onchange="changeOrderStatus(this.dataset.orderId, this.value, this)"
+          >
+            ${statusOption("pending", status)}
+            ${statusOption("preparing", status)}
+            ${statusOption("shipped", status)}
+            ${statusOption("out_for_delivery", status)}
+            ${statusOption("delivered", status)}
+            ${statusOption("cancelled", status)}
+          </select>
+        </td>
+        <td>${escapeHtml(formattedOrderDate)}</td>
+        <td>
+          <button class="danger" onclick="deleteOrder('${escapeHtml(order.id)}')">Sil</button>
+        </td>
+      `;
+
+      table.appendChild(row);
+    });
   }
 
-
-  /*
-   * STATUS OPTION
-   */
-  function statusOption(
-    value,
-    current
-  ) {
-
-    const label =
-      ORDER_STATUS_LABELS[
-        value
-      ] || value;
-
-
+  function statusOption(value, current) {
+    const label = ORDER_STATUS_LABELS[value] || value;
     return `
-      <option
-        value="${escapeHtml(value)}"
-        ${value === current
-          ? "selected"
-          : ""}
-      >
+      <option value="${escapeHtml(value)}" ${value === current ? "selected" : ""}>
         ${escapeHtml(label)}
       </option>
     `;
-
   }
 
-
-  /*
-   * SİPARİŞ DURUMU DEĞİŞTİR
-   */
-  async function changeOrderStatus(
-    id,
-    status,
-    selectElement
-  ) {
-
-    const previousStatus =
-      selectElement.dataset.previousStatus ||
-      normalizeOrderStatus(
-        selectElement.value
-      );
-
-
-    /*
-     * Seçilen yeni değeri sakla
-     */
-    selectElement.dataset.previousStatus =
-      status;
-
-
-    /*
-     * Kullanıcının tekrar tekrar
-     * tıklamasını engelle
-     */
-    selectElement.disabled =
-      true;
-
+  async function changeOrderStatus(id, status, selectElement) {
+    const previousStatus = selectElement.dataset.previousStatus || normalizeOrderStatus(selectElement.value);
+    selectElement.dataset.previousStatus = status;
+    selectElement.disabled = true;
 
     try {
+      await apiRequest("/api/admin/orders/" + encodeURIComponent(id) + "/status", {
+        method: "PATCH",
+        body: JSON.stringify({ status })
+      });
 
-      console.log(
-        "Sipariş durumu güncelleniyor:",
-        {
-          id,
-          status
-        }
-      );
-
-
-      const data =
-        await apiRequest(
-          "/api/admin/orders/" +
-          encodeURIComponent(id) +
-          "/status",
-          {
-            method: "PATCH",
-
-            body:
-              JSON.stringify({
-                status
-              })
-          }
-        );
-
-
-      console.log(
-        "Sipariş durumu güncellendi:",
-        data
-      );
-
-
-      showMessage(
-        "Sipariş durumu güncellendi: " +
-        (
-          ORDER_STATUS_LABELS[
-            status
-          ] || status
-        )
-      );
-
-
-      /*
-       * Backend'deki gerçek durumu
-       * tekrar çek
-       */
+      showMessage("Sipariş durumu güncellendi: " + (ORDER_STATUS_LABELS[status] || status));
       await loadOrders();
-
       await loadStats();
 
-
     } catch (error) {
-
-      console.error(
-        "SİPARİŞ DURUMU GÜNCELLEME HATASI:",
-        error
-      );
-
-
-      showMessage(
-        "Sipariş durumu güncellenemedi: " +
-        error.message
-      );
-
-
-      /*
-       * Güncelleme başarısızsa
-       * eski duruma dön
-       */
-      if (
-        selectElement &&
-        previousStatus
-      ) {
-
-        selectElement.value =
-          previousStatus;
-
+      console.error("SİPARİŞ DURUMU GÜNCELLEME HATASI:", error);
+      showMessage("Sipariş durumu güncellenemedi: " + error.message);
+      if (selectElement && previousStatus) {
+        selectElement.value = previousStatus;
       }
-
-
     } finally {
-
-      if (
-        selectElement
-      ) {
-
-        selectElement.disabled =
-          false;
-
+      if (selectElement) {
+        selectElement.disabled = false;
       }
-
     }
-
   }
 
-
-  /*
-   * SQLITE → SUPABASE TAŞIMA
-   */
   async function migrateToSupabase() {
-
-    const confirmed =
-      confirm(
-        "SQLite verilerini Supabase'e aktarmak istediğine emin misin?"
-      );
-
-
-    if (!confirmed) {
-      return;
-    }
-
+    const confirmed = confirm("SQLite verilerini Supabase'e aktarmak istediğine emin misin?");
+    if (!confirmed) return;
 
     try {
+      showMessage("Veriler Supabase'e aktarılıyor...");
+      const data = await apiRequest("/api/admin/migrate-to-supabase", { method: "POST" });
 
-      showMessage(
-        "Veriler Supabase'e aktarılıyor..."
-      );
-
-
-      const data =
-        await apiRequest(
-          "/api/admin/migrate-to-supabase",
-          {
-            method: "POST"
-          }
-        );
-
-
-      console.log(
-        "SUPABASE TAŞIMA SONUCU:",
-        data
-      );
-
-
-      showMessage(
-        `Taşıma tamamlandı: ${
-          data.users || 0
-        } kullanıcı, ${
-          data.orders || 0
-        } sipariş.`
-      );
-
-
+      showMessage(`Taşıma tamamlandı: ${data.users || 0} kullanıcı, ${data.orders || 0} sipariş.`);
       await loadAll();
-
-
     } catch (error) {
-
-      console.error(
-        "SUPABASE TAŞIMA HATASI:",
-        error
-      );
-
-
-      showMessage(
-        "Taşıma başarısız: " +
-        error.message
-      );
-
+      console.error("SUPABASE TAŞIMA HATASI:", error);
+      showMessage("Taşıma başarısız: " + error.message);
     }
-
   }
 
-
-  /*
-   * KULLANICI SİL
-   */
   async function deleteUser(id) {
-
-    const confirmDelete =
-      confirm(
-        "Bu kullanıcıyı silmek istediğine emin misin?"
-      );
-
-
-    if (!confirmDelete) {
-      return;
-    }
-
+    const confirmDelete = confirm("Bu kullanıcıyı silmek istediğine emin misin?");
+    if (!confirmDelete) return;
 
     try {
-
-      await apiRequest(
-        "/api/admin/users/" +
-        encodeURIComponent(id),
-        {
-          method: "DELETE"
-        }
-      );
-
-
-      showMessage(
-        "Kullanıcı silindi."
-      );
-
-
+      await apiRequest("/api/admin/users/" + encodeURIComponent(id), { method: "DELETE" });
+      showMessage("Kullanıcı silindi.");
       await loadAll();
-
-
     } catch (error) {
-
       console.error(error);
-
-      showMessage(
-        error.message
-      );
-
+      showMessage(error.message);
     }
-
   }
 
-
-  /*
-   * SİPARİŞ SİL
-   */
   async function deleteOrder(id) {
-
-    const confirmDelete =
-      confirm(
-        "Bu siparişi silmek istediğine emin misin?"
-      );
-
-
-    if (!confirmDelete) {
-      return;
-    }
-
+    const confirmDelete = confirm("Bu siparişi silmek istediğine emin misin?");
+    if (!confirmDelete) return;
 
     try {
-
-      await apiRequest(
-        "/api/admin/orders/" +
-        encodeURIComponent(id),
-        {
-          method: "DELETE"
-        }
-      );
-
-
-      showMessage(
-        "Sipariş silindi."
-      );
-
-
+      await apiRequest("/api/admin/orders/" + encodeURIComponent(id), { method: "DELETE" });
+      showMessage("Sipariş silindi.");
       await loadAll();
-
-
     } catch (error) {
-
       console.error(error);
-
-      showMessage(
-        error.message
-      );
-
+      showMessage(error.message);
     }
-
   }
 
-
-  /*
-   * SAYFA AÇILDIĞINDA
-   */
-  window.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-      const token =
-        localStorage.getItem(
-          "veloraAdminToken"
-        );
-
-
-      if (token) {
-
-        showAdminPanel();
-
-      }
-
+  window.addEventListener("DOMContentLoaded", function() {
+    const token = localStorage.getItem("veloraAdminToken");
+    if (token) {
+      showAdminPanel();
     }
-  );
-
+  });
 </script>
 
 </body>
 </html>
-```
