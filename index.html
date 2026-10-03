@@ -305,7 +305,7 @@ nav a:hover,
     line-height: 1;
 }
 
-/* HERO SLIDER */
+/* HERO SLIDER (Görsellerin çok yakın olmasını önlemek için contain ve center ayarı) */
 .hero-slider{
     position:relative;
     width:100%;
@@ -335,8 +335,9 @@ nav a:hover,
 .hero-slide img{
     width:100%;
     height:100%;
-    object-fit:cover;
-    object-position:center;
+    object-fit: contain !important; /* Görsellerin yakınlaşmasını ve kesilmesini engeller, uzak gösterir */
+    object-position: center;
+    background: #eee3d3;
     display:block;
 }
 
@@ -500,7 +501,7 @@ section{
     letter-spacing:3px;
 }
 
-/* ÜRÜNLER LİSTE (MOBİL DÜZELTME DAHİL) */
+/* ÜRÜNLER LİSTE */
 #urunler{
     background:#fbf7f0;
 }
@@ -1671,8 +1672,8 @@ footer{
     }
 
     .hero-slider{
-        height:60vh;
-        min-height:400px;
+        height:55vh;
+        min-height:350px;
     }
 
     .hero-overlay{
@@ -1698,13 +1699,13 @@ footer{
     }
 
     .hero-content h1{
-        font-size:30px;
-        margin-bottom:12px;
+        font-size:28px;
+        margin-bottom:10px;
     }
 
     .hero-content p{
         font-size:13px;
-        margin-bottom:18px;
+        margin-bottom:15px;
     }
 
     .hero-arrow{
