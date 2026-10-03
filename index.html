@@ -671,7 +671,7 @@ section{
 }
 
 /* =========================================================
-   MODAL GENEL VE MOBİL UYUMLULUK
+   MODAL GENEL VE MOBİL UYUMLULUK (PAYTR İÇİN GÜNCELLENDİ)
    ========================================================= */
 .modal{
     display:none;
@@ -727,6 +727,38 @@ section{
     cursor:pointer;
     z-index:10;
     line-height:1;
+}
+
+/* PAYTR ÖDEME MODALI KUSURSUZ MOBİL & DESKTOP KAYDIRMA ÇÖZÜMÜ */
+#paytrModal {
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 99999;
+}
+#paytrModal .modal-box {
+    position: relative;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+#paytrIframeContainer {
+    flex: 1;
+    width: 100%;
+    height: calc(100vh - 60px);
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+#paytr-iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 700px;
+    border: none;
 }
 
 /* FOTOĞRAF BÜYÜTME (LIGHTBOX) MODALI */
@@ -2263,12 +2295,14 @@ class="search-result-info"
     </div>
 </div>
 
-<!-- PAYTR ÖDEME MODALI -->
+<!-- PAYTR ÖDEME MODALI (KUSURSUZ KAYDIRMA DESTEKLİ) -->
 <div class="modal" id="paytrModal">
-    <div class="modal-box large" style="max-width: 900px; height: 80vh;">
-        <button class="close-modal" id="closePaytrButton" type="button">×</button>
-        <h2>Güvenli Kartla Ödeme</h2>
-        <div id="paytrIframeContainer" style="width: 100%; height: calc(100% - 60px);">
+    <div class="modal-box large">
+        <div class="modal-header" style="padding: 12px 20px; background: #111; color: #fff; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: bold; letter-spacing: 1px;">VELORA - Güvenli Kartla Ödeme</span>
+            <button class="close-modal" id="closePaytrButton" type="button" style="position:static; background:#ff4d4d; color:white; border:none; padding:6px 14px; border-radius:4px; font-size:14px; cursor:pointer;">Kapat X</button>
+        </div>
+        <div id="paytrIframeContainer">
             <!-- PayTR iFrame buraya dinamik yüklenecek -->
         </div>
     </div>
@@ -2796,7 +2830,8 @@ function closeAllModalsExcept(exceptId){
         "ordersModal",
         "productDetailModal",
         "profileModal",
-        "paytrModal"
+        "paytrModal",
+        "imageZoomModal"
     ].forEach(id=>{
         if(id!==exceptId) $(id)?.classList.remove("active");
     });
@@ -3580,11 +3615,10 @@ async function submitOrder(event){
             subcategory:product.subcategory,
             image:product.image,
             quantity:Number(item.quantity),
-            price: 500 // Varsayılan ürün fiyatı (veya ürün yapınıza göre güncelleyebilirsiniz)
+            price: 500
         };
     });
 
-    // Toplam tutar hesaplama (her ürün başına 500 TL)
     const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
     if(message){
@@ -3644,7 +3678,7 @@ function openPaytrModal(paytrToken){
     if(!modal || !container) return;
 
     container.innerHTML = `
-        <iframe src="https://www.paytr.com/odeme/guvenli/${paytrToken}" id="paytr-iframe" style="width: 100%; height: 100%; border: none;" frameborder="0" scrolling="no"></iframe>
+        <iframe src="https://www.paytr.com/odeme/guvenli/${paytrToken}" id="paytr-iframe" frameborder="0" scrolling="yes"></iframe>
     `;
 
     modal.classList.add("active");
@@ -4510,6 +4544,7 @@ function initEvents(){
     
     $("closeProfileButton")?.addEventListener("click", closeProfile);
     $("closePaytrButton")?.addEventListener("click", closePaytrModal);
+    $("imageZoomClose")?.addEventListener("click", ()=> $("imageZoomModal")?.classList.remove("active"));
 
     $("accountButton")?.addEventListener("click", event=>{
         event.stopPropagation();
