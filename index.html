@@ -1790,13 +1790,13 @@ footer {
     }
 
     .hero-slider{
-        height:80vh; 
-        min-height:500px;
+        height: 50vh; 
+        min-height: 350px;
     }
     
     .hero-slide img {
         object-fit: cover;
-        object-position: center top;
+        object-position: center 15%; 
     }
 
     .hero-overlay{
@@ -2089,7 +2089,7 @@ class="account-section-button"
 id="favoritesMenuButton"
 type="button"
 >
-❤️️ Favorilerim
+❤️ Favorilerim
 </button>
 
 <button
@@ -2105,7 +2105,7 @@ type="button"
 <button
 id="profileMenuButton"
 type="button"
-style="background:#fffaf3!important; color:#70533important; border:1px solid #b99669!important;"
+style="background:#fffaf3!important; color:#705333!important; border:1px solid #b99669!important;"
 >
 ⚙️ Profilim & Bilgilerim
 </button>
@@ -2766,7 +2766,7 @@ type="button"
 ×
 </button>
 
-<h2>❤️ Favorilerim</h2>
+<h2>❤️️ Favorilerim</h2>
 
 <div id="favoritesContainer"></div>
 
@@ -4484,7 +4484,7 @@ async function openFavorites(){
     if(!favoriteProductIds.length){
         container.innerHTML=`
             <div class="favorites-empty">
-                <span style="font-size:40px;">❤️</span><br><br>
+                <span style="font-size:40px;">❤️️</span><br><br>
                 <strong style="font-size:16px; color:#705333;">Henüz favoriniz yok</strong>
                 <p style="font-size:13px; color:#96724c; margin-top:5px;">Beğendiğiniz ürünlerin üzerindeki kalp ikonuna basarak ekleyebilirsiniz.</p>
                 <button type="button" class="cart-empty-btn" onclick="closeFavorites(); location.href='#urunler';">Ürünleri İncele</button>
