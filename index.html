@@ -3564,6 +3564,7 @@ function changeCartQuantity(productId,change){
 
     saveCart();
     renderCart();
+    $("checkoutPanel")?.classList.remove("active");
 }
 
 function removeFromCart(productId){
@@ -3571,6 +3572,7 @@ function removeFromCart(productId){
     cart=cart.filter(item=>Number(item.productId)!==id);
     saveCart();
     renderCart();
+    $("checkoutPanel")?.classList.remove("active");
 }
 
 function renderCart(){
@@ -3623,16 +3625,7 @@ function renderCart(){
             return sum + (product ? product.price * item.quantity : 0);
         }, 0);
         
-        let shippingCost = (subtotal < 1500) ? 79.90 : 0;
-        let finalTotal = subtotal + shippingCost;
-        
-        total.innerHTML = `
-            <div style="font-size:15px; color:#806344; margin-bottom:6px; font-weight:normal;">Ara Toplam: ${subtotal.toLocaleString("tr-TR", {minimumFractionDigits:2})} TL</div>
-            ${shippingCost > 0 
-                ? `<div style="font-size:15px; color:#a05243; margin-bottom:10px; font-weight:normal;">Kargo Ücreti: ${shippingCost.toLocaleString("tr-TR", {minimumFractionDigits:2})} TL</div>` 
-                : `<div style="font-size:15px; color:#507047; margin-bottom:10px; font-weight:normal;">Kargo Ücreti: Bedava (1500 TL Üzeri)</div>`}
-            <div style="font-size:20px; color:#60482f; font-weight:bold;">Genel Toplam: ${finalTotal.toLocaleString("tr-TR", {minimumFractionDigits:2})} TL</div>
-        `;
+        total.innerHTML = `Toplam: ${subtotal.toLocaleString("tr-TR", {minimumFractionDigits:2})} TL`;
     }
 }
 
@@ -3690,7 +3683,29 @@ function openCheckout(){
     const user=safeJsonParse(localStorage.getItem("veloraUser") || "{}", {});
     const fullName = [user.first_name, user.last_name].filter(Boolean).join(" ") || user.username || "";
 
+    const subtotal = cart.reduce((sum, item) => {
+        const product = products.find(p => p.id === item.productId);
+        return sum + (product ? product.price * item.quantity : 0);
+    }, 0);
+    let shippingCost = (subtotal < 1500) ? 79.90 : 0;
+    let finalTotal = subtotal + shippingCost;
+
+    let shippingHtml = shippingCost > 0
+        ? `<div style="display:flex; justify-content:space-between; margin-bottom:8px; color:#a05243;"><span>Kargo Ücreti:</span> <span>${shippingCost.toLocaleString("tr-TR", {minimumFractionDigits:2})} TL</span></div>`
+        : `<div style="display:flex; justify-content:space-between; margin-bottom:8px; color:#507047;"><span>Kargo Ücreti:</span> <span>Bedava (1500 TL Üzeri)</span></div>`;
+
     content.innerHTML=`
+        <div style="background:#fffaf3; border:1px solid #d9c5a9; padding:15px; margin-bottom:20px; border-radius:3px;">
+            <h4 style="color:#85633d; margin-bottom:12px; border-bottom:1px solid #eadbc8; padding-bottom:8px;">Sipariş Özeti</h4>
+            <div style="display:flex; justify-content:space-between; margin-bottom:8px; color:#60482f; font-size:14px;">
+                <span>Ara Toplam:</span> <span>${subtotal.toLocaleString("tr-TR", {minimumFractionDigits:2})} TL</span>
+            </div>
+            ${shippingHtml}
+            <div style="display:flex; justify-content:space-between; margin-top:12px; padding-top:12px; border-top:1px solid #eadbc8; color:#60482f; font-size:18px; font-weight:bold;">
+                <span>Genel Toplam:</span> <span>${finalTotal.toLocaleString("tr-TR", {minimumFractionDigits:2})} TL</span>
+            </div>
+        </div>
+
         <h3>Sipariş Bilgileri</h3>
         <div class="checkout-note">
             Sipariş bilgilerinizi eksiksiz giriniz.<br>
@@ -3726,6 +3741,11 @@ function openCheckout(){
     `;
 
     $("checkoutForm")?.addEventListener("submit", submitOrder);
+    
+    // Smooth scroll checkout paneline insin ki kullanıcı kargoyu ve formu görsün
+    setTimeout(() => {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
 }
 
 async function submitOrder(event){
