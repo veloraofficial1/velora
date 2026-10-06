@@ -3587,7 +3587,7 @@ function renderCart(){
                 <a href="#urunler" class="cart-empty-btn" onclick="closeCart()">Koleksiyona Git</a>
             </div>
         `;
-        if(total) total.textContent="Toplam: 0 TL";
+        if(total) total.innerHTML="Toplam: 0 TL";
         return;
     }
 
@@ -3618,11 +3618,21 @@ function renderCart(){
     }).join("");
 
     if(total){
-        const totalAmount = cart.reduce((sum, item) => {
+        const subtotal = cart.reduce((sum, item) => {
             const product = products.find(p => p.id === item.productId);
             return sum + (product ? product.price * item.quantity : 0);
         }, 0);
-        total.textContent = "Toplam: " + totalAmount + " TL";
+        
+        let shippingCost = (subtotal < 1500) ? 79.90 : 0;
+        let finalTotal = subtotal + shippingCost;
+        
+        total.innerHTML = `
+            <div style="font-size:15px; color:#806344; margin-bottom:6px; font-weight:normal;">Ara Toplam: ${subtotal.toLocaleString("tr-TR", {minimumFractionDigits:2})} TL</div>
+            ${shippingCost > 0 
+                ? `<div style="font-size:15px; color:#a05243; margin-bottom:10px; font-weight:normal;">Kargo Ücreti: ${shippingCost.toLocaleString("tr-TR", {minimumFractionDigits:2})} TL</div>` 
+                : `<div style="font-size:15px; color:#507047; margin-bottom:10px; font-weight:normal;">Kargo Ücreti: Bedava (1500 TL Üzeri)</div>`}
+            <div style="font-size:20px; color:#60482f; font-weight:bold;">Genel Toplam: ${finalTotal.toLocaleString("tr-TR", {minimumFractionDigits:2})} TL</div>
+        `;
     }
 }
 
