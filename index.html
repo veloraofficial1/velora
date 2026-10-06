@@ -304,7 +304,7 @@ nav a:hover,
     line-height: 1;
 }
 
-/* HERO SLIDER (HİÇBİR BOŞLUK KALMAMASI İÇİN GÜNCELLENDİ) */
+/* HERO SLIDER */
 .hero-slider{
     position:relative;
     width:100%;
@@ -613,6 +613,13 @@ section{
     margin-bottom:10px;
 }
 
+.product-price {
+    font-size: 17px;
+    font-weight: bold;
+    color: #8b6943;
+    margin-bottom: 12px;
+}
+
 .card-rating-preview{
     color:#b3864e;
     font-size:14px;
@@ -824,8 +831,15 @@ section{
 
 .product-detail-subcategory{
     color:#a18058;
-    margin-bottom:16px;
+    margin-bottom:10px;
     font-size:15px;
+}
+
+.product-detail-price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #8b6943;
+    margin-bottom: 20px;
 }
 
 .product-detail-info .stock-button{
@@ -1117,6 +1131,13 @@ section{
 .cart-item-info p{
     font-size:13px;
     color:#96724c;
+    margin-bottom:5px;
+}
+
+.cart-item-price {
+    font-size: 14px;
+    font-weight: bold;
+    color: #8b6943;
 }
 
 .cart-remove{
@@ -1157,6 +1178,7 @@ section{
     text-align:right;
     color:#60482f;
     font-size:19px;
+    font-weight:bold;
 }
 
 .cart-actions{
@@ -2295,7 +2317,7 @@ class="search-result-info"
 
 </section>
 
-<!-- GÜNCELLENMİŞ İLETİŞİM BÖLÜMÜ (WHATSAPP, INSTAGRAM, GMAIL, ADRES) -->
+<!-- İLETİŞİM BÖLÜMÜ -->
 <section id="iletisim">
 <h2 class="section-title">İletişim</h2>
 <div class="contact-text">
@@ -2801,22 +2823,22 @@ type="button"
 const API_BASE = "https://velora-backend-1-aft5.onrender.com";
 
 const products = [
-    {id:1,name:"Zarif Yüzük",category:"Yüzük",subcategory:"Günlük",image:"resimler/yuzuk.jpg"},
-    {id:2,name:"Taşlı Yüzük",category:"Yüzük",subcategory:"Özel",image:"resimler/tasli-yuzuk.jpg"},
-    {id:3,name:"İnci Yüzük",category:"Yüzük",subcategory:"İnci",image:"resimler/inciyuzuk.jpg"},
-    {id:4,name:"Altın Yüzük",category:"Yüzük",subcategory:"Altın",image:"resimler/altinyuzuk.jpg"},
-    {id:5,name:"Zarif Bileklik",category:"Bileklik",subcategory:"Günlük",image:"resimler/bileklik.jpg"},
-    {id:6,name:"Taşlı Bileklik",category:"Bileklik",subcategory:"Özel",image:"resimler/taslibileklik.jpg"},
-    {id:7,name:"İnci Bileklik",category:"Bileklik",subcategory:"İnci",image:"resimler/incibileklik.jpg"},
-    {id:8,name:"Altın Bileklik",category:"Bileklik",subcategory:"Altın",image:"resimler/altinbileklik.jpg"},
-    {id:9,name:"Zarif Küpe",category:"Küpe",subcategory:"Günlük",image:"resimler/kupe.jpg"},
-    {id:10,name:"İnci Küpe",category:"Küpe",subcategory:"İnci",image:"resimler/incikupe.jpg"},
-    {id:11,name:"Taşlı Küpe",category:"Küpe",subcategory:"Özel",image:"resimler/taslikupe.jpg"},
-    {id:12,name:"Altın Küpe",category:"Küpe",subcategory:"Altın",image:"resimler/altinkupe.jpg"},
-    {id:13,name:"Zarif Kolye",category:"Kolye",subcategory:"Günlük",image:"resimler/kolye.jpg"},
-    {id:14,name:"İnci Kolye",category:"Kolye",subcategory:"İnci",image:"resimler/incikolye.jpg"},
-    {id:15,name:"Taşlı Kolye",category:"Kolye",subcategory:"Özel",image:"resimler/taslikolye.jpg"},
-    {id:16,name:"Altın Kolye",category:"Kolye",subcategory:"Altın",image:"resimler/altinkolye.jpg"}
+    {id:1,name:"Zarif Yüzük",category:"Yüzük",subcategory:"Günlük",image:"resimler/yuzuk.jpg", price: 350},
+    {id:2,name:"Taşlı Yüzük",category:"Yüzük",subcategory:"Özel",image:"resimler/tasli-yuzuk.jpg", price: 420},
+    {id:3,name:"İnci Yüzük",category:"Yüzük",subcategory:"İnci",image:"resimler/inciyuzuk.jpg", price: 380},
+    {id:4,name:"Altın Yüzük",category:"Yüzük",subcategory:"Altın",image:"resimler/altinyuzuk.jpg", price: 450},
+    {id:5,name:"Zarif Bileklik",category:"Bileklik",subcategory:"Günlük",image:"resimler/bileklik.jpg", price: 390},
+    {id:6,name:"Taşlı Bileklik",category:"Bileklik",subcategory:"Özel",image:"resimler/taslibileklik.jpg", price: 480},
+    {id:7,name:"İnci Bileklik",category:"Bileklik",subcategory:"İnci",image:"resimler/incibileklik.jpg", price: 410},
+    {id:8,name:"Altın Bileklik",category:"Bileklik",subcategory:"Altın",image:"resimler/altinbileklik.jpg", price: 550},
+    {id:9,name:"Zarif Küpe",category:"Küpe",subcategory:"Günlük",image:"resimler/kupe.jpg", price: 290},
+    {id:10,name:"İnci Küpe",category:"Küpe",subcategory:"İnci",image:"resimler/incikupe.jpg", price: 340},
+    {id:11,name:"Taşlı Küpe",category:"Küpe",subcategory:"Özel",image:"resimler/taslikupe.jpg", price: 380},
+    {id:12,name:"Altın Küpe",category:"Küpe",subcategory:"Altın",image:"resimler/altinkupe.jpg", price: 410},
+    {id:13,name:"Zarif Kolye",category:"Kolye",subcategory:"Günlük",image:"resimler/kolye.jpg", price: 450},
+    {id:14,name:"İnci Kolye",category:"Kolye",subcategory:"İnci",image:"resimler/incikolye.jpg", price: 490},
+    {id:15,name:"Taşlı Kolye",category:"Kolye",subcategory:"Özel",image:"resimler/taslikolye.jpg", price: 520},
+    {id:16,name:"Altın Kolye",category:"Kolye",subcategory:"Altın",image:"resimler/altinkolye.jpg", price: 590}
 ];
 
 let cart = [];
@@ -3611,6 +3633,7 @@ function renderCart(){
                 <div class="cart-item-info">
                     <h3>${escapeHtml(product.name)}</h3>
                     <p>${escapeHtml(product.category)} · ${escapeHtml(product.subcategory)}</p>
+                    <div class="cart-item-price">${product.price} TL</div>
                     <div class="cart-quantity">
                         <button type="button" data-cart-minus="${product.id}">−</button>
                         <span>${Number(item.quantity)}</span>
@@ -3623,7 +3646,11 @@ function renderCart(){
     }).join("");
 
     if(total){
-        total.textContent="Toplam: "+getCartCount()+" adet ürün";
+        const totalAmount = cart.reduce((sum, item) => {
+            const product = products.find(p => p.id === item.productId);
+            return sum + (product ? product.price * item.quantity : 0);
+        }, 0);
+        total.textContent = "Toplam: " + totalAmount + " TL";
     }
 }
 
@@ -3763,7 +3790,7 @@ async function submitOrder(event){
             subcategory:product.subcategory,
             image:product.image,
             quantity:Number(item.quantity),
-            price: 500
+            price: product.price
         };
     });
 
@@ -3941,6 +3968,7 @@ function renderProducts(list=products){
                     <div>
                         <h3 class="product-name">${escapeHtml(product.name)}</h3>
                         <div class="product-category">${escapeHtml(product.subcategory)}</div>
+                        <div class="product-price">${product.price} TL</div>
                         <div class="card-rating-preview">★★★★★</div>
                         <div class="stock-status">Stokta Var</div>
                     </div>
@@ -4099,6 +4127,7 @@ async function openProductDetail(productId){
                 <div class="product-detail-subcategory">
                     ${escapeHtml(product.category)} · ${escapeHtml(product.subcategory)}
                 </div>
+                <div class="product-detail-price">${product.price} TL</div>
 
                 <button
                     class="stock-button"
