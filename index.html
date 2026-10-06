@@ -334,8 +334,8 @@ nav a:hover,
 .hero-slide img{
     width:100%;
     height:100%;
-    object-fit: cover; /* Sağda, solda, altta ve üstte sıfır boşluk bırakır */
-    object-position: center; /* Tam merkeze odaklar */
+    object-fit: cover;
+    object-position: center;
     display:block;
 }
 
@@ -1283,6 +1283,33 @@ section{
     color:#8a493f;
 }
 
+/* YASAL SÖZLEŞMELER CHECKBOX STİLİ */
+.legal-agreements {
+    margin: 15px 0;
+    padding: 12px;
+    background: #f7efe3;
+    border: 1px solid #dfccb2;
+    border-radius: 4px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: #6b5640;
+}
+.legal-agreements input[type="checkbox"] {
+    width: auto;
+    margin-top: 3px;
+    cursor: pointer;
+}
+.legal-agreements a {
+    color: #b99669;
+    text-decoration: underline;
+    font-weight: bold;
+}
+.legal-agreements a:hover {
+    color: #8b6943;
+}
+
 /* AUTH */
 .auth-tabs{
     display:flex;
@@ -1607,12 +1634,82 @@ section{
     color: #6b5640;
 }
 
-footer{
-    background:#4d3b2a;
-    color:#f5e9d8;
-    text-align:center;
-    padding:25px;
-    font-size:14px;
+/* YENİ FOOTER STİLLERİ */
+footer {
+    background: #4d3b2a;
+    color: #f5e9d8;
+    padding: 40px 5% 20px;
+    font-size: 14px;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 30px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-section h3 {
+    color: #d8c2a4;
+    font-size: 18px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.footer-section p {
+    line-height: 1.6;
+    margin-bottom: 8px;
+    color: #d6c2a5;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #d6c2a5;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #fff;
+}
+
+.footer-payment-logos {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(216, 194, 164, 0.2);
+}
+
+.footer-payment-logos p {
+    margin-bottom: 15px;
+    color: #d8c2a4;
+}
+
+.footer-payment-logos img {
+    margin: 0 10px;
+    vertical-align: middle;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: rgba(245, 233, 216, 0.6);
 }
 
 /* =========================================================
@@ -1669,7 +1766,6 @@ footer{
         font-size:12px;
     }
 
-    /* TELEFONDA AŞIRI KESİLMEYİ ÖNLEMEK İÇİN BOYU KISALTILDI */
     .hero-slider{
         height:50vh; 
         min-height:350px;
@@ -1818,6 +1914,13 @@ footer{
         width: 100%;
         min-width: unset;
         padding: 20px 15px;
+    }
+    .footer-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .footer-section {
+        text-align: center;
     }
 }
 
@@ -2248,8 +2351,45 @@ class="search-result-info"
 
 </section>
 
+<!-- GÜNCELLENMİŞ YENİ FOOTER ALANI -->
 <footer>
-© 2026 VELORA — Zarif Takı Koleksiyonu
+  <div class="footer-container">
+    <!-- Kurumsal Bilgiler ve Adres -->
+    <div class="footer-section">
+      <h3>VELORA</h3>
+      <p><strong>Firma Ünvanı:</strong> Velora Takı ve Aksesuar</p>
+      <!-- NOT: POS onayında gerçek adresini isteyebilirler, burayı kendi adresinle değiştir -->
+      <p><strong>Adres:</strong> İstanbul, Türkiye</p> 
+      <p><strong>Müşteri Hizmetleri:</strong> 0534 275 28 07</p>
+      <p><strong>E-posta:</strong> veloraofficial6022@gmail.com</p>
+    </div>
+
+    <!-- Yasal Sözleşmeler (Zorunlu) -->
+    <div class="footer-section">
+      <h3>Sözleşmeler ve Politikalar</h3>
+      <ul>
+        <li><a href="/mesafeli-satis-sozlesmesi.html">Mesafeli Satış Sözleşmesi</a></li>
+        <li><a href="/on-bilgilendirme-formu.html">Ön Bilgilendirme Formu</a></li>
+        <li><a href="/iptal-ve-iade-sartlari.html">İptal ve İade Politikası</a></li>
+        <li><a href="/gizlilik-ve-guvenlik.html">Gizlilik ve Güvenlik Politikası</a></li>
+        <li><a href="/kargo-ve-teslimat.html">Kargo ve Teslimat Şartları</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Güvenli Ödeme Logoları (Zorunlu) -->
+  <div class="footer-payment-logos">
+    <p>256 Bit SSL ile Güvenli Alışveriş</p>
+    <img src="https://www.paytr.com/img/general/PayTR-Odeme-Altyapisi.svg" alt="PayTR ile Güvenli Ödeme" height="30" style="background:#fff; padding:5px; border-radius:4px; margin-bottom:10px;">
+    <br>
+    <img src="https://seeklogo.com/images/V/visa-logo-6F4057663D-seeklogo.com.png" alt="Visa" height="25">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="Mastercard" height="30">
+    <img src="https://troyodeme.com/images/troy-logo-beyaz.svg" alt="Troy" height="25" style="background:#00a3e0; padding:3px; border-radius:4px;">
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 VELORA — Tüm Hakları Saklıdır.
+  </div>
 </footer>
 
 
@@ -3536,6 +3676,7 @@ function openCheckout(){
     const user=safeJsonParse(localStorage.getItem("veloraUser") || "{}", {});
     const fullName = [user.first_name, user.last_name].filter(Boolean).join(" ") || user.username || "";
 
+    // BURAYA YASAL SÖZLEŞMELER ONAY KUTUCUĞU EKLENDİ
     content.innerHTML=`
         <h3>Sipariş Bilgileri</h3>
         <div class="checkout-note">
@@ -3545,13 +3686,28 @@ function openCheckout(){
         <form class="checkout-form" id="checkoutForm">
             <label>Ad Soyad</label>
             <input type="text" id="checkoutName" value="${escapeHtml(fullName)}" required>
+            
             <label>E-posta</label>
             <input type="email" id="checkoutEmail" value="${escapeHtml(user.email || "")}" readonly required>
+            
             <label>Telefon</label>
             <input type="tel" id="checkoutPhone" placeholder="05xx xxx xx xx" required>
+            
             <label>Teslimat Adresi</label>
             <textarea id="checkoutAddress" placeholder="Teslimat adresinizi yazınız..." required></textarea>
+            
+            <!-- Yasal Sözleşmeler Checkbox -->
+            <div class="legal-agreements">
+                <input type="checkbox" id="accept-contracts" name="accept-contracts" required>
+                <label for="accept-contracts">
+                    <a href="/on-bilgilendirme-formu.html" target="_blank">Ön Bilgilendirme Formunu</a> ve 
+                    <a href="/mesafeli-satis-sozlesmesi.html" target="_blank">Mesafeli Satış Sözleşmesini</a> 
+                    okudum ve onaylıyorum.
+                </label>
+            </div>
+            
             <div id="checkoutMessage" class="checkout-message"></div>
+            
             <button class="checkout-submit" type="submit">Güvenli Ödemeye Geç</button>
         </form>
     `;
@@ -3570,6 +3726,13 @@ async function submitOrder(event){
 
     if(!cart.length){
         alert("Sepetiniz boş.");
+        return;
+    }
+
+    // CHECKBOX KONTROLÜ
+    const contractsChecked = $("accept-contracts")?.checked;
+    if(!contractsChecked){
+        alert("Lütfen ödemeye geçmeden önce yasal sözleşmeleri onaylayınız.");
         return;
     }
 
