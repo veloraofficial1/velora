@@ -1790,8 +1790,8 @@ footer {
     }
 
     .hero-slider{
-        height:50vh; 
-        min-height:350px;
+        height: 70vh; 
+        min-height: 450px;
     }
 
     .hero-overlay{
@@ -2126,60 +2126,81 @@ type="button"
 
 <section class="hero-slider" id="heroSlider">
 
-<!-- 5 ADET GİRİŞ SLİDER FOTOĞRAFINA ASLA DOKUNULMADI, ORİJİNAL HALİYLE DURUYOR -->
+<!-- 1. SLAYT: Ana Marka İmajı -->
 <div class="hero-slide active">
-<img src="resimler/resim1.jpg" alt="VELORA Zarif Takılar" onerror="this.style.display='none'">
-<div class="hero-overlay"></div>
-<div class="hero-content">
-<span>VELORA</span>
-<h1>Tarzını Yansıt.</h1>
-<p>Zarafetin en güzel hali, senin stilin.</p>
-<a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
-</div>
-</div>
-
-<div class="hero-slide">
-<img src="resimler/resim2.jpg" alt="VELORA Takı Koleksiyonu" onerror="this.style.display='none'">
-<div class="hero-overlay"></div>
-<div class="hero-content">
-<span>VELORA</span>
-<h1>Zarafet Detaylarda Saklıdır.</h1>
-<p>Her detayda sana ait bir ışıltı.</p>
-<a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
-</div>
+    <picture>
+        <!-- Mobil için Dikey (Portrait) -->
+        <source media="(max-width: 768px)" srcset="https://image.pollinations.ai/prompt/A%20luxurious%20gold%20necklace%20on%20an%20elegant%20woman,%20dark%20aesthetic,%20high-end%20jewelry%20commercial%20photography,%20cinematic%20lighting?width=720&height=1280&nologo=true&seed=145">
+        <!-- Bilgisayar için Yatay (Landscape) -->
+        <img src="https://image.pollinations.ai/prompt/A%20luxurious%20gold%20necklace%20on%20an%20elegant%20woman,%20dark%20aesthetic,%20high-end%20jewelry%20commercial%20photography,%20cinematic%20lighting?width=1920&height=1080&nologo=true&seed=145" alt="VELORA Zarif Takılar" onerror="this.style.display='none'">
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <span>VELORA</span>
+        <h1>Tarzını Yansıt.</h1>
+        <p>Zarafetin en güzel hali, senin stilin.</p>
+        <a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
+    </div>
 </div>
 
+<!-- 2. SLAYT: Yakın Çekim Yüzük -->
 <div class="hero-slide">
-<img src="resimler/resim3.jpg" alt="VELORA Özel Koleksiyon" onerror="this.style.display='none'">
-<div class="hero-overlay"></div>
-<div class="hero-content">
-<span>VELORA</span>
-<h1>Her Anına Bir Işıltı.</h1>
-<p>Sade, zarif ve sana özel.</p>
-<a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
-</div>
+    <picture>
+        <source media="(max-width: 768px)" srcset="https://image.pollinations.ai/prompt/Macro%20photography%20of%20elegant%20diamond%20and%20gold%20rings%20on%20dark%20velvet,%20luxury%20jewelry%20display,%20warm%20lighting?width=720&height=1280&nologo=true&seed=222">
+        <img src="https://image.pollinations.ai/prompt/Macro%20photography%20of%20elegant%20diamond%20and%20gold%20rings%20on%20dark%20velvet,%20luxury%20jewelry%20display,%20warm%20lighting?width=1920&height=1080&nologo=true&seed=222" alt="VELORA Takı Koleksiyonu" onerror="this.style.display='none'">
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <span>VELORA</span>
+        <h1>Zarafet Detaylarda Saklıdır.</h1>
+        <p>Her detayda sana ait bir ışıltı.</p>
+        <a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
+    </div>
 </div>
 
+<!-- 3. SLAYT: Minimalist Altın Işıltısı -->
 <div class="hero-slide">
-<img src="resimler/urun1.jpg" alt="VELORA Koleksiyonu" onerror="this.style.display='none'">
-<div class="hero-overlay"></div>
-<div class="hero-content">
-<span>VELORA</span>
-<h1>Zarif Bir Dokunuş.</h1>
-<p>Stiline eşlik eden özel parçalar.</p>
-<a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
-</div>
+    <picture>
+        <source media="(max-width: 768px)" srcset="https://image.pollinations.ai/prompt/Minimalist%20gold%20bracelets%20on%20a%20smooth%20marble%20surface,%20luxury%20jewelry%20aesthetic,%20soft%20shadows?width=720&height=1280&nologo=true&seed=333">
+        <img src="https://image.pollinations.ai/prompt/Minimalist%20gold%20bracelets%20on%20a%20smooth%20marble%20surface,%20luxury%20jewelry%20aesthetic,%20soft%20shadows?width=1920&height=1080&nologo=true&seed=333" alt="VELORA Özel Koleksiyon" onerror="this.style.display='none'">
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <span>VELORA</span>
+        <h1>Her Anına Bir Işıltı.</h1>
+        <p>Sade, zarif ve sana özel altın dokunuşlar.</p>
+        <a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
+    </div>
 </div>
 
+<!-- 4. SLAYT: Seçkin Parçalar / Küpeler -->
 <div class="hero-slide">
-<img src="resimler/kargo.jpg" alt="VELORA Ücretsiz Kargo Kampanyası" onerror="this.src='resimler/resim1.jpg'">
-<div class="hero-overlay"></div>
-<div class="hero-content">
-<span>VELORA KAMPANYA</span>
-<h1>1500 TL Üzeri<br>Kargo Ücretsiz!</h1>
-<p>Seçkin parçalarla tarzını yansıt, kargo bedavaya gelsin.</p>
-<a href="#urunler" class="hero-button">Alışverişe Başla</a>
+    <picture>
+        <source media="(max-width: 768px)" srcset="https://image.pollinations.ai/prompt/Elegant%20pearl%20and%20gold%20earrings%20displayed%20on%20a%20sleek%20dark%20stand,%20luxury%20boutique%20lighting?width=720&height=1280&nologo=true&seed=444">
+        <img src="https://image.pollinations.ai/prompt/Elegant%20pearl%20and%20gold%20earrings%20displayed%20on%20a%20sleek%20dark%20stand,%20luxury%20boutique%20lighting?width=1920&height=1080&nologo=true&seed=444" alt="VELORA Koleksiyonu" onerror="this.style.display='none'">
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <span>VELORA</span>
+        <h1>Zarif Bir Dokunuş.</h1>
+        <p>Stiline eşlik eden özel parçalar.</p>
+        <a href="#urunler" class="hero-button">Koleksiyonu Keşfet</a>
+    </div>
 </div>
+
+<!-- 5. SLAYT: KARGO KAMPANYASI KUTUSU -->
+<div class="hero-slide">
+    <picture>
+        <source media="(max-width: 768px)" srcset="https://image.pollinations.ai/prompt/A%20premium%20velvet%20jewelry%20gift%20box%20tied%20with%20a%20silk%20ribbon%20on%20a%20dark%20luxurious%20background,%20free%20shipping%20concept,%20high-end%20ecommerce?width=720&height=1280&nologo=true&seed=555">
+        <img src="https://image.pollinations.ai/prompt/A%20premium%20velvet%20jewelry%20gift%20box%20tied%20with%20a%20silk%20ribbon%20on%20a%20dark%20luxurious%20background,%20free%20shipping%20concept,%20high-end%20ecommerce?width=1920&height=1080&nologo=true&seed=555" alt="VELORA Ücretsiz Kargo Kampanyası" onerror="this.style.display='none'">
+    </picture>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <span>VELORA KAMPANYA</span>
+        <h1>1500 TL Üzeri<br>Kargo Ücretsiz!</h1>
+        <p>Seçkin parçalarla tarzını yansıt, kargo bedavaya gelsin. Tüm siparişlerinizde sigortalı ve güvenli gönderim.</p>
+        <a href="#urunler" class="hero-button">Alışverişe Başla</a>
+    </div>
 </div>
 
 <button class="hero-arrow hero-prev" id="heroPrev" type="button">‹</button>
@@ -3309,7 +3330,7 @@ async function openProfile(){
     const content = $("profileContent");
     if(!modal || !content) return;
 
-    modal.classList.add("active");
+    modal.classList.addactive");
     content.innerHTML = `<div class="favorites-empty">Profil bilgileri yükleniyor...</div>`;
 
     const token = localStorage.getItem("veloraToken");
