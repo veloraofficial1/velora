@@ -873,13 +873,30 @@
     selectElement.dataset.previousStatus = status;
     selectElement.disabled = true;
 
+    // Eğer Kargo'ya verildi seçilirse takip numarası sor
+    let trackingNumber = "";
+    if (status === "shipped") {
+      trackingNumber = prompt("Lütfen Kargo Takip Numarasını girin:\n(Bu numara müşteriye gidecek olan 'Siparişiniz Kargoya Verildi' e-postasına eklenecektir)");
+      if (trackingNumber === null) {
+        // İptal'e basıldıysa durumu eski haline çevir ve işlemi durdur
+        selectElement.value = previousStatus;
+        selectElement.disabled = false;
+        return;
+      }
+    }
+
     try {
       await apiRequest("/api/admin/orders/" + encodeURIComponent(id) + "/status", {
         method: "PATCH",
-        body: JSON.stringify({ status })
+        body: JSON.stringify({ status: status, tracking_number: trackingNumber })
       });
 
-      showMessage("Sipariş durumu güncellendi: " + (ORDER_STATUS_LABELS[status] || status));
+      if (status === "shipped") {
+        showMessage("Durum güncellendi. Kargo e-postası müşteriye iletiliyor...");
+      } else {
+        showMessage("Sipariş durumu güncellendi: " + (ORDER_STATUS_LABELS[status] || status));
+      }
+      
       await loadOrders();
       await loadStats();
 
