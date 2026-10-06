@@ -1790,12 +1790,13 @@ footer {
     }
 
     .hero-slider{
-        height:65vh; 
-        min-height:420px;
+        height:80vh; 
+        min-height:500px;
     }
     
     .hero-slide img {
-        object-position: top center;
+        object-fit: cover;
+        object-position: center top;
     }
 
     .hero-overlay{
@@ -2088,7 +2089,7 @@ class="account-section-button"
 id="favoritesMenuButton"
 type="button"
 >
-❤️ Favorilerim
+❤️️ Favorilerim
 </button>
 
 <button
@@ -2104,7 +2105,7 @@ type="button"
 <button
 id="profileMenuButton"
 type="button"
-style="background:#fffaf3!important; color:#705333!important; border:1px solid #b99669!important;"
+style="background:#fffaf3!important; color:#70533important; border:1px solid #b99669!important;"
 >
 ⚙️ Profilim & Bilgilerim
 </button>
@@ -3556,6 +3557,28 @@ function addToCart(productId){
     showCartToast(product.name+" sepete eklendi.");
 }
 
+function updateCheckoutTotals(productsTotal) {
+    const subtotalEl = $("checkoutSubtotal");
+    const shippingEl = $("checkoutShipping");
+    const finalTotalEl = $("checkoutFinalTotal");
+
+    if(subtotalEl && shippingEl && finalTotalEl) {
+        subtotalEl.textContent = productsTotal.toLocaleString("tr-TR",{minimumFractionDigits:2, maximumFractionDigits:2});
+        
+        let shippingFee = 79.90;
+        let shippingDisplay = "79,90 TL";
+        
+        if (productsTotal >= 1500) {
+            shippingFee = 0;
+            shippingDisplay = '<span style="color:#507047; font-weight:bold;">Ücretsiz (1500 TL Üzeri Kampanyası)</span>';
+        }
+        
+        shippingEl.innerHTML = shippingDisplay;
+        const finalTotal = productsTotal + shippingFee;
+        finalTotalEl.textContent = finalTotal.toLocaleString("tr-TR",{minimumFractionDigits:2, maximumFractionDigits:2});
+    }
+}
+
 function changeCartQuantity(productId,change){
     const id=Number(productId);
     const item=cart.find(i=>Number(i.productId)===id);
@@ -3592,6 +3615,11 @@ function renderCart(){
             </div>
         `;
         if(total) total.textContent="Toplam: 0 TL";
+        
+        const checkoutContent = $("checkoutContent");
+        if(checkoutContent && $("checkoutPanel")?.classList.contains("active")) {
+            checkoutContent.innerHTML=`<div class="login-required-box">Sepetiniz boş.</div>`;
+        }
         return;
     }
 
@@ -3626,7 +3654,8 @@ function renderCart(){
             const product = products.find(p => p.id === item.productId);
             return sum + (product ? product.price * item.quantity : 0);
         }, 0);
-        total.textContent = "Toplam: " + totalAmount + " TL";
+        total.textContent = "Toplam: " + totalAmount.toLocaleString("tr-TR",{minimumFractionDigits:2, maximumFractionDigits:2}) + " TL";
+        updateCheckoutTotals(totalAmount);
     }
 }
 
@@ -3705,9 +3734,9 @@ function openCheckout(){
             Sipariş bilgilerinizi eksiksiz giriniz.<br>
             "Ödemeye Geç" butonuna tıkladığınızda güvenli PayTR ödeme ekranı açılacaktır.
             <div style="margin-top:10px; padding-top:10px; border-top:1px dashed #d9c5a9;">
-                <strong>Ara Toplam:</strong> ${productsTotal.toLocaleString("tr-TR",{minimumFractionDigits:2, maximumFractionDigits:2})} TL<br>
-                <strong>Kargo Ücreti:</strong> ${shippingDisplay}<br>
-                <strong style="color:#8b6943; font-size:16px; display:block; margin-top:5px;">Genel Toplam: ${finalTotal.toLocaleString("tr-TR",{minimumFractionDigits:2, maximumFractionDigits:2})} TL</strong>
+                <strong>Ara Toplam:</strong> <span id="checkoutSubtotal">${productsTotal.toLocaleString("tr-TR",{minimumFractionDigits:2, maximumFractionDigits:2})}</span> TL<br>
+                <strong>Kargo Ücreti:</strong> <span id="checkoutShipping">${shippingDisplay}</span><br>
+                <strong style="color:#8b6943; font-size:16px; display:block; margin-top:5px;">Genel Toplam: <span id="checkoutFinalTotal">${finalTotal.toLocaleString("tr-TR",{minimumFractionDigits:2, maximumFractionDigits:2})}</span> TL</strong>
             </div>
         </div>
         <form class="checkout-form" id="checkoutForm">
