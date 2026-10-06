@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -1790,8 +1791,12 @@ footer {
     }
 
     .hero-slider{
-        height:50vh; 
-        min-height:350px;
+        height:65vh; 
+        min-height:420px;
+    }
+    
+    .hero-slide img {
+        object-position: top center;
     }
 
     .hero-overlay{
@@ -3680,11 +3685,23 @@ function openCheckout(){
     const user=safeJsonParse(localStorage.getItem("veloraUser") || "{}", {});
     const fullName = [user.first_name, user.last_name].filter(Boolean).join(" ") || user.username || "";
 
+    const productsTotal = cart.reduce((sum, item) => {
+        const product = products.find(p => p.id === item.productId);
+        return sum + (product ? product.price * item.quantity : 0);
+    }, 0);
+    const shippingFee = 79.90;
+    const finalTotal = productsTotal + shippingFee;
+
     content.innerHTML=`
         <h3>Sipariş Bilgileri</h3>
         <div class="checkout-note">
             Sipariş bilgilerinizi eksiksiz giriniz.<br>
             "Ödemeye Geç" butonuna tıkladığınızda güvenli PayTR ödeme ekranı açılacaktır.
+            <div style="margin-top:10px; padding-top:10px; border-top:1px dashed #d9c5a9;">
+                <strong>Ara Toplam:</strong> ${productsTotal.toLocaleString("tr-TR",{minimumFractionDigits:2, maximumFractionDigits:2})} TL<br>
+                <strong>Kargo Ücreti:</strong> 79,90 TL<br>
+                <strong style="color:#8b6943; font-size:16px; display:block; margin-top:5px;">Genel Toplam: ${finalTotal.toLocaleString("tr-TR",{minimumFractionDigits:2, maximumFractionDigits:2})} TL</strong>
+            </div>
         </div>
         <form class="checkout-form" id="checkoutForm">
             <label>Ad Soyad</label>
@@ -3766,7 +3783,19 @@ async function submitOrder(event){
         };
     });
 
-    const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const productsTotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const shippingFee = 79.90;
+    const total = productsTotal + shippingFee;
+
+    items.push({
+        productId: 99999,
+        name: "Kargo Ücreti",
+        category: "Kargo",
+        subcategory: "Hizmet",
+        image: "",
+        quantity: 1,
+        price: 79.90
+    });
 
     if(message){
         message.className="checkout-message";
