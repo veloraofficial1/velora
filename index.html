@@ -2860,24 +2860,21 @@ type="button"
 
 const API_BASE = "https://velora-backend-1-aft5.onrender.com";
 
-// TÜM ÜRÜNLER (KOLYE, BİLEKLİK, YÜZÜK DAHİL) STOK FOTOĞRAFLARLA GÜNCELLENDİ
+// YENİ ÜRÜNLER (FOTOĞRAFLAR GEÇİCİ OLARAK EKLENMİŞTİR)
 const products = [
-    {id:1,name:"Zarif Yüzük",category:"Yüzük",subcategory:"Günlük",image:"https://images.unsplash.com/photo-1605100804763-247f66156ce2?w=500&q=80", price: 350},
-    {id:2,name:"Taşlı Yüzük",category:"Yüzük",subcategory:"Özel",image:"https://images.unsplash.com/photo-1599643478524-fb524b067a9b?w=500&q=80", price: 420},
-    {id:3,name:"İnci Yüzük",category:"Yüzük",subcategory:"İnci",image:"https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?w=500&q=80", price: 380},
-    {id:4,name:"Altın Yüzük",category:"Yüzük",subcategory:"Altın",image:"https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&q=80", price: 450},
-    {id:5,name:"Zarif Bileklik",category:"Bileklik",subcategory:"Günlük",image:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&q=80", price: 390},
-    {id:6,name:"Taşlı Bileklik",category:"Bileklik",subcategory:"Özel",image:"https://images.unsplash.com/photo-1573408301145-b98c4af05b8a?w=500&q=80", price: 480},
-    {id:7,name:"İnci Bileklik",category:"Bileklik",subcategory:"İnci",image:"https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=500&q=80", price: 410},
-    {id:8,name:"Altın Bileklik",category:"Bileklik",subcategory:"Altın",image:"https://images.unsplash.com/photo-1531995811006-35cb42e1a022?w=500&q=80", price: 550},
-    {id:9,name:"Zarif Küpe",category:"Küpe",subcategory:"Günlük",image:"https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?w=500&q=80", price: 290},
-    {id:10,name:"İnci Küpe",category:"Küpe",subcategory:"İnci",image:"https://images.unsplash.com/photo-1635767798638-3e25273a8236?w=500&q=80", price: 340},
-    {id:11,name:"Taşlı Küpe",category:"Küpe",subcategory:"Özel",image:"https://images.unsplash.com/photo-1629224316810-9d8805b95e76?w=500&q=80", price: 380},
-    {id:12,name:"Altın Küpe",category:"Küpe",subcategory:"Altın",image:"https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=500&q=80", price: 410},
-    {id:13,name:"Zarif Kolye",category:"Kolye",subcategory:"Günlük",image:"https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=500&q=80", price: 450},
-    {id:14,name:"İnci Kolye",category:"Kolye",subcategory:"İnci",image:"https://images.unsplash.com/photo-1588444650733-d0767b753cb8?w=500&q=80", price: 490},
-    {id:15,name:"Taşlı Kolye",category:"Kolye",subcategory:"Özel",image:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500&q=80", price: 520},
-    {id:16,name:"Altın Kolye",category:"Kolye",subcategory:"Altın",image:"https://images.unsplash.com/photo-1610928038933-2882f0ab77aa?w=500&q=80", price: 590}
+    {id:1, name:"Zarif Beyaz Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"resimler/gecici_kupe1.jpg", price: 250},
+    {id:2, name:"Canlı Mor Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"resimler/gecici_kupe2.jpg", price: 250},
+    {id:3, name:"Gold Renk Işıltılı Zirkon Taşlı Küme Küpe", category:"Küpe", subcategory:"Zirkon", image:"resimler/gecici_kupe3.jpg", price: 280},
+    {id:4, name:"Gold Renk Kıvrımlı Modern Zirkon Küpe", category:"Küpe", subcategory:"Modern", image:"resimler/gecici_kupe4.jpg", price: 280},
+    {id:5, name:"Gümüş Renk Baget Kesim Işıltılı Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/gecici_bileklik1.jpg", price: 250},
+    {id:6, name:"Gold Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/gecici_bileklik2.jpg", price: 650},
+    {id:7, name:"Gümüş Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/gecici_bileklik3.jpg", price: 650},
+    {id:8, name:"Gold Renk Işıltılı Çiçek Motifli Zarif Bileklik", category:"Bileklik", subcategory:"Zarif", image:"resimler/gecici_bileklik4.jpg", price: 550},
+    {id:9, name:"Gümüş Renk Şık Hasır Örgü Bileklik", category:"Bileklik", subcategory:"Örgü", image:"resimler/gecici_bileklik5.jpg", price: 550},
+    {id:10, name:"Gold Renk Organik Kesim Doğal Taşlı Yüzük", category:"Yüzük", subcategory:"Doğal Taş", image:"resimler/gecici_yuzuk1.jpg", price: 230},
+    {id:11, name:"Zarif Su Yolu Zirkon Kolye", category:"Kolye", subcategory:"Su Yolu", image:"resimler/gecici_kolye1.jpg", price: 350},
+    {id:12, name:"Gold Renk Minimal Yıldız Kolye", category:"Kolye", subcategory:"Minimal", image:"resimler/gecici_kolye2.jpg", price: 500},
+    {id:13, name:"Gece Mavisi Taşlı Yıldız Kolye", category:"Kolye", subcategory:"Taşlı", image:"resimler/gecici_kolye3.jpg", price: 450}
 ];
 
 let cart = [];
