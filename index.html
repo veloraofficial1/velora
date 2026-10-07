@@ -2890,7 +2890,7 @@ type="button"
 
 const API_BASE = "https://velora-backend-1-aft5.onrender.com";
 
-/* 15 ÜRÜN - İSİMLER VE RESİM YOLLARI TAMAMEN DÜZELTİLDİ */
+/* 15 EKSİKSİZ ÜRÜN LİSTESİ - İSİMLER VE RESİMLER TAM DÜZELTİLDİ */
 const products = [
     {id:1, name:"Zarif Beyaz Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"resimler/5.jpeg", oldPrice: 350, price: 250},
     {id:2, name:"Canlı Mor Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"resimler/7.jpeg", oldPrice: 350, price: 250},
@@ -3727,7 +3727,7 @@ function renderCart(){
                 >
                 <div class="cart-item-info">
                     <h3>${escapeHtml(product.name)}</h3>
-                    <p>${escapeHtml(product.category)} ·${escapeHtml(product.subcategory)}</p>
+                    <p>${escapeHtml(product.category)} · ${escapeHtml(product.subcategory)}</p>
                     <div class="cart-item-price">${product.price} TL</div>
                     <div class="cart-quantity">
                         <button type="button" data-cart-minus="${product.id}">−</button>
@@ -4266,7 +4266,7 @@ async function openProductDetail(productId){
             <div class="product-detail-info">
                 <h3>${escapeHtml(product.name)}</h3>
                 <div class="product-detail-subcategory">
-                    ${escapeHtml(product.category)} ·${escapeHtml(product.subcategory)}
+                    ${escapeHtml(product.category)} · ${escapeHtml(product.subcategory)}
                 </div>
                 <div class="opening-badge">✨ Açılışa Özel İndirim</div>
                 <div class="product-detail-price-box">
@@ -4417,7 +4417,8 @@ async function loadProductDetailReviews(productId){
                     <span class="detail-review-date">${escapeHtml(formatReviewDate(review.created_at || review.date))}</span>
                 </div>
                 <div class="detail-review-stars">${reviewStarsHtml(review.rating)}</div>
-                <div class="detail-review-comment">${commentDisplay}</div>${commentImg ? `<div style="margin-top:10px;"><img src="${commentImg}" alt="Yorum Fotoğrafı" style="width:80px;height:80px;object-fit:cover;border-radius:4px;border:1px solid #dfccb2;cursor:pointer;" onclick="openImageZoom('${commentImg}')"></div>` : ""}
+                <div class="detail-review-comment">${commentDisplay}</div>
+                ${commentImg ? `<div style="margin-top:10px;"><img src="${commentImg}" alt="Yorum Fotoğrafı" style="width:80px;height:80px;object-fit:cover;border-radius:4px;border:1px solid #dfccb2;cursor:pointer;" onclick="openImageZoom('${commentImg}')"></div>` : ""}
                 ${adminToolsHtml}
             `;
             container.appendChild(item);
@@ -4604,7 +4605,7 @@ async function openFavorites(){
             <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" onerror="this.src='resimler/urun1.jpg'">
             <div class="favorite-item-info">
                 <h3>${escapeHtml(product.name)}</h3>
-                <p>${escapeHtml(product.category)} ·${escapeHtml(product.subcategory)}</p>
+                <p>${escapeHtml(product.category)} · ${escapeHtml(product.subcategory)}</p>
                 <button class="favorite-remove" type="button" data-remove-favorite="${product.id}">♥ Favorilerden Çıkar</button>
             </div>
         `;
@@ -4747,4 +4748,311 @@ function renderOrders(orders){
                 <span style="font-size:40px;">📦</span><br><br>
                 <strong style="font-size:16px; color:#705333;">Henüz siparişiniz bulunmuyor</strong>
                 <p style="font-size:13px; color:#96724c; margin-top:5px;">Verdiğiniz tüm siparişler ve kargo durumları burada listelenir.</p>
-                <button type="button" class="cart-empty-btn" onclick="close
+                <button type="button" class="cart-empty-btn" onclick="closeOrders(); location.href='#urunler';">Alışverişe Başla</button>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML="";
+
+    orders.forEach(order=>{
+        const items=parseOrderItems(order);
+        const tracking=getTrackingNumber(order);
+
+        const itemsHtml=items.length ? items.map(item=>`<div>${escapeHtml(item.name || item.productName || "Ürün")} × ${escapeHtml(item.quantity || 1)}</div>`).join("") : "Ürün bilgisi bulunamadı.";
+        const card=document.createElement("div");
+        card.className="order-card";
+
+        card.innerHTML=`
+            <div class="order-top" style="margin-bottom:0;">
+                <div>
+                    <div class="order-number">Sipariş #${escapeHtml(order.id)}</div>
+                    <div class="order-date">${formatOrderDate(order.created_at)}</div>
+                </div>
+            </div>
+            
+            ${getOrderProgressHtml(order.status || order.order_status)}
+
+            <div class="order-items" style="border-top:none;"><strong>Ürünler</strong><div>${itemsHtml}</div></div>
+            <div class="order-total">Toplam: ${Number(order.total || 0).toLocaleString("tr-TR",{minimumFractionDigits:2, maximumFractionDigits:2})} TL</div>
+            ${tracking ? `<div class="tracking-box" style="background:#eef5ec; border:1px solid #c3dabc; color:#3b5334;"><strong>🚚 Kargo Takip No:</strong> <span style="font-weight:bold; font-size:15px; margin-left:5px;">${escapeHtml(tracking)}</span></div>`:""}
+            ${order.customer_address ? `<div class="order-address"><strong>Teslimat Adresi:</strong><br>${escapeHtml(order.customer_address)}</div>`:""}
+        `;
+        container.appendChild(card);
+    });
+}
+
+function initHero(){
+    const slides=document.querySelectorAll(".hero-slide");
+    const dots=document.querySelectorAll(".hero-dot");
+    if(!slides.length) return;
+
+    function show(index){
+        heroCurrent=(index+slides.length)%slides.length;
+        slides.forEach((slide,i)=>slide.classList.toggle("active", i===heroCurrent));
+        dots.forEach((dot,i)=>dot.classList.toggle("active", i===heroCurrent));
+    }
+
+    function next(){ show(heroCurrent+1); }
+    function prev(){ show(heroCurrent-1); }
+    function start(){
+        clearInterval(heroTimer);
+        heroTimer=setInterval(next,5000);
+    }
+
+    $("heroNext")?.addEventListener("click", ()=>{ next(); start(); });
+    $("heroPrev")?.addEventListener("click", ()=>{ prev(); start(); });
+
+    dots.forEach(dot=>{
+        dot.addEventListener("click", ()=>{
+            show(Number(dot.dataset.slide));
+            start();
+        });
+    });
+
+    let startX=0;
+    const slider=$("heroSlider");
+    if(slider){
+        slider.addEventListener("touchstart", event=>{ startX=event.changedTouches[0].screenX; }, {passive:true});
+        slider.addEventListener("touchend", event=>{
+            const endX=event.changedTouches[0].screenX;
+            const diff=startX-endX;
+            if(Math.abs(diff)<50) return;
+            diff>0 ? next() : prev();
+            start();
+        }, {passive:true});
+    }
+
+    show(0);
+    start();
+}
+
+function filterCategory(category){
+    if($("productSearch")) $("productSearch").value="";
+    const filtered=products.filter(p=>p.category===category);
+    if($("searchResultInfo")) $("searchResultInfo").textContent=category+" ürünleri";
+    renderProducts(filtered);
+    $("urunler")?.scrollIntoView({behavior:"smooth"});
+}
+
+function showAllProducts(){
+    if($("productSearch")) $("productSearch").value="";
+    if($("searchResultInfo")) $("searchResultInfo").textContent="Tüm Ürünler";
+    renderProducts(products);
+    $("urunler")?.scrollIntoView({behavior:"smooth"});
+}
+
+function searchProducts(){
+    const input=$("productSearch");
+    if(!input) return;
+
+    const query=input.value.trim().toLocaleLowerCase("tr-TR");
+    if(!query){
+        if($("searchResultInfo")) $("searchResultInfo").textContent="";
+        renderProducts(products);
+        return;
+    }
+
+    const filtered=products.filter(product=>
+        product.name.toLocaleLowerCase("tr-TR").includes(query) ||
+        product.category.toLocaleLowerCase("tr-TR").includes(query) ||
+        product.subcategory.toLocaleLowerCase("tr-TR").includes(query)
+    );
+
+    if($("searchResultInfo")) $("searchResultInfo").textContent=`${filtered.length} ürün bulundu: "${query}"`;
+    renderProducts(filtered);
+    $("urunler")?.scrollIntoView({behavior:"smooth"});
+}
+
+function initEvents(){
+    $("menuButton")?.addEventListener("click", event=>{
+        event.stopPropagation();
+        $("menuPanel")?.classList.toggle("active");
+    });
+
+    document.querySelectorAll("[data-category]").forEach(element=>{
+        element.addEventListener("click", event=>{
+            event.preventDefault();
+            const category=element.dataset.category;
+            if(category) filterCategory(category);
+        });
+    });
+
+    document.querySelectorAll("[data-action]").forEach(element=>{
+        element.addEventListener("click", event=>{
+            event.preventDefault();
+            const action=element.dataset.action;
+            if(action==="all-products") showAllProducts();
+            if(action==="featured") $("one-cikanlar")?.scrollIntoView({behavior:"smooth"});
+            if(action==="contact") $("iletisim")?.scrollIntoView({behavior:"smooth"});
+        });
+    });
+
+    $("cartButton")?.addEventListener("click", openCart);
+    $("closeCartButton")?.addEventListener("click", closeCart);
+    $("continueShoppingButton")?.addEventListener("click", closeCart);
+    $("checkoutButton")?.addEventListener("click", openCheckout);
+    $("closeProductDetailButton")?.addEventListener("click", ()=> $("productDetailModal")?.classList.remove("active"));
+    
+    $("closeProfileButton")?.addEventListener("click", closeProfile);
+    $("closePaytrButton")?.addEventListener("click", closePaytrModal);
+    $("imageZoomClose")?.addEventListener("click", ()=> $("imageZoomModal")?.classList.remove("active"));
+
+    $("accountButton")?.addEventListener("click", event=>{
+        event.stopPropagation();
+        const token=localStorage.getItem("veloraToken");
+        if(token) toggleAccountMenu();
+        else openAuth();
+    });
+
+    $("favoritesMenuButton")?.addEventListener("click", openFavorites);
+    $("ordersMenuButton")?.addEventListener("click", openOrders);
+    $("profileMenuButton")?.addEventListener("click", openProfile);
+    $("changePasswordMenuButton")?.addEventListener("click", showChangePassword);
+    $("logoutButton")?.addEventListener("click", logout);
+
+    $("closeAuthButton")?.addEventListener("click", closeAuth);
+    $("loginTab")?.addEventListener("click", showLogin);
+    $("registerTab")?.addEventListener("click", showRegister);
+    $("forgotPasswordLink")?.addEventListener("click", showForgotPassword);
+
+    $("loginAuthForm")?.addEventListener("submit", login);
+    $("registerAuthForm")?.addEventListener("submit", register);
+    $("verifyAuthForm")?.addEventListener("submit", verifyEmail);
+    $("forgotAuthForm")?.addEventListener("submit", forgotPassword);
+    $("resetAuthForm")?.addEventListener("submit", resetPassword);
+    $("changeAuthForm")?.addEventListener("submit", changePassword);
+
+    $("closeFavoritesButton")?.addEventListener("click", closeFavorites);
+    $("closeOrdersButton")?.addEventListener("click", closeOrders);
+
+    $("searchButton")?.addEventListener("click", searchProducts);
+    $("productSearch")?.addEventListener("keydown", event => {
+        if(event.key === "Enter") {
+            event.preventDefault();
+            searchProducts();
+        }
+    });
+
+    ["cartModal", "authModal", "favoritesModal", "ordersModal", "productDetailModal", "profileModal", "imageZoomModal", "paytrModal"].forEach(modalId=>{
+        $(modalId)?.addEventListener("click", event=>{
+            if(event.target.id===modalId) event.currentTarget.classList.remove("active");
+        });
+    });
+
+    document.addEventListener("click", event=>{
+        if(!document.querySelector(".account-area")?.contains(event.target)) closeAccountMenu();
+        if(!document.querySelector(".menu-wrapper")?.contains(event.target)) $("menuPanel")?.classList.remove("active");
+    });
+
+    $("productContainer")?.addEventListener("click", async event=>{
+        const favorite=event.target.closest("[data-favorite]");
+        if(favorite){
+            event.stopPropagation();
+            await toggleFavorite(favorite.dataset.favorite);
+            return;
+        }
+
+        const addCart=event.target.closest("[data-add-cart]");
+        if(addCart){
+            event.stopPropagation();
+            addToCart(addCart.dataset.addCart);
+            return;
+        }
+
+        const detailBtn=event.target.closest("[data-open-detail]");
+        const clickedCard=event.target.closest(".product-card");
+
+        if(detailBtn){
+            event.stopPropagation();
+            openProductDetail(detailBtn.dataset.openDetail);
+            return;
+        }
+
+        if(clickedCard && !event.target.closest("button")){
+            openProductDetail(clickedCard.dataset.productId);
+            return;
+        }
+    });
+
+    $("productDetailModal")?.addEventListener("click", async event=>{
+        const adminDeleteBtn = event.target.closest("[data-admin-delete]");
+        if(adminDeleteBtn){
+            deleteReviewAdmin(adminDeleteBtn.dataset.adminDelete, adminDeleteBtn.dataset.adminProduct);
+            return;
+        }
+
+        const adminEditBtn = event.target.closest("[data-admin-edit]");
+        if(adminEditBtn){
+            editReviewAdmin(adminEditBtn.dataset.adminEdit, adminEditBtn.dataset.adminProduct);
+            return;
+        }
+
+        const star=event.target.closest("[data-star-product]");
+        if(star){
+            selectStar(Number(star.dataset.starProduct), Number(star.dataset.starRating));
+            return;
+        }
+
+        const submitReviewBtn=event.target.closest("[data-submit-review]");
+        if(submitReviewBtn){
+            await submitModalReview(submitReviewBtn.dataset.submitReview);
+            return;
+        }
+
+        const detailCart=event.target.closest("[data-detail-add-cart]");
+        if(detailCart){
+            addToCart(detailCart.dataset.detailAddCart);
+            return;
+        }
+    });
+
+    $("cartList")?.addEventListener("click", event=>{
+        const minus=event.target.closest("[data-cart-minus]");
+        if(minus){
+            changeCartQuantity(minus.dataset.cartMinus, -1);
+            return;
+        }
+        
+        const plusTarget = event.target.closest("[data-cart-plus]");
+        if(plusTarget){
+            changeCartQuantity(plusTarget.dataset.cartPlus, 1);
+            return;
+        }
+
+        const remove=event.target.closest("[data-cart-remove]");
+        if(remove){
+            removeFromCart(remove.dataset.cartRemove);
+            return;
+        }
+    });
+
+    $("favoritesContainer")?.addEventListener("click", async event=>{
+        const button=event.target.closest("[data-remove-favorite]");
+        if(!button) return;
+        await removeFavoriteFromList(button.dataset.removeFavorite);
+    });
+
+    $("logoLink")?.addEventListener("click", event=>{
+        event.preventDefault();
+        window.scrollTo({top:0, behavior:"smooth"});
+    });
+}
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    try{
+        loadCart();
+        updateAccountUI();
+        renderProducts(products);
+        initHero();
+        initEvents();
+        loadCurrentUser();
+    }catch(error){
+        console.error("VELORA başlatma hatası:", error);
+    }
+});
+</script>
+
+</body>
+</html>
