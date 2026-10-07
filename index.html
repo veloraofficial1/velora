@@ -1553,6 +1553,62 @@ section{
     font-size:14px;
 }
 
+/* SİPARİŞ AŞAMALARI (PROGRESS BAR) */
+.order-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dfccb2;
+    position: relative;
+}
+.order-progress::before {
+    content: "";
+    position: absolute;
+    top: 13px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: #e4d5c1;
+    z-index: 1;
+}
+.progress-step {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    color: #a18058;
+}
+.progress-icon {
+    width: 28px;
+    height: 28px;
+    margin: 0 auto 6px;
+    background: #fffaf3;
+    border: 2px solid #e4d5c1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #e4d5c1;
+    transition: 0.3s;
+}
+.progress-step.active .progress-icon,
+.progress-step.completed .progress-icon {
+    border-color: #507047;
+    background: #507047;
+    color: #fff;
+}
+.progress-step.active {
+    color: #507047;
+    font-weight: bold;
+}
+.progress-step.completed {
+    color: #507047;
+}
+
 /* ÖNE ÇIKANLAR & İLETİŞİM */
 #one-cikanlar{
     background:#efe3d2;
@@ -1971,6 +2027,10 @@ footer {
         padding: 6px 8px;
         font-size: 11px;
     }
+    
+    .progress-step { font-size: 9px; }
+    .progress-icon { width: 22px; height: 22px; font-size: 11px; margin-bottom: 4px; }
+    .order-progress::before { top: 10px; }
 }
 </style>
 </head>
@@ -2092,7 +2152,7 @@ class="account-section-button"
 id="favoritesMenuButton"
 type="button"
 >
-❤️️ Favorilerim
+❤ Favorilerim
 </button>
 
 <button
@@ -4594,21 +4654,48 @@ function formatOrderDate(value){
     return date.toLocaleString("tr-TR");
 }
 
-const CUSTOMER_ORDER_STATUS_LABELS = {
-    pending: "Sipariş Alındı",
-    preparing: "Hazırlanıyor",
-    shipped: "Kargoya Verildi",
-    delivered: "Teslim Edildi",
-    cancelled: "İptal Edildi"
-};
+function getOrderProgressHtml(status) {
+    const current = String(status || "pending").trim();
+    
+    if (current === "cancelled") {
+        return `<div style="color:#a05243; font-weight:bold; padding:15px 0; border-bottom:1px solid #dfccb2; text-align:center;">❌ Bu sipariş iptal edilmiştir.</div>`;
+    }
 
-function normalizeCustomerOrderStatus(status){
-    const value=String(status || "pending").trim();
-    return CUSTOMER_ORDER_STATUS_LABELS[value] || "Sipariş Alındı";
-}
+    const steps = [
+        { id: "pending", label: "Sipariş Alındı" },
+        { id: "preparing", label: "Hazırlanıyor" },
+        { id: "shipped", label: "Kargoya Verildi" },
+        { id: "delivered", label: "Teslim Edildi" }
+    ];
 
-function getOrderStatus(order){
-    return normalizeCustomerOrderStatus(order.status || order.order_status || "pending");
+    let currentIndex = steps.findIndex(s => s.id === current);
+    if (currentIndex === -1) currentIndex = 0;
+
+    let html = '<div class="order-progress">';
+    steps.forEach((step, index) => {
+        let stateClass = "";
+        let icon = "✓";
+        if (index < currentIndex) {
+            stateClass = "completed";
+        } else if (index === currentIndex) {
+            stateClass = "active";
+            if(step.id === "pending") icon = "📋";
+            if(step.id === "preparing") icon = "📦";
+            if(step.id === "shipped") icon = "🚚";
+            if(step.id === "delivered") icon = "📍";
+        } else {
+            icon = "";
+        }
+
+        html += `
+            <div class="progress-step ${stateClass}">
+                <div class="progress-icon">${icon}</div>
+                <div>${step.label}</div>
+            </div>
+        `;
+    });
+    html += '</div>';
+    return html;
 }
 
 function getTrackingNumber(order){
@@ -4635,7 +4722,6 @@ function renderOrders(orders){
 
     orders.forEach(order=>{
         const items=parseOrderItems(order);
-        const status=getOrderStatus(order);
         const tracking=getTrackingNumber(order);
 
         const itemsHtml=items.length ? items.map(item=>`<div>${escapeHtml(item.name || item.productName || "Ürün")} × ${escapeHtml(item.quantity || 1)}</div>`).join("") : "Ürün bilgisi bulunamadı.";
@@ -4643,16 +4729,18 @@ function renderOrders(orders){
         card.className="order-card";
 
         card.innerHTML=`
-            <div class="order-top">
+            <div class="order-top" style="margin-bottom:0;">
                 <div>
                     <div class="order-number">Sipariş #${escapeHtml(order.id)}</div>
                     <div class="order-date">${formatOrderDate(order.created_at)}</div>
                 </div>
-                <div class="order-status">${escapeHtml(status)}</div>
             </div>
-            <div class="order-items"><strong>Ürünler</strong><div>${itemsHtml}</div></div>
+            
+            ${getOrderProgressHtml(order.status || order.order_status)}
+
+            <div class="order-items" style="border-top:none;"><strong>Ürünler</strong><div>${itemsHtml}</div></div>
             <div class="order-total">Toplam: ${Number(order.total || 0).toLocaleString("tr-TR",{minimumFractionDigits:2, maximumFractionDigits:2})} TL</div>
-            ${tracking ? `<div class="tracking-box"><strong>🚚 Kargo Takip No:</strong> ${escapeHtml(tracking)}</div>`:""}
+            ${tracking ? `<div class="tracking-box" style="background:#eef5ec; border:1px solid #c3dabc; color:#3b5334;"><strong>🚚 Kargo Takip No:</strong> <span style="font-weight:bold; font-size:15px; margin-left:5px;">${escapeHtml(tracking)}</span></div>`:""}
             ${order.customer_address ? `<div class="order-address"><strong>Teslimat Adresi:</strong><br>${escapeHtml(order.customer_address)}</div>`:""}
         `;
         container.appendChild(card);
