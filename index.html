@@ -334,7 +334,7 @@ nav a:hover,
 .hero-slide img{
     width:100%;
     height:100%;
-    object-fit: cover; /* Telefonda ve masada ideal doluluk için cover, çok fazla taşmayı önleyecek şekilde ayarlandı */
+    object-fit: cover;
     object-position: center;
     display:block;
 }
@@ -613,11 +613,33 @@ section{
     margin-bottom:10px;
 }
 
+.product-price-box {
+    margin-bottom: 12px;
+}
+
+.product-old-price {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: #a8937b;
+    margin-right: 8px;
+}
+
 .product-price {
     font-size: 17px;
     font-weight: bold;
     color: #8b6943;
-    margin-bottom: 12px;
+}
+
+.opening-badge {
+    display: inline-block;
+    background: #f4ece1;
+    color: #8b6943;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    border: 1px dashed #d5b993;
+    font-weight: bold;
 }
 
 .card-rating-preview{
@@ -835,11 +857,21 @@ section{
     font-size:15px;
 }
 
+.product-detail-price-box {
+    margin-bottom: 20px;
+}
+
+.product-detail-old-price {
+    font-size: 16px;
+    text-decoration: line-through;
+    color: #a8937b;
+    margin-right: 10px;
+}
+
 .product-detail-price {
     font-size: 22px;
     font-weight: bold;
     color: #8b6943;
-    margin-bottom: 20px;
 }
 
 .product-detail-info .stock-button{
@@ -1853,7 +1885,7 @@ footer {
     .hero-slide img {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* Mobilde dikey/yatay fotoğrafların ekrana tam oturmasını sağlar */
+        object-fit: cover;
         object-position: center;
     }
 
@@ -2860,21 +2892,22 @@ type="button"
 
 const API_BASE = "https://velora-backend-1-aft5.onrender.com";
 
-// YENİ ÜRÜNLER (FOTOĞRAFLAR GEÇİCİ OLARAK EKLENMİŞTİR)
+// ÜRÜNLER (ZAMLI VE AÇILIŞA ÖZEL 100 TL İNDİRİMLİ FİYATLARLA)
 const products = [
-    {id:1, name:"Zarif Beyaz Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"resimler/gecici_kupe1.jpg", price: 250},
-    {id:2, name:"Canlı Mor Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"resimler/gecici_kupe2.jpg", price: 250},
-    {id:3, name:"Gold Renk Işıltılı Zirkon Taşlı Küme Küpe", category:"Küpe", subcategory:"Zirkon", image:"resimler/gecici_kupe3.jpg", price: 280},
-    {id:4, name:"Gold Renk Kıvrımlı Modern Zirkon Küpe", category:"Küpe", subcategory:"Modern", image:"resimler/gecici_kupe4.jpg", price: 280},
-    {id:5, name:"Gümüş Renk Baget Kesim Işıltılı Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/gecici_bileklik1.jpg", price: 250},
-    {id:6, name:"Gold Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/gecici_bileklik2.jpg", price: 650},
-    {id:7, name:"Gümüş Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/gecici_bileklik3.jpg", price: 650},
-    {id:8, name:"Gold Renk Işıltılı Çiçek Motifli Zarif Bileklik", category:"Bileklik", subcategory:"Zarif", image:"resimler/gecici_bileklik4.jpg", price: 550},
-    {id:9, name:"Gümüş Renk Şık Hasır Örgü Bileklik", category:"Bileklik", subcategory:"Örgü", image:"resimler/gecici_bileklik5.jpg", price: 550},
-    {id:10, name:"Gold Renk Organik Kesim Doğal Taşlı Yüzük", category:"Yüzük", subcategory:"Doğal Taş", image:"resimler/gecici_yuzuk1.jpg", price: 230},
-    {id:11, name:"Zarif Su Yolu Zirkon Kolye", category:"Kolye", subcategory:"Su Yolu", image:"resimler/gecici_kolye1.jpg", price: 350},
-    {id:12, name:"Gold Renk Minimal Yıldız Kolye", category:"Kolye", subcategory:"Minimal", image:"resimler/gecici_kolye2.jpg", price: 500},
-    {id:13, name:"Gece Mavisi Taşlı Yıldız Kolye", category:"Kolye", subcategory:"Taşlı", image:"resimler/gecici_kolye3.jpg", price: 450}
+    {id:1, name:"Zarif Beyaz Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"resimler/gecici_kupe1.jpg", oldPrice: 350, price: 250},
+    {id:2, name:"Canlı Mor Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"resimler/gecici_kupe2.jpg", oldPrice: 350, price: 250},
+    {id:3, name:"Gold Renk Işıltılı Zirkon Taşlı Küme Küpe", category:"Küpe", subcategory:"Zirkon", image:"resimler/gecici_kupe3.jpg", oldPrice: 380, price: 280},
+    {id:4, name:"Gold Renk Kıvrımlı Modern Zirkon Küpe", category:"Küpe", subcategory:"Modern", image:"resimler/gecici_kupe4.jpg", oldPrice: 380, price: 280},
+    {id:5, name:"Bohem Tarzı Zarif Pazubent", category:"Bileklik", subcategory:"Pazubent", image:"resimler/gecici_pazubent1.jpg", oldPrice: 400, price: 300},
+    {id:6, name:"Gümüş Renk Baget Kesim Işıltılı Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/gecici_bileklik1.jpg", oldPrice: 350, price: 250},
+    {id:7, name:"Gold Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/gecici_bileklik2.jpg", oldPrice: 750, price: 650},
+    {id:8, name:"Gümüş Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/gecici_bileklik3.jpg", oldPrice: 750, price: 650},
+    {id:9, name:"Gold Renk Işıltılı Çiçek Motifli Zarif Bileklik", category:"Bileklik", subcategory:"Zarif", image:"resimler/gecici_bileklik4.jpg", oldPrice: 650, price: 550},
+    {id:10, name:"Gümüş Renk Şık Hasır Örgü Bileklik", category:"Bileklik", subcategory:"Örgü", image:"resimler/gecici_bileklik5.jpg", oldPrice: 650, price: 550},
+    {id:11, name:"Gold Renk Organik Kesim Doğal Taşlı Yüzük", category:"Yüzük", subcategory:"Doğal Taş", image:"resimler/gecici_yuzuk1.jpg", oldPrice: 330, price: 230},
+    {id:12, name:"Zarif Su Yolu Zirkon Kolye", category:"Kolye", subcategory:"Su Yolu", image:"resimler/gecici_kolye1.jpg", oldPrice: 450, price: 350},
+    {id:13, name:"Gold Renk Minimal Yıldız Kolye", category:"Kolye", subcategory:"Minimal", image:"resimler/gecici_kolye2.jpg", oldPrice: 600, price: 500},
+    {id:14, name:"Gece Mavisi Taşlı Yıldız Kolye", category:"Kolye", subcategory:"Taşlı", image:"resimler/gecici_kolye3.jpg", oldPrice: 550, price: 450}
 ];
 
 let cart = [];
@@ -4073,7 +4106,11 @@ function renderProducts(list=products){
                     <div>
                         <h3 class="product-name">${escapeHtml(product.name)}</h3>
                         <div class="product-category">${escapeHtml(product.subcategory)}</div>
-                        <div class="product-price">${product.price} TL</div>
+                        <div class="opening-badge">✨ Açılışa Özel İndirim</div>
+                        <div class="product-price-box">
+                            <span class="product-old-price">${product.oldPrice} TL</span>
+                            <span class="product-price">${product.price} TL</span>
+                        </div>
                         <div class="card-rating-preview">★★★★★</div>
                         <div class="stock-status">Stokta Var</div>
                     </div>
@@ -4232,7 +4269,11 @@ async function openProductDetail(productId){
                 <div class="product-detail-subcategory">
                     ${escapeHtml(product.category)} · ${escapeHtml(product.subcategory)}
                 </div>
-                <div class="product-detail-price">${product.price} TL</div>
+                <div class="opening-badge">✨ Açılışa Özel İndirim</div>
+                <div class="product-detail-price-box">
+                    <span class="product-detail-old-price">${product.oldPrice} TL</span>
+                    <span class="product-detail-price">${product.price} TL</span>
+                </div>
 
                 <button
                     class="stock-button"
