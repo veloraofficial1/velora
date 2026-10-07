@@ -2892,22 +2892,23 @@ type="button"
 
 const API_BASE = "https://velora-backend-1-aft5.onrender.com";
 
-// ÜRÜNLER (ZAMLI VE AÇILIŞA ÖZEL 100 TL İNDİRİMLİ FİYATLARLA)
+/* 15 ÜRÜN GERÇEK FOTOĞRAF DOSYA ADLARI, ZAMLI VE AÇILIŞA ÖZEL İNDİRİMLİ FİYATLARLA */
 const products = [
-    {id:1, name:"Zarif Beyaz Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"resimler/gecici_kupe1.jpg", oldPrice: 350, price: 250},
-    {id:2, name:"Canlı Mor Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"resimler/gecici_kupe2.jpg", oldPrice: 350, price: 250},
-    {id:3, name:"Gold Renk Işıltılı Zirkon Taşlı Küme Küpe", category:"Küpe", subcategory:"Zirkon", image:"resimler/gecici_kupe3.jpg", oldPrice: 380, price: 280},
-    {id:4, name:"Gold Renk Kıvrımlı Modern Zirkon Küpe", category:"Küpe", subcategory:"Modern", image:"resimler/gecici_kupe4.jpg", oldPrice: 380, price: 280},
-    {id:5, name:"Bohem Tarzı Zarif Pazubent", category:"Bileklik", subcategory:"Pazubent", image:"resimler/gecici_pazubent1.jpg", oldPrice: 400, price: 300},
-    {id:6, name:"Gümüş Renk Baget Kesim Işıltılı Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/gecici_bileklik1.jpg", oldPrice: 350, price: 250},
-    {id:7, name:"Gold Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/gecici_bileklik2.jpg", oldPrice: 750, price: 650},
-    {id:8, name:"Gümüş Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/gecici_bileklik3.jpg", oldPrice: 750, price: 650},
-    {id:9, name:"Gold Renk Işıltılı Çiçek Motifli Zarif Bileklik", category:"Bileklik", subcategory:"Zarif", image:"resimler/gecici_bileklik4.jpg", oldPrice: 650, price: 550},
-    {id:10, name:"Gümüş Renk Şık Hasır Örgü Bileklik", category:"Bileklik", subcategory:"Örgü", image:"resimler/gecici_bileklik5.jpg", oldPrice: 650, price: 550},
-    {id:11, name:"Gold Renk Organik Kesim Doğal Taşlı Yüzük", category:"Yüzük", subcategory:"Doğal Taş", image:"resimler/gecici_yuzuk1.jpg", oldPrice: 330, price: 230},
-    {id:12, name:"Zarif Su Yolu Zirkon Kolye", category:"Kolye", subcategory:"Su Yolu", image:"resimler/gecici_kolye1.jpg", oldPrice: 450, price: 350},
-    {id:13, name:"Gold Renk Minimal Yıldız Kolye", category:"Kolye", subcategory:"Minimal", image:"resimler/gecici_kolye2.jpg", oldPrice: 600, price: 500},
-    {id:14, name:"Gece Mavisi Taşlı Yıldız Kolye", category:"Kolye", subcategory:"Taşlı", image:"resimler/gecici_kolye3.jpg", oldPrice: 550, price: 450}
+    {id:1, name:"Zarif Beyaz Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"5.jpeg", oldPrice: 350, price: 250},
+    {id:2, name:"Canlı Mor Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"7.jpeg", oldPrice: 350, price: 250},
+    {id:3, name:"Gold Renk Işıltılı Zirkon Taşlı Küme Küpe", category:"Küpe", subcategory:"Zirkon", image:"6.jpeg", oldPrice: 380, price: 280},
+    {id:4, name:"Gold Renk Kıvrımlı Modern Zirkon Küpe", category:"Küpe", subcategory:"Modern", image:"Velora Altın Kristal Küpe Kartı.png", oldPrice: 380, price: 280},
+    {id:5, name:"Bohem Tarzı Zarif Pazubent", category:"Bileklik", subcategory:"Pazubent", image:"Altın Yıldız Mercan Kafes Bileklik.png", oldPrice: 400, price: 300},
+    {id:6, name:"Gümüş Renk Baget Kesim Işıltılı Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"1_2.jpeg", oldPrice: 350, price: 250},
+    {id:7, name:"Gold Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"2.jpeg", oldPrice: 750, price: 650},
+    {id:8, name:"Gümüş Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"4.jpeg", oldPrice: 750, price: 650},
+    {id:9, name:"Gold Renk Işıltılı Çiçek Motifli Zarif Bileklik", category:"Bileklik", subcategory:"Zarif", image:"Zarif Altın Çiçekli Bileklik.png", oldPrice: 650, price: 550},
+    {id:10, name:"Gümüş Renk Şık Hasır Örgü Bileklik", category:"Bileklik", subcategory:"Örgü", image:"11.jpeg", oldPrice: 650, price: 550},
+    {id:11, name:"Gold Renk Organik Kesim Doğal Taşlı Yüzük", category:"Yüzük", subcategory:"Doğal Taş", image:"Zarif Altın ve Ham Taşlı Yüzük.png", oldPrice: 330, price: 230},
+    {id:12, name:"Zarif Su Yolu Zirkon Kolye", category:"Kolye", subcategory:"Su Yolu", image:"8_2.jpeg", oldPrice: 450, price: 350},
+    {id:13, name:"Gold Renk Minimal Yıldız Kolye", category:"Kolye", subcategory:"Minimal", image:"9_2.jpeg", oldPrice: 600, price: 500},
+    {id:14, name:"Gece Mavisi Taşlı Yıldız Kolye", category:"Kolye", subcategory:"Taşlı", image:"10_2.jpeg", oldPrice: 550, price: 450},
+    {id:15, name:"Gold Renk Damla Kesim Alternatif Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"3.jpeg", oldPrice: 750, price: 650}
 ];
 
 let cart = [];
