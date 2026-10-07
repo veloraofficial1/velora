@@ -456,7 +456,7 @@ section{
     letter-spacing:3px;
 }
 
-/* KATEGORİLER (EN BAŞTAKİ 4 ANA KATEGORI GÖRSELİ - KENDİ ÜRÜNLERİNİZLE GÜNCELLENDİ) */
+/* KATEGORİLER */
 .category-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -2302,24 +2302,24 @@ Kategoriler
 
 <div class="category-grid">
 
-<!-- KATEGORİ GÖRSELLERİ KENDİ ÜRÜNLERİNİZLE GÜNCELLENDİ -->
+<!-- KATEGORİ GÖRSELLERİ RESİMLER KLASÖRÜYLE GÜNCELLENDİ -->
 <div class="category-card" data-category="Yüzük">
-<img src="Zarif Altın ve Ham Taşlı Yüzük.png" alt="Yüzük">
+<img src="resimler/Zarif Altın ve Ham Taşlı Yüzük.png" alt="Yüzük">
 <div class="category-overlay">Yüzük</div>
 </div>
 
 <div class="category-card" data-category="Bileklik">
-<img src="2.jpeg" alt="Bileklik">
+<img src="resimler/2.jpeg" alt="Bileklik">
 <div class="category-overlay">Bileklik</div>
 </div>
 
 <div class="category-card" data-category="Küpe">
-<img src="5.jpeg" alt="Küpe">
+<img src="resimler/5.jpeg" alt="Küpe">
 <div class="category-overlay">Küpe</div>
 </div>
 
 <div class="category-card" data-category="Kolye">
-<img src="8_2.jpeg" alt="Kolye">
+<img src="resimler/8_2.jpeg" alt="Kolye">
 <div class="category-overlay">Kolye</div>
 </div>
 
@@ -2350,9 +2350,9 @@ class="search-result-info"
 
 <div class="featured-grid">
 
-<!-- ÖNE ÇIKANLAR KENDİ ÜRÜNLERİNİZLE GÜNCELLENDİ -->
+<!-- ÖNE ÇIKANLAR RESİMLER KLASÖRÜYLE GÜNCELLENDİ -->
 <div class="featured-card" data-category="Yüzük">
-<img src="Zarif Altın ve Ham Taşlı Yüzük.png" alt="Yüzük">
+<img src="resimler/Zarif Altın ve Ham Taşlı Yüzük.png" alt="Yüzük">
 <div class="featured-info">
 <h3>Zarif Yüzükler</h3>
 <p>Günlük stiline eşlik eden parçalar</p>
@@ -2360,7 +2360,7 @@ class="search-result-info"
 </div>
 
 <div class="featured-card" data-category="Bileklik">
-<img src="2.jpeg" alt="Bileklik">
+<img src="resimler/2.jpeg" alt="Bileklik">
 <div class="featured-info">
 <h3>Şık Bileklikler</h3>
 <p>Zarif detaylarla tamamlanan stil</p>
@@ -2368,7 +2368,7 @@ class="search-result-info"
 </div>
 
 <div class="featured-card" data-category="Küpe">
-<img src="5.jpeg" alt="Küpe">
+<img src="resimler/5.jpeg" alt="Küpe">
 <div class="featured-info">
 <h3>Özel Küpeler</h3>
 <p>Her kombine uyum sağlayan ışıltılar</p>
@@ -2376,7 +2376,7 @@ class="search-result-info"
 </div>
 
 <div class="featured-card" data-category="Kolye">
-<img src="8_2.jpeg" alt="Kolye">
+<img src="resimler/8_2.jpeg" alt="Kolye">
 <div class="featured-info">
 <h3>Zarif Kolyeler</h3>
 <p>Stiline eşlik eden özel dokunuşlar</p>
@@ -2892,23 +2892,23 @@ type="button"
 
 const API_BASE = "https://velora-backend-1-aft5.onrender.com";
 
-/* 15 ÜRÜN (RESİMLER/ KLASÖRÜ KALDIRILDI VE KATEGORİ GÖRSELLERİ DEĞİŞTİRİLDİ) */
+/* 15 ÜRÜN - RESİMLER KLASÖRÜ YOLU EKLENMİŞ HALİ */
 const products = [
-    {id:1, name:"Zarif Beyaz Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"5.jpeg", oldPrice: 350, price: 250},
-    {id:2, name:"Canlı Mor Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"7.jpeg", oldPrice: 350, price: 250},
-    {id:3, name:"Gold Renk Işıltılı Zirkon Taşlı Küme Küpe", category:"Küpe", subcategory:"Zirkon", image:"6.jpeg", oldPrice: 380, price: 280},
-    {id:4, name:"Gold Renk Kıvrımlı Modern Zirkon Küpe", category:"Küpe", subcategory:"Modern", image:"Velora Altın Kristal Küpe Kartı.png", oldPrice: 380, price: 280},
-    {id:5, name:"Bohem Tarzı Zarif Pazubent", category:"Bileklik", subcategory:"Pazubent", image:"Altın Yıldız Mercan Kafes Bileklik.png", oldPrice: 400, price: 300},
-    {id:6, name:"Gümüş Renk Baget Kesim Işıltılı Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"1_2.jpeg", oldPrice: 350, price: 250},
-    {id:7, name:"Gold Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"2.jpeg", oldPrice: 750, price: 650},
-    {id:8, name:"Gümüş Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"4.jpeg", oldPrice: 750, price: 650},
-    {id:9, name:"Gold Renk Işıltılı Çiçek Motifli Zarif Bileklik", category:"Bileklik", subcategory:"Zarif", image:"Zarif Altın Çiçekli Bileklik.png", oldPrice: 650, price: 550},
-    {id:10, name:"Gümüş Renk Şık Hasır Örgü Bileklik", category:"Bileklik", subcategory:"Örgü", image:"10.jpeg", oldPrice: 650, price: 550},
-    {id:11, name:"Gold Renk Organik Kesim Doğal Taşlı Yüzük", category:"Yüzük", subcategory:"Doğal Taş", image:"Zarif Altın ve Ham Taşlı Yüzük.png", oldPrice: 330, price: 230},
-    {id:12, name:"Zarif Su Yolu Zirkon Kolye", category:"Kolye", subcategory:"Su Yolu", image:"8_2.jpeg", oldPrice: 450, price: 350},
-    {id:13, name:"Gold Renk Minimal Yıldız Kolye", category:"Kolye", subcategory:"Minimal", image:"9_2.jpeg", oldPrice: 600, price: 500},
-    {id:14, name:"Gece Mavisi Taşlı Yıldız Kolye", category:"Kolye", subcategory:"Taşlı", image:"10_2.jpeg", oldPrice: 550, price: 450},
-    {id:15, name:"Gold Renk Damla Kesim Alternatif Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"3.jpeg", oldPrice: 750, price: 650}
+    {id:1, name:"Zarif Beyaz Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"resimler/5.jpeg", oldPrice: 350, price: 250},
+    {id:2, name:"Canlı Mor Mine Detaylı Deniz Yıldızı Küpe", category:"Küpe", subcategory:"Deniz Yıldızı", image:"resimler/7.jpeg", oldPrice: 350, price: 250},
+    {id:3, name:"Gold Renk Işıltılı Zirkon Taşlı Küme Küpe", category:"Küpe", subcategory:"Zirkon", image:"resimler/6.jpeg", oldPrice: 380, price: 280},
+    {id:4, name:"Gold Renk Kıvrımlı Modern Zirkon Küpe", category:"Küpe", subcategory:"Modern", image:"resimler/Velora Altın Kristal Küpe Kartı.png", oldPrice: 380, price: 280},
+    {id:5, name:"Bohem Tarzı Zarif Pazubent", category:"Bileklik", subcategory:"Pazubent", image:"resimler/Altın Yıldız Mercan Kafes Bileklik.png", oldPrice: 400, price: 300},
+    {id:6, name:"Gümüş Renk Baget Kesim Işıltılı Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/1_2.jpeg", oldPrice: 350, price: 250},
+    {id:7, name:"Gold Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/2.jpeg", oldPrice: 750, price: 650},
+    {id:8, name:"Gümüş Renk Damla Kesim Şık Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/4.jpeg", oldPrice: 750, price: 650},
+    {id:9, name:"Gold Renk Işıltılı Çiçek Motifli Zarif Bileklik", category:"Bileklik", subcategory:"Zarif", image:"resimler/Zarif Altın Çiçekli Bileklik.png", oldPrice: 650, price: 550},
+    {id:10, name:"Gümüş Renk Şık Hasır Örgü Bileklik", category:"Bileklik", subcategory:"Örgü", image:"resimler/10.jpeg", oldPrice: 650, price: 550},
+    {id:11, name:"Gold Renk Organik Kesim Doğal Taşlı Yüzük", category:"Yüzük", subcategory:"Doğal Taş", image:"resimler/Zarif Altın ve Ham Taşlı Yüzük.png", oldPrice: 330, price: 230},
+    {id:12, name:"Zarif Su Yolu Zirkon Kolye", category:"Kolye", subcategory:"Su Yolu", image:"resimler/8_2.jpeg", oldPrice: 450, price: 350},
+    {id:13, name:"Gold Renk Minimal Yıldız Kolye", category:"Kolye", subcategory:"Minimal", image:"resimler/9_2.jpeg", oldPrice: 600, price: 500},
+    {id:14, name:"Gece Mavisi Taşlı Yıldız Kolye", category:"Kolye", subcategory:"Taşlı", image:"resimler/10_2.jpeg", oldPrice: 550, price: 450},
+    {id:15, name:"Gold Renk Damla Kesim Alternatif Su Yolu Bileklik", category:"Bileklik", subcategory:"Su Yolu", image:"resimler/3.jpeg", oldPrice: 750, price: 650}
 ];
 
 let cart = [];
